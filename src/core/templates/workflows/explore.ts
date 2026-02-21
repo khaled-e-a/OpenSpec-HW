@@ -202,7 +202,7 @@ You: [reads codebase]
 
 **User is stuck mid-implementation:**
 \`\`\`
-User: /opsx:explore add-auth-system
+User: /opsx-hw:explore add-auth-system
       The OAuth integration is more complex than expected
 
 You: [reads change artifacts]
@@ -305,7 +305,7 @@ export function getOpsxExploreCommandTemplate(): CommandTemplate {
 
 **This is a stance, not a workflow.** There are no fixed steps, no required sequence, no mandatory outputs. You're a thinking partner helping the user explore.
 
-**Input**: The argument after \`/opsx:explore\` is whatever the user wants to think about. Could be:
+**Input**: The argument after \`/opsx-hw:explore\` is whatever the user wants to think about. Could be:
 - A vague idea: "real-time collaboration"
 - A specific problem: "the auth system is getting unwieldy"
 - A change name: "add-dark-mode" (to explore in context of that change)

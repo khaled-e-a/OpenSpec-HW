@@ -25,20 +25,20 @@ function escapeYamlValue(value: string): string {
 
 /**
  * Cursor adapter for command generation.
- * File path: .cursor/commands/opsx-<id>.md
- * Frontmatter: name (as /opsx-<id>), id, category, description
+ * File path: .cursor/commands/opsx-hw-<id>.md
+ * Frontmatter: name (as /opsx-hw-<id>), id, category, description
  */
 export const cursorAdapter: ToolCommandAdapter = {
   toolId: 'cursor',
 
   getFilePath(commandId: string): string {
-    return path.join('.cursor', 'commands', `opsx-${commandId}.md`);
+    return path.join('.cursor', 'commands', `opsx-hw-${commandId}.md`);
   },
 
   formatFile(content: CommandContent): string {
     return `---
-name: /opsx-${content.id}
-id: opsx-${content.id}
+name: /opsx-hw-hw-${content.id}
+id: opsx-hw-hw-${content.id}
 category: ${escapeYamlValue(content.category)}
 description: ${escapeYamlValue(content.description)}
 ---

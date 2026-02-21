@@ -1,4 +1,4 @@
-# Tasks: Add /opsx:verify Skill
+# Tasks: Add /opsx-hw:verify Skill
 
 ## 1. Skill Template Functions
 - [x] 1.1 Add `getVerifyChangeSkillTemplate()` to skill-templates.ts

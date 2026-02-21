@@ -6,22 +6,22 @@ Defines the agent skill for verifying that implementation matches change artifac
 ## ADDED Requirements
 
 ### Requirement: Verify Skill Invocation
-The system SHALL provide an `/opsx:verify` skill that validates implementation against change artifacts.
+The system SHALL provide an `/opsx-hw:verify` skill that validates implementation against change artifacts.
 
 #### Scenario: Verify with change name provided
-- **WHEN** agent executes `/opsx:verify <change-name>`
+- **WHEN** agent executes `/opsx-hw:verify <change-name>`
 - **THEN** the agent verifies implementation for that specific change
 - **AND** produces a verification report
 
 #### Scenario: Verify without change name
-- **WHEN** agent executes `/opsx:verify` without a change name
+- **WHEN** agent executes `/opsx-hw:verify` without a change name
 - **THEN** the agent prompts user to select from available changes
 - **AND** shows only changes that have implementation tasks
 
 #### Scenario: Change has no tasks
 - **WHEN** selected change has no tasks.md or tasks are empty
 - **THEN** the agent reports "No tasks to verify"
-- **AND** suggests running `/opsx:continue` to create tasks
+- **AND** suggests running `/opsx-hw:continue` to create tasks
 
 ### Requirement: Completeness Verification
 The agent SHALL verify that all required work has been completed.

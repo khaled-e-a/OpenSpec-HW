@@ -4,7 +4,7 @@ The current setup has two separate commands (`openspec init` and `openspec exper
 
 ## What Changes
 
-- **BREAKING**: `openspec init` now generates skills and `/opsx:*` commands instead of config files and `/openspec:*` commands
+- **BREAKING**: `openspec init` now generates skills and `/opsx-hw:*` commands instead of config files and `/openspec:*` commands
 - **BREAKING**: Config files (`CLAUDE.md`, `.cursorrules`, etc.) are no longer generated
 - **BREAKING**: Old slash commands (`/openspec:proposal`, `/openspec:apply`, `/openspec:archive`) are no longer generated
 - **BREAKING**: `openspec/AGENTS.md` and `openspec/project.md` are no longer generated

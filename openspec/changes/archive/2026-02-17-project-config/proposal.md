@@ -340,14 +340,14 @@ Once config is created, it affects the experimental workflow in three ways:
 
 ```bash
 # Before config: must specify schema
-/opsx:new my-feature --schema spec-driven
+/opsx-hw:new my-feature --schema spec-driven
 
 # After config (with schema: spec-driven): schema is automatic
-/opsx:new my-feature
+/opsx-hw:new my-feature
 # Automatically uses spec-driven from config
 
 # Override still works
-/opsx:new my-feature --schema tdd
+/opsx-hw:new my-feature --schema tdd
 # Uses tdd, ignoring config
 ```
 

@@ -8,17 +8,17 @@ Currently:
 - Commands go through the adapter system which can transform content per-tool
 - Skills use a single shared function with no tool-specific transformation
 
-The templates in `src/core/templates/skill-templates.ts` use Claude's colon-based format (`/opsx:new`) as the canonical format. Tools that use different formats need transformation at generation time.
+The templates in `src/core/templates/skill-templates.ts` use Claude's colon-based format (`/opsx-hw:new`) as the canonical format. Tools that use different formats need transformation at generation time.
 
 ## Goals / Non-Goals
 
 **Goals:**
-- Transform all `/opsx:` command references to `/opsx-` for OpenCode in both commands and skills
+- Transform all `/opsx-hw:` command references to `/opsx-` for OpenCode in both commands and skills
 - Create a shared, reusable transformation utility
 - Keep the transformation opt-in via a callback parameter (not hard-coded tool detection)
 
 **Non-Goals:**
-- Modifying the canonical template format (templates stay with `/opsx:`)
+- Modifying the canonical template format (templates stay with `/opsx-hw:`)
 - Applying transformation to other tools (only OpenCode for now)
 - Creating a full adapter system for skills (overkill for current needs)
 
@@ -65,6 +65,6 @@ The templates in `src/core/templates/skill-templates.ts` use Claude's colon-base
 
 | Risk | Mitigation |
 |------|------------|
-| Other `/opsx:` patterns exist that shouldn't be transformed | All occurrences in templates are command invocations - verified by inspection |
+| Other `/opsx-hw:` patterns exist that shouldn't be transformed | All occurrences in templates are command invocations - verified by inspection |
 | Future tools may need same transformation | Utility is shared and easy to reuse; can add to other tools' generation |
 | Callback adds complexity to function signature | Optional parameter with sensible default (no transformation) |

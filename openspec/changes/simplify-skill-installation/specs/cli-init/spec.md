@@ -96,14 +96,14 @@ The init command SHALL work with sensible defaults and tool confirmation, minimi
 - **WHEN** init completes successfully
 - **AND** `propose` is in the active profile
 - **THEN** the system SHALL display a tool-appropriate success message
-- **THEN** for tools using colon syntax (Claude Code): "Start your first change: /opsx:propose \"your idea\""
+- **THEN** for tools using colon syntax (Claude Code): "Start your first change: /opsx-hw:propose \"your idea\""
 - **THEN** for tools using hyphen syntax (Cursor, others): "Start your first change: /opsx-propose \"your idea\""
 
 #### Scenario: Init success message (propose not installed, new installed)
 - **WHEN** init completes successfully
 - **AND** `propose` is NOT in the active profile
 - **AND** `new` is in the active profile
-- **THEN** for tools using colon syntax: "Start your first change: /opsx:new \"your idea\""
+- **THEN** for tools using colon syntax: "Start your first change: /opsx-hw:new \"your idea\""
 - **THEN** for tools using hyphen syntax: "Start your first change: /opsx-new \"your idea\""
 
 #### Scenario: Init success message (neither propose nor new)

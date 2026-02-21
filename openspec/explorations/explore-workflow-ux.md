@@ -4,7 +4,7 @@
 
 The explore workflow is part of the core loop (`propose`, `explore`, `apply`, `archive`). Users should be able to think through ideas in explore mode, then smoothly transition into a formal change proposal.
 
-Currently, explore references `/opsx:new` and `/opsx:ff` which are being replaced with `/opsx:propose`. But beyond just updating references, there are deeper UX questions about how explore should work.
+Currently, explore references `/opsx-hw:new` and `/opsx-hw:ff` which are being replaced with `/opsx-hw:propose`. But beyond just updating references, there are deeper UX questions about how explore should work.
 
 ## Open Questions
 
@@ -38,7 +38,7 @@ Currently, explore references `/opsx:new` and `/opsx:ff` which are being replace
 
 6. **What happens before a change proposal exists?**
    - Exploration is standalone
-   - When ready, user runs `/opsx:propose`
+   - When ready, user runs `/opsx-hw:propose`
    - Should exploration context automatically seed the proposal?
 
 7. **What happens after a change proposal exists?**
@@ -65,7 +65,7 @@ Currently, explore references `/opsx:new` and `/opsx:ff` which are being replace
 
 ### Approach A: Ephemeral Explorations (Status Quo+)
 - Explorations remain conversational only
-- Just update references to `/opsx:propose`
+- Just update references to `/opsx-hw:propose`
 - User manually carries insights forward
 - **Pro:** Simple, no new artifacts
 - **Con:** Insights can be lost, no audit trail

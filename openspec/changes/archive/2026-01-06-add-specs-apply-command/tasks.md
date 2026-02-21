@@ -14,7 +14,7 @@
   - Description: Sync delta specs to main specs
   - **Agent-driven**: Instructions for agent to read deltas and edit main specs directly
 
-- [x] Add `/opsx:sync` slash command template in `skill-templates.ts`
+- [x] Add `/opsx-hw:sync` slash command template in `skill-templates.ts`
   - Mirror the skill template for slash command format
   - **Agent-driven**: No CLI command, agent does the merge
 

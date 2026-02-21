@@ -41,12 +41,12 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = claudeAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.claude', 'commands', 'opsx', 'explore.md'));
+      expect(filePath).toBe(path.join('.claude', 'commands', 'opsx-hw', 'explore.md'));
     });
 
     it('should generate correct file path for different command IDs', () => {
-      expect(claudeAdapter.getFilePath('new')).toBe(path.join('.claude', 'commands', 'opsx', 'new.md'));
-      expect(claudeAdapter.getFilePath('bulk-archive')).toBe(path.join('.claude', 'commands', 'opsx', 'bulk-archive.md'));
+      expect(claudeAdapter.getFilePath('new')).toBe(path.join('.claude', 'commands', 'opsx-hw', 'new.md'));
+      expect(claudeAdapter.getFilePath('bulk-archive')).toBe(path.join('.claude', 'commands', 'opsx-hw', 'bulk-archive.md'));
     });
 
     it('should format file with correct YAML frontmatter', () => {
@@ -73,22 +73,22 @@ describe('command-generation/adapters', () => {
       expect(cursorAdapter.toolId).toBe('cursor');
     });
 
-    it('should generate correct file path with opsx- prefix', () => {
+    it('should generate correct file path with opsx-hw- prefix', () => {
       const filePath = cursorAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.cursor', 'commands', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.cursor', 'commands', 'opsx-hw-explore.md'));
     });
 
     it('should generate correct file paths for different commands', () => {
-      expect(cursorAdapter.getFilePath('new')).toBe(path.join('.cursor', 'commands', 'opsx-new.md'));
-      expect(cursorAdapter.getFilePath('bulk-archive')).toBe(path.join('.cursor', 'commands', 'opsx-bulk-archive.md'));
+      expect(cursorAdapter.getFilePath('new')).toBe(path.join('.cursor', 'commands', 'opsx-hw-new.md'));
+      expect(cursorAdapter.getFilePath('bulk-archive')).toBe(path.join('.cursor', 'commands', 'opsx-hw-bulk-archive.md'));
     });
 
     it('should format file with Cursor-specific frontmatter', () => {
       const output = cursorAdapter.formatFile(sampleContent);
 
       expect(output).toContain('---\n');
-      expect(output).toContain('name: /opsx-explore');
-      expect(output).toContain('id: opsx-explore');
+      expect(output).toContain('name: /opsx-hw-explore');
+      expect(output).toContain('id: opsx-hw-explore');
       expect(output).toContain('category: Workflow');
       expect(output).toContain('description: Enter explore mode for thinking');
       expect(output).toContain('---\n\n');
@@ -108,7 +108,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = windsurfAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.windsurf', 'workflows', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.windsurf', 'workflows', 'opsx-hw-explore.md'));
     });
 
     it('should format file similar to Claude format', () => {
@@ -131,7 +131,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = amazonQAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.amazonq', 'prompts', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.amazonq', 'prompts', 'opsx-hw-explore.md'));
     });
 
     it('should format file with description frontmatter', () => {
@@ -150,7 +150,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = antigravityAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.agent', 'workflows', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.agent', 'workflows', 'opsx-hw-explore.md'));
     });
 
     it('should format file with description frontmatter', () => {
@@ -169,7 +169,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = auggieAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.augment', 'commands', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.augment', 'commands', 'opsx-hw-explore.md'));
     });
 
     it('should format file with description and argument-hint', () => {
@@ -189,7 +189,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = clineAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.clinerules', 'workflows', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.clinerules', 'workflows', 'opsx-hw-explore.md'));
     });
 
     it('should format file with markdown header (no YAML frontmatter)', () => {
@@ -213,7 +213,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate path ending with correct structure', () => {
       const filePath = codexAdapter.getFilePath('explore');
-      expect(filePath).toMatch(/prompts[/\\]opsx-explore\.md$/);
+      expect(filePath).toMatch(/prompts[/\\]opsx-hw-explore\.md$/);
     });
 
     it('should default to homedir/.codex', () => {
@@ -221,7 +221,7 @@ describe('command-generation/adapters', () => {
       delete process.env.CODEX_HOME;
       try {
         const filePath = codexAdapter.getFilePath('explore');
-        const expected = path.join(os.homedir(), '.codex', 'prompts', 'opsx-explore.md');
+        const expected = path.join(os.homedir(), '.codex', 'prompts', 'opsx-hw-explore.md');
         expect(filePath).toBe(expected);
       } finally {
         if (original !== undefined) {
@@ -235,7 +235,7 @@ describe('command-generation/adapters', () => {
       process.env.CODEX_HOME = '/custom/codex-home';
       try {
         const filePath = codexAdapter.getFilePath('explore');
-        expect(filePath).toBe(path.join(path.resolve('/custom/codex-home'), 'prompts', 'opsx-explore.md'));
+        expect(filePath).toBe(path.join(path.resolve('/custom/codex-home'), 'prompts', 'opsx-hw-explore.md'));
       } finally {
         if (original !== undefined) {
           process.env.CODEX_HOME = original;
@@ -260,9 +260,9 @@ describe('command-generation/adapters', () => {
       expect(codebuddyAdapter.toolId).toBe('codebuddy');
     });
 
-    it('should generate correct file path with nested opsx folder', () => {
+    it('should generate correct file path with nested opsx-hw folder', () => {
       const filePath = codebuddyAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.codebuddy', 'commands', 'opsx', 'explore.md'));
+      expect(filePath).toBe(path.join('.codebuddy', 'commands', 'opsx-hw', 'explore.md'));
     });
 
     it('should format file with name, description, and argument-hint', () => {
@@ -283,13 +283,13 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path with .prompt extension', () => {
       const filePath = continueAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.continue', 'prompts', 'opsx-explore.prompt'));
+      expect(filePath).toBe(path.join('.continue', 'prompts', 'opsx-hw-explore.prompt'));
     });
 
     it('should format file with name, description, and invokable', () => {
       const output = continueAdapter.formatFile(sampleContent);
       expect(output).toContain('---\n');
-      expect(output).toContain('name: opsx-explore');
+      expect(output).toContain('name: opsx-hw-explore');
       expect(output).toContain('description: Enter explore mode for thinking');
       expect(output).toContain('invokable: true');
       expect(output).toContain('---\n\n');
@@ -304,7 +304,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = costrictAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.cospec', 'openspec', 'commands', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.cospec', 'openspec', 'commands', 'opsx-hw-explore.md'));
     });
 
     it('should format file with description and argument-hint', () => {
@@ -322,9 +322,9 @@ describe('command-generation/adapters', () => {
       expect(crushAdapter.toolId).toBe('crush');
     });
 
-    it('should generate correct file path with nested opsx folder', () => {
+    it('should generate correct file path with nested opsx-hw folder', () => {
       const filePath = crushAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.crush', 'commands', 'opsx', 'explore.md'));
+      expect(filePath).toBe(path.join('.crush', 'commands', 'opsx-hw', 'explore.md'));
     });
 
     it('should format file with name, description, category, and tags', () => {
@@ -346,7 +346,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = factoryAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.factory', 'commands', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.factory', 'commands', 'opsx-hw-explore.md'));
     });
 
     it('should format file with description and argument-hint', () => {
@@ -366,7 +366,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path with .toml extension', () => {
       const filePath = geminiAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.gemini', 'commands', 'opsx', 'explore.toml'));
+      expect(filePath).toBe(path.join('.gemini', 'commands', 'opsx-hw', 'explore.toml'));
     });
 
     it('should format file in TOML format', () => {
@@ -385,7 +385,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path with .prompt.md extension', () => {
       const filePath = githubCopilotAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.github', 'prompts', 'opsx-explore.prompt.md'));
+      expect(filePath).toBe(path.join('.github', 'prompts', 'opsx-hw-explore.prompt.md'));
     });
 
     it('should format file with description frontmatter', () => {
@@ -404,14 +404,14 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = iflowAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.iflow', 'commands', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.iflow', 'commands', 'opsx-hw-explore.md'));
     });
 
     it('should format file with name, id, category, and description', () => {
       const output = iflowAdapter.formatFile(sampleContent);
       expect(output).toContain('---\n');
-      expect(output).toContain('name: /opsx-explore');
-      expect(output).toContain('id: opsx-explore');
+      expect(output).toContain('name: /opsx-hw-explore');
+      expect(output).toContain('id: opsx-hw-explore');
       expect(output).toContain('category: Workflow');
       expect(output).toContain('description: Enter explore mode for thinking');
       expect(output).toContain('---\n\n');
@@ -426,7 +426,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = kilocodeAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.kilocode', 'workflows', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.kilocode', 'workflows', 'opsx-hw-explore.md'));
     });
 
     it('should format file without frontmatter', () => {
@@ -443,7 +443,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = opencodeAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.opencode', 'command', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.opencode', 'command', 'opsx-hw-explore.md'));
     });
 
     it('should format file with description frontmatter', () => {
@@ -457,28 +457,28 @@ describe('command-generation/adapters', () => {
     it('should transform colon-based command references to hyphen-based', () => {
       const contentWithCommands: CommandContent = {
         ...sampleContent,
-        body: 'Use /opsx:new to start, then /opsx:apply to implement.',
+        body: 'Use /opsx-hw:new to start, then /opsx-hw:apply to implement.',
       };
       const output = opencodeAdapter.formatFile(contentWithCommands);
-      expect(output).toContain('/opsx-new');
-      expect(output).toContain('/opsx-apply');
-      expect(output).not.toContain('/opsx:new');
-      expect(output).not.toContain('/opsx:apply');
+      expect(output).toContain('/opsx-hw-new');
+      expect(output).toContain('/opsx-hw-apply');
+      expect(output).not.toContain('/opsx-hw:new');
+      expect(output).not.toContain('/opsx-hw:apply');
     });
 
     it('should handle multiple command references in body', () => {
       const contentWithMultipleCommands: CommandContent = {
         ...sampleContent,
-        body: `/opsx:explore for ideas
-/opsx:new to create
-/opsx:continue to proceed
-/opsx:apply to implement`,
+        body: `/opsx-hw:explore for ideas
+/opsx-hw:new to create
+/opsx-hw:continue to proceed
+/opsx-hw:apply to implement`,
       };
       const output = opencodeAdapter.formatFile(contentWithMultipleCommands);
-      expect(output).toContain('/opsx-explore');
-      expect(output).toContain('/opsx-new');
-      expect(output).toContain('/opsx-continue');
-      expect(output).toContain('/opsx-apply');
+      expect(output).toContain('/opsx-hw-explore');
+      expect(output).toContain('/opsx-hw-new');
+      expect(output).toContain('/opsx-hw-continue');
+      expect(output).toContain('/opsx-hw-apply');
     });
   });
 
@@ -487,9 +487,9 @@ describe('command-generation/adapters', () => {
       expect(qoderAdapter.toolId).toBe('qoder');
     });
 
-    it('should generate correct file path with nested opsx folder', () => {
+    it('should generate correct file path with nested opsx-hw folder', () => {
       const filePath = qoderAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.qoder', 'commands', 'opsx', 'explore.md'));
+      expect(filePath).toBe(path.join('.qoder', 'commands', 'opsx-hw', 'explore.md'));
     });
 
     it('should format file with name, description, category, and tags', () => {
@@ -511,7 +511,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path with .toml extension', () => {
       const filePath = qwenAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.qwen', 'commands', 'opsx-explore.toml'));
+      expect(filePath).toBe(path.join('.qwen', 'commands', 'opsx-hw-explore.toml'));
     });
 
     it('should format file in TOML format', () => {
@@ -530,7 +530,7 @@ describe('command-generation/adapters', () => {
 
     it('should generate correct file path', () => {
       const filePath = roocodeAdapter.getFilePath('explore');
-      expect(filePath).toBe(path.join('.roo', 'commands', 'opsx-explore.md'));
+      expect(filePath).toBe(path.join('.roo', 'commands', 'opsx-hw-explore.md'));
     });
 
     it('should format file with markdown header (no YAML frontmatter)', () => {
@@ -547,17 +547,17 @@ describe('command-generation/adapters', () => {
       // path.join handles platform-specific separators
       const filePath = claudeAdapter.getFilePath('test');
       // On any platform, path.join returns the correct separator
-      expect(filePath.split(path.sep)).toEqual(['.claude', 'commands', 'opsx', 'test.md']);
+      expect(filePath.split(path.sep)).toEqual(['.claude', 'commands', 'opsx-hw', 'test.md']);
     });
 
     it('Cursor adapter uses path.join for paths', () => {
       const filePath = cursorAdapter.getFilePath('test');
-      expect(filePath.split(path.sep)).toEqual(['.cursor', 'commands', 'opsx-test.md']);
+      expect(filePath.split(path.sep)).toEqual(['.cursor', 'commands', 'opsx-hw-test.md']);
     });
 
     it('Windsurf adapter uses path.join for paths', () => {
       const filePath = windsurfAdapter.getFilePath('test');
-      expect(filePath.split(path.sep)).toEqual(['.windsurf', 'workflows', 'opsx-test.md']);
+      expect(filePath.split(path.sep)).toEqual(['.windsurf', 'workflows', 'opsx-hw-test.md']);
     });
 
     it('All adapters use path.join for paths', () => {

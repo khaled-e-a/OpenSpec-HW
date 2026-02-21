@@ -434,11 +434,11 @@ You can always go back:
 
 | Command | What it does |
 |---------|--------------|
-| `/opsx:new` | Start a new change |
-| `/opsx:continue` | Create the next artifact (based on what's ready) |
-| `/opsx:ff` | Fast-forward (all planning artifacts at once) |
-| `/opsx:apply` | Implement tasks, updating artifacts as needed |
-| `/opsx:archive` | Archive when done |
+| `/opsx-hw:new` | Start a new change |
+| `/opsx-hw:continue` | Create the next artifact (based on what's ready) |
+| `/opsx-hw:ff` | Fast-forward (all planning artifacts at once) |
+| `/opsx-hw:apply` | Implement tasks, updating artifacts as needed |
+| `/opsx-hw:archive` | Archive when done |
 
 **Setup:** `openspec experimental`
 

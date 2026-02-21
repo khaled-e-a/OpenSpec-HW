@@ -562,27 +562,27 @@ openspec/
 │                              OPENSPEC FLOW                                   │
 │                                                                              │
 │   ┌────────────────┐                                                         │
-│   │  1. START      │  /opsx:new creates a change folder                      │
+│   │  1. START      │  /opsx-hw:new creates a change folder                      │
 │   │     CHANGE     │                                                         │
 │   └───────┬────────┘                                                         │
 │           │                                                                  │
 │           ▼                                                                  │
 │   ┌────────────────┐                                                         │
-│   │  2. CREATE     │  /opsx:ff or /opsx:continue                             │
+│   │  2. CREATE     │  /opsx-hw:ff or /opsx-hw:continue                             │
 │   │     ARTIFACTS  │  Creates proposal → specs → design → tasks              │
 │   │                │  (based on schema dependencies)                         │
 │   └───────┬────────┘                                                         │
 │           │                                                                  │
 │           ▼                                                                  │
 │   ┌────────────────┐                                                         │
-│   │  3. IMPLEMENT  │  /opsx:apply                                            │
+│   │  3. IMPLEMENT  │  /opsx-hw:apply                                            │
 │   │     TASKS      │  Work through tasks, checking them off                  │
 │   │                │◄──── Update artifacts as you learn                      │
 │   └───────┬────────┘                                                         │
 │           │                                                                  │
 │           ▼                                                                  │
 │   ┌────────────────┐                                                         │
-│   │  4. VERIFY     │  /opsx:verify (optional)                                │
+│   │  4. VERIFY     │  /opsx-hw:verify (optional)                                │
 │   │     WORK       │  Check implementation matches specs                     │
 │   └───────┬────────┘                                                         │
 │           │                                                                  │

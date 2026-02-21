@@ -65,7 +65,7 @@
 - [x] 7.3 Add migration check to init: call shared `migrateIfNeeded()` before profile resolution
 - [x] 7.4 Change tool selection to show pre-selected detected tools
 - [x] 7.5 Apply configured profile directly in init (no profile confirmation prompt)
-- [x] 7.6 Update success message to show `/opsx:propose` prompt (only if propose is in the active profile)
+- [x] 7.6 Update success message to show `/opsx-hw:propose` prompt (only if propose is in the active profile)
 - [x] 7.7 Add `--profile` flag to override global config
 - [x] 7.8 Update non-interactive mode to use defaults without prompting
 - [x] 7.9 Add tests for init flow with various scenarios (including migration on re-init and custom profile behavior)
@@ -75,7 +75,7 @@
 - [x] 8.1 Modify existing `src/commands/update.ts` to read global config for profile/delivery/workflows
 - [x] 8.2 Implement shared `scanInstalledWorkflows(projectPath, tools)` — scan tool directories, match only against `ALL_WORKFLOWS` constant, return union across tools
 - [x] 8.3 Implement shared `migrateIfNeeded(projectPath, tools)` — one-time migration logic used by both `init` and `update`
-- [x] 8.4 Display migration message: "Migrated: custom profile with N workflows" + "New in this version: /opsx:propose. Try 'openspec config profile core' for the streamlined experience."
+- [x] 8.4 Display migration message: "Migrated: custom profile with N workflows" + "New in this version: /opsx-hw:propose. Try 'openspec config profile core' for the streamlined experience."
 - [x] 8.5 Add project check: exit with error if no `openspec/` directory exists
 - [x] 8.6 Add logic to detect which workflows are in config but not installed (to add)
 - [x] 8.7 Add logic to detect which workflows are installed and need refresh (to update)
@@ -107,7 +107,7 @@
 
 ## 11. Template Next-Step Guidance
 
-- [x] 11.1 Audit all templates for hardcoded cross-workflow command references (e.g., `/opsx:propose`)
+- [x] 11.1 Audit all templates for hardcoded cross-workflow command references (e.g., `/opsx-hw:propose`)
 - [x] 11.2 Replace any specific command references with generic concept-based guidance (e.g., "create a change proposal")
 - [x] 11.3 Review explore → propose transition UX (see `openspec/explorations/explore-workflow-ux.md` for open questions)
 

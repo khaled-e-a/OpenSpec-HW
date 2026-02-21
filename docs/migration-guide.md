@@ -8,7 +8,7 @@ OPSX replaces the old phase-locked workflow with a fluid, action-based approach.
 
 | Aspect | Legacy | OPSX |
 |--------|--------|------|
-| **Commands** | `/openspec:proposal`, `/openspec:apply`, `/openspec:archive` | `/opsx:new`, `/opsx:continue`, `/opsx:apply`, and more |
+| **Commands** | `/openspec:proposal`, `/openspec:apply`, `/openspec:archive` | `/opsx-hw:new`, `/opsx-hw:continue`, `/opsx-hw:apply`, and more |
 | **Workflow** | Create all artifacts at once | Create incrementally or all at once—your choice |
 | **Going back** | Awkward phase gates | Natural—update any artifact anytime |
 | **Customization** | Fixed structure | Schema-driven, fully hackable |
@@ -279,35 +279,35 @@ After migration, you have 9 OPSX commands instead of 3:
 
 | Command | Purpose |
 |---------|---------|
-| `/opsx:explore` | Think through ideas with no structure |
-| `/opsx:new` | Start a new change |
-| `/opsx:continue` | Create the next artifact (one at a time) |
-| `/opsx:ff` | Fast-forward—create all planning artifacts at once |
-| `/opsx:apply` | Implement tasks from tasks.md |
-| `/opsx:verify` | Validate implementation matches specs |
-| `/opsx:sync` | Preview spec merge (optional—archive prompts if needed) |
-| `/opsx:archive` | Finalize and archive the change |
-| `/opsx:bulk-archive` | Archive multiple changes at once |
+| `/opsx-hw:explore` | Think through ideas with no structure |
+| `/opsx-hw:new` | Start a new change |
+| `/opsx-hw:continue` | Create the next artifact (one at a time) |
+| `/opsx-hw:ff` | Fast-forward—create all planning artifacts at once |
+| `/opsx-hw:apply` | Implement tasks from tasks.md |
+| `/opsx-hw:verify` | Validate implementation matches specs |
+| `/opsx-hw:sync` | Preview spec merge (optional—archive prompts if needed) |
+| `/opsx-hw:archive` | Finalize and archive the change |
+| `/opsx-hw:bulk-archive` | Archive multiple changes at once |
 
 ### Command Mapping from Legacy
 
 | Legacy | OPSX Equivalent |
 |--------|-----------------|
-| `/openspec:proposal` | `/opsx:new` then `/opsx:ff` |
-| `/openspec:apply` | `/opsx:apply` |
-| `/openspec:archive` | `/opsx:archive` |
+| `/openspec:proposal` | `/opsx-hw:new` then `/opsx-hw:ff` |
+| `/openspec:apply` | `/opsx-hw:apply` |
+| `/openspec:archive` | `/opsx-hw:archive` |
 
 ### New Capabilities
 
 **Granular artifact creation:**
 ```
-/opsx:continue
+/opsx-hw:continue
 ```
 Creates one artifact at a time based on dependencies. Use this when you want to review each step.
 
 **Exploration mode:**
 ```
-/opsx:explore
+/opsx-hw:explore
 ```
 Think through ideas with a partner before committing to a change.
 
@@ -365,7 +365,7 @@ Artifacts form a directed graph. Dependencies are enablers, not gates:
                      specs, design)
 ```
 
-When you run `/opsx:continue`, it checks what's ready and offers the next artifact. You can also create multiple ready artifacts in any order.
+When you run `/opsx-hw:continue`, it checks what's ready and offers the next artifact. You can also create multiple ready artifacts in any order.
 
 ### Skills vs Commands
 
@@ -400,7 +400,7 @@ Your in-progress changes work seamlessly with OPSX commands.
 **Have an active change from the legacy workflow?**
 
 ```
-/opsx:apply add-my-feature
+/opsx-hw:apply add-my-feature
 ```
 
 OPSX reads the existing artifacts and continues from where you left off.
@@ -408,7 +408,7 @@ OPSX reads the existing artifacts and continues from where you left off.
 **Want to add more artifacts to an existing change?**
 
 ```
-/opsx:continue add-my-feature
+/opsx-hw:continue add-my-feature
 ```
 
 Shows what's ready to create based on what already exists.
@@ -559,11 +559,11 @@ project/
 ### Command Cheatsheet
 
 ```
-/opsx:new          Start a change
-/opsx:continue     Create next artifact
-/opsx:ff           Create all planning artifacts
-/opsx:apply        Implement tasks
-/opsx:archive      Finish and archive
+/opsx-hw:new          Start a change
+/opsx-hw:continue     Create next artifact
+/opsx-hw:ff           Create all planning artifacts
+/opsx-hw:apply        Implement tasks
+/opsx-hw:archive      Finish and archive
 ```
 
 ---

@@ -4,7 +4,7 @@ Spec application is currently bundled with archive - users must run `openspec ar
 
 ## What Changes
 
-- Add `/opsx:sync` skill that syncs delta specs to main specs as a standalone action
+- Add `/opsx-hw:sync` skill that syncs delta specs to main specs as a standalone action
 - The operation is idempotent - safe to run multiple times, agent reconciles main specs to match deltas
 - Archive continues to work as today (applies specs if not already reconciled, then moves to archive)
 - No new state tracking - the agent reads delta and main specs, reconciles on each run
@@ -12,15 +12,15 @@ Spec application is currently bundled with archive - users must run `openspec ar
 
 **Workflow becomes:**
 ```
-/opsx:new → /opsx:continue → /opsx:apply → archive
+/opsx-hw:new → /opsx-hw:continue → /opsx-hw:apply → archive
                                   │
-                                  └── /opsx:sync (optional, anytime)
+                                  └── /opsx-hw:sync (optional, anytime)
 ```
 
 ## Capabilities
 
 ### New Capabilities
-- `specs-sync-skill`: Skill template for `/opsx:sync` command that reconciles main specs with delta specs
+- `specs-sync-skill`: Skill template for `/opsx-hw:sync` command that reconciles main specs with delta specs
 
 ### Modified Capabilities
 - None (agent-driven, no CLI command needed)

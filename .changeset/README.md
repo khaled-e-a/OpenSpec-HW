@@ -24,7 +24,7 @@ Use this structure for your changeset content:
 
 ```markdown
 ---
-"@fission-ai/openspec": patch
+"@khaledea/openspec-hw": patch
 ---
 
 ### New Features

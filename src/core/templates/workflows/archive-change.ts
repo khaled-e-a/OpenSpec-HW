@@ -127,7 +127,7 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
     tags: ['workflow', 'archive', 'experimental'],
     content: `Archive a completed change in the experimental workflow.
 
-**Input**: Optionally specify a change name after \`/opsx:archive\` (e.g., \`/opsx:archive add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
+**Input**: Optionally specify a change name after \`/opsx-hw:archive\` (e.g., \`/opsx-hw:archive add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 **Steps**
 

@@ -19,7 +19,7 @@
 - [x] 2.6 Generate skills using existing `skill-templates.ts`
 - [x] 2.7 Generate slash commands using existing `command-generation/` adapters
 - [x] 2.8 Create `openspec/config.yaml` with default schema
-- [x] 2.9 Update success output to match new workflow (skills, /opsx:* commands)
+- [x] 2.9 Update success output to match new workflow (skills, /opsx-hw:* commands)
 - [x] 2.10 Add `--force` flag to skip legacy cleanup prompt in non-interactive mode
 
 ## 3. Remove Legacy Code

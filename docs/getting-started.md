@@ -8,25 +8,25 @@ OpenSpec helps you and your AI coding assistant agree on what to build before an
 
 ```
 ┌────────────────────┐
-│ Start a Change     │  /opsx:new
+│ Start a Change     │  /opsx-hw:new
 └────────┬───────────┘
          │
          ▼
 ┌────────────────────┐
-│ Create Artifacts   │  /opsx:ff or /opsx:continue
+│ Create Artifacts   │  /opsx-hw:ff or /opsx-hw:continue
 │ (proposal, specs,  │
 │  design, tasks)    │
 └────────┬───────────┘
          │
          ▼
 ┌────────────────────┐
-│ Implement Tasks    │  /opsx:apply
+│ Implement Tasks    │  /opsx-hw:apply
 │ (AI writes code)   │
 └────────┬───────────┘
          │
          ▼
 ┌────────────────────┐
-│ Archive & Merge    │  /opsx:archive
+│ Archive & Merge    │  /opsx-hw:archive
 │ Specs              │
 └────────────────────┘
 ```
@@ -134,7 +134,7 @@ Let's walk through adding dark mode to an application.
 ### 1. Start the Change
 
 ```
-You: /opsx:new add-dark-mode
+You: /opsx-hw:new add-dark-mode
 
 AI:  Created openspec/changes/add-dark-mode/
      Ready to create: proposal
@@ -142,10 +142,10 @@ AI:  Created openspec/changes/add-dark-mode/
 
 ### 2. Create Artifacts
 
-Use `/opsx:ff` (fast-forward) to create all planning artifacts at once:
+Use `/opsx-hw:ff` (fast-forward) to create all planning artifacts at once:
 
 ```
-You: /opsx:ff
+You: /opsx-hw:ff
 
 AI:  Creating artifacts for add-dark-mode...
      ✓ proposal.md — why we're doing this, what's changing
@@ -221,7 +221,7 @@ The system SHALL allow users to choose between light and dark themes.
 ### 4. Implement
 
 ```
-You: /opsx:apply
+You: /opsx-hw:apply
 
 AI:  Working through tasks...
      ✓ 1.1 Created ThemeContext with light/dark state
@@ -237,7 +237,7 @@ During implementation, if you discover the design needs adjustment, just update 
 ### 5. Archive
 
 ```
-You: /opsx:archive
+You: /opsx-hw:archive
 
 AI:  Archiving add-dark-mode...
      ✓ Merged specs into openspec/specs/ui/spec.md

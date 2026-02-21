@@ -87,7 +87,7 @@ The update command SHALL detect existing users (no `profile` in global config + 
 - **THEN** the system SHALL take the union of detected workflow names across all tools
 - **THEN** the system SHALL write to global config: `profile: "custom"`, `delivery: "both"`, `workflows: [<detected>]`
 - **THEN** the system SHALL display: "Migrated: custom profile with <count> workflows (<workflow-names>)"
-- **THEN** the system SHALL display: "New in this version: /opsx:propose (combines new + ff). Try 'openspec config profile core' for the streamlined 4-workflow experience."
+- **THEN** the system SHALL display: "New in this version: /opsx-hw:propose (combines new + ff). Try 'openspec config profile core' for the streamlined 4-workflow experience."
 - **THEN** the system SHALL proceed with normal update logic (using the migrated config)
 - **THEN** the result SHALL be template refresh only (no workflows added or removed)
 

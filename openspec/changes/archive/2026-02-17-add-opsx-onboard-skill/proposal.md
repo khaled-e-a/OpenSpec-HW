@@ -4,7 +4,7 @@ Users who run `openspec init` are left with files but no clear path to actually 
 
 ## What Changes
 
-- Add new `/opsx:onboard` skill that guides users through their first OpenSpec change
+- Add new `/opsx-hw:onboard` skill that guides users through their first OpenSpec change
 - Add corresponding slash command template for editor integrations
 - The skill will:
   - Analyze the user's codebase to suggest appropriately-scoped starter tasks

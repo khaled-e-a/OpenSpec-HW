@@ -10,7 +10,7 @@ Existing skills follow a consistent pattern:
 ## Goals / Non-Goals
 
 **Goals:**
-- Add `/opsx:onboard` skill that teaches the OpenSpec workflow through guided practice
+- Add `/opsx-hw:onboard` skill that teaches the OpenSpec workflow through guided practice
 - Follow existing patterns for skill/command template generation
 - Provide comprehensive narration that explains each step
 - Include codebase analysis to suggest real, appropriately-scoped tasks

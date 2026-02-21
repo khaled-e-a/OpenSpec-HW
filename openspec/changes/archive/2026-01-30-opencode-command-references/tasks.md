@@ -18,5 +18,5 @@
 - [x] 3.1 Run `npx vitest run test/utils/command-references.test.ts test/core/command-generation/adapters.test.ts test/core/shared/skill-generation.test.ts` to ensure tests pass
 - [x] 3.2 Run `pnpm run build` to ensure no TypeScript errors
 - [x] 3.3 Run `openspec init --tools opencode` in a temp directory and verify:
-  - Command files in `.opencode/command/` contain `/opsx-` references (not `/opsx:`)
-  - Skill files in `.opencode/skills/` contain `/opsx-` references (not `/opsx:`)
+  - Command files in `.opencode/command/` contain `/opsx-` references (not `/opsx-hw:`)
+  - Skill files in `.opencode/skills/` contain `/opsx-` references (not `/opsx-hw:`)

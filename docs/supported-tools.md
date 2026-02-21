@@ -6,7 +6,7 @@ OpenSpec works with 20+ AI coding assistants. When you run `openspec init`, you'
 
 For each tool you select, OpenSpec installs:
 
-1. **Skills** — Reusable instruction files that power the `/opsx:*` workflow commands
+1. **Skills** — Reusable instruction files that power the `/opsx-hw:*` workflow commands
 2. **Commands** — Tool-specific slash command bindings
 
 ## Tool Directory Reference
@@ -75,7 +75,7 @@ For each tool, OpenSpec generates 10 skill files that power the OPSX workflow:
 | `openspec-bulk-archive-change` | Archive multiple changes at once |
 | `openspec-onboard` | Guided onboarding through a complete workflow cycle |
 
-These skills are invoked via slash commands like `/opsx:new`, `/opsx:apply`, etc. See [Commands](commands.md) for the full list.
+These skills are invoked via slash commands like `/opsx-hw:new`, `/opsx-hw:apply`, etc. See [Commands](commands.md) for the full list.
 
 ## Adding a New Tool
 

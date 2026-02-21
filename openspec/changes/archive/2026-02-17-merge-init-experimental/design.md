@@ -3,7 +3,7 @@
 Currently `openspec init` and `openspec experimental` are separate commands with distinct purposes:
 
 - **init**: Creates `openspec/` directory, generates `AGENTS.md`/`project.md`, configures tool config files (`CLAUDE.md`, etc.), generates old slash commands (`/openspec:proposal`, etc.)
-- **experimental**: Generates skills (9 per tool), generates opsx slash commands (`/opsx:new`, etc.), creates `config.yaml`
+- **experimental**: Generates skills (9 per tool), generates opsx slash commands (`/opsx-hw:new`, etc.), creates `config.yaml`
 
 The skill-based workflow (experimental) is the direction we're going, so we're making it the default by merging into `init`.
 
@@ -64,7 +64,7 @@ The skill-based workflow (experimental) is the direction we're going, so we're m
 - `project.md` may contain valuable user-written project documentation
 - The new workflow uses `config.yaml.context` for the same purpose (auto-injected into artifacts)
 - Auto-deleting would lose user content; auto-migrating is complex (needs LLM to compress)
-- Users can migrate manually or use `/opsx:explore` to get AI assistance
+- Users can migrate manually or use `/opsx-hw:explore` to get AI assistance
 
 **Migration path**:
 1. During legacy cleanup, detect `openspec/project.md` but do not delete

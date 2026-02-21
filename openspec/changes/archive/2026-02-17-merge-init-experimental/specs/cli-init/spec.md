@@ -65,15 +65,15 @@ The command SHALL generate opsx slash commands for selected AI tools.
 
 - **WHEN** a tool is selected during initialization
 - **THEN** create 9 slash command files using the tool's command adapter:
-  - `/opsx:explore`
-  - `/opsx:new`
-  - `/opsx:continue`
-  - `/opsx:apply`
-  - `/opsx:ff`
-  - `/opsx:verify`
-  - `/opsx:sync`
-  - `/opsx:archive`
-  - `/opsx:bulk-archive`
+  - `/opsx-hw:explore`
+  - `/opsx-hw:new`
+  - `/opsx-hw:continue`
+  - `/opsx-hw:apply`
+  - `/opsx-hw:ff`
+  - `/opsx-hw:verify`
+  - `/opsx-hw:sync`
+  - `/opsx-hw:archive`
+  - `/opsx-hw:bulk-archive`
 - **AND** use tool-specific path conventions (e.g., `.claude/commands/opsx/` for Claude)
 - **AND** include tool-specific frontmatter format
 
@@ -89,9 +89,9 @@ The command SHALL provide clear, actionable next steps upon successful initializ
   - "Refreshed: <tools>" for already-configured tools that were updated
   - Count of skills and commands generated
 - **AND** display getting started section with:
-  - `/opsx:new` - Start a new change
-  - `/opsx:continue` - Create the next artifact
-  - `/opsx:apply` - Implement tasks
+  - `/opsx-hw:new` - Start a new change
+  - `/opsx-hw:continue` - Create the next artifact
+  - `/opsx-hw:apply` - Implement tasks
 - **AND** display links to documentation and feedback
 
 #### Scenario: Displaying restart instruction
@@ -165,9 +165,9 @@ The command SHALL maintain backward compatibility with the experimental command.
 
 ### Requirement: Slash Command Configuration
 
-**Reason**: Old `/openspec:*` slash commands are replaced by `/opsx:*` commands with richer functionality.
+**Reason**: Old `/openspec:*` slash commands are replaced by `/opsx-hw:*` commands with richer functionality.
 
-**Migration**: Use `/opsx:new`, `/opsx:continue`, `/opsx:apply` instead of `/openspec:proposal`, `/openspec:apply`, `/openspec:archive`.
+**Migration**: Use `/opsx-hw:new`, `/opsx-hw:continue`, `/opsx-hw:apply` instead of `/openspec:proposal`, `/openspec:apply`, `/openspec:archive`.
 
 ### Requirement: Root instruction stub
 

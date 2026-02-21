@@ -8,28 +8,28 @@ For workflow patterns and when to use each command, see [Workflows](workflows.md
 
 | Command | Purpose |
 |---------|---------|
-| `/opsx:explore` | Think through ideas before committing to a change |
-| `/opsx:new` | Start a new change |
-| `/opsx:continue` | Create the next artifact based on dependencies |
-| `/opsx:ff` | Fast-forward: create all planning artifacts at once |
-| `/opsx:apply` | Implement tasks from the change |
-| `/opsx:verify` | Validate implementation matches artifacts |
-| `/opsx:sync` | Merge delta specs into main specs |
-| `/opsx:archive` | Archive a completed change |
-| `/opsx:bulk-archive` | Archive multiple changes at once |
-| `/opsx:onboard` | Guided tutorial through the complete workflow |
+| `/opsx-hw:explore` | Think through ideas before committing to a change |
+| `/opsx-hw:new` | Start a new change |
+| `/opsx-hw:continue` | Create the next artifact based on dependencies |
+| `/opsx-hw:ff` | Fast-forward: create all planning artifacts at once |
+| `/opsx-hw:apply` | Implement tasks from the change |
+| `/opsx-hw:verify` | Validate implementation matches artifacts |
+| `/opsx-hw:sync` | Merge delta specs into main specs |
+| `/opsx-hw:archive` | Archive a completed change |
+| `/opsx-hw:bulk-archive` | Archive multiple changes at once |
+| `/opsx-hw:onboard` | Guided tutorial through the complete workflow |
 
 ---
 
 ## Command Reference
 
-### `/opsx:explore`
+### `/opsx-hw:explore`
 
 Think through ideas, investigate problems, and clarify requirements before committing to a change.
 
 **Syntax:**
 ```
-/opsx:explore [topic]
+/opsx-hw:explore [topic]
 ```
 
 **Arguments:**
@@ -42,11 +42,11 @@ Think through ideas, investigate problems, and clarify requirements before commi
 - Investigates the codebase to answer questions
 - Compares options and approaches
 - Creates visual diagrams to clarify thinking
-- Can transition to `/opsx:new` when insights crystallize
+- Can transition to `/opsx-hw:new` when insights crystallize
 
 **Example:**
 ```text
-You: /opsx:explore
+You: /opsx-hw:explore
 
 AI:  What would you like to explore?
 
@@ -66,7 +66,7 @@ AI:  Let me investigate your current auth setup...
 
 You: Let's go with JWT. Can we start a change for that?
 
-AI:  Ready when you are. Run /opsx:new add-jwt-auth to begin.
+AI:  Ready when you are. Run /opsx-hw:new add-jwt-auth to begin.
 ```
 
 **Tips:**
@@ -77,13 +77,13 @@ AI:  Ready when you are. Run /opsx:new add-jwt-auth to begin.
 
 ---
 
-### `/opsx:new`
+### `/opsx-hw:new`
 
 Start a new change. Creates the change folder structure and scaffolds it with the selected schema.
 
 **Syntax:**
 ```
-/opsx:new [change-name] [--schema <schema-name>]
+/opsx-hw:new [change-name] [--schema <schema-name>]
 ```
 
 **Arguments:**
@@ -106,13 +106,13 @@ openspec/changes/<change-name>/
 
 **Example:**
 ```
-You: /opsx:new add-dark-mode
+You: /opsx-hw:new add-dark-mode
 
 AI:  Created openspec/changes/add-dark-mode/
      Schema: spec-driven
 
      Ready to create: proposal
-     Use /opsx:continue to create it, or /opsx:ff to create all artifacts.
+     Use /opsx-hw:continue to create it, or /opsx-hw:ff to create all artifacts.
 ```
 
 **Tips:**
@@ -122,13 +122,13 @@ AI:  Created openspec/changes/add-dark-mode/
 
 ---
 
-### `/opsx:continue`
+### `/opsx-hw:continue`
 
 Create the next artifact in the dependency chain. Creates one artifact at a time for incremental progress.
 
 **Syntax:**
 ```
-/opsx:continue [change-name]
+/opsx-hw:continue [change-name]
 ```
 
 **Arguments:**
@@ -145,7 +145,7 @@ Create the next artifact in the dependency chain. Creates one artifact at a time
 
 **Example:**
 ```
-You: /opsx:continue
+You: /opsx-hw:continue
 
 AI:  Change: add-dark-mode
 
@@ -162,7 +162,7 @@ AI:  Change: add-dark-mode
      ✓ Created openspec/changes/add-dark-mode/specs/ui/spec.md
 
      Now available: tasks
-     Run /opsx:continue to create the next artifact.
+     Run /opsx-hw:continue to create the next artifact.
 ```
 
 **Tips:**
@@ -173,13 +173,13 @@ AI:  Change: add-dark-mode
 
 ---
 
-### `/opsx:ff`
+### `/opsx-hw:ff`
 
 Fast-forward through artifact creation. Creates all planning artifacts at once.
 
 **Syntax:**
 ```
-/opsx:ff [change-name]
+/opsx-hw:ff [change-name]
 ```
 
 **Arguments:**
@@ -195,7 +195,7 @@ Fast-forward through artifact creation. Creates all planning artifacts at once.
 
 **Example:**
 ```
-You: /opsx:ff add-dark-mode
+You: /opsx-hw:ff add-dark-mode
 
 AI:  Fast-forwarding add-dark-mode...
 
@@ -205,24 +205,24 @@ AI:  Fast-forwarding add-dark-mode...
      ✓ Creating tasks.md
 
      All planning artifacts complete!
-     Ready for implementation. Run /opsx:apply to begin.
+     Ready for implementation. Run /opsx-hw:apply to begin.
 ```
 
 **Tips:**
 - Use when you have a clear picture of what you're building
-- Faster than `/opsx:continue` for straightforward changes
+- Faster than `/opsx-hw:continue` for straightforward changes
 - You can still edit artifacts afterward
 - Good for small to medium features
 
 ---
 
-### `/opsx:apply`
+### `/opsx-hw:apply`
 
 Implement tasks from the change. Works through the task list, writing code and checking off items.
 
 **Syntax:**
 ```
-/opsx:apply [change-name]
+/opsx-hw:apply [change-name]
 ```
 
 **Arguments:**
@@ -238,7 +238,7 @@ Implement tasks from the change. Works through the task list, writing code and c
 
 **Example:**
 ```
-You: /opsx:apply
+You: /opsx-hw:apply
 
 AI:  Implementing add-dark-mode...
 
@@ -266,13 +266,13 @@ AI:  Implementing add-dark-mode...
 
 ---
 
-### `/opsx:verify`
+### `/opsx-hw:verify`
 
 Validate that implementation matches your change artifacts. Checks completeness, correctness, and coherence.
 
 **Syntax:**
 ```
-/opsx:verify [change-name]
+/opsx-hw:verify [change-name]
 ```
 
 **Arguments:**
@@ -296,7 +296,7 @@ Validate that implementation matches your change artifacts. Checks completeness,
 
 **Example:**
 ```
-You: /opsx:verify
+You: /opsx-hw:verify
 
 AI:  Verifying add-dark-mode...
 
@@ -334,13 +334,13 @@ AI:  Verifying add-dark-mode...
 
 ---
 
-### `/opsx:sync`
+### `/opsx-hw:sync`
 
 **Optional command.** Merge delta specs from a change into main specs. Archive will prompt to sync if needed, so you typically don't need to run this manually.
 
 **Syntax:**
 ```
-/opsx:sync [change-name]
+/opsx-hw:sync [change-name]
 ```
 
 **Arguments:**
@@ -357,7 +357,7 @@ AI:  Verifying add-dark-mode...
 
 **Example:**
 ```text
-You: /opsx:sync
+You: /opsx-hw:sync
 
 AI:  Syncing add-dark-mode delta specs...
 
@@ -371,7 +371,7 @@ AI:  Syncing add-dark-mode delta specs...
      Merging...
      ✓ openspec/specs/ui/spec.md updated
 
-     Change remains active. Run /opsx:archive when ready to complete.
+     Change remains active. Run /opsx-hw:archive when ready to complete.
 ```
 
 **When to use manually:**
@@ -391,13 +391,13 @@ AI:  Syncing add-dark-mode delta specs...
 
 ---
 
-### `/opsx:archive`
+### `/opsx-hw:archive`
 
 Archive a completed change. Finalizes the change and moves it to the archive folder.
 
 **Syntax:**
 ```
-/opsx:archive [change-name]
+/opsx-hw:archive [change-name]
 ```
 
 **Arguments:**
@@ -414,7 +414,7 @@ Archive a completed change. Finalizes the change and moves it to the archive fol
 
 **Example:**
 ```text
-You: /opsx:archive
+You: /opsx-hw:archive
 
 AI:  Archiving add-dark-mode...
 
@@ -439,17 +439,17 @@ AI:  ✓ Synced specs to openspec/specs/ui/spec.md
 - Archive won't block on incomplete tasks, but will warn
 - Delta specs can be synced during archive or beforehand
 - Archived changes are preserved for history
-- Use `/opsx:verify` first to catch issues
+- Use `/opsx-hw:verify` first to catch issues
 
 ---
 
-### `/opsx:bulk-archive`
+### `/opsx-hw:bulk-archive`
 
 Archive multiple completed changes at once. Handles spec conflicts between changes.
 
 **Syntax:**
 ```
-/opsx:bulk-archive [change-names...]
+/opsx-hw:bulk-archive [change-names...]
 ```
 
 **Arguments:**
@@ -466,7 +466,7 @@ Archive multiple completed changes at once. Handles spec conflicts between chang
 
 **Example:**
 ```
-You: /opsx:bulk-archive
+You: /opsx-hw:bulk-archive
 
 AI:  Found 3 completed changes:
      - add-dark-mode (8/8 tasks complete)
@@ -499,13 +499,13 @@ AI:  ✓ Archived add-dark-mode
 
 ---
 
-### `/opsx:onboard`
+### `/opsx-hw:onboard`
 
 Guided onboarding through the complete OpenSpec workflow. An interactive tutorial using your actual codebase.
 
 **Syntax:**
 ```
-/opsx:onboard
+/opsx-hw:onboard
 ```
 
 **What it does:**
@@ -519,19 +519,19 @@ Guided onboarding through the complete OpenSpec workflow. An interactive tutoria
 **Phases:**
 1. Welcome and codebase analysis
 2. Finding an improvement opportunity
-3. Creating a change (`/opsx:new`)
+3. Creating a change (`/opsx-hw:new`)
 4. Writing the proposal
 5. Creating specs
 6. Writing the design
 7. Creating tasks
-8. Implementing tasks (`/opsx:apply`)
+8. Implementing tasks (`/opsx-hw:apply`)
 9. Verifying implementation
 10. Archiving the change
 11. Summary and next steps
 
 **Example:**
 ```
-You: /opsx:onboard
+You: /opsx-hw:onboard
 
 AI:  Welcome to OpenSpec!
 
@@ -565,7 +565,7 @@ Different AI tools use slightly different command syntax. Use the format that ma
 
 | Tool | Syntax Example |
 |------|----------------|
-| Claude Code | `/opsx:new`, `/opsx:apply` |
+| Claude Code | `/opsx-hw:new`, `/opsx-hw:apply` |
 | Cursor | `/opsx-new`, `/opsx-apply` |
 | Windsurf | `/opsx-new`, `/opsx-apply` |
 | Copilot (IDE) | `/opsx-new`, `/opsx-apply` |
@@ -604,7 +604,7 @@ Legacy changes can be continued with OPSX commands. The artifact structure is co
 The command couldn't identify which change to work on.
 
 **Solutions:**
-- Specify the change name explicitly: `/opsx:apply add-dark-mode`
+- Specify the change name explicitly: `/opsx-hw:apply add-dark-mode`
 - Check that the change folder exists: `openspec list`
 - Verify you're in the right project directory
 
@@ -644,7 +644,7 @@ The AI creates incomplete or incorrect artifacts.
 - Add project context in `openspec/config.yaml`
 - Add per-artifact rules for specific guidance
 - Provide more detail in your change description
-- Use `/opsx:continue` instead of `/opsx:ff` for more control
+- Use `/opsx-hw:continue` instead of `/opsx-hw:ff` for more control
 
 ---
 

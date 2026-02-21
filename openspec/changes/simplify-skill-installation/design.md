@@ -196,7 +196,7 @@ function migrateIfNeeded(projectPath: string, tools: AiTool[]): void {
 
 ### 9. Generic Next-Step Guidance in Templates
 
-Workflow templates use generic, concept-based next-step guidance rather than referencing specific workflow commands. For example, instead of "run `/opsx:propose`", templates say "create a change proposal".
+Workflow templates use generic, concept-based next-step guidance rather than referencing specific workflow commands. For example, instead of "run `/opsx-hw:propose`", templates say "create a change proposal".
 
 **Rationale:** Conditional cross-referencing (where each template checks which other workflows are installed and renders different command names) adds significant complexity to template generation, testing, and maintenance. Generic guidance avoids this entirely while still being useful — users already know their installed workflows.
 

@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://github.com/Fission-AI/OpenSpec/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Fission-AI/OpenSpec/actions/workflows/ci.yml/badge.svg" /></a>
-  <a href="https://www.npmjs.com/package/@fission-ai/openspec"><img alt="npm version" src="https://img.shields.io/npm/v/@fission-ai/openspec?style=flat-square" /></a>
+  <a href="https://www.npmjs.com/package/@khaledea/openspec-hw"><img alt="npm version" src="https://img.shields.io/npm/v/@khaledea/openspec-hw?style=flat-square" /></a>
   <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" /></a>
   <a href="https://discord.gg/YctCnvvshC"><img alt="Discord" src="https://img.shields.io/discord/1411657095639601154?style=flat-square&logo=discord&logoColor=white&label=Discord&suffix=%20online" /></a>
 </p>
@@ -18,7 +18,7 @@
 <summary><strong>The most loved spec framework.</strong></summary>
 
 [![Stars](https://img.shields.io/github/stars/Fission-AI/OpenSpec?style=flat-square&label=Stars)](https://github.com/Fission-AI/OpenSpec/stargazers)
-[![Downloads](https://img.shields.io/npm/dm/@fission-ai/openspec?style=flat-square&label=Downloads/mo)](https://www.npmjs.com/package/@fission-ai/openspec)
+[![Downloads](https://img.shields.io/npm/dm/@khaledea/openspec-hw?style=flat-square&label=Downloads/mo)](https://www.npmjs.com/package/@khaledea/openspec-hw)
 [![Contributors](https://img.shields.io/github/contributors/Fission-AI/OpenSpec?style=flat-square&label=Contributors)](https://github.com/Fission-AI/OpenSpec/graphs/contributors)
 
 </details>
@@ -36,7 +36,7 @@ Our philosophy:
 > [!TIP]
 > **New workflow now available!** We've rebuilt OpenSpec with a new artifact-guided workflow.
 >
-> Run `/opsx:onboard` to get started. → [Learn more here](docs/opsx.md)
+> Run `/opsx-hw:onboard` to get started. → [Learn more here](docs/opsx.md)
 
 <p align="center">
   Follow <a href="https://x.com/0xTab">@0xTab on X</a> for updates · Join the <a href="https://discord.gg/YctCnvvshC">OpenSpec Discord</a> for help and questions.
@@ -46,23 +46,23 @@ Our philosophy:
 
 Using OpenSpec in a team? [Email here](mailto:teams@openspec.dev) for access to our Slack channel.
 
-<!-- TODO: Add GIF demo of /opsx:new → /opsx:archive workflow -->
+<!-- TODO: Add GIF demo of /opsx-hw:new → /opsx-hw:archive workflow -->
 
 ## See it in action
 
 ```text
-You: /opsx:new add-dark-mode
+You: /opsx-hw:new add-dark-mode
 AI:  Created openspec/changes/add-dark-mode/
      Ready to create: proposal
 
-You: /opsx:ff   # "fast-forward" - generate all planning docs
+You: /opsx-hw:ff   # "fast-forward" - generate all planning docs
 AI:  ✓ proposal.md — why we're doing this, what's changing
      ✓ specs/       — requirements and scenarios
      ✓ design.md    — technical approach
      ✓ tasks.md     — implementation checklist
      Ready for implementation!
 
-You: /opsx:apply
+You: /opsx-hw:apply
 AI:  Implementing tasks...
      ✓ 1.1 Add theme context provider
      ✓ 1.2 Create toggle component
@@ -70,7 +70,7 @@ AI:  Implementing tasks...
      ✓ 2.2 Wire up localStorage
      All tasks complete!
 
-You: /opsx:archive
+You: /opsx-hw:archive
 AI:  Archived to openspec/changes/archive/2025-01-23-add-dark-mode/
      Specs updated. Ready for the next feature.
 ```
@@ -91,7 +91,7 @@ AI:  Archived to openspec/changes/archive/2025-01-23-add-dark-mode/
 Install OpenSpec globally:
 
 ```bash
-npm install -g @fission-ai/openspec@latest
+npm install -g @khaledea/openspec-hw@latest
 ```
 
 Then navigate to your project directory and initialize:
@@ -101,7 +101,7 @@ cd your-project
 openspec init
 ```
 
-Now tell your AI: `/opsx:new <what-you-want-to-build>`
+Now tell your AI: `/opsx-hw:new <what-you-want-to-build>`
 
 > [!NOTE]
 > Not sure if your tool is supported? [View the full list](docs/supported-tools.md) – we support 20+ tools and growing.
@@ -142,7 +142,7 @@ AI coding assistants are powerful but unpredictable when requirements live only 
 **Upgrade the package**
 
 ```bash
-npm install -g @fission-ai/openspec@latest
+npm install -g @khaledea/openspec-hw@latest
 ```
 
 **Refresh agent instructions**

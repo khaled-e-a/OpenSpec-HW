@@ -6,14 +6,14 @@ The goal: **get users to an "aha moment" in under a minute**.
 
 ```text
 0:00  $ openspec init
-      ✓ Done. Run /opsx:propose "your idea"
+      ✓ Done. Run /opsx-hw:propose "your idea"
 
-0:15  /opsx:propose "add user authentication"
+0:15  /opsx-hw:propose "add user authentication"
 
 0:45  Agent creates proposal.md, design.md, tasks.md
       "Whoa, it planned the whole thing for me" ← AHA
 
-1:00  /opsx:apply
+1:00  /opsx-hw:apply
 ```
 
 Additionally, users have different preferences for how workflows are delivered (skills vs commands vs both), but this should be a power-user configuration, not something new users think about.
@@ -38,7 +38,7 @@ Setting up OpenSpec...
 ✓ Done
 
 Start your first change:
-  /opsx:propose "add dark mode"
+  /opsx-hw:propose "add dark mode"
 ```
 
 **No prompts for profile or delivery.** Defaults are:
@@ -74,7 +74,7 @@ The `propose` workflow is new - it combines `new` + `ff` into a single command t
 
 ### 5. Improved Propose UX
 
-`/opsx:propose` should naturally onboard users by explaining what it's doing:
+`/opsx-hw:propose` should naturally onboard users by explaining what it's doing:
 
 ```text
 I'll create a change with 3 artifacts:
@@ -82,7 +82,7 @@ I'll create a change with 3 artifacts:
 - design.md (how)
 - tasks.md (implementation steps)
 
-When ready to implement, run /opsx:apply
+When ready to implement, run /opsx-hw:apply
 ```
 
 This teaches as it goes - no separate onboarding needed for most users.

@@ -4,11 +4,11 @@
 
 Currently, there is **no way to regenerate artifacts** in the OPSX workflow:
 
-- `/opsx:apply` just reads whatever's on disk
-- `/opsx:continue` only creates the NEXT artifact - won't touch existing ones
+- `/opsx-hw:apply` just reads whatever's on disk
+- `/opsx-hw:continue` only creates the NEXT artifact - won't touch existing ones
 
 If you edit `design.md` after `tasks.md` exists, your only options are:
-1. Delete tasks.md manually, then run `/opsx:continue`
+1. Delete tasks.md manually, then run `/opsx-hw:continue`
 2. Edit tasks.md manually
 
 The documentation claims you can "update artifacts mid-flight and continue" but there's no mechanism that actually supports this.
@@ -18,11 +18,11 @@ The documentation claims you can "update artifacts mid-flight and continue" but 
 Two parts:
 
 ### Part 1: Staleness Detection
-Add artifact staleness detection to `/opsx:apply`:
+Add artifact staleness detection to `/opsx-hw:apply`:
 
 1. **Track modification times**: When generating an artifact, record the mtime of its dependencies
-2. **Detect staleness**: When `/opsx:apply` runs, check if upstream artifacts (design.md, specs) have been modified since tasks.md was generated
-3. **Prompt user**: If stale, ask: "Design was modified after tasks were generated. Would you like to regenerate tasks with `/opsx:continue`?"
+2. **Detect staleness**: When `/opsx-hw:apply` runs, check if upstream artifacts (design.md, specs) have been modified since tasks.md was generated
+3. **Prompt user**: If stale, ask: "Design was modified after tasks were generated. Would you like to regenerate tasks with `/opsx-hw:continue`?"
 
 ## User Experience
 
@@ -31,7 +31,7 @@ Add artifact staleness detection to `/opsx:apply`:
 This is the workflow we want to enable (currently documented but not supported):
 
 ```
-You: /opsx:apply
+You: /opsx-hw:apply
 
 AI:  Working through tasks...
      ✓ Task 1.1: Created caching layer
@@ -57,7 +57,7 @@ AI:  Updated design.md to use CacheManager from src/cache/
 When user manually edits an upstream artifact:
 
 ```
-$ /opsx:apply
+$ /opsx-hw:apply
 
 ⚠️  Detected changes to upstream artifacts:
     - design.md modified 5 minutes ago (after tasks.md was generated)
@@ -76,13 +76,13 @@ Add a way to regenerate specific artifacts:
 
 ```bash
 # Option A: Flag on continue
-/opsx:continue --regenerate tasks
+/opsx-hw:continue --regenerate tasks
 
 # Option B: Separate command
-/opsx:regenerate tasks
+/opsx-hw:regenerate tasks
 
 # Option C: Interactive prompt when staleness detected
-/opsx:apply
+/opsx-hw:apply
 # "Design changed. Regenerate tasks? [y/N]"
 ```
 
