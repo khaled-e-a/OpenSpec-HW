@@ -153,6 +153,34 @@ Run this inside each project to regenerate AI guidance and ensure the latest sla
 openspec update
 ```
 
+## Building from Source
+
+Clone the repo and install dependencies:
+
+```bash
+git clone https://github.com/khaledea/OpenSpec-HW.git
+cd OpenSpec-HW
+pnpm install
+```
+
+Build the package:
+
+```bash
+pnpm run build
+```
+
+Install the built package globally so the `openspec` command is available:
+
+```bash
+npm install -g .
+```
+
+Verify it works:
+
+```bash
+openspec --version
+```
+
 ## Usage Notes
 
 **Model selection**: OpenSpec works best with high-reasoning models. We recommend Opus 4.5 and GPT 5.2 for both planning and implementation.
