@@ -605,7 +605,7 @@ The command couldn't identify which change to work on.
 
 **Solutions:**
 - Specify the change name explicitly: `/opsx-hw:apply add-dark-mode`
-- Check that the change folder exists: `openspec list`
+- Check that the change folder exists: `openspec-hw list`
 - Verify you're in the right project directory
 
 ### "No artifacts ready"
@@ -613,7 +613,7 @@ The command couldn't identify which change to work on.
 All artifacts are either complete or blocked by missing dependencies.
 
 **Solutions:**
-- Run `openspec status --change <name>` to see what's blocking
+- Run `openspec-hw status --change <name>` to see what's blocking
 - Check if required artifacts exist
 - Create missing dependency artifacts first
 
@@ -622,17 +622,17 @@ All artifacts are either complete or blocked by missing dependencies.
 The specified schema doesn't exist.
 
 **Solutions:**
-- List available schemas: `openspec schemas`
+- List available schemas: `openspec-hw schemas`
 - Check spelling of schema name
-- Create the schema if it's custom: `openspec schema init <name>`
+- Create the schema if it's custom: `openspec-hw schema init <name>`
 
 ### Commands not recognized
 
 The AI tool doesn't recognize OpenSpec commands.
 
 **Solutions:**
-- Ensure OpenSpec is initialized: `openspec init`
-- Regenerate skills: `openspec update`
+- Ensure OpenSpec is initialized: `openspec-hw init`
+- Regenerate skills: `openspec-hw update`
 - Check that `.claude/skills/` directory exists (for Claude Code)
 - Restart your AI tool to pick up new skills
 

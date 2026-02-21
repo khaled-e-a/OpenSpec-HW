@@ -46,18 +46,18 @@ function getCommandPath(command: Command): string {
 
   while (current) {
     const name = current.name();
-    // Skip the root 'openspec' command
-    if (name && name !== 'openspec') {
+    // Skip the root 'openspec-hw' command
+    if (name && name !== 'openspec-hw') {
       names.unshift(name);
     }
     current = current.parent;
   }
 
-  return names.join(':') || 'openspec';
+  return names.join(':') || 'openspec-hw';
 }
 
 program
-  .name('openspec')
+  .name('openspec-hw')
   .description('AI-native system for spec-driven development')
   .version(version);
 

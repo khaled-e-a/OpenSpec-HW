@@ -60,7 +60,7 @@ You're "in planning phase", then "in implementation phase", then "done". But rea
 
 ```bash
 # Make sure you have openspec installed — skills are automatically generated
-openspec init
+openspec-hw init
 ```
 
 This creates skills in `.claude/skills/` (or equivalent) that AI coding assistants auto-detect.
@@ -73,7 +73,7 @@ Project config lets you set defaults and inject project-specific context into al
 
 ### Creating Config
 
-Config is created during `openspec init`, or manually:
+Config is created during `openspec-hw init`, or manually:
 
 ```yaml
 # openspec/config.yaml
@@ -140,7 +140,7 @@ rules:
 
 **"Unknown artifact ID in rules: X"**
 - Check artifact IDs match your schema (see list above)
-- Run `openspec schemas --json` to see artifact IDs for each schema
+- Run `openspec-hw schemas --json` to see artifact IDs for each schema
 
 **Config not being applied:**
 - Ensure file is at `openspec/config.yaml` (not `.yml`)
@@ -475,7 +475,7 @@ Artifacts form a directed acyclic graph (DAG). Dependencies are **enablers**, no
   ┌──────────────────────────────────────────────────────────────────────────┐
   │  Step 1: Query current state                                             │
   │  ┌────────────────────────────────────────────────────────────────────┐  │
-  │  │  $ openspec status --change "add-auth" --json                      │  │
+  │  │  $ openspec-hw status --change "add-auth" --json                      │  │
   │  │                                                                    │  │
   │  │  {                                                                 │  │
   │  │    "artifacts": [                                                  │  │
@@ -489,7 +489,7 @@ Artifacts form a directed acyclic graph (DAG). Dependencies are **enablers**, no
   │                                                                          │
   │  Step 2: Get rich instructions for ready artifact                        │
   │  ┌────────────────────────────────────────────────────────────────────┐  │
-  │  │  $ openspec instructions specs --change "add-auth" --json          │  │
+  │  │  $ openspec-hw instructions specs --change "add-auth" --json          │  │
   │  │                                                                    │  │
   │  │  {                                                                 │  │
   │  │    "template": "# Specification\n\n## ADDED Requirements...",      │  │
@@ -549,16 +549,16 @@ Create custom workflows using the schema management commands:
 
 ```bash
 # Create a new schema from scratch (interactive)
-openspec schema init my-workflow
+openspec-hw schema init my-workflow
 
 # Or fork an existing schema as a starting point
-openspec schema fork spec-driven my-workflow
+openspec-hw schema fork spec-driven my-workflow
 
 # Validate your schema structure
-openspec schema validate my-workflow
+openspec-hw schema validate my-workflow
 
 # See where a schema resolves from (useful for debugging)
-openspec schema which my-workflow
+openspec-hw schema which my-workflow
 ```
 
 Schemas are stored in `openspec/schemas/` (project-local, version controlled) or `~/.local/share/openspec/schemas/` (user global).
@@ -614,19 +614,19 @@ Schemas define what artifacts exist and their dependencies. Currently available:
 
 ```bash
 # List available schemas
-openspec schemas
+openspec-hw schemas
 
 # See all schemas with their resolution sources
-openspec schema which --all
+openspec-hw schema which --all
 
 # Create a new schema interactively
-openspec schema init my-workflow
+openspec-hw schema init my-workflow
 
 # Fork an existing schema for customization
-openspec schema fork spec-driven my-workflow
+openspec-hw schema fork spec-driven my-workflow
 
 # Validate schema structure before use
-openspec schema validate my-workflow
+openspec-hw schema validate my-workflow
 ```
 
 ## Tips
@@ -635,7 +635,7 @@ openspec schema validate my-workflow
 - `/opsx-hw:ff` when you know what you want, `/opsx-hw:continue` when exploring
 - During `/opsx-hw:apply`, if something's wrong — fix the artifact, then continue
 - Tasks track progress via checkboxes in `tasks.md`
-- Check status anytime: `openspec status --change "name"`
+- Check status anytime: `openspec-hw status --change "name"`
 
 ## Feedback
 

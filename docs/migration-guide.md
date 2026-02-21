@@ -82,14 +82,14 @@ Don't worry about getting it perfect. We're still learning what works best here,
 
 ## Running the Migration
 
-Both `openspec init` and `openspec update` detect legacy files and guide you through the same cleanup process. Use whichever fits your situation:
+Both `openspec-hw init` and `openspec-hw update` detect legacy files and guide you through the same cleanup process. Use whichever fits your situation:
 
-### Using `openspec init`
+### Using `openspec-hw init`
 
 Run this if you want to add new tools or reconfigure which tools are set up:
 
 ```bash
-openspec init
+openspec-hw init
 ```
 
 The init command detects legacy files and guides you through cleanup:
@@ -133,12 +133,12 @@ Needs your attention
 4. New skills are installed in `.claude/skills/`
 5. `openspec/config.yaml` is created with a default schema
 
-### Using `openspec update`
+### Using `openspec-hw update`
 
 Run this if you just want to migrate and refresh your existing tools to the latest version:
 
 ```bash
-openspec update
+openspec-hw update
 ```
 
 The update command also detects and cleans up legacy artifacts, then refreshes your skills to the latest version.
@@ -148,7 +148,7 @@ The update command also detects and cleans up legacy artifacts, then refreshes y
 For scripted migrations:
 
 ```bash
-openspec init --force --tools claude
+openspec-hw init --force --tools claude
 ```
 
 The `--force` flag skips prompts and auto-accepts cleanup.
@@ -416,7 +416,7 @@ Shows what's ready to create based on what already exists.
 **Need to see status?**
 
 ```bash
-openspec status --change add-my-feature
+openspec-hw status --change add-my-feature
 ```
 
 ---
@@ -466,7 +466,7 @@ When determining which schema to use, OPSX checks in order:
 List all available schemas:
 
 ```bash
-openspec schemas
+openspec-hw schemas
 ```
 
 ### Custom Schemas
@@ -474,13 +474,13 @@ openspec schemas
 Create your own workflow:
 
 ```bash
-openspec schema init my-workflow
+openspec-hw schema init my-workflow
 ```
 
 Or fork an existing one:
 
 ```bash
-openspec schema fork spec-driven my-workflow
+openspec-hw schema fork spec-driven my-workflow
 ```
 
 See [Customization](customization.md) for details.
@@ -494,7 +494,7 @@ See [Customization](customization.md) for details.
 You're running in a CI or non-interactive environment. Use:
 
 ```bash
-openspec init --force
+openspec-hw init --force
 ```
 
 ### Commands not appearing after migration
@@ -510,7 +510,7 @@ Check that your `rules:` keys match your schema's artifact IDs:
 Run this to see valid artifact IDs:
 
 ```bash
-openspec schemas --json
+openspec-hw schemas --json
 ```
 
 ### Config not being applied

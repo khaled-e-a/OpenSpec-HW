@@ -27,7 +27,7 @@
     }
   },
   "bin": {
-    "openspec": "./bin/openspec.js"
+    "openspec-hw": "./bin/openspec.js"
   },
   "files": [
     "dist",

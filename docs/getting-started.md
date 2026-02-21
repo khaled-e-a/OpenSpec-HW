@@ -33,7 +33,7 @@ OpenSpec helps you and your AI coding assistant agree on what to build before an
 
 ## What OpenSpec Creates
 
-After running `openspec init`, your project has this structure:
+After running `openspec-hw init`, your project has this structure:
 
 ```
 openspec/
@@ -253,16 +253,16 @@ Use the CLI to check on your changes:
 
 ```bash
 # List active changes
-openspec list
+openspec-hw list
 
 # View change details
-openspec show add-dark-mode
+openspec-hw show add-dark-mode
 
 # Validate spec formatting
-openspec validate add-dark-mode
+openspec-hw validate add-dark-mode
 
 # Interactive dashboard
-openspec view
+openspec-hw view
 ```
 
 ## Next Steps

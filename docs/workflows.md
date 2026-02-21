@@ -392,7 +392,7 @@ Catches mismatches before you close out the change.
 
 ### Name Changes Clearly
 
-Good names make `openspec list` useful:
+Good names make `openspec-hw list` useful:
 
 ```text
 Good:                          Avoid:

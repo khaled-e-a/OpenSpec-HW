@@ -64,7 +64,7 @@ Or add to your development environment in `flake.nix`:
 ## Verify Installation
 
 ```bash
-openspec --version
+openspec-hw --version
 ```
 
 ## Next Steps
@@ -73,7 +73,7 @@ After installing, initialize OpenSpec in your project:
 
 ```bash
 cd your-project
-openspec init
+openspec-hw init
 ```
 
 See [Getting Started](getting-started.md) for a full walkthrough.

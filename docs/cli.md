@@ -1,6 +1,6 @@
 # CLI Reference
 
-The OpenSpec CLI (`openspec`) provides terminal commands for project setup, validation, status inspection, and management. These commands complement the AI slash commands (like `/opsx-hw:new`) documented in [Commands](commands.md).
+The OpenSpec CLI (`openspec-hw`) provides terminal commands for project setup, validation, status inspection, and management. These commands complement the AI slash commands (like `/opsx-hw:new`) documented in [Commands](commands.md).
 
 ## Summary
 
@@ -27,11 +27,11 @@ These commands are interactive and designed for terminal use:
 
 | Command | Purpose |
 |---------|---------|
-| `openspec init` | Initialize project (interactive prompts) |
-| `openspec view` | Interactive dashboard |
-| `openspec config edit` | Open config in editor |
-| `openspec feedback` | Submit feedback via GitHub |
-| `openspec completion install` | Install shell completions |
+| `openspec-hw init` | Initialize project (interactive prompts) |
+| `openspec-hw view` | Interactive dashboard |
+| `openspec-hw config edit` | Open config in editor |
+| `openspec-hw feedback` | Submit feedback via GitHub |
+| `openspec-hw completion install` | Install shell completions |
 
 ### Agent-Compatible Commands
 
@@ -39,13 +39,13 @@ These commands support `--json` output for programmatic use by AI agents and scr
 
 | Command | Human Use | Agent Use |
 |---------|-----------|-----------|
-| `openspec list` | Browse changes/specs | `--json` for structured data |
-| `openspec show <item>` | Read content | `--json` for parsing |
-| `openspec validate` | Check for issues | `--all --json` for bulk validation |
-| `openspec status` | See artifact progress | `--json` for structured status |
-| `openspec instructions` | Get next steps | `--json` for agent instructions |
-| `openspec templates` | Find template paths | `--json` for path resolution |
-| `openspec schemas` | List available schemas | `--json` for schema discovery |
+| `openspec-hw list` | Browse changes/specs | `--json` for structured data |
+| `openspec-hw show <item>` | Read content | `--json` for parsing |
+| `openspec-hw validate` | Check for issues | `--all --json` for bulk validation |
+| `openspec-hw status` | See artifact progress | `--json` for structured status |
+| `openspec-hw instructions` | Get next steps | `--json` for agent instructions |
+| `openspec-hw templates` | Find template paths | `--json` for path resolution |
+| `openspec-hw schemas` | List available schemas | `--json` for schema discovery |
 
 ---
 
@@ -63,12 +63,12 @@ These options work with all commands:
 
 ## Setup Commands
 
-### `openspec init`
+### `openspec-hw init`
 
 Initialize OpenSpec in your project. Creates the folder structure and configures AI tool integrations.
 
 ```
-openspec init [path] [options]
+openspec-hw init [path] [options]
 ```
 
 **Arguments:**
@@ -90,19 +90,19 @@ openspec init [path] [options]
 
 ```bash
 # Interactive initialization
-openspec init
+openspec-hw init
 
 # Initialize in a specific directory
-openspec init ./my-project
+openspec-hw init ./my-project
 
 # Non-interactive: configure for Claude and Cursor
-openspec init --tools claude,cursor
+openspec-hw init --tools claude,cursor
 
 # Configure for all supported tools
-openspec init --tools all
+openspec-hw init --tools all
 
 # Skip prompts and auto-cleanup legacy files
-openspec init --force
+openspec-hw init --force
 ```
 
 **What it creates:**
@@ -120,12 +120,12 @@ openspec/
 
 ---
 
-### `openspec update`
+### `openspec-hw update`
 
 Update OpenSpec instruction files after upgrading the CLI. Re-generates AI tool configuration files.
 
 ```
-openspec update [path] [options]
+openspec-hw update [path] [options]
 ```
 
 **Arguments:**
@@ -145,19 +145,19 @@ openspec update [path] [options]
 ```bash
 # Update instruction files after npm upgrade
 npm update @khaledea/openspec-hw
-openspec update
+openspec-hw update
 ```
 
 ---
 
 ## Browsing Commands
 
-### `openspec list`
+### `openspec-hw list`
 
 List changes or specs in your project.
 
 ```
-openspec list [options]
+openspec-hw list [options]
 ```
 
 **Options:**
@@ -173,13 +173,13 @@ openspec list [options]
 
 ```bash
 # List all active changes
-openspec list
+openspec-hw list
 
 # List all specs
-openspec list --specs
+openspec-hw list --specs
 
 # JSON output for scripts
-openspec list --json
+openspec-hw list --json
 ```
 
 **Output (text):**
@@ -192,24 +192,24 @@ Active changes:
 
 ---
 
-### `openspec view`
+### `openspec-hw view`
 
 Display an interactive dashboard for exploring specs and changes.
 
 ```
-openspec view
+openspec-hw view
 ```
 
 Opens a terminal-based interface for navigating your project's specifications and changes.
 
 ---
 
-### `openspec show`
+### `openspec-hw show`
 
 Display details of a change or spec.
 
 ```
-openspec show [item-name] [options]
+openspec-hw show [item-name] [options]
 ```
 
 **Arguments:**
@@ -244,28 +244,28 @@ openspec show [item-name] [options]
 
 ```bash
 # Interactive selection
-openspec show
+openspec-hw show
 
 # Show a specific change
-openspec show add-dark-mode
+openspec-hw show add-dark-mode
 
 # Show a specific spec
-openspec show auth --type spec
+openspec-hw show auth --type spec
 
 # JSON output for parsing
-openspec show add-dark-mode --json
+openspec-hw show add-dark-mode --json
 ```
 
 ---
 
 ## Validation Commands
 
-### `openspec validate`
+### `openspec-hw validate`
 
 Validate changes and specs for structural issues.
 
 ```
-openspec validate [item-name] [options]
+openspec-hw validate [item-name] [options]
 ```
 
 **Arguments:**
@@ -291,19 +291,19 @@ openspec validate [item-name] [options]
 
 ```bash
 # Interactive validation
-openspec validate
+openspec-hw validate
 
 # Validate a specific change
-openspec validate add-dark-mode
+openspec-hw validate add-dark-mode
 
 # Validate all changes
-openspec validate --changes
+openspec-hw validate --changes
 
 # Validate everything with JSON output (for CI/scripts)
-openspec validate --all --json
+openspec-hw validate --all --json
 
 # Strict validation with increased parallelism
-openspec validate --all --strict --concurrency 12
+openspec-hw validate --all --strict --concurrency 12
 ```
 
 **Output (text):**
@@ -343,12 +343,12 @@ Validating add-dark-mode...
 
 ## Lifecycle Commands
 
-### `openspec archive`
+### `openspec-hw archive`
 
 Archive a completed change and merge delta specs into main specs.
 
 ```
-openspec archive [change-name] [options]
+openspec-hw archive [change-name] [options]
 ```
 
 **Arguments:**
@@ -369,16 +369,16 @@ openspec archive [change-name] [options]
 
 ```bash
 # Interactive archive
-openspec archive
+openspec-hw archive
 
 # Archive specific change
-openspec archive add-dark-mode
+openspec-hw archive add-dark-mode
 
 # Archive without prompts (CI/scripts)
-openspec archive add-dark-mode --yes
+openspec-hw archive add-dark-mode --yes
 
 # Archive a tooling change that doesn't affect specs
-openspec archive update-ci-config --skip-specs
+openspec-hw archive update-ci-config --skip-specs
 ```
 
 **What it does:**
@@ -394,12 +394,12 @@ openspec archive update-ci-config --skip-specs
 
 These commands support the artifact-driven OPSX workflow. They're useful for both humans checking progress and agents determining next steps.
 
-### `openspec status`
+### `openspec-hw status`
 
 Display artifact completion status for a change.
 
 ```
-openspec status [options]
+openspec-hw status [options]
 ```
 
 **Options:**
@@ -414,13 +414,13 @@ openspec status [options]
 
 ```bash
 # Interactive status check
-openspec status
+openspec-hw status
 
 # Status for specific change
-openspec status --change add-dark-mode
+openspec-hw status --change add-dark-mode
 
 # JSON for agent use
-openspec status --change add-dark-mode --json
+openspec-hw status --change add-dark-mode --json
 ```
 
 **Output (text):**
@@ -456,12 +456,12 @@ Next: Create design using /opsx-hw:continue
 
 ---
 
-### `openspec instructions`
+### `openspec-hw instructions`
 
 Get enriched instructions for creating an artifact or applying tasks. Used by AI agents to understand what to create next.
 
 ```
-openspec instructions [artifact] [options]
+openspec-hw instructions [artifact] [options]
 ```
 
 **Arguments:**
@@ -484,16 +484,16 @@ openspec instructions [artifact] [options]
 
 ```bash
 # Get instructions for next artifact
-openspec instructions --change add-dark-mode
+openspec-hw instructions --change add-dark-mode
 
 # Get specific artifact instructions
-openspec instructions design --change add-dark-mode
+openspec-hw instructions design --change add-dark-mode
 
 # Get apply/implementation instructions
-openspec instructions apply --change add-dark-mode
+openspec-hw instructions apply --change add-dark-mode
 
 # JSON for agent consumption
-openspec instructions design --change add-dark-mode --json
+openspec-hw instructions design --change add-dark-mode --json
 ```
 
 **Output includes:**
@@ -505,12 +505,12 @@ openspec instructions design --change add-dark-mode --json
 
 ---
 
-### `openspec templates`
+### `openspec-hw templates`
 
 Show resolved template paths for all artifacts in a schema.
 
 ```
-openspec templates [options]
+openspec-hw templates [options]
 ```
 
 **Options:**
@@ -524,13 +524,13 @@ openspec templates [options]
 
 ```bash
 # Show template paths for default schema
-openspec templates
+openspec-hw templates
 
 # Show templates for custom schema
-openspec templates --schema my-workflow
+openspec-hw templates --schema my-workflow
 
 # JSON for programmatic use
-openspec templates --json
+openspec-hw templates --json
 ```
 
 **Output (text):**
@@ -547,12 +547,12 @@ Templates:
 
 ---
 
-### `openspec schemas`
+### `openspec-hw schemas`
 
 List available workflow schemas with their descriptions and artifact flows.
 
 ```
-openspec schemas [options]
+openspec-hw schemas [options]
 ```
 
 **Options:**
@@ -564,7 +564,7 @@ openspec schemas [options]
 **Example:**
 
 ```bash
-openspec schemas
+openspec-hw schemas
 ```
 
 **Output:**
@@ -587,12 +587,12 @@ Available schemas:
 
 Commands for creating and managing custom workflow schemas.
 
-### `openspec schema init`
+### `openspec-hw schema init`
 
 Create a new project-local schema.
 
 ```
-openspec schema init <name> [options]
+openspec-hw schema init <name> [options]
 ```
 
 **Arguments:**
@@ -616,10 +616,10 @@ openspec schema init <name> [options]
 
 ```bash
 # Interactive schema creation
-openspec schema init research-first
+openspec-hw schema init research-first
 
 # Non-interactive with specific artifacts
-openspec schema init rapid \
+openspec-hw schema init rapid \
   --description "Rapid iteration workflow" \
   --artifacts "proposal,tasks" \
   --default
@@ -639,12 +639,12 @@ openspec/schemas/<name>/
 
 ---
 
-### `openspec schema fork`
+### `openspec-hw schema fork`
 
 Copy an existing schema to your project for customization.
 
 ```
-openspec schema fork <source> [name] [options]
+openspec-hw schema fork <source> [name] [options]
 ```
 
 **Arguments:**
@@ -665,17 +665,17 @@ openspec schema fork <source> [name] [options]
 
 ```bash
 # Fork the built-in spec-driven schema
-openspec schema fork spec-driven my-workflow
+openspec-hw schema fork spec-driven my-workflow
 ```
 
 ---
 
-### `openspec schema validate`
+### `openspec-hw schema validate`
 
 Validate a schema's structure and templates.
 
 ```
-openspec schema validate [name] [options]
+openspec-hw schema validate [name] [options]
 ```
 
 **Arguments:**
@@ -695,20 +695,20 @@ openspec schema validate [name] [options]
 
 ```bash
 # Validate a specific schema
-openspec schema validate my-workflow
+openspec-hw schema validate my-workflow
 
 # Validate all schemas
-openspec schema validate
+openspec-hw schema validate
 ```
 
 ---
 
-### `openspec schema which`
+### `openspec-hw schema which`
 
 Show where a schema resolves from (useful for debugging precedence).
 
 ```
-openspec schema which [name] [options]
+openspec-hw schema which [name] [options]
 ```
 
 **Arguments:**
@@ -728,7 +728,7 @@ openspec schema which [name] [options]
 
 ```bash
 # Check where a schema comes from
-openspec schema which spec-driven
+openspec-hw schema which spec-driven
 ```
 
 **Output:**
@@ -748,12 +748,12 @@ spec-driven resolves from: package
 
 ## Configuration Commands
 
-### `openspec config`
+### `openspec-hw config`
 
 View and modify global OpenSpec configuration.
 
 ```
-openspec config <subcommand> [options]
+openspec-hw config <subcommand> [options]
 ```
 
 **Subcommands:**
@@ -773,57 +773,57 @@ openspec config <subcommand> [options]
 
 ```bash
 # Show config file path
-openspec config path
+openspec-hw config path
 
 # List all settings
-openspec config list
+openspec-hw config list
 
 # Get a specific value
-openspec config get telemetry.enabled
+openspec-hw config get telemetry.enabled
 
 # Set a value
-openspec config set telemetry.enabled false
+openspec-hw config set telemetry.enabled false
 
 # Set a string value explicitly
-openspec config set user.name "My Name" --string
+openspec-hw config set user.name "My Name" --string
 
 # Remove a custom setting
-openspec config unset user.name
+openspec-hw config unset user.name
 
 # Reset all configuration
-openspec config reset --all --yes
+openspec-hw config reset --all --yes
 
 # Edit config in your editor
-openspec config edit
+openspec-hw config edit
 
 # Configure profile with action-based wizard
-openspec config profile
+openspec-hw config profile
 
 # Fast preset: switch workflows to core (keeps delivery mode)
-openspec config profile core
+openspec-hw config profile core
 ```
 
-`openspec config profile` starts with a current-state summary, then lets you choose:
+`openspec-hw config profile` starts with a current-state summary, then lets you choose:
 - Change delivery + workflows
 - Change delivery only
 - Change workflows only
 - Keep current settings (exit)
 
 If you keep current settings, no changes are written and no update prompt is shown.
-If there are no config changes but the current project files are out of sync with your global profile/delivery, OpenSpec will show a warning and suggest running `openspec update`.
+If there are no config changes but the current project files are out of sync with your global profile/delivery, OpenSpec will show a warning and suggest running `openspec-hw update`.
 Pressing `Ctrl+C` also cancels the flow cleanly (no stack trace) and exits with code `130`.
-In the workflow checklist, `[x]` means the workflow is selected in global config. To apply those selections to project files, run `openspec update` (or choose `Apply changes to this project now?` when prompted inside a project).
+In the workflow checklist, `[x]` means the workflow is selected in global config. To apply those selections to project files, run `openspec-hw update` (or choose `Apply changes to this project now?` when prompted inside a project).
 
 **Interactive examples:**
 
 ```bash
 # Delivery-only update
-openspec config profile
+openspec-hw config profile
 # choose: Change delivery only
 # choose delivery: Skills only
 
 # Workflows-only update
-openspec config profile
+openspec-hw config profile
 # choose: Change workflows only
 # toggle workflows in the checklist, then confirm
 ```
@@ -832,12 +832,12 @@ openspec config profile
 
 ## Utility Commands
 
-### `openspec feedback`
+### `openspec-hw feedback`
 
 Submit feedback about OpenSpec. Creates a GitHub issue.
 
 ```
-openspec feedback <message> [options]
+openspec-hw feedback <message> [options]
 ```
 
 **Arguments:**
@@ -857,18 +857,18 @@ openspec feedback <message> [options]
 **Example:**
 
 ```bash
-openspec feedback "Add support for custom artifact types" \
+openspec-hw feedback "Add support for custom artifact types" \
   --body "I'd like to define my own artifact types beyond the built-in ones."
 ```
 
 ---
 
-### `openspec completion`
+### `openspec-hw completion`
 
 Manage shell completions for the OpenSpec CLI.
 
 ```
-openspec completion <subcommand> [shell]
+openspec-hw completion <subcommand> [shell]
 ```
 
 **Subcommands:**
@@ -885,16 +885,16 @@ openspec completion <subcommand> [shell]
 
 ```bash
 # Install completions (auto-detects shell)
-openspec completion install
+openspec-hw completion install
 
 # Install for specific shell
-openspec completion install zsh
+openspec-hw completion install zsh
 
 # Generate script for manual installation
-openspec completion generate bash > ~/.bash_completion.d/openspec
+openspec-hw completion generate bash > ~/.bash_completion.d/openspec
 
 # Uninstall
-openspec completion uninstall
+openspec-hw completion uninstall
 ```
 
 ---
@@ -913,7 +913,7 @@ openspec completion uninstall
 | Variable | Description |
 |----------|-------------|
 | `OPENSPEC_CONCURRENCY` | Default concurrency for bulk validation (default: 6) |
-| `EDITOR` or `VISUAL` | Editor for `openspec config edit` |
+| `EDITOR` or `VISUAL` | Editor for `openspec-hw config edit` |
 | `NO_COLOR` | Disable color output when set |
 
 ---

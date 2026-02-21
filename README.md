@@ -98,7 +98,7 @@ Then navigate to your project directory and initialize:
 
 ```bash
 cd your-project
-openspec init
+openspec-hw init
 ```
 
 Now tell your AI: `/opsx-hw:new <what-you-want-to-build>`
@@ -150,7 +150,7 @@ npm install -g @khaledea/openspec-hw@latest
 Run this inside each project to regenerate AI guidance and ensure the latest slash commands are active:
 
 ```bash
-openspec update
+openspec-hw update
 ```
 
 ## Building from Source
@@ -169,7 +169,7 @@ Build the package:
 pnpm run build
 ```
 
-Install the built package globally so the `openspec` command is available:
+Install the built package globally so the `openspec-hw` command is available:
 
 ```bash
 npm install -g .
@@ -178,7 +178,7 @@ npm install -g .
 Verify it works:
 
 ```bash
-openspec --version
+openspec-hw --version
 ```
 
 ## Usage Notes
