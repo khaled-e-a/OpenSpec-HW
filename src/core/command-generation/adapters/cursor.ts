@@ -37,8 +37,8 @@ export const cursorAdapter: ToolCommandAdapter = {
 
   formatFile(content: CommandContent): string {
     return `---
-name: /opsx-hw-hw-${content.id}
-id: opsx-hw-hw-${content.id}
+name: /opsx-hw-${content.id}
+id: opsx-hw-${content.id}
 category: ${escapeYamlValue(content.category)}
 description: ${escapeYamlValue(content.description)}
 ---

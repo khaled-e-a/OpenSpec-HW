@@ -99,7 +99,7 @@ function isPromptCancellationError(error: unknown): boolean {
  * Resolve the effective current profile state from global config defaults.
  */
 export function resolveCurrentProfileState(config: GlobalConfig): ProfileState {
-  const profile = config.profile || 'core';
+  const profile = config.profile || 'all';
   const delivery = config.delivery || 'both';
   const workflows = [
     ...getProfileWorkflows(profile, config.workflows ? [...config.workflows] : undefined),
@@ -111,10 +111,10 @@ export function resolveCurrentProfileState(config: GlobalConfig): ProfileState {
  * Derive profile type from selected workflows.
  */
 export function deriveProfileFromWorkflowSelection(selectedWorkflows: string[]): Profile {
-  const isCoreMatch =
-    selectedWorkflows.length === CORE_WORKFLOWS.length &&
-    CORE_WORKFLOWS.every((w) => selectedWorkflows.includes(w));
-  return isCoreMatch ? 'core' : 'custom';
+  const isAllMatch =
+    selectedWorkflows.length === ALL_WORKFLOWS.length &&
+    ALL_WORKFLOWS.every((w) => selectedWorkflows.includes(w));
+  return isAllMatch ? 'all' : 'custom';
 }
 
 /**
@@ -257,8 +257,8 @@ export function registerConfigCommand(program: Command): void {
         console.log(`\nProfile settings:`);
         console.log(`  profile: ${config.profile} ${profileSource}`);
         console.log(`  delivery: ${config.delivery} ${deliverySource}`);
-        if (config.profile === 'core') {
-          console.log(`  workflows: ${CORE_WORKFLOWS.join(', ')} (from core profile)`);
+        if (config.profile === 'all') {
+          console.log(`  workflows: ${ALL_WORKFLOWS.join(', ')} (from all profile)`);
         } else if (config.workflows && config.workflows.length > 0) {
           console.log(`  workflows: ${config.workflows.join(', ')} (explicit)`);
         } else {
@@ -455,18 +455,18 @@ export function registerConfigCommand(program: Command): void {
     .description('Configure workflow profile (interactive picker or preset shortcut)')
     .action(async (preset?: string) => {
       // Preset shortcut: `openspec config profile core`
-      if (preset === 'core') {
+      if (preset === 'all') {
         const config = getGlobalConfig();
-        config.profile = 'core';
-        config.workflows = [...CORE_WORKFLOWS];
+        config.profile = 'all';
+        delete config.workflows;
         // Preserve delivery setting
         saveGlobalConfig(config);
-        console.log('Config updated. Run `openspec update` in your projects to apply.');
+        console.log('Config updated. Run `openspec-hw update` in your projects to apply.');
         return;
       }
 
       if (preset) {
-        console.error(`Error: Unknown profile preset "${preset}". Available presets: core`);
+        console.error(`Error: Unknown profile preset "${preset}". Available presets: all`);
         process.exitCode = 1;
         return;
       }

@@ -53,6 +53,7 @@ function scanInstalledWorkflowArtifacts(
         hasCommands = true;
       }
     }
+
   }
 
   return {
@@ -127,5 +128,4 @@ export function migrateIfNeeded(projectPath: string, tools: AIToolOption[]): voi
   saveGlobalConfig(config);
 
   console.log(`Migrated: custom profile with ${installedWorkflows.length} workflows`);
-  console.log("New in this version: /opsx-hw:propose. Try 'openspec config profile core' for the streamlined experience.");
 }

@@ -21,7 +21,7 @@ export const continueAdapter: ToolCommandAdapter = {
 
   formatFile(content: CommandContent): string {
     return `---
-name: opsx-hw-hw-${content.id}
+name: opsx-hw-${content.id}
 description: ${content.description}
 invokable: true
 ---

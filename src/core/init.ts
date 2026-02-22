@@ -182,11 +182,11 @@ export class InitCommand {
       return undefined;
     }
 
-    if (this.profileOverride === 'core' || this.profileOverride === 'custom') {
+    if (this.profileOverride === 'all' || this.profileOverride === 'custom') {
       return this.profileOverride;
     }
 
-    throw new Error(`Invalid profile "${this.profileOverride}". Available profiles: core, custom`);
+    throw new Error(`Invalid profile "${this.profileOverride}". Available profiles: all, custom`);
   }
 
   // ═══════════════════════════════════════════════════════════
@@ -516,7 +516,7 @@ export class InitCommand {
 
     // Read global config for profile and delivery settings (use --profile override if set)
     const globalConfig = getGlobalConfig();
-    const profile: Profile = this.resolveProfileOverride() ?? globalConfig.profile ?? 'core';
+    const profile: Profile = this.resolveProfileOverride() ?? globalConfig.profile ?? 'all';
     const delivery: Delivery = globalConfig.delivery ?? 'both';
     const workflows = getProfileWorkflows(profile, globalConfig.workflows);
 
@@ -657,7 +657,7 @@ export class InitCommand {
     const successfulTools = [...results.createdTools, ...results.refreshedTools];
     if (successfulTools.length > 0) {
       const globalConfig = getGlobalConfig();
-      const profile: Profile = (this.profileOverride as Profile) ?? globalConfig.profile ?? 'core';
+      const profile: Profile = (this.profileOverride as Profile) ?? globalConfig.profile ?? 'all';
       const delivery: Delivery = globalConfig.delivery ?? 'both';
       const workflows = getProfileWorkflows(profile, globalConfig.workflows);
       const toolDirs = [...new Set(successfulTools.map((t) => t.skillsDir))].join(', ');

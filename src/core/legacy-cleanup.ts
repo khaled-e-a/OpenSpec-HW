@@ -30,7 +30,7 @@ export const LEGACY_CONFIG_FILES = [
  * Some tools used a directory structure, others used individual files.
  */
 export const LEGACY_SLASH_COMMAND_PATHS: Record<string, LegacySlashCommandPattern> = {
-  // Directory-based: .tooldir/commands/openspec/ or .tooldir/commands/openspec/*.md
+  // Directory-based: .tooldir/commands/openspec/ (Gen 1 — very old upstream format)
   'claude': { type: 'directory', path: '.claude/commands/openspec' },
   'codebuddy': { type: 'directory', path: '.codebuddy/commands/openspec' },
   'qoder': { type: 'directory', path: '.qoder/commands/openspec' },
