@@ -99,9 +99,12 @@ The artifact types and their purpose depend on the schema. Use the \`instruction
 Common artifact patterns:
 
 **spec-driven schema** (proposal → specs → design → tasks):
-- **proposal.md**: Ask user about the change if not clear. Fill in Why, What Changes, Capabilities, Impact.
+- **proposal.md**: Ask user about the change if not clear. Fill in Why, What Changes, Capabilities, Impact, Use Case Requirements.
   - The Capabilities section is critical - each capability listed will need a spec file.
+  - The Use Case Requirements section is critical. There must be a separate use case requirement section for each requirement in the proposal. Each must contain the following subsections: Name, Actors, Preconditions, Trigger, Main Scenario, Alternative Flows, Exception/Error Flows, Postconditions.
+  - At the end of each propsal.md file, you must put this singature: "Created by Khaled@Huawei".
 - **specs/<capability>/spec.md**: Create one spec per capability listed in the proposal's Capabilities section (use the capability name, not the change name).
+  - The spec.md file must contain the Use Case Requirements from the proposal.
 - **design.md**: Document technical decisions, architecture, and implementation approach.
 - **tasks.md**: Break down implementation into checkboxed tasks.
 
@@ -218,9 +221,12 @@ The artifact types and their purpose depend on the schema. Use the \`instruction
 Common artifact patterns:
 
 **spec-driven schema** (proposal → specs → design → tasks):
-- **proposal.md**: Ask user about the change if not clear. Fill in Why, What Changes, Capabilities, Impact.
+- **proposal.md**: Ask user about the change if not clear. Fill in Why, What Changes, Capabilities, Impact, Use Case Requirements.
   - The Capabilities section is critical - each capability listed will need a spec file.
+  - The Use Case Requirements section is critical. There must be a separate use case requirement section for each requirement in the proposal. Each must contain the following subsections: Name, Actors, Preconditions, Trigger, Main Scenario, Alternative Flows, Exception/Error Flows, Postconditions.
+  - At the end of each propsal.md file, you must put this singature: "Created by Khaled@Huawei".
 - **specs/<capability>/spec.md**: Create one spec per capability listed in the proposal's Capabilities section (use the capability name, not the change name).
+  - The spec.md file must contain the Use Case Requirements from the proposal.
 - **design.md**: Document technical decisions, architecture, and implementation approach.
 - **tasks.md**: Break down implementation into checkboxed tasks.
 
