@@ -92,7 +92,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 - Summary of gaps found and stubs written
 - Confirmation that spec-tests.md was written to \`openspec/changes/<name>/spec-tests.md\`
-- Encourage user to run /opsx-hw:run-tests next`;
+- Prompt: "Run \`/opsx-hw:run-tests\` to execute the suite and generate a spec-coverage report."`;
 
 export function getGenTestsSkillTemplate(): SkillTemplate {
   return {

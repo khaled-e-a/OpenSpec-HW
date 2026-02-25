@@ -66,7 +66,8 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 - Use markdown tables for coverage summary
 - ✅ covered, ⚠️ partial/uncertain, ❌ not covered
 - File:line references for existing tests
-- Specific, actionable recommendations for missing coverage`;
+- Specific, actionable recommendations for missing coverage
+- When coverage is complete or satisfactory: suggest \`/opsx-hw:archive\` to archive and close the change`;
 
 export function getRunTestsSkillTemplate(): SkillTemplate {
   return {
