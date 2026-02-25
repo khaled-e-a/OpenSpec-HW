@@ -1,7 +1,8 @@
 /**
  * Skill Template Workflow Modules
  *
- * Test workflow: generates and runs test cases from spec.md use case requirements.
+ * Gen-tests workflow: parses spec.md use cases, discovers existing tests,
+ * writes missing stubs, and produces a persistent spec-tests.md mapping file.
  */
 import type { SkillTemplate, CommandTemplate } from '../types.js';
 
@@ -39,7 +40,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
    Search the codebase for test files (\`*.test.ts\`, \`*.spec.ts\`, \`*.test.js\`, \`*.spec.js\`, \`test/**/*.ts\`, \`__tests__/**/*.ts\`).
    Read them. Map test descriptions/names to use case requirements using keyword matching and semantic similarity.
 
-5. **Generate missing test cases**
+5. **Generate missing test stubs**
 
    For each uncovered path:
    - Propose a test case: test name, input conditions, expected output/behavior
@@ -47,37 +48,32 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
      following the project's existing test style (framework, describe/it blocks, etc.)
    - **Ask the user to confirm before writing if the number of new files > 0.**
 
-6. **Run the tests**
+6. **Write spec-tests.md**
 
-   Detect the project's test runner from \`package.json\` scripts
-   (prefer: \`"test"\`, \`"test:unit"\`, \`"vitest"\`, \`"jest"\`).
-   Run: \`<detected-runner>\`
-   Capture stdout/stderr output.
+   Write (or update) \`openspec/changes/<name>/spec-tests.md\`.
 
-7. **Generate Test Coverage Report**
+   Format:
 
    \`\`\`
-   ## Test Report: <change-name>
+   # Spec–Test Mapping: <change-name>
+   Generated: <date>
 
-   ### Use Case Coverage Summary
-   | Use Case         | Happy | Alt | Exception | Overall |
-   |-----------------|-------|-----|-----------|---------|
-   | <name>          | ✅ 2/2| ⚠️ 1/2| ❌ 0/1  | 60%    |
-   ...
-   Overall: X/Y paths covered (Z%)
+   ## Use Case: <name>
 
-   ### Covered Paths
-   - ✅ <use case> — <happy path name> (\`test/foo.test.ts:42\`)
-   ...
+   ### Happy Path: <path-name>
+   - Status: ✅ covered / ⚠️ partial / ❌ not covered
+   - Tests:
+     - \`test/foo.test.ts:42\` — "<test description>"
+     ...
 
-   ### Uncovered Paths
-   - ❌ <use case> — <exception path name>: No test found
+   ### Alternative Path: <path-name>
    ...
 
-   ### Test Run Results
-   <summary from test runner output: passed/failed/skipped counts>
-   If failures: list failing test names and errors.
+   ### Exception/Error Path: <path-name>
+   ...
    \`\`\`
+
+   (Repeat for every use case and every path.)
 
 **Heuristics**
 
@@ -91,22 +87,19 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 - If no spec.md found: report "No spec found for change <name>. Cannot generate tests."
 - If no use case sections found in spec: list all top-level headings found and ask user
   to point to the relevant section
-- If test runner detection fails: ask user for the test command
-- If tests fail: still show coverage report, highlight failures separately
 
-**Output Format**
+**Output**
 
-- Use markdown tables for coverage summary
-- ✅ covered, ⚠️ partial/uncertain, ❌ not covered
-- File:line references for existing tests
-- Specific, actionable recommendations for missing coverage`;
+- Summary of gaps found and stubs written
+- Confirmation that spec-tests.md was written to \`openspec/changes/<name>/spec-tests.md\`
+- Encourage user to run /opsx-hw:run-tests next`;
 
-export function getTestSkillTemplate(): SkillTemplate {
+export function getGenTestsSkillTemplate(): SkillTemplate {
   return {
-    name: 'openspec-test',
+    name: 'openspec-gen-tests',
     description:
-      'Generate and run test cases from spec.md use case requirements. Reports coverage of happy paths, alternative paths, and exception/error paths.',
-    instructions: `Generate and run test cases from spec.md use case requirements, then report coverage.
+      'Analyse spec.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.',
+    instructions: `Analyse spec.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
 
 ${INSTRUCTIONS_BODY}`,
     license: 'MIT',
@@ -115,15 +108,15 @@ ${INSTRUCTIONS_BODY}`,
   };
 }
 
-export function getOpsxTestCommandTemplate(): CommandTemplate {
+export function getOpsxGenTestsCommandTemplate(): CommandTemplate {
   return {
-    name: 'OPSX: Test',
-    description: 'Generate and run test cases from spec.md use case requirements',
+    name: 'OPSX: Gen Tests',
+    description: 'Analyse spec.md use cases, discover existing tests, write missing stubs, and produce spec-tests.md',
     category: 'Workflow',
-    tags: ['workflow', 'test', 'coverage'],
-    content: `Generate and run test cases from spec.md use case requirements, then report coverage.
+    tags: ['workflow', 'test', 'gen-tests', 'coverage'],
+    content: `Analyse spec.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
 
-**Input**: Optionally specify a change name after \`/opsx-hw:test\` (e.g., \`/opsx-hw:test add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
+**Input**: Optionally specify a change name after \`/opsx-hw:gen-tests\` (e.g., \`/opsx-hw:gen-tests add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 ${INSTRUCTIONS_BODY}`,
   };
