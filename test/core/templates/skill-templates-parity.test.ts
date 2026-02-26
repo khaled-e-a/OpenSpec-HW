@@ -36,14 +36,14 @@ import { generateSkillContent } from '../../../src/core/shared/skill-generation.
 const EXPECTED_FUNCTION_HASHES: Record<string, string> = {
   getExploreSkillTemplate: 'a2cd140b6746a8141565fc2a978aa4dd7d5e6aef605701c69f4595d469ce9258',
   getNewChangeSkillTemplate: '5989672758eccf54e3bb554ab97f2c129a192b12bbb7688cc1ffcf6bccb1ae9d',
-  getContinueChangeSkillTemplate: '4679abc28653d4b1e251886f79f66f74a91fbe6dbc250612c83403d64aa41f74',
+  getContinueChangeSkillTemplate: '9ff19012a45bd226c5f4eaf1d43ca94f7e370642cc7cd501317ec3472405f18a',
   getApplyChangeSkillTemplate: '0cc42689c953fd96f73f54b2cd52c75d0f4ba595004eb95d34428f17ea3a1958',
   getFfChangeSkillTemplate: '1456fbc7e1a60c36a50516cc498fe71394f947feb2479a7ef4b6b732894ae323',
   getSyncSpecsSkillTemplate: 'bded184e4c345619148de2c0ad80a5b527d4ffe45c87cc785889b9329e0f465b',
   getOnboardSkillTemplate: '2ad3e6bfcd4f58971021fc7f1c9e15e2cedf92dad6841c388cffb7f6ceb0a6d0',
   getOpsxExploreCommandTemplate: 'b60c59590a43b1054576676fef59a2973aa6d525f6c979425b8899aab2e181e5',
   getOpsxNewCommandTemplate: 'b61b4b056edb33d95cec3d38d23a260a31f4a2ac94c8ea157e11ce9cbcb764d2',
-  getOpsxContinueCommandTemplate: '3bf2cf6e180a4edf28bdf5203c6998cd491f1ff055f6cac3bd7e4235fa274a18',
+  getOpsxContinueCommandTemplate: 'fe9cec6a40cf6ece5d18216aaa7d327cb8da5e1d50461d6c7553a84f5bd3587b',
   getOpsxApplyCommandTemplate: '4eb8b5676b1e87ef9f4e77a1a44fb79bdeda2268c438b784593666a2759ec68d',
   getOpsxFfCommandTemplate: '1e0d5377ba142bb1855880195b5550ac2b81282b6f637b2812fd0e9d9fd8add1',
   getArchiveChangeSkillTemplate: '6f8ca383fdb5a4eb9872aca81e07bf0ba7f25e4de8617d7a047ca914ca7f14b9',
@@ -57,8 +57,8 @@ const EXPECTED_FUNCTION_HASHES: Record<string, string> = {
   getOpsxProposeSkillTemplate: 'fba128b53c0e49ddc6b4280805c10a7440dfdb4f12f3efd59acde1a2324f8cbf',
   getOpsxProposeCommandTemplate: '2636af528ca0360600471a01c07b085046a12b8b6375152fc680122ca8b9a809',
   getFeedbackSkillTemplate: 'd7d83c5f7fc2b92fe8f4588a5bf2d9cb315e4c73ec19bcd5ef28270906319a0d',
-  getGenTestsSkillTemplate: 'f72c5467e865bd6c81d1683c2a206945fe8a0aaf81c350f15a70bd9766fe344a',
-  getOpsxGenTestsCommandTemplate: 'd3c7d91ce5c510049cdbe3f4bbb9e6a2baeadb21b210d88d305d4a64fad65ffe',
+  getGenTestsSkillTemplate: '20004beebe5e0217003346c518f62368da55981491dcf7addd61a3c7396c9351',
+  getOpsxGenTestsCommandTemplate: '501efc8dd56de86e9c6945fa3616eb1c4b0fcdf6f53ca3dd88a31582f60e22e7',
   getRunTestsSkillTemplate: 'ec88c13e655bf31e10b5b12b0ece8429c5da471e614eae954ac1e1cc738f898a',
   getOpsxRunTestsCommandTemplate: 'fbafca57fdd5900c340fefd70244b89b850f1078843e6694646d155ecfceaceb',
 };
@@ -66,7 +66,7 @@ const EXPECTED_FUNCTION_HASHES: Record<string, string> = {
 const EXPECTED_GENERATED_SKILL_CONTENT_HASHES: Record<string, string> = {
   'openspec-explore': '146b1a5d01755f729782d63a9b89abed0d94ef76e26044b31b9399e242c9e9e1',
   'openspec-new-change': 'c324a7ace1f244aa3f534ac8e3370a2c11190d6d1b85a315f26a211398310f0f',
-  'openspec-continue-change': 'cc22b993d80a1d38f0a6d95beb8b233206c03c52dc09529768ecd9b07e867952',
+  'openspec-continue-change': '11902e1740175756ed72be8b3874c37d06aee2b203122e136634fdad27d7cd0c',
   'openspec-apply-change': 'a81b422a64a3c243d49ebbd288e049971d571fd0dc85f91a103527e69d3b4918',
   'openspec-ff-change': '887836826432deb7be4b27e41dec46a96224f9fd7f8d5f279d6609f69c7d7c02',
   'openspec-sync-specs': 'b8859cf454379a19ca35dbf59eedca67306607f44a355327f9dc851114e50bde',
@@ -75,7 +75,7 @@ const EXPECTED_GENERATED_SKILL_CONTENT_HASHES: Record<string, string> = {
   'openspec-verify-change': '30d07c6f7051965f624f5964db51844ec17c7dfd05f0da95281fe0ca73616326',
   'openspec-onboard': '370c7ba9edff00a371db8ee73ca446f62d67caaf1c9479378df66bdf7cd849cd',
   'openspec-propose': 'dc63b50a02abb7c8d6c213d233c8816dfa2772ef3431ee4cc5d6cfca2baf5cee',
-  'openspec-gen-tests': '06db0d0caecfef2176c479833ccf6167cba32fcfe97e28ee63aaaebbb3963279',
+  'openspec-gen-tests': '371df1330924c0c75558459d40179778f09a95e55225b013fdd391f3bd561298',
   'openspec-run-tests': '027c3deccd7684a120e5e829525808c52bdff33b4d290a3ccde9714780fbf917',
 };
 

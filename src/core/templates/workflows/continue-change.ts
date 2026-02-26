@@ -101,7 +101,20 @@ Common artifact patterns:
 **spec-driven schema** (proposal → specs → design → tasks):
 - **proposal.md**: Ask user about the change if not clear. Fill in Why, What Changes, Capabilities, Impact, Use Case Requirements.
   - The Capabilities section is critical - each capability listed will need a spec file.
-  - The Use Case Requirements section is critical. There must be a separate use case requirement section for each requirement in the proposal. Each must contain the following subsections: Name, Actors, Preconditions, Trigger, Main Scenario, Alternative Flows, Exception/Error Flows, Postconditions.
+  - The Use Case Requirements section is critical. There must be a separate use case requirement section for each requirement in the proposal. Each use case must contain these subsections, written following Cockburn's guidelines:
+    - **Name**: A short active verb phrase stating the goal (e.g., "Register new customer"). Write at user-goal level — something completable in a single sitting (2–20 min). Ask: "Can I go to lunch when this is done?"
+    - **Primary Actor**: The role whose goal this use case satisfies (e.g., "Customer", "Clerk"). Use role names, not job titles.
+    - **Stakeholders & Interests**: Everyone with a vested interest in the outcome, even if they don't directly interact with the system. For each, state what interest must be protected (e.g., "Auditor: all transactions must be logged").
+    - **Preconditions**: Only facts the system can guarantee are true before this use case starts. Do NOT list things that are usually true but cannot be guaranteed by the system.
+    - **Trigger**: The event or condition that initiates this use case (user action, time-based event, or state change).
+    - **Main Scenario** (Happy Path): 3–9 numbered steps with no "if" statements. Rules:
+      - Each step must distinctly move the goal forward — ask "Why is the actor doing this?" and write the answer, not the physical action
+      - Write from a neutral bird's eye view: "Actor verbs [object] [with data]", "System verifies [condition]", "System updates [state]"
+      - Use "verifies"/"validates"/"ensures" for validation steps — never "checks" (which implies an unresolved if-statement)
+      - Show actor intent, not UI interactions: "Customer provides shipping address" not "Customer clicks Address field"
+      - Always be clear who is acting at each step ("Who's got the ball?")
+    - **Extensions** (Alternative & Exception Paths): All failure conditions and alternative paths, each referenced to the main scenario step where they arise. Format: "2a. <condition>: <action>". Brainstorm: bad/missing input, validation failures, service unavailability, timeouts, unexpected internal state.
+    - **Postconditions**: State of the world after successful completion. Assert each stakeholder's interests are satisfied (e.g., "Order placed. Inventory reserved. Payment logged. Customer has confirmation.").
   - At the end of each propsal.md file, you must put this singature: "Created by Khaled@Huawei".
 - **specs/<capability>/spec.md**: Create one spec per capability listed in the proposal's Capabilities section (use the capability name, not the change name).
   - The spec.md file must contain the Use Case Requirements from the proposal.
@@ -223,7 +236,20 @@ Common artifact patterns:
 **spec-driven schema** (proposal → specs → design → tasks):
 - **proposal.md**: Ask user about the change if not clear. Fill in Why, What Changes, Capabilities, Impact, Use Case Requirements.
   - The Capabilities section is critical - each capability listed will need a spec file.
-  - The Use Case Requirements section is critical. There must be a separate use case requirement section for each requirement in the proposal. Each must contain the following subsections: Name, Actors, Preconditions, Trigger, Main Scenario, Alternative Flows, Exception/Error Flows, Postconditions.
+  - The Use Case Requirements section is critical. There must be a separate use case requirement section for each requirement in the proposal. Each use case must contain these subsections, written following Cockburn's guidelines:
+    - **Name**: A short active verb phrase stating the goal (e.g., "Register new customer"). Write at user-goal level — something completable in a single sitting (2–20 min). Ask: "Can I go to lunch when this is done?"
+    - **Primary Actor**: The role whose goal this use case satisfies (e.g., "Customer", "Clerk"). Use role names, not job titles.
+    - **Stakeholders & Interests**: Everyone with a vested interest in the outcome, even if they don't directly interact with the system. For each, state what interest must be protected (e.g., "Auditor: all transactions must be logged").
+    - **Preconditions**: Only facts the system can guarantee are true before this use case starts. Do NOT list things that are usually true but cannot be guaranteed by the system.
+    - **Trigger**: The event or condition that initiates this use case (user action, time-based event, or state change).
+    - **Main Scenario** (Happy Path): 3–9 numbered steps with no "if" statements. Rules:
+      - Each step must distinctly move the goal forward — ask "Why is the actor doing this?" and write the answer, not the physical action
+      - Write from a neutral bird's eye view: "Actor verbs [object] [with data]", "System verifies [condition]", "System updates [state]"
+      - Use "verifies"/"validates"/"ensures" for validation steps — never "checks" (which implies an unresolved if-statement)
+      - Show actor intent, not UI interactions: "Customer provides shipping address" not "Customer clicks Address field"
+      - Always be clear who is acting at each step ("Who's got the ball?")
+    - **Extensions** (Alternative & Exception Paths): All failure conditions and alternative paths, each referenced to the main scenario step where they arise. Format: "2a. <condition>: <action>". Brainstorm: bad/missing input, validation failures, service unavailability, timeouts, unexpected internal state.
+    - **Postconditions**: State of the world after successful completion. Assert each stakeholder's interests are satisfied (e.g., "Order placed. Inventory reserved. Payment logged. Customer has confirmation.").
   - At the end of each propsal.md file, you must put this singature: "Created by Khaled@Huawei".
 - **specs/<capability>/spec.md**: Create one spec per capability listed in the proposal's Capabilities section (use the capability name, not the change name).
   - The spec.md file must contain the Use Case Requirements from the proposal.
