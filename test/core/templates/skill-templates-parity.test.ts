@@ -57,8 +57,8 @@ const EXPECTED_FUNCTION_HASHES: Record<string, string> = {
   getOpsxProposeSkillTemplate: 'fba128b53c0e49ddc6b4280805c10a7440dfdb4f12f3efd59acde1a2324f8cbf',
   getOpsxProposeCommandTemplate: '2636af528ca0360600471a01c07b085046a12b8b6375152fc680122ca8b9a809',
   getFeedbackSkillTemplate: 'd7d83c5f7fc2b92fe8f4588a5bf2d9cb315e4c73ec19bcd5ef28270906319a0d',
-  getGenTestsSkillTemplate: '506b2929331421954f2c9511fba7ca51731bd1fdc88b8d255a5c99a7fb852050',
-  getOpsxGenTestsCommandTemplate: 'fccae8a5e73e06b058c2a8a33ac6fdce7fd6adba7dc7fe11505b7ff2708eb3d0',
+  getGenTestsSkillTemplate: 'f9e8c00f5791acc5cc4b7cba8187c5a74221d36c880293a2bef9b8f0cb00d0e4',
+  getOpsxGenTestsCommandTemplate: '3edbd872fdb8c5dcd8c8648ab09da17fcfb2c883cf73b327b486008f90b73688',
   getRunTestsSkillTemplate: '30bb5fa2f2d4606a87ba515a408c90dbe682e16ed89284e578c2a5606c53897e',
   getOpsxRunTestsCommandTemplate: '06ee44952e6dc5555cdbfd4b5c7b87bf754ea7e1f6bf3130bbd3e9d1f1adbfc4',
 };
@@ -75,7 +75,7 @@ const EXPECTED_GENERATED_SKILL_CONTENT_HASHES: Record<string, string> = {
   'openspec-verify-change': '30d07c6f7051965f624f5964db51844ec17c7dfd05f0da95281fe0ca73616326',
   'openspec-onboard': '370c7ba9edff00a371db8ee73ca446f62d67caaf1c9479378df66bdf7cd849cd',
   'openspec-propose': 'dc63b50a02abb7c8d6c213d233c8816dfa2772ef3431ee4cc5d6cfca2baf5cee',
-  'openspec-gen-tests': 'ee80d361017e0ca01cd8b3d29edf6c6d914fc25cd274a24ab4cc812dca38040f',
+  'openspec-gen-tests': '3f6029582219ea770aca9109712bca46a2a48c85bcf43c9c5a9329b8b74e9c37',
   'openspec-run-tests': '6ad390b28371c1eb0fd5b82a3c6409cf7351a6976aa765a315f6534937c0245e',
 };
 

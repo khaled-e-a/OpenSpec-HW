@@ -38,12 +38,15 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
    Search the codebase for test files (\`*.test.ts\`, \`*.spec.ts\`, \`*.test.js\`, \`*.spec.js\`, \`test/**/*.ts\`, \`__tests__/**/*.ts\`).
    Read them. Map test descriptions/names to use case steps and extensions using keyword matching and semantic similarity.
-   **Identify the type of each test: Unit, Component, or Integration.**
+   Classify each test by requirement scope — not by implementation style:
+   - **Unit**: the test verifies exactly one spec step or extension (one ID: e.g., UC1-S2 or UC1-E3a).
+   - **Component**: the test verifies multiple steps within a single use case (e.g., UC1-S1 through UC1-S4) but does not cross use case boundaries.
+   - **Integration**: the test verifies the full flow of a use case (entire UC), or requirements that span multiple use cases.
 
 5. **Generate missing test stubs**
 
    For each uncovered step or extension:
-   - Propose a test case: test name, type (Unit/Component/Integration), input conditions, expected output/behavior.
+   - Propose a test case: test name, **type based on requirement scope** (Unit = single step/extension; Component = multiple steps within one UC; Integration = full UC flow or cross-UC), input conditions, expected output/behavior.
    - Write test stubs to the appropriate test file (or create one if none exists).
    - **Ask the user to confirm before writing if the number of new files > 0.**
 
@@ -93,6 +96,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 - Prefer writing tests in the same file/directory as existing tests for that module
 - Follow existing test framework (don't introduce a new one)
+- Classify by requirement boundary, not by code layer. A test that calls a low-level function but verifies a single spec step is still a Unit test. A test that exercises the UI but covers an entire use case flow is an Integration test.
 - Map requirements to tests via: exact name match, keyword match, file path match
 - When uncertain about coverage, mark as ⚠️ (partial) not ✅
 
