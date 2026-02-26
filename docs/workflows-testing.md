@@ -4,16 +4,25 @@ This guide covers the test commands and how they fit into the overall workflow. 
 
 ## The Testing Flow
 
-After implementing a change with `/opsx-hw:apply`, the recommended path before archiving is:
+The testing workflow is flexible and non-linear, allowing you to validate changes at any stage of the development lifecycle.
 
 ```text
-/opsx-hw:apply ──► /opsx-hw:gen-tests ──► /opsx-hw:run-tests ──► /opsx-hw:archive
-                         │                        │
-                  generates missing         validates coverage
-                  tests + spec-tests.md     against spec paths
+          ┌────────────────────────────────┐
+          │                                │
+          ▼                                │
+/opsx-hw:apply ──► /opsx-hw:archive        │
+     │   ▲              │                  │
+     │   │              ▼                  │
+     └───┼───► /opsx-hw:gen-tests ──► /opsx-hw:run-tests
+         │                                 │
+         └─────────────────────────────────┘
 ```
 
-`/opsx-hw:gen-tests` analyses the spec, finds gaps, and generates tests. `/opsx-hw:run-tests` runs the suite and reports coverage aligned to spec use case paths. When coverage is complete or satisfactory, proceed to archive.
+- **Post-Apply**: Run `/opsx-hw:gen-tests` immediately after implementation to ensure full coverage before archiving.
+- **Post-Archive**: You can still generate and run tests for changes already in the archive.
+- **Iterative Fixes**: If `/opsx-hw:run-tests` identifies failures, loop back to `/opsx-hw:apply` to refine the code or implementation.
+
+`/opsx-hw:gen-tests` analyses the spec, finds gaps, and generates tests. `/opsx-hw:run-tests` runs the suite and reports coverage aligned to spec use case paths.
 
 ---
 
@@ -74,9 +83,11 @@ Run the test suite and generate a spec-coverage report. Uses \`spec-tests.md\` (
 
 **Coverage report format:**
 
-| Use Case | Happy | Extensions | Overall |
-|----------|-------|------------|---------|
-| \`<name>\` | ✅ N/N | ⚠️ N/N | X% |
+| Use Case | Happy | Alt | Exception | Overall |
+|---|---|---|---|---|
+| UC-01: Drag Widget to New Position | ✅ 1/1 | ✅ 2/2 | ❌ 0/1 | 75% |
+| UC-02: Snap Widget to Grid Cell | ✅ 1/1 | ✅ 1/1 | ✅ 1/1 | 100% |
+| UC-03: Resize Widget | ✅ 1/1 | ✅ 1/1 | ✅ 1/1 | 100% |
 
 **Tips:**
 - Run after \`/opsx-hw:gen-tests\` for accurate per-path coverage
@@ -90,47 +101,40 @@ Run the test suite and generate a spec-coverage report. Uses \`spec-tests.md\` (
 
 \`/opsx-hw:gen-tests\` writes \`openspec/changes/<name>/spec-tests.md\` — a persistent mapping of spec use case paths to test files. This file:
 
-- Tracks which tests cover which spec paths/steps using IDs (UC1-S1)
+- Tracks which tests cover which spec paths/steps using IDs (UC-02-S1)
 - Maps single requirements to one or more tests of varying types (Unit, Component, Integration)
 - Is read by \`/opsx-hw:run-tests\` for accurate coverage reporting
 - Documents generated test infrastructure (mocks, fixtures, helpers)
 - Lives alongside the other change artifacts and is archived with the change
 
-**Format:**
+**Example Format:**
 \`\`\`markdown
-# Spec–Test Mapping: <change-name>
-Generated: <date>
+# Spec–Test Mapping: 2026-02-23-drag-drop-dashboard-grid
+Generated: Thursday, February 26, 2026
 
 ## Requirement Traceability Matrix
 
 | ID | Requirement | Type | Test Type | Test Case | Status |
 |----|-------------|------|-----------|-----------|--------|
-| UC1 | <Name> Full Flow | Flow | Integration | \`test/integration.test.ts\` | ✅ |
-| UC1-S1 | <Step Description> | Step | Unit | \`test/unit.test.ts\` | ✅ |
-| UC1-S1 | <Step Description> | Step | Component | \`test/comp.test.ts\` | ✅ |
-| UC1-E2a | <Extension Description>| Extension | Component | \`test/comp2.test.ts\` | ⚠️ |
+| UC-02 | Snap Widget to Grid Cell | Flow | Component | \`src/__tests__/DashboardGrid.test.tsx\` | ⚠️ |
+| UC-02-S1 | Calculate nearest cell | Step | Unit | \`src/__tests__/snapCalculation.test.ts\` | ✅ |
+| UC-02-S2 | Check unoccupied/bounds | Step | Unit | \`src/__tests__/layoutUtils.test.ts\` | ✅ |
+| UC-02-S3 | Place flush to corner | Step | Unit | \`src/__tests__/snapCalculation.test.ts\` | ✅ |
+| UC-02-S4 | Remove preview/render snapped | Step | Component | - | ⚠️ |
+| UC-02-A1 | Nearest cell occupied | Alt | Unit | \`src/__tests__/layoutReducer.test.ts\` | ✅ |
+| UC-02-E1 | No available cell | Exc | Unit | \`src/__tests__/layoutReducer.test.ts\` | ✅ |
 
-## Use Case Details: <name> (ID: UC1)
+## Use Case Details: Snap Widget to Grid Cell (ID: UC-02)
 
 ### Main Scenario
-- **UC1-S1**: <description> 
-  - \`test/unit.test.ts:42\` (Unit)
-  - \`test/comp.test.ts:12\` (Component)
-- **UC1-S2**: <description> -> \`test/bar.test.ts:15\` (Component)
+- **UC-02-S1**: Calculate nearest cell -> \`src/__tests__/snapCalculation.test.ts\` (Unit)
+- **UC-02-S2**: Check unoccupied/bounds -> \`src/__tests__/layoutUtils.test.ts:hasCollision\` (Unit)
+- **UC-02-S3**: Place flush to corner -> \`src/__tests__/snapCalculation.test.ts\` (Unit)
+- **UC-02-S4**: Remove preview/render snapped -> MISSING (Component)
 
 ### Extensions
-- **UC1-E2a**: <condition> -> \`test/comp2.test.ts:5\` (Component)
-
-## Test Infrastructure
-
-### Mocks & Fakes
-- \`test/mocks/foo.mock.ts\` — <what it mocks and which tests use it>
-
-### Fixtures & Seed Data
-- \`test/fixtures/foo.json\` — <what data it contains and which tests use it>
-
-### Helpers & Utilities
-- \`test/helpers/foo.helper.ts\` — <what it provides and which tests use it>
+- **UC-02-A1**: Nearest cell occupied -> \`src/__tests__/layoutReducer.test.ts:UC-01 Alt A2\` (Unit)
+- **UC-02-E1**: No available cell -> \`src/__tests__/layoutReducer.test.ts:UC-01 Alt A3\` (Unit)
 \`\`\`
 
 ---
