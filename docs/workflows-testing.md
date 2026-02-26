@@ -50,19 +50,19 @@ Analyse spec.md use cases, discover existing tests, generate missing unit/compon
 - Writes the full test (not just stubs) for each uncovered path
 - Generates any missing supporting code: mocks, fakes, fixtures, helpers, factory functions
 - Asks for confirmation before creating new files
-- Writes \`openspec/changes/<name>/spec-tests.md\` containing a Requirement Traceability Matrix (RTM) mapping each spec path/step to test files
+- Writes `openspec/changes/<name>/spec-tests.md` containing a Requirement Traceability Matrix (RTM) mapping each spec path/step to test files
 
 **Tips:**
-- Run after \`/opsx-hw:apply\` before archiving
+- Run after `/opsx-hw:apply` before archiving
 - Generates full tests, not just stubs — follows existing framework and style
-- \`spec-tests.md\` persists the spec→test mapping for use by \`/opsx-hw:run-tests\`
+- `spec-tests.md` persists the spec→test mapping for use by `/opsx-hw:run-tests`
 - Supporting code (mocks, fixtures, helpers) is placed in conventional project locations
 
 ---
 
-### \`/opsx-hw:run-tests\`
+### `/opsx-hw:run-tests`
 
-Run the test suite and generate a spec-coverage report. Uses \`spec-tests.md\` (produced by \`/opsx-hw:gen-tests\`) when available.
+Run the test suite and generate a spec-coverage report. Uses `spec-tests.md` (produced by `/opsx-hw:gen-tests`) when available.
 
 **Syntax:**
 ```
@@ -72,11 +72,11 @@ Run the test suite and generate a spec-coverage report. Uses \`spec-tests.md\` (
 **Arguments:**
 | Argument | Required | Description |
 |----------|----------|-------------|
-| \`change-name\` | No | Which change to report coverage for (inferred from context if not provided) |
+| `change-name` | No | Which change to report coverage for (inferred from context if not provided) |
 
 **What it does:**
-- Loads \`spec-tests.md\` if it exists (for accurate spec-path → test-file mapping using IDs)
-- Detects the project's test runner from \`package.json\` scripts
+- Loads `spec-tests.md` if it exists (for accurate spec-path → test-file mapping using IDs)
+- Detects the project's test runner from `package.json` scripts
 - Runs the full test suite and captures output
 - Produces a coverage report mapping each use case path/step to a pass/fail/missing status
 - Highlights failing tests and uncovered paths
@@ -90,56 +90,48 @@ Run the test suite and generate a spec-coverage report. Uses \`spec-tests.md\` (
 | UC-03: Resize Widget | ✅ 1/1 | ✅ 1/1 | ✅ 1/1 | 100% |
 
 **Tips:**
-- Run after \`/opsx-hw:gen-tests\` for accurate per-path coverage
-- Without \`spec-tests.md\`, falls back to keyword/file-path matching (less precise)
+- Run after `/opsx-hw:gen-tests` for accurate per-path coverage
+- Without `spec-tests.md`, falls back to keyword/file-path matching (less precise)
 - Failing tests are listed with error details
-- When coverage is complete or satisfactory, proceed to \`/opsx-hw:archive\`
+- When coverage is complete or satisfactory, proceed to `/opsx-hw:archive`
 
 ---
 
-## The \`spec-tests.md\` File
+## The `spec-tests.md` File
 
-\`/opsx-hw:gen-tests\` writes \`openspec/changes/<name>/spec-tests.md\` — a persistent mapping of spec use case paths to test files. This file:
+`/opsx-hw:gen-tests` writes `openspec/changes/<name>/spec-tests.md` — a persistent mapping of spec use case paths to test files. This file:
 
 - Tracks which tests cover which spec paths/steps using IDs (UC-02-S1)
 - Maps single requirements to one or more tests of varying types (Unit, Component, Integration)
-- Is read by \`/opsx-hw:run-tests\` for accurate coverage reporting
+- Is read by `/opsx-hw:run-tests` for accurate coverage reporting
 - Documents generated test infrastructure (mocks, fixtures, helpers)
 - Lives alongside the other change artifacts and is archived with the change
 
 **Example Format:**
-\`\`\`markdown
-# Spec–Test Mapping: 2026-02-23-drag-drop-dashboard-grid
-Generated: Thursday, February 26, 2026
 
-## Requirement Traceability Matrix
+### Spec–Test Mapping: [feature name]
+Generated: [date]
+
+#### Requirement Traceability Matrix
 
 | ID | Requirement | Type | Test Type | Test Case | Status |
 |----|-------------|------|-----------|-----------|--------|
-| UC-02 | Snap Widget to Grid Cell | Flow | Component | \`src/__tests__/DashboardGrid.test.tsx\` | ⚠️ |
-| UC-02-S1 | Calculate nearest cell | Step | Unit | \`src/__tests__/snapCalculation.test.ts\` | ✅ |
-| UC-02-S2 | Check unoccupied/bounds | Step | Unit | \`src/__tests__/layoutUtils.test.ts\` | ✅ |
-| UC-02-S3 | Place flush to corner | Step | Unit | \`src/__tests__/snapCalculation.test.ts\` | ✅ |
+| UC-02 | Snap Widget to Grid Cell | Flow | Component | `src/__tests__/DashboardGrid.test.tsx` | ⚠️ |
+| UC-02-S1 | Calculate nearest cell | Step | Unit | `src/__tests__/snapCalculation.test.ts` | ✅ |
+| UC-02-S2 | Check unoccupied/bounds | Step | Unit | `src/__tests__/layoutUtils.test.ts` | ✅ |
+| UC-02-S3 | Place flush to corner | Step | Unit | `src/__tests__/snapCalculation.test.ts` | ✅ |
 | UC-02-S4 | Remove preview/render snapped | Step | Component | - | ⚠️ |
-| UC-02-A1 | Nearest cell occupied | Alt | Unit | \`src/__tests__/layoutReducer.test.ts\` | ✅ |
-| UC-02-E1 | No available cell | Exc | Unit | \`src/__tests__/layoutReducer.test.ts\` | ✅ |
+| UC-02-A1 | Nearest cell occupied | Alt | Unit | `src/__tests__/layoutReducer.test.ts` | ✅ |
+| UC-02-E1 | No available cell | Exc | Unit | `src/__tests__/layoutReducer.test.ts` | ✅ |
 
-## Use Case Details: Snap Widget to Grid Cell (ID: UC-02)
+#### Use Case Details: Snap Widget to Grid Cell (ID: UC-02)
 
-### Main Scenario
-- **UC-02-S1**: Calculate nearest cell -> \`src/__tests__/snapCalculation.test.ts\` (Unit)
-- **UC-02-S2**: Check unoccupied/bounds -> \`src/__tests__/layoutUtils.test.ts:hasCollision\` (Unit)
-- **UC-02-S3**: Place flush to corner -> \`src/__tests__/snapCalculation.test.ts\` (Unit)
+##### Main Scenario
+- **UC-02-S1**: Calculate nearest cell -> `src/__tests__/snapCalculation.test.ts` (Unit)
+- **UC-02-S2**: Check unoccupied/bounds -> `src/__tests__/layoutUtils.test.ts:hasCollision` (Unit)
+- **UC-02-S3**: Place flush to corner -> `src/__tests__/snapCalculation.test.ts` (Unit)
 - **UC-02-S4**: Remove preview/render snapped -> MISSING (Component)
 
-### Extensions
-- **UC-02-A1**: Nearest cell occupied -> \`src/__tests__/layoutReducer.test.ts:UC-01 Alt A2\` (Unit)
-- **UC-02-E1**: No available cell -> \`src/__tests__/layoutReducer.test.ts:UC-01 Alt A3\` (Unit)
-\`\`\`
-
----
-
-## Next Steps
-
-- [Workflows](workflows.md) - General workflow patterns
-- [Commands](commands.md) - Full command reference
+##### Extensions
+- **UC-02-A1**: Nearest cell occupied -> `src/__tests__/layoutReducer.test.ts:UC-01 Alt A2` (Unit)
+- **UC-02-E1**: No available cell -> `src/__tests__/layoutReducer.test.ts:UC-01 Alt A3` (Unit)
