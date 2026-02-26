@@ -29,51 +29,65 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
    Look for sections structured as:
    - \`### Use Case:\` or \`## Use Case:\` headings
    - Within each use case, identify sub-sections:
-     - \`#### Happy Path\` / \`**Happy Path**\`
-     - \`#### Alternative Paths\` / \`**Alternative Paths**\`
-     - \`#### Exception/Error Paths\` / \`**Exception/Error Paths**\`
+     - \`**Main Scenario**\` (Happy Path) - extract numbered steps.
+     - \`**Extensions**\` (Alternative & Exception Paths) - extract paths like "2a. <condition>".
 
-   Extract each path as a named requirement to test against.
+   **Crucially, assign a unique ID to each use case (e.g., UC1, UC2), each step in the Main Scenario (e.g., UC1-S1, UC1-S2), and each Extension (e.g., UC1-E2a).** These IDs are the basis for traceability.
 
 4. **Discover existing tests**
 
    Search the codebase for test files (\`*.test.ts\`, \`*.spec.ts\`, \`*.test.js\`, \`*.spec.js\`, \`test/**/*.ts\`, \`__tests__/**/*.ts\`).
-   Read them. Map test descriptions/names to use case requirements using keyword matching and semantic similarity.
+   Read them. Map test descriptions/names to use case steps and extensions using keyword matching and semantic similarity.
+   **Identify the type of each test: Unit, Component, or Integration.**
 
 5. **Generate missing test stubs**
 
-   For each uncovered path:
-   - Propose a test case: test name, input conditions, expected output/behavior
-   - Write test stubs to the appropriate test file (or create one if none exists)
-     following the project's existing test style (framework, describe/it blocks, etc.)
+   For each uncovered step or extension:
+   - Propose a test case: test name, type (Unit/Component/Integration), input conditions, expected output/behavior.
+   - Write test stubs to the appropriate test file (or create one if none exists).
    - **Ask the user to confirm before writing if the number of new files > 0.**
 
 6. **Write spec-tests.md**
 
    Write (or update) \`openspec/changes/<name>/spec-tests.md\`.
 
+   This file must include a **Requirement Traceability Matrix** and detailed mappings.
+   **Note: A single requirement or step can (and often should) map to multiple tests of varying types.** Add multiple rows or comma-separated test files in the matrix if a step has multiple tests.
+
    Format:
 
-   \`\`\`
+   \`\`\`markdown
    # Spec–Test Mapping: <change-name>
    Generated: <date>
 
-   ## Use Case: <name>
+   ## Requirement Traceability Matrix
 
-   ### Happy Path: <path-name>
-   - Status: ✅ covered / ⚠️ partial / ❌ not covered
-   - Tests:
-     - \`test/foo.test.ts:42\` — "<test description>"
-     ...
-
-   ### Alternative Path: <path-name>
+   | ID | Requirement | Type | Test Type | Test Case | Status |
+   |----|-------------|------|-----------|-----------|--------|
+   | UC1 | <Name> Full Flow | Flow | Integration | \`test/integration.test.ts\` | ✅ |
+   | UC1-S1 | <Step Description> | Step | Unit | \`test/unit.test.ts\` | ✅ |
+   | UC1-S1 | <Step Description> | Step | Component | \`test/comp.test.ts\` | ✅ |
+   | UC1-E2a | <Extension Description>| Extension | Component | \`test/comp2.test.ts\` | ⚠️ |
    ...
 
-   ### Exception/Error Path: <path-name>
-   ...
+   ## Use Case Details: <name> (ID: UC1)
+
+   ### Main Scenario
+   - **UC1-S1**: <description> 
+     - \`test/unit.test.ts:42\` (Unit)
+     - \`test/comp.test.ts:12\` (Component)
+   - **UC1-S2**: <description> -> \`test/bar.test.ts:15\` (Component)
+   - ...
+
+   ### Extensions
+   - **UC1-E2a**: <condition> -> \`test/comp2.test.ts:5\` (Component)
+   - ...
+
+   ### Full Flow Tests
+   - \`test/integration.test.ts:10\` — "<test description>" (Integration)
    \`\`\`
 
-   (Repeat for every use case and every path.)
+   (Repeat for every use case.)
 
 **Heuristics**
 

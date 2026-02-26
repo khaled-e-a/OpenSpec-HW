@@ -19,7 +19,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 2. **Load spec-tests.md (if available)**
 
    Look for \`openspec/changes/<name>/spec-tests.md\`.
-   If found, read it — it provides the spec-path → test-file mapping for coverage.
+   If found, read it — it provides the Requirement Traceability Matrix and step-level IDs (e.g., UC1-S1) mapping spec steps/flows to test files.
    If not found, proceed with best-effort mapping (keyword/file-path matching).
 
 3. **Run the tests**
@@ -32,23 +32,23 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 4. **Generate Test Coverage Report**
 
-   \`\`\`
+   \`\`\`markdown
    ## Test Report: <change-name>
 
    ### Use Case Coverage Summary
-   | Use Case         | Happy | Alt | Exception | Overall |
-   |-----------------|-------|-----|-----------|---------|
-   | <name>          | ✅ 2/2| ⚠️ 1/2| ❌ 0/1  | 60%    |
+   | Use Case         | Happy | Extensions | Overall |
+   |-----------------|-------|------------|---------|
+   | <name>          | ✅ 2/2| ⚠️ 1/2      | 75%     |
    ...
-   Overall: X/Y paths covered (Z%)
+   Overall: X/Y paths/steps covered (Z%)
 
-   ### Covered Paths
-   - ✅ <use case> — <happy path name> (\`test/foo.test.ts:42\`)
+   ### Covered Requirements
+   - ✅ **UC1-S1**: <description> (\`test/foo.test.ts:42\`)
    ...
 
-   ### Uncovered Paths
-   - ❌ <use case> — <exception path name>: No test found
-     → Run /opsx-hw:gen-tests to generate missing stubs
+   ### Uncovered Requirements
+   - ❌ **UC1-E2a**: <description>: No test found
+     → Run /opsx-hw:gen-tests to generate missing tests
    ...
 
    ### Test Run Results
