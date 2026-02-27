@@ -1,0 +1,118 @@
+---
+name: openspec-gen-tests
+description: Analyse spec.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
+license: MIT
+compatibility: Requires openspec CLI.
+metadata:
+  author: openspec
+  version: "1.0"
+  generatedBy: "1.1.1"
+---
+
+Analyse spec.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
+
+**Input**: Optionally specify a change name. If omitted, check context. If ambiguous, prompt.
+
+**Steps**
+
+1. **If no change name provided, prompt for selection**
+
+   Run `openspec list --json` to get available changes. Use the **AskUserQuestion tool** to let the user select.
+
+   Only show changes that have a spec artifact. **NEVER auto-select**.
+
+2. **Load the spec**
+
+   ```bash
+   openspec instructions apply --change "<name>" --json
+   ```
+
+   From `contextFiles`, find and read `spec.md` (and any delta specs in `openspec/changes/<name>/specs/`).
+
+3. **Parse use case requirements from spec.md**
+
+   Look for sections structured as:
+   - `### Use Case:` or `## Use Case:` headings
+   - Within each use case, identify sub-sections:
+     - `**Main Scenario**` (Happy Path) - extract numbered steps.
+     - `**Extensions**` (Alternative & Exception Paths) - extract paths like "2a. <condition>".
+
+   **Crucially, assign a unique ID to each use case (e.g., UC1, UC2), each step in the Main Scenario (e.g., UC1-S1, UC1-S2), and each Extension (e.g., UC1-E2a).** These IDs are the basis for traceability.
+
+4. **Discover existing tests**
+
+   Search the codebase for test files (`*.test.ts`, `*.spec.ts`, `*.test.js`, `*.spec.js`, `test/**/*.ts`, `__tests__/**/*.ts`).
+   Read them. Map test descriptions/names to use case steps and extensions using keyword matching and semantic similarity.
+   Classify each test by requirement scope — not by implementation style:
+   - **Unit**: the test verifies exactly one spec step or extension (one ID: e.g., UC1-S2 or UC1-E3a).
+   - **Component**: the test verifies multiple steps within a single use case (e.g., UC1-S1 through UC1-S4) but does not cross use case boundaries.
+   - **Integration**: the test verifies the full flow of a use case (entire UC), or requirements that span multiple use cases.
+
+5. **Generate missing test stubs**
+
+   For each uncovered step or extension:
+   - Propose a test case: test name, **type based on requirement scope** (Unit = single step/extension; Component = multiple steps within one UC; Integration = full UC flow or cross-UC), input conditions, expected output/behavior.
+   - Write test stubs to the appropriate test file (or create one if none exists).
+   - **Ask the user to confirm before writing if the number of new files > 0.**
+
+6. **Write spec-tests.md**
+
+   Write (or update) `openspec/changes/<name>/spec-tests.md`.
+
+   This file must include a **Requirement Traceability Matrix** and detailed mappings.
+   **Note: A single requirement or step can (and often should) map to multiple tests of varying types.** Add multiple rows or comma-separated test files in the matrix if a step has multiple tests.
+
+   Format:
+
+   ```markdown
+   # Spec–Test Mapping: <change-name>
+   Generated: <date>
+
+   ## Requirement Traceability Matrix
+
+   | ID | Requirement | Type | Test Type | Test Case | Status |
+   |----|-------------|------|-----------|-----------|--------|
+   | UC1 | <Name> Full Flow | Flow | Integration | `test/integration.test.ts` | ✅ |
+   | UC1-S1 | <Step Description> | Step | Unit | `test/unit.test.ts` | ✅ |
+   | UC1-S1 | <Step Description> | Step | Component | `test/comp.test.ts` | ✅ |
+   | UC1-E2a | <Extension Description>| Extension | Component | `test/comp2.test.ts` | ⚠️ |
+   ...
+
+   ## Use Case Details: <name> (ID: UC1)
+
+   ### Main Scenario
+   - **UC1-S1**: <description> 
+     - `test/unit.test.ts:42` (Unit)
+     - `test/comp.test.ts:12` (Component)
+   - **UC1-S2**: <description> -> `test/bar.test.ts:15` (Component)
+   - ...
+
+   ### Extensions
+   - **UC1-E2a**: <condition> -> `test/comp2.test.ts:5` (Component)
+   - ...
+
+   ### Full Flow Tests
+   - `test/integration.test.ts:10` — "<test description>" (Integration)
+   ```
+
+   (Repeat for every use case.)
+
+**Heuristics**
+
+- Prefer writing tests in the same file/directory as existing tests for that module
+- Follow existing test framework (don't introduce a new one)
+- Classify by requirement boundary, not by code layer. A test that calls a low-level function but verifies a single spec step is still a Unit test. A test that exercises the UI but covers an entire use case flow is an Integration test.
+- Map requirements to tests via: exact name match, keyword match, file path match
+- When uncertain about coverage, mark as ⚠️ (partial) not ✅
+
+**Graceful Degradation**
+
+- If no spec.md found: report "No spec found for change <name>. Cannot generate tests."
+- If no use case sections found in spec: list all top-level headings found and ask user
+  to point to the relevant section
+
+**Output**
+
+- Summary of gaps found and stubs written
+- Confirmation that spec-tests.md was written to `openspec/changes/<name>/spec-tests.md`
+- Prompt: "Run `/opsx-hw:run-tests` to execute the suite and generate a spec-coverage report."
