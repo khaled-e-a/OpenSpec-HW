@@ -19,18 +19,19 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 2. **Load spec-tests.md (if available)**
 
    Look for \`openspec/changes/<name>/spec-tests.md\`.
-   If found, read it — it provides the Requirement Traceability Matrix and step-level IDs (e.g., UC1-S1) mapping spec steps/flows to test files.
+   If found, read it — it provides the Requirement Traceability Matrix and step-level IDs (e.g., R1-UC1-S1) mapping spec steps/flows to test files.
    If not found, proceed with best-effort mapping (keyword/file-path matching).
 
 3. **Run the tests**
 
-   Detect the project's test runner from \`package.json\` scripts
-   (prefer: \`"test"\`, \`"test:unit"\`, \`"vitest"\`, \`"jest"\`).
-   If detection fails: ask the user for the test command.
+   Detect the project's test runner.
+   If detection fails: ask the user to provide the test command.
    Run: \`<detected-runner>\`
    Capture stdout/stderr output.
 
 4. **Generate Test Coverage Report**
+
+   Save this file to \`openspec/changes/<name>/test-report.md\`.
 
    \`\`\`markdown
    ## Test Report: <change-name>
@@ -43,11 +44,11 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
    Overall: X/Y paths/steps covered (Z%)
 
    ### Covered Requirements
-   - ✅ **UC1-S1**: <description> (\`test/foo.test.ts:42\`)
+   - ✅ **R1-UC1-S1**: <description> (\`test/foo.test.ts:42\`)
    ...
 
    ### Uncovered Requirements
-   - ❌ **UC1-E2a**: <description>: No test found
+   - ❌ **R1-UC1-E2a**: <description>: No test found
      → Run /opsx-hw:gen-tests to generate missing tests
    ...
 
