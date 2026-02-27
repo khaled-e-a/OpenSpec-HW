@@ -1,0 +1,20 @@
+.dashboard-grid {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  background: #f8f9fa;
+  border-radius: 8px;
+  overflow: hidden;
+  user-select: none;
+}
+
+.dashboard-grid__empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 14px;
+  pointer-events: none;
+}

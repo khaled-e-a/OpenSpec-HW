@@ -1,0 +1,35 @@
+@keyframes ghost-shake {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-6px); }
+  40%  { transform: translateX(6px); }
+  60%  { transform: translateX(-4px); }
+  80%  { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+.ghost-widget {
+  position: absolute;
+  border-radius: 6px;
+  pointer-events: none;
+  box-sizing: border-box;
+  transition: left 60ms ease, top 60ms ease, width 60ms ease, height 60ms ease;
+}
+
+.ghost-widget--drag {
+  background: rgba(59, 130, 246, 0.12);
+  border: 2px dashed #3b82f6;
+}
+
+.ghost-widget--resize {
+  background: rgba(16, 185, 129, 0.12);
+  border: 2px dashed #10b981;
+}
+
+.ghost-widget--invalid {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: #ef4444;
+}
+
+.ghost-widget--shake {
+  animation: ghost-shake 0.35s ease-in-out;
+}

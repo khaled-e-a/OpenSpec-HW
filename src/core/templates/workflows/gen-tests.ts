@@ -2,7 +2,7 @@
  * Skill Template Workflow Modules
  *
  * Gen-tests workflow: parses spec.md use cases, discovers existing tests,
- * writes missing stubs, and produces a persistent spec-tests.md mapping file.
+ * writes missing tests, test stubs, or mocks, and produces a persistent spec-tests.md mapping file.
  */
 import type { SkillTemplate, CommandTemplate } from '../types.js';
 
@@ -64,12 +64,12 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
    - **Component**: the test verifies multiple steps within a single use case (e.g., UC1-S1 through UC1-S4) but does not cross use case boundaries.
    - **Integration**: the test verifies the full flow of a use case (entire UC), or requirements that span multiple use cases.
 
-6. **Generate missing test stubs**
+6. **Generate missing tests**
 
    For each uncovered step or extension:
    - Propose a test case: test name, **type based on requirement scope** (Unit = single step/extension; Component = multiple steps within one UC; Integration = full UC flow or cross-UC), input conditions, expected output/behavior.
-   - Write test stubs to the appropriate test file (or create one if none exists).
-   - **Ask the user to confirm before writing if the number of new files > 0.**
+   - Write test stubs, mocks, or tests to the appropriate test file (or create one if none exists).
+   - Test files must be placed in an appropriate location in the codebase, follow the best practices of the codebase structure, and follow the same style as existing tests.
 
 7. **Update spec-tests.md**
 
@@ -123,12 +123,11 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 8. **Decision point (Re-generate or output)**
 
-   - If there are missing or incomplete tests (marked as ❌ or ⚠️ in the matrix):
-     - Report the missing or incomplete tests to the user and ask if they want to generate them.
-     - If the user confirms, go back to step 6 and generate missing test stubs.
-     - If the user does not confirm, proceed to the output step.
-   - Else:
-     - Proceed to the output step.
+   - Report the missing or incomplete tests to the user.
+   - **Ask if they want to generate / update missing and incomplete tests.**
+   - If the user confirms, go back to step 6 and generate / update tests.
+   - If the user does not confirm, proceed to the output step.
+   - Do not proceed to the output step without user confirmation.
 
 
 **Heuristics**
