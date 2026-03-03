@@ -7,10 +7,10 @@
 import type { SkillTemplate, CommandTemplate } from '../types.js';
 
 export function getFfChangeSkillTemplate(): SkillTemplate {
-  return {
-    name: 'openspec-ff-change',
-    description: 'Fast-forward through OpenSpec artifact creation. Use when the user wants to quickly create all artifacts needed for implementation without stepping through each one individually.',
-    instructions: `Fast-forward through artifact creation - generate everything needed to start implementation in one go.
+   return {
+      name: 'openspec-ff-change',
+      description: 'Fast-forward through OpenSpec artifact creation. Use when the user wants to quickly create all artifacts needed for implementation without stepping through each one individually.',
+      instructions: `Fast-forward through artifact creation - generate everything needed to start implementation in one go.
 
 **Input**: The user's request should include a change name (kebab-case) OR a description of what they want to build.
 
@@ -27,13 +27,13 @@ export function getFfChangeSkillTemplate(): SkillTemplate {
 
 2. **Create the change directory**
    \`\`\`bash
-   openspec new change "<name>"
+   openspec-hw new change "<name>"
    \`\`\`
    This creates a scaffolded change at \`openspec/changes/<name>/\`.
 
 3. **Get the artifact build order**
    \`\`\`bash
-   openspec status --change "<name>" --json
+   openspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to get:
    - \`applyRequires\`: array of artifact IDs needed before implementation (e.g., \`["tasks"]\`)
@@ -48,7 +48,7 @@ export function getFfChangeSkillTemplate(): SkillTemplate {
    a. **For each artifact that is \`ready\` (dependencies satisfied)**:
       - Get instructions:
         \`\`\`bash
-        openspec instructions <artifact-id> --change "<name>" --json
+        openspec-hw instructions <artifact-id> --change "<name>" --json
         \`\`\`
       - The instructions JSON includes:
         - \`context\`: Project background (constraints for you - do NOT include in output)
@@ -63,7 +63,7 @@ export function getFfChangeSkillTemplate(): SkillTemplate {
       - Show brief progress: "✓ Created <artifact-id>"
 
    b. **Continue until all \`applyRequires\` artifacts are complete**
-      - After creating each artifact, re-run \`openspec status --change "<name>" --json\`
+      - After creating each artifact, re-run \`openspec-hw status --change "<name>" --json\`
       - Check if every artifact ID in \`applyRequires\` has \`status: "done"\` in the artifacts array
       - Stop when all \`applyRequires\` artifacts are done
 
@@ -73,7 +73,7 @@ export function getFfChangeSkillTemplate(): SkillTemplate {
 
 5. **Show final status**
    \`\`\`bash
-   openspec status --change "<name>"
+   openspec-hw status --change "<name>"
    \`\`\`
 
 **Output**
@@ -86,7 +86,7 @@ After completing all artifacts, summarize:
 
 **Artifact Creation Guidelines**
 
-- Follow the \`instruction\` field from \`openspec instructions\` for each artifact type
+- Follow the \`instruction\` field from \`openspec-hw instructions\` for each artifact type
 - The schema defines what each artifact should contain - follow it
 - Read dependency artifacts for context before creating new ones
 - Use \`template\` as the structure for your output file - fill in its sections
@@ -100,19 +100,19 @@ After completing all artifacts, summarize:
 - If context is critically unclear, ask the user - but prefer making reasonable decisions to keep momentum
 - If a change with that name already exists, suggest continuing that change instead
 - Verify each artifact file exists after writing before proceeding to next`,
-    license: 'MIT',
-    compatibility: 'Requires openspec CLI.',
-    metadata: { author: 'openspec', version: '1.0' },
-  };
+      license: 'MIT',
+      compatibility: 'Requires openspec-hw CLI.',
+      metadata: { author: 'openspec', version: '1.0' },
+   };
 }
 
 export function getOpsxFfCommandTemplate(): CommandTemplate {
-  return {
-    name: 'OPSX: Fast Forward',
-    description: 'Create a change and generate all artifacts needed for implementation in one go',
-    category: 'Workflow',
-    tags: ['workflow', 'artifacts', 'experimental'],
-    content: `Fast-forward through artifact creation - generate everything needed to start implementation.
+   return {
+      name: 'OPSX: Fast Forward',
+      description: 'Create a change and generate all artifacts needed for implementation in one go',
+      category: 'Workflow',
+      tags: ['workflow', 'artifacts', 'experimental'],
+      content: `Fast-forward through artifact creation - generate everything needed to start implementation.
 
 **Input**: The argument after \`/opsx-hw:ff\` is the change name (kebab-case), OR a description of what the user wants to build.
 
@@ -129,13 +129,13 @@ export function getOpsxFfCommandTemplate(): CommandTemplate {
 
 2. **Create the change directory**
    \`\`\`bash
-   openspec new change "<name>"
+   openspec-hw new change "<name>"
    \`\`\`
    This creates a scaffolded change at \`openspec/changes/<name>/\`.
 
 3. **Get the artifact build order**
    \`\`\`bash
-   openspec status --change "<name>" --json
+   openspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to get:
    - \`applyRequires\`: array of artifact IDs needed before implementation (e.g., \`["tasks"]\`)
@@ -150,7 +150,7 @@ export function getOpsxFfCommandTemplate(): CommandTemplate {
    a. **For each artifact that is \`ready\` (dependencies satisfied)**:
       - Get instructions:
         \`\`\`bash
-        openspec instructions <artifact-id> --change "<name>" --json
+        openspec-hw instructions <artifact-id> --change "<name>" --json
         \`\`\`
       - The instructions JSON includes:
         - \`context\`: Project background (constraints for you - do NOT include in output)
@@ -165,7 +165,7 @@ export function getOpsxFfCommandTemplate(): CommandTemplate {
       - Show brief progress: "✓ Created <artifact-id>"
 
    b. **Continue until all \`applyRequires\` artifacts are complete**
-      - After creating each artifact, re-run \`openspec status --change "<name>" --json\`
+      - After creating each artifact, re-run \`openspec-hw status --change "<name>" --json\`
       - Check if every artifact ID in \`applyRequires\` has \`status: "done"\` in the artifacts array
       - Stop when all \`applyRequires\` artifacts are done
 
@@ -175,7 +175,7 @@ export function getOpsxFfCommandTemplate(): CommandTemplate {
 
 5. **Show final status**
    \`\`\`bash
-   openspec status --change "<name>"
+   openspec-hw status --change "<name>"
    \`\`\`
 
 **Output**
@@ -188,7 +188,7 @@ After completing all artifacts, summarize:
 
 **Artifact Creation Guidelines**
 
-- Follow the \`instruction\` field from \`openspec instructions\` for each artifact type
+- Follow the \`instruction\` field from \`openspec-hw instructions\` for each artifact type
 - The schema defines what each artifact should contain - follow it
 - Read dependency artifacts for context before creating new ones
 - Use \`template\` as the structure for your output file - fill in its sections
@@ -202,5 +202,5 @@ After completing all artifacts, summarize:
 - If context is critically unclear, ask the user - but prefer making reasonable decisions to keep momentum
 - If a change with that name already exists, ask if user wants to continue it or create a new one
 - Verify each artifact file exists after writing before proceeding to next`
-  };
+   };
 }

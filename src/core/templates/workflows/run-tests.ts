@@ -12,7 +12,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
+   Run \`openspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
 
    **NEVER auto-select**.
 
@@ -79,7 +79,7 @@ export function getRunTestsSkillTemplate(): SkillTemplate {
 
 ${INSTRUCTIONS_BODY}`,
     license: 'MIT',
-    compatibility: 'Requires openspec CLI.',
+    compatibility: 'Requires openspec-hw CLI.',
     metadata: { author: 'openspec', version: '1.0' },
   };
 }

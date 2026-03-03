@@ -18,7 +18,7 @@ export function getContinueChangeSkillTemplate(): SkillTemplate {
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec list --json\` to get available changes sorted by most recently modified. Then use the **AskUserQuestion tool** to let the user select which change to work on.
+   Run \`openspec-hw list --json\` to get available changes sorted by most recently modified. Then use the **AskUserQuestion tool** to let the user select which change to work on.
 
    Present the top 3-4 most recently modified changes as options, showing:
    - Change name
@@ -32,7 +32,7 @@ export function getContinueChangeSkillTemplate(): SkillTemplate {
 
 2. **Check current status**
    \`\`\`bash
-   openspec status --change "<name>" --json
+   openspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to understand current state. The response includes:
    - \`schemaName\`: The workflow schema being used (e.g., "spec-driven")
@@ -55,7 +55,7 @@ export function getContinueChangeSkillTemplate(): SkillTemplate {
    - Pick the FIRST artifact with \`status: "ready"\` from the status output
    - Get its instructions:
      \`\`\`bash
-     openspec instructions <artifact-id> --change "<name>" --json
+     openspec-hw instructions <artifact-id> --change "<name>" --json
      \`\`\`
    - Parse the JSON. The key fields are:
      - \`context\`: Project background (constraints for you - do NOT include in output)
@@ -80,7 +80,7 @@ export function getContinueChangeSkillTemplate(): SkillTemplate {
 
 4. **After creating an artifact, show progress**
    \`\`\`bash
-   openspec status --change "<name>"
+   openspec-hw status --change "<name>"
    \`\`\`
 
 **Output**
@@ -98,7 +98,7 @@ The artifact types and their purpose depend on the schema. Use the \`instruction
 
 Common artifact patterns:
 
-**spec-driven schema** (proposal → specs → design → tasks):
+**spec-driven schema** (proposal → usecases → specs → design → tasks):
 - **proposal.md**: Ask user about the change if not clear. Fill in Why, What Changes, Capabilities, Impact, Use Case Requirements.
   - The Capabilities section is critical - each capability listed will need a spec file.
   - The Use Case Requirements section is critical. There must be a separate use case requirement section for each requirement in the proposal. Each use case must contain these subsections, written following Cockburn's guidelines:
@@ -116,8 +116,24 @@ Common artifact patterns:
     - **Extensions** (Alternative & Exception Paths): All failure conditions and alternative paths, each referenced to the main scenario step where they arise. Format: "2a. <condition>: <action>". Brainstorm: bad/missing input, validation failures, service unavailability, timeouts, unexpected internal state.
     - **Postconditions**: State of the world after successful completion. Assert each stakeholder's interests are satisfied (e.g., "Order placed. Inventory reserved. Payment logged. Customer has confirmation.").
   - At the end of each propsal.md file, you must put this singature: "Created by Khaled@Huawei".
-- **specs/<capability>/spec.md**: Create one spec per capability listed in the proposal's Capabilities section (use the capability name, not the change name).
-  - The spec.md file must contain the Use Case Requirements from the proposal.
+- **usecases.md**: Create use cases based on the proposal, following Cockburn's methodology.
+  - For each capability or user-facing goal, write a use case with:
+    - **Name**: Active verb phrase stating the goal (e.g., "Register new user")
+    - **Primary Actor**: Role whose goal this satisfies (e.g., "Customer", "User")
+    - **Stakeholders & Interests**: Everyone with vested interest in outcome
+    - **Preconditions**: Facts the system guarantees before start
+    - **Trigger**: Event that initiates the use case
+    - **Main Success Scenario**: 3-9 numbered steps showing goal progression
+    - **Extensions**: Failure/alternative paths referenced to main steps
+    - **Postconditions**: State after successful completion
+- **specs/<capability>/spec.md**: Create one spec per capability that IMPLEMENTS use cases.
+  - MUST read usecases.md first and map each requirement to specific use case steps
+  - Use format: "**Implements**: UC1-S1 - [step description]"
+  - Ensure every main scenario step becomes a requirement
+  - Map extensions to requirements when they represent system behavior
+  - Example mapping:
+    * UC1-S2 "System displays drag preview" → Requirement: "System SHALL show drag preview"
+    * UC1-E2a "Invalid position" → Requirement: "System SHALL validate drop position"
 - **design.md**: Document technical decisions, architecture, and implementation approach.
 - **tasks.md**: Break down implementation into checkboxed tasks.
 
@@ -134,7 +150,7 @@ For other schemas, follow the \`instruction\` field from the CLI output.
   - Do NOT copy \`<context>\`, \`<rules>\`, \`<project_context>\` blocks into the artifact
   - These guide what you write, but should never appear in the output`,
     license: 'MIT',
-    compatibility: 'Requires openspec CLI.',
+    compatibility: 'Requires openspec-hw CLI.',
     metadata: { author: 'openspec', version: '1.0' },
   };
 }
@@ -153,7 +169,7 @@ export function getOpsxContinueCommandTemplate(): CommandTemplate {
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec list --json\` to get available changes sorted by most recently modified. Then use the **AskUserQuestion tool** to let the user select which change to work on.
+   Run \`openspec-hw list --json\` to get available changes sorted by most recently modified. Then use the **AskUserQuestion tool** to let the user select which change to work on.
 
    Present the top 3-4 most recently modified changes as options, showing:
    - Change name
@@ -167,7 +183,7 @@ export function getOpsxContinueCommandTemplate(): CommandTemplate {
 
 2. **Check current status**
    \`\`\`bash
-   openspec status --change "<name>" --json
+   openspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to understand current state. The response includes:
    - \`schemaName\`: The workflow schema being used (e.g., "spec-driven")
@@ -190,7 +206,7 @@ export function getOpsxContinueCommandTemplate(): CommandTemplate {
    - Pick the FIRST artifact with \`status: "ready"\` from the status output
    - Get its instructions:
      \`\`\`bash
-     openspec instructions <artifact-id> --change "<name>" --json
+     openspec-hw instructions <artifact-id> --change "<name>" --json
      \`\`\`
    - Parse the JSON. The key fields are:
      - \`context\`: Project background (constraints for you - do NOT include in output)
@@ -215,7 +231,7 @@ export function getOpsxContinueCommandTemplate(): CommandTemplate {
 
 4. **After creating an artifact, show progress**
    \`\`\`bash
-   openspec status --change "<name>"
+   openspec-hw status --change "<name>"
    \`\`\`
 
 **Output**
@@ -233,7 +249,7 @@ The artifact types and their purpose depend on the schema. Use the \`instruction
 
 Common artifact patterns:
 
-**spec-driven schema** (proposal → specs → design → tasks):
+**spec-driven schema** (proposal → usecases → specs → design → tasks):
 - **proposal.md**: Ask user about the change if not clear. Fill in Why, What Changes, Capabilities, Impact, Use Case Requirements.
   - The Capabilities section is critical - each capability listed will need a spec file.
   - The Use Case Requirements section is critical. There must be a separate use case requirement section for each requirement in the proposal. Each use case must contain these subsections, written following Cockburn's guidelines:
@@ -251,8 +267,24 @@ Common artifact patterns:
     - **Extensions** (Alternative & Exception Paths): All failure conditions and alternative paths, each referenced to the main scenario step where they arise. Format: "2a. <condition>: <action>". Brainstorm: bad/missing input, validation failures, service unavailability, timeouts, unexpected internal state.
     - **Postconditions**: State of the world after successful completion. Assert each stakeholder's interests are satisfied (e.g., "Order placed. Inventory reserved. Payment logged. Customer has confirmation.").
   - At the end of each propsal.md file, you must put this singature: "Created by Khaled@Huawei".
-- **specs/<capability>/spec.md**: Create one spec per capability listed in the proposal's Capabilities section (use the capability name, not the change name).
-  - The spec.md file must contain the Use Case Requirements from the proposal.
+- **usecases.md**: Create use cases based on the proposal, following Cockburn's methodology.
+  - For each capability or user-facing goal, write a use case with:
+    - **Name**: Active verb phrase stating the goal (e.g., "Register new user")
+    - **Primary Actor**: Role whose goal this satisfies (e.g., "Customer", "User")
+    - **Stakeholders & Interests**: Everyone with vested interest in outcome
+    - **Preconditions**: Facts the system guarantees before start
+    - **Trigger**: Event that initiates the use case
+    - **Main Success Scenario**: 3-9 numbered steps showing goal progression
+    - **Extensions**: Failure/alternative paths referenced to main steps
+    - **Postconditions**: State after successful completion
+- **specs/<capability>/spec.md**: Create one spec per capability that IMPLEMENTS use cases.
+  - MUST read usecases.md first and map each requirement to specific use case steps
+  - Use format: "**Implements**: UC1-S1 - [step description]"
+  - Ensure every main scenario step becomes a requirement
+  - Map extensions to requirements when they represent system behavior
+  - Example mapping:
+    * UC1-S2 "System displays drag preview" → Requirement: "System SHALL show drag preview"
+    * UC1-E2a "Invalid position" → Requirement: "System SHALL validate drop position"
 - **design.md**: Document technical decisions, architecture, and implementation approach.
 - **tasks.md**: Break down implementation into checkboxed tasks.
 

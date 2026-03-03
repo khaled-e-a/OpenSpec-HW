@@ -12,6 +12,7 @@ import {
 } from './constants.js';
 import { parseDeltaSpec, normalizeRequirementName } from '../parsers/requirement-blocks.js';
 import { FileSystemUtils } from '../../utils/file-system.js';
+import { UseCaseSpecMapper } from '../parsers/usecase-spec-mapper.js';
 
 export class Validator {
   private strictMode: boolean;
@@ -110,6 +111,7 @@ export class Validator {
    * - REMOVED: names only; no scenario/description required
    * - RENAMED: pairs well-formed
    * - No duplicates within sections; no cross-section conflicts per spec
+   * - Use case traceability for ADDED/MODIFIED requirements
    */
   async validateChangeDeltaSpecs(changeDir: string): Promise<ValidationReport> {
     const issues: ValidationIssue[] = [];
@@ -117,6 +119,17 @@ export class Validator {
     let totalDeltas = 0;
     const missingHeaderSpecs: string[] = [];
     const emptySectionSpecs: Array<{ path: string; sections: string[] }> = [];
+
+    // Load use cases if available
+    let useCaseSteps: any[] = [];
+    const useCasesFile = path.join(changeDir, 'usecases.md');
+    try {
+      const useCaseContent = await fs.readFile(useCasesFile, 'utf-8');
+      const mapper = new UseCaseSpecMapper();
+      useCaseSteps = mapper.parseUseCaseSteps(useCaseContent);
+    } catch {
+      // No use cases file, skip traceability validation
+    }
 
     try {
       const entries = await fs.readdir(specsDir, { withFileTypes: true });
@@ -170,6 +183,10 @@ export class Validator {
           if (scenarioCount < 1) {
             issues.push({ level: 'ERROR', path: entryPath, message: `ADDED "${block.name}" must include at least one scenario` });
           }
+          // Check for implements reference if use cases exist
+          if (useCaseSteps.length > 0 && !requirementText?.includes('**Implements**:')) {
+            issues.push({ level: 'WARNING', path: entryPath, message: `ADDED "${block.name}" missing "**Implements**" reference to use case step` });
+          }
         }
 
         // Validate MODIFIED
@@ -190,6 +207,10 @@ export class Validator {
           const scenarioCount = this.countScenarios(block.raw);
           if (scenarioCount < 1) {
             issues.push({ level: 'ERROR', path: entryPath, message: `MODIFIED "${block.name}" must include at least one scenario` });
+          }
+          // Check for implements reference if use cases exist
+          if (useCaseSteps.length > 0 && !requirementText?.includes('**Implements**:')) {
+            issues.push({ level: 'WARNING', path: entryPath, message: `MODIFIED "${block.name}" missing "**Implements**" reference to use case step` });
           }
         }
 
@@ -288,7 +309,7 @@ export class Validator {
 
   private applySpecRules(spec: Spec, content: string): ValidationIssue[] {
     const issues: ValidationIssue[] = [];
-    
+
     if (spec.overview.length < MIN_PURPOSE_LENGTH) {
       issues.push({
         level: 'WARNING',
@@ -296,7 +317,16 @@ export class Validator {
         message: VALIDATION_MESSAGES.PURPOSE_TOO_BRIEF,
       });
     }
-    
+
+    // Check for Use Case Traceability section
+    if (!content.includes('## Use Case Traceability')) {
+      issues.push({
+        level: 'WARNING',
+        path: 'traceability',
+        message: 'Spec missing "Use Case Traceability" section. Add this section to map requirements to use case steps.',
+      });
+    }
+
     spec.requirements.forEach((req, index) => {
       if (req.text.length > MAX_REQUIREMENT_TEXT_LENGTH) {
         issues.push({
@@ -305,7 +335,7 @@ export class Validator {
           message: VALIDATION_MESSAGES.REQUIREMENT_TOO_LONG,
         });
       }
-      
+
       if (req.scenarios.length === 0) {
         issues.push({
           level: 'WARNING',
@@ -313,8 +343,17 @@ export class Validator {
           message: `${VALIDATION_MESSAGES.REQUIREMENT_NO_SCENARIOS}. ${VALIDATION_MESSAGES.GUIDE_SCENARIO_FORMAT}`,
         });
       }
+
+      // Check for implements reference
+      if (!req.text.includes('**Implements**:') && content.includes('## Use Case Traceability')) {
+        issues.push({
+          level: 'WARNING',
+          path: `requirements[${index}]`,
+          message: `Requirement "${req.name}" missing "**Implements**" reference to use case step.`,
+        });
+      }
     });
-    
+
     return issues;
   }
 

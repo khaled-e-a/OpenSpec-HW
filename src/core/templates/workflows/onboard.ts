@@ -12,7 +12,7 @@ export function getOnboardSkillTemplate(): SkillTemplate {
     description: 'Guided onboarding for OpenSpec - walk through a complete workflow cycle with narration and real codebase work.',
     instructions: getOnboardInstructions(),
     license: 'MIT',
-    compatibility: 'Requires openspec CLI.',
+    compatibility: 'Requires openspec-hw CLI.',
     metadata: { author: 'openspec', version: '1.0' },
   };
 }
@@ -28,9 +28,9 @@ Before starting, check if the OpenSpec CLI is installed:
 
 \`\`\`bash
 # Unix/macOS
-openspec --version 2>&1 || echo "CLI_NOT_INSTALLED"
+openspec-hw --version 2>&1 || echo "CLI_NOT_INSTALLED"
 # Windows (PowerShell)
-# if (Get-Command openspec -ErrorAction SilentlyContinue) { openspec --version } else { echo "CLI_NOT_INSTALLED" }
+# if (Get-Command openspec-hw -ErrorAction SilentlyContinue) { openspec-hw --version } else { echo "CLI_NOT_INSTALLED" }
 \`\`\`
 
 **If CLI not installed:**
@@ -53,7 +53,7 @@ I'll walk you through a complete change cycle—from idea to implementation—us
 1. Pick a small, real task in your codebase
 2. Explore the problem briefly
 3. Create a change (the container for our work)
-4. Build the artifacts: proposal → specs → design → tasks
+4. Build the artifacts: proposal → usecases → specs → design → tasks
 5. Implement the tasks
 6. Archive the completed change
 
@@ -176,14 +176,14 @@ Now let's create a change to hold our work.
 \`\`\`
 ## Creating a Change
 
-A "change" in OpenSpec is a container for all the thinking and planning around a piece of work. It lives in \`openspec/changes/<name>/\` and holds your artifacts—proposal, specs, design, tasks.
+A "change" in OpenSpec is a container for all the thinking and planning around a piece of work. It lives in \`openspec/changes/<name>/\` and holds your artifacts—proposal, usecases, specs, design, tasks.
 
 Let me create one for our task.
 \`\`\`
 
 **DO:** Create the change with a derived kebab-case name:
 \`\`\`bash
-openspec new change "<derived-name>"
+openspec-hw new change "<derived-name>"
 \`\`\`
 
 **SHOW:**
@@ -252,7 +252,7 @@ Does this capture the intent? I can adjust before we save it.
 
 After approval, save the proposal:
 \`\`\`bash
-openspec instructions proposal --change "<name>" --json
+openspec-hw instructions proposal --change "<name>" --json
 \`\`\`
 Then write the content to \`openspec/changes/<name>/proposal.md\`.
 
@@ -441,7 +441,7 @@ Archived changes become your project's decision history—you can always find th
 
 **DO:**
 \`\`\`bash
-openspec archive "<name>"
+openspec-hw archive "<name>"
 \`\`\`
 
 **SHOW:**

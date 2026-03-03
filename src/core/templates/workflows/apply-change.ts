@@ -7,10 +7,10 @@
 import type { SkillTemplate, CommandTemplate } from '../types.js';
 
 export function getApplyChangeSkillTemplate(): SkillTemplate {
-  return {
-    name: 'openspec-apply-change',
-    description: 'Implement tasks from an OpenSpec change. Use when the user wants to start implementing, continue implementation, or work through tasks.',
-    instructions: `Implement tasks from an OpenSpec change.
+   return {
+      name: 'openspec-apply-change',
+      description: 'Implement tasks from an OpenSpec change. Use when the user wants to start implementing, continue implementation, or work through tasks.',
+      instructions: `Implement tasks from an OpenSpec change.
 
 **Input**: Optionally specify a change name. If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
@@ -21,13 +21,13 @@ export function getApplyChangeSkillTemplate(): SkillTemplate {
    If a name is provided, use it. Otherwise:
    - Infer from conversation context if the user mentioned a change
    - Auto-select if only one active change exists
-   - If ambiguous, run \`openspec list --json\` to get available changes and use the **AskUserQuestion tool** to let the user select
+   - If ambiguous, run \`openspec-hw list --json\` to get available changes and use the **AskUserQuestion tool** to let the user select
 
    Always announce: "Using change: <name>" and how to override (e.g., \`/opsx-hw:apply <other>\`).
 
 2. **Check status to understand the schema**
    \`\`\`bash
-   openspec status --change "<name>" --json
+   openspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to understand:
    - \`schemaName\`: The workflow being used (e.g., "spec-driven")
@@ -36,7 +36,7 @@ export function getApplyChangeSkillTemplate(): SkillTemplate {
 3. **Get apply instructions**
 
    \`\`\`bash
-   openspec instructions apply --change "<name>" --json
+   openspec-hw instructions apply --change "<name>" --json
    \`\`\`
 
    This returns:
@@ -54,7 +54,7 @@ export function getApplyChangeSkillTemplate(): SkillTemplate {
 
    Read the files listed in \`contextFiles\` from the apply instructions output.
    The files depend on the schema being used:
-   - **spec-driven**: proposal, specs, design, tasks
+   - **spec-driven**: proposal, usecases, specs, design, tasks
    - Other schemas: follow the contextFiles from CLI output
 
 5. **Show current progress**
@@ -116,7 +116,7 @@ Working on task 4/7: <task description>
 - [x] Task 2
 ...
 
-All tasks complete! Next: run \`/opsx-hw:gen-tests\` to map spec use cases to tests and generate any missing test stubs. Once testing is satisfactory, use \`/opsx-hw:archive\` to archive and close the change.
+All tasks complete! Next: run \`/opsx-hw:gen-tests\` to map use cases to tests and generate any missing test stubs. Once testing is satisfactory, use \`/opsx-hw:archive\` to archive and close the change.
 \`\`\`
 
 **Output On Pause (Issue Encountered)**
@@ -155,19 +155,19 @@ This skill supports the "actions on a change" model:
 
 - **Can be invoked anytime**: Before all artifacts are done (if tasks exist), after partial implementation, interleaved with other actions
 - **Allows artifact updates**: If implementation reveals design issues, suggest updating artifacts - not phase-locked, work fluidly`,
-    license: 'MIT',
-    compatibility: 'Requires openspec CLI.',
-    metadata: { author: 'openspec', version: '1.0' },
-  };
+      license: 'MIT',
+      compatibility: 'Requires openspec-hw CLI.',
+      metadata: { author: 'openspec', version: '1.0' },
+   };
 }
 
 export function getOpsxApplyCommandTemplate(): CommandTemplate {
-  return {
-    name: 'OPSX: Apply',
-    description: 'Implement tasks from an OpenSpec change (Experimental)',
-    category: 'Workflow',
-    tags: ['workflow', 'artifacts', 'experimental'],
-    content: `Implement tasks from an OpenSpec change.
+   return {
+      name: 'OPSX: Apply',
+      description: 'Implement tasks from an OpenSpec change (Experimental)',
+      category: 'Workflow',
+      tags: ['workflow', 'artifacts', 'experimental'],
+      content: `Implement tasks from an OpenSpec change.
 
 **Input**: Optionally specify a change name (e.g., \`/opsx-hw:apply add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
@@ -178,13 +178,13 @@ export function getOpsxApplyCommandTemplate(): CommandTemplate {
    If a name is provided, use it. Otherwise:
    - Infer from conversation context if the user mentioned a change
    - Auto-select if only one active change exists
-   - If ambiguous, run \`openspec list --json\` to get available changes and use the **AskUserQuestion tool** to let the user select
+   - If ambiguous, run \`openspec-hw list --json\` to get available changes and use the **AskUserQuestion tool** to let the user select
 
    Always announce: "Using change: <name>" and how to override (e.g., \`/opsx-hw:apply <other>\`).
 
 2. **Check status to understand the schema**
    \`\`\`bash
-   openspec status --change "<name>" --json
+   openspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to understand:
    - \`schemaName\`: The workflow being used (e.g., "spec-driven")
@@ -193,7 +193,7 @@ export function getOpsxApplyCommandTemplate(): CommandTemplate {
 3. **Get apply instructions**
 
    \`\`\`bash
-   openspec instructions apply --change "<name>" --json
+   openspec-hw instructions apply --change "<name>" --json
    \`\`\`
 
    This returns:
@@ -211,7 +211,7 @@ export function getOpsxApplyCommandTemplate(): CommandTemplate {
 
    Read the files listed in \`contextFiles\` from the apply instructions output.
    The files depend on the schema being used:
-   - **spec-driven**: proposal, specs, design, tasks
+   - **spec-driven**: proposal, usecases, specs, design, tasks
    - Other schemas: follow the contextFiles from CLI output
 
 5. **Show current progress**
@@ -273,7 +273,7 @@ Working on task 4/7: <task description>
 - [x] Task 2
 ...
 
-All tasks complete! Next: run \`/opsx-hw:gen-tests\` to map spec use cases to tests and generate any missing test stubs. Once testing is satisfactory, use \`/opsx-hw:archive\` to archive and close the change.
+All tasks complete! Next: run \`/opsx-hw:gen-tests\` to map use cases to tests and generate any missing test stubs. Once testing is satisfactory, use \`/opsx-hw:archive\` to archive and close the change.
 \`\`\`
 
 **Output On Pause (Issue Encountered)**
@@ -312,5 +312,5 @@ This skill supports the "actions on a change" model:
 
 - **Can be invoked anytime**: Before all artifacts are done (if tasks exist), after partial implementation, interleaved with other actions
 - **Allows artifact updates**: If implementation reveals design issues, suggest updating artifacts - not phase-locked, work fluidly`
-  };
+   };
 }

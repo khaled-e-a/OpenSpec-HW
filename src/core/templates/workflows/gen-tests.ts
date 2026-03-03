@@ -1,7 +1,7 @@
 /**
  * Skill Template Workflow Modules
  *
- * Gen-tests workflow: parses spec.md use cases, discovers existing tests,
+ * Gen-tests workflow: parses usecases.md use cases, discovers existing tests,
  * writes missing tests, test stubs, or mocks, and produces a persistent spec-tests.md mapping file.
  */
 import type { SkillTemplate, CommandTemplate } from '../types.js';
@@ -12,17 +12,17 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
+   Run \`openspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
 
    Only show changes that have a spec artifact. **NEVER auto-select**.
 
-2. **Load the spec**
+2. **Load the use cases**
 
    \`\`\`bash
-   openspec instructions apply --change "<name>" --json
+   openspec-hw instructions apply --change "<name>" --json
    \`\`\`
 
-   From \`contextFiles\`, find and read \`spec.md\` (and any delta specs in \`openspec/changes/<name>/specs/\`).
+   From \`contextFiles\`, find and read \`usecases.md\` (and any spec files in \`openspec/changes/<name>/specs/\`).
 
 
 3. **Create an empty spec-tests.md file**
@@ -39,21 +39,14 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
    - \`### Full Flow Tests\`
 
 
-4. **Parse use case requirements from spec.md**
+4. **Extract spec-to-usecase mapping from specs**
 
-   Look for sections structured as:
-   - \`### Use Case:\` or \`## Use Case:\` headings
-   - Within each use case, identify sub-sections:
-     - \`**Main Scenario**\` (Happy Path) - extract numbered steps.
-     - \`**Extensions**\` (Alternative & Exception Paths) - extract paths like "2a. <condition>".
+   Parse all spec files to extract:
+   - Requirement ID (R1, R2, etc.)
+   - "**Implements**" references (UC1-S1, UC1-E2a, etc.)
+   - WHEN/THEN scenarios
 
-   Assign a unique ID to each use case:
-   - ID each use case in each spec.md: R1-UC1, R1-UC2, R2-UC1, R2-UC2, ...
-   - ID each step in the Main Scenario: R1-UC1-S1, R1-UC1-S2, R1-UC2-S1, R1-UC2-S2, ...
-   - ID each extension: R1-UC1-E1, R1-UC1-E2, R1-UC2-E1, R1-UC2-E2, ...
-   These IDs are the basis for traceability.
-
-   Write the ID to spec and use case mapping in the \`## Use Case ID Mapping\` section of \`openspec/changes/<name>/spec-tests.md\`.
+   This mapping is already created during spec generation, just extract it.
 
 5. **Discover existing tests**
 
@@ -140,8 +133,8 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 **Graceful Degradation**
 
-- If no spec.md found: report "No spec found for change <name>. Cannot generate tests."
-- If no use case sections found in spec: list all top-level headings found and ask user
+- If no usecases.md found: report "No use cases found for change <name>. Cannot generate tests."
+- If no use case sections found in usecases.md: list all top-level headings found and ask user
   to point to the relevant section
 
 **Output**
@@ -154,12 +147,12 @@ export function getGenTestsSkillTemplate(): SkillTemplate {
   return {
     name: 'openspec-gen-tests',
     description:
-      'Analyse spec.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.',
-    instructions: `Analyse spec.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
+      'Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.',
+    instructions: `Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
 
 ${INSTRUCTIONS_BODY}`,
     license: 'MIT',
-    compatibility: 'Requires openspec CLI.',
+    compatibility: 'Requires openspec-hw CLI.',
     metadata: { author: 'openspec', version: '1.0' },
   };
 }
@@ -167,10 +160,10 @@ ${INSTRUCTIONS_BODY}`,
 export function getOpsxGenTestsCommandTemplate(): CommandTemplate {
   return {
     name: 'OPSX: Gen Tests',
-    description: 'Analyse spec.md use cases, discover existing tests, write missing stubs, and produce spec-tests.md',
+    description: 'Analyse usecases.md use cases, discover existing tests, write missing stubs, and produce spec-tests.md',
     category: 'Workflow',
     tags: ['workflow', 'test', 'gen-tests', 'coverage'],
-    content: `Analyse spec.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
+    content: `Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
 
 **Input**: Optionally specify a change name after \`/opsx-hw:gen-tests\` (e.g., \`/opsx-hw:gen-tests add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 

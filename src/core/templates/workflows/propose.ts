@@ -7,13 +7,15 @@
 import type { SkillTemplate, CommandTemplate } from '../types.js';
 
 export function getOpsxProposeSkillTemplate(): SkillTemplate {
-  return {
-    name: 'openspec-propose',
-    description: 'Propose a new change with all artifacts generated in one step. Use when the user wants to quickly describe what they want to build and get a complete proposal with design, specs, and tasks ready for implementation.',
-    instructions: `Propose a new change - create the change and generate all artifacts in one step.
+   return {
+      name: 'openspec-propose',
+      description: 'Propose a new change with all artifacts generated in one step. Use when the user wants to quickly describe what they want to build and get a complete proposal with design, specs, and tasks ready for implementation.',
+      instructions: `Propose a new change - create the change and generate all artifacts in one step.
 
 I'll create a change with artifacts:
 - proposal.md (what & why)
+- usecases.md (actor goals & scenarios)
+- specs/*.md (detailed requirements)
 - design.md (how)
 - tasks.md (implementation steps)
 
@@ -36,13 +38,13 @@ When ready to implement, run /opsx-hw:apply
 
 2. **Create the change directory**
    \`\`\`bash
-   openspec new change "<name>"
+   openspec-hw new change "<name>"
    \`\`\`
    This creates a scaffolded change at \`openspec/changes/<name>/\` with \`.openspec.yaml\`.
 
 3. **Get the artifact build order**
    \`\`\`bash
-   openspec status --change "<name>" --json
+   openspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to get:
    - \`applyRequires\`: array of artifact IDs needed before implementation (e.g., \`["tasks"]\`)
@@ -57,7 +59,7 @@ When ready to implement, run /opsx-hw:apply
    a. **For each artifact that is \`ready\` (dependencies satisfied)**:
       - Get instructions:
         \`\`\`bash
-        openspec instructions <artifact-id> --change "<name>" --json
+        openspec-hw instructions <artifact-id> --change "<name>" --json
         \`\`\`
       - The instructions JSON includes:
         - \`context\`: Project background (constraints for you - do NOT include in output)
@@ -72,7 +74,7 @@ When ready to implement, run /opsx-hw:apply
       - Show brief progress: "Created <artifact-id>"
 
    b. **Continue until all \`applyRequires\` artifacts are complete**
-      - After creating each artifact, re-run \`openspec status --change "<name>" --json\`
+      - After creating each artifact, re-run \`openspec-hw status --change "<name>" --json\`
       - Check if every artifact ID in \`applyRequires\` has \`status: "done"\` in the artifacts array
       - Stop when all \`applyRequires\` artifacts are done
 
@@ -82,7 +84,7 @@ When ready to implement, run /opsx-hw:apply
 
 5. **Show final status**
    \`\`\`bash
-   openspec status --change "<name>"
+   openspec-hw status --change "<name>"
    \`\`\`
 
 **Output**
@@ -95,7 +97,7 @@ After completing all artifacts, summarize:
 
 **Artifact Creation Guidelines**
 
-- Follow the \`instruction\` field from \`openspec instructions\` for each artifact type
+- Follow the \`instruction\` field from \`openspec-hw instructions\` for each artifact type
 - The schema defines what each artifact should contain - follow it
 - Read dependency artifacts for context before creating new ones
 - Use \`template\` as the structure for your output file - fill in its sections
@@ -109,19 +111,19 @@ After completing all artifacts, summarize:
 - If context is critically unclear, ask the user - but prefer making reasonable decisions to keep momentum
 - If a change with that name already exists, ask if user wants to continue it or create a new one
 - Verify each artifact file exists after writing before proceeding to next`,
-    license: 'MIT',
-    compatibility: 'Requires openspec CLI.',
-    metadata: { author: 'openspec', version: '1.0' },
-  };
+      license: 'MIT',
+      compatibility: 'Requires openspec-hw CLI.',
+      metadata: { author: 'openspec', version: '1.0' },
+   };
 }
 
 export function getOpsxProposeCommandTemplate(): CommandTemplate {
-  return {
-    name: 'OPSX: Propose',
-    description: 'Propose a new change - create it and generate all artifacts in one step',
-    category: 'Workflow',
-    tags: ['workflow', 'artifacts', 'experimental'],
-    content: `Propose a new change - create the change and generate all artifacts in one step.
+   return {
+      name: 'OPSX: Propose',
+      description: 'Propose a new change - create it and generate all artifacts in one step',
+      category: 'Workflow',
+      tags: ['workflow', 'artifacts', 'experimental'],
+      content: `Propose a new change - create the change and generate all artifacts in one step.
 
 I'll create a change with artifacts:
 - proposal.md (what & why)
@@ -147,13 +149,13 @@ When ready to implement, run /opsx-hw:apply
 
 2. **Create the change directory**
    \`\`\`bash
-   openspec new change "<name>"
+   openspec-hw new change "<name>"
    \`\`\`
    This creates a scaffolded change at \`openspec/changes/<name>/\` with \`.openspec.yaml\`.
 
 3. **Get the artifact build order**
    \`\`\`bash
-   openspec status --change "<name>" --json
+   openspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to get:
    - \`applyRequires\`: array of artifact IDs needed before implementation (e.g., \`["tasks"]\`)
@@ -168,7 +170,7 @@ When ready to implement, run /opsx-hw:apply
    a. **For each artifact that is \`ready\` (dependencies satisfied)**:
       - Get instructions:
         \`\`\`bash
-        openspec instructions <artifact-id> --change "<name>" --json
+        openspec-hw instructions <artifact-id> --change "<name>" --json
         \`\`\`
       - The instructions JSON includes:
         - \`context\`: Project background (constraints for you - do NOT include in output)
@@ -183,7 +185,7 @@ When ready to implement, run /opsx-hw:apply
       - Show brief progress: "Created <artifact-id>"
 
    b. **Continue until all \`applyRequires\` artifacts are complete**
-      - After creating each artifact, re-run \`openspec status --change "<name>" --json\`
+      - After creating each artifact, re-run \`openspec-hw status --change "<name>" --json\`
       - Check if every artifact ID in \`applyRequires\` has \`status: "done"\` in the artifacts array
       - Stop when all \`applyRequires\` artifacts are done
 
@@ -193,7 +195,7 @@ When ready to implement, run /opsx-hw:apply
 
 5. **Show final status**
    \`\`\`bash
-   openspec status --change "<name>"
+   openspec-hw status --change "<name>"
    \`\`\`
 
 **Output**
@@ -206,7 +208,7 @@ After completing all artifacts, summarize:
 
 **Artifact Creation Guidelines**
 
-- Follow the \`instruction\` field from \`openspec instructions\` for each artifact type
+- Follow the \`instruction\` field from \`openspec-hw instructions\` for each artifact type
 - The schema defines what each artifact should contain - follow it
 - Read dependency artifacts for context before creating new ones
 - Use \`template\` as the structure for your output file - fill in its sections
@@ -220,5 +222,5 @@ After completing all artifacts, summarize:
 - If context is critically unclear, ask the user - but prefer making reasonable decisions to keep momentum
 - If a change with that name already exists, ask if user wants to continue it or create a new one
 - Verify each artifact file exists after writing before proceeding to next`
-  };
+   };
 }

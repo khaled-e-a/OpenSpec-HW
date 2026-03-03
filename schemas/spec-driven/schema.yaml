@@ -1,6 +1,6 @@
 name: spec-driven
 version: 1
-description: Default OpenSpec workflow - proposal → specs → design → tasks
+description: Default OpenSpec workflow - proposal → usecases → specs → design → tasks
 artifacts:
   - id: proposal
     generates: proposal.md
@@ -27,12 +27,61 @@ artifacts:
       This is the foundation - specs, design, and tasks all build on this.
     requires: []
 
+  - id: usecases
+    generates: usecases.md
+    description: Use cases capturing actor goals, scenarios, and extensions
+    template: usecases.md
+    instruction: |
+      Create use cases based on the proposal, following Cockburn's methodology.
+
+      For each capability or user-facing goal identified in the proposal,
+      write a use case that captures:
+      - WHO interacts with the system (primary actor)
+      - WHAT they want to achieve (goal)
+      - HOW the interaction unfolds (main success scenario, 3-9 steps)
+      - WHAT can go wrong (extensions/alternate flows)
+
+      Guidelines (from "Writing Effective Use Cases"):
+      - Title should be an active-verb goal phrase (e.g., "Register new user")
+      - Each step shows a goal succeeding - highlight the actor's intention, not UI details
+      - Use simple grammar: "Actor does X. System responds with Y."
+      - Keep the GUI out - describe intent, not button clicks
+      - Steps should show who has the ball (which actor is acting)
+      - Write from a bird's eye view, not from inside the system
+      - Extensions should list what the system detects, not "checks"
+
+      Levels:
+      - Summary (cloud/kite): multi-session goals spanning days/weeks
+      - User goal (sea level): single-sitting goals that deliver value
+      - Subfunction (fish/clam): partial goals supporting user-goal use cases
+
+      Most use cases should be at User goal level.
+      Start with the main success scenario, then brainstorm extensions.
+      Each use case is a potential test case - make scenarios concrete and verifiable.
+    requires:
+      - proposal
+
   - id: specs
     generates: "specs/**/*.md"
     description: Detailed specifications for the change
     template: spec.md
     instruction: |
       Create specification files that define WHAT the system should do.
+
+      CRITICAL: Each requirement MUST map to specific use case steps from usecases.md.
+
+      Mapping Requirements:
+      1. Read usecases.md first and identify all use case steps for this capability
+      2. Create requirements that implement each use case step
+      3. Use format: "**Implements**: UC1-S1 - [step description]"
+      4. Ensure every main scenario step has at least one requirement
+      5. Map extensions to specific requirements when applicable
+
+      Use Case to Spec Mapping Process:
+      1. Parse usecases.md for your capability
+      2. List all UC steps in "Use Case Traceability" section
+      3. Create requirements that implement each step
+      4. Reference the UC step in each requirement
 
       Create one spec file per capability listed in the proposal's Capabilities section.
       - New capabilities: use the exact kebab-case name from the proposal (specs/<capability>/spec.md).
@@ -62,25 +111,33 @@ artifacts:
 
       Example:
       ```
+      ## Use Case Traceability
+      This spec implements the following use case steps:
+      - UC1-S2: System displays drag preview
+      - UC1-E2a: Invalid drop position
+
       ## ADDED Requirements
 
-      ### Requirement: User can export data
-      The system SHALL allow users to export their data in CSV format.
+      ### Requirement: Show drag preview
+      **Implements**: UC1-S2 - System displays drag preview
+      The system SHALL display a visual preview of the dragged item during drag operations.
 
-      #### Scenario: Successful export
-      - **WHEN** user clicks "Export" button
-      - **THEN** system downloads a CSV file with all user data
+      #### Scenario: Drag preview visible
+      - **WHEN** user starts dragging an item
+      - **THEN** system shows a semi-transparent copy of the item under cursor
 
-      ## REMOVED Requirements
+      ### Requirement: Validate drop position
+      **Implements**: UC1-E2a - Invalid drop position
+      The system SHALL prevent dropping items in invalid locations.
 
-      ### Requirement: Legacy export
-      **Reason**: Replaced by new export system
-      **Migration**: Use new export endpoint at /api/v2/export
+      #### Scenario: Invalid drop location
+      - **WHEN** user attempts to drop item outside valid drop zone
+      - **THEN** system reverts drag operation and shows error message
       ```
 
       Specs should be testable - each scenario is a potential test case.
     requires:
-      - proposal
+      - usecases
 
   - id: design
     generates: design.md
@@ -108,7 +165,7 @@ artifacts:
 
       Good design docs explain the "why" behind technical decisions.
     requires:
-      - proposal
+      - usecases
 
   - id: tasks
     generates: tasks.md
