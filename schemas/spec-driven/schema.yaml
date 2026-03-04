@@ -146,6 +146,22 @@ artifacts:
     instruction: |
       Create the design document that explains HOW to implement the change.
 
+      CRITICAL: Each design decision MUST address specific use case steps from usecases.md.
+
+      Use Case to Design Mapping Requirements:
+      1. Read usecases.md first and identify all use case steps for this capability
+      2. Create "Use Case Coverage" section listing all use case steps and which design section addresses each
+      3. For each technical decision, add "**Addresses**: UC1-S1 - [step description]"
+      4. Ensure every main scenario step has corresponding design consideration
+      5. Map extensions to design decisions when they affect technical approach
+      6. List any unaddressed use case steps and explain why
+
+      Design Process:
+      1. Parse usecases.md for all use case steps
+      2. Map each step to relevant design sections (Context, Decisions, Risks, etc.)
+      3. Write technical decisions that explicitly support the mapped use case steps
+      4. Validate all steps are covered before finalizing
+
       When to include design.md (create only if any apply):
       - Cross-cutting change (multiple services/modules) or new architectural pattern
       - New external dependency or significant data model changes
@@ -154,16 +170,18 @@ artifacts:
 
       Sections:
       - **Context**: Background, current state, constraints, stakeholders
+      - **Use Case Coverage**: Map all use case steps to design sections
       - **Goals / Non-Goals**: What this design achieves and explicitly excludes
-      - **Decisions**: Key technical choices with rationale (why X over Y?). Include alternatives considered for each decision.
+      - **Decisions**: Key technical choices with rationale and use case mapping
       - **Risks / Trade-offs**: Known limitations, things that could go wrong. Format: [Risk] → Mitigation
       - **Migration Plan**: Steps to deploy, rollback strategy (if applicable)
       - **Open Questions**: Outstanding decisions or unknowns to resolve
 
       Focus on architecture and approach, not line-by-line implementation.
       Reference the proposal for motivation and specs for requirements.
+      Each technical decision should explicitly support the use cases it addresses.
 
-      Good design docs explain the "why" behind technical decisions.
+      Good design docs explain the "why" behind technical decisions and how they enable user goals.
     requires:
       - usecases
 
@@ -174,30 +192,57 @@ artifacts:
     instruction: |
       Create the task list that breaks down the implementation work.
 
+      CRITICAL: Each task MUST reference specific use case steps from usecases.md.
+
+      Use Case to Task Mapping Requirements:
+      1. Read usecases.md first and identify all use case steps for this capability
+      2. Create "Use Case Traceability" section listing all use case steps
+      3. For each task, add "(Addresses: UC1-S1)" or "(Addresses: UC1-S1, UC1-S2)" for multiple steps
+      4. Ensure every main scenario step is addressed by at least one task
+      5. Map extensions to tasks when they represent implementation work
+      6. Tasks can address multiple use case steps if they are closely related
+
+      Task Mapping Process:
+      1. Parse usecases.md for all use case steps
+      2. Create tasks that implement each step
+      3. Reference the UC step(s) in each task using (Addresses: UCx-Sy) format
+      4. Group related tasks under appropriate headings
+      5. Validate all steps are covered before finalizing
+
       **IMPORTANT: Follow the template below exactly.** The apply phase parses
       checkbox format to track progress. Tasks not using `- [ ]` won't be tracked.
 
       Guidelines:
       - Group related tasks under ## numbered headings
       - Each task MUST be a checkbox: `- [ ] X.Y Task description`
+      - Each task MUST include use case mapping: `- [ ] X.Y Task description (Addresses: UC1-S1)`
       - Tasks should be small enough to complete in one session
       - Order tasks by dependency (what must be done first?)
 
       Example:
       ```
-      ## 1. Setup
+      ## Use Case Traceability
+      This implementation addresses the following use case steps:
+      - UC1-S1: User navigates to registration page
+      - UC1-S2: System displays registration form
+      - UC1-S3: User enters registration details
+      - UC1-E2a: Invalid email format
 
-      - [ ] 1.1 Create new module structure
-      - [ ] 1.2 Add dependencies to package.json
+      ## 1. Frontend Implementation
 
-      ## 2. Core Implementation
+      - [ ] 1.1 Create registration page component (Addresses: UC1-S1)
+      - [ ] 1.2 Build registration form with validation (Addresses: UC1-S2, UC1-S3)
+      - [ ] 1.3 Add email format validation (Addresses: UC1-E2a)
 
-      - [ ] 2.1 Implement data export function
-      - [ ] 2.2 Add CSV formatting utilities
+      ## 2. Backend Implementation
+
+      - [ ] 2.1 Create registration API endpoint (Addresses: UC1-S3)
+      - [ ] 2.2 Implement email validation service (Addresses: UC1-E2a)
       ```
 
       Reference specs for what needs to be built, design for how to build it.
       Each task should be verifiable - you know when it's done.
+      Each task must map to specific use case steps to ensure complete implementation.
     requires:
       - specs
       - design

@@ -113,6 +113,166 @@ export class Validator {
    * - No duplicates within sections; no cross-section conflicts per spec
    * - Use case traceability for ADDED/MODIFIED requirements
    */
+  /**
+   * Validate tasks document for use case coverage
+   */
+  async validateTasks(filePath: string): Promise<ValidationReport> {
+    const issues: ValidationIssue[] = [];
+
+    try {
+      const content = readFileSync(filePath, 'utf-8');
+
+      // Check for Use Case Traceability section
+      if (!content.includes('## Use Case Traceability')) {
+        issues.push({
+          level: 'WARNING',
+          path: 'traceability',
+          message: 'Tasks missing "Use Case Traceability" section. Add this section to map tasks to use case steps.',
+        });
+      }
+
+      // Check for Addresses references in tasks
+      const taskMatches = content.match(/^-\s*\[\s*\]\s+\d+\.\d+/gm);
+      if (taskMatches) {
+        const lines = content.split('\n');
+        let taskCount = 0;
+        let mappedTaskCount = 0;
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+
+          // Count tasks
+          if (trimmed.match(/^-\s*\[\s*\]\s+\d+\.\d+/)) {
+            taskCount++;
+            if (trimmed.includes('(Addresses:')) {
+              mappedTaskCount++;
+            }
+          }
+        }
+
+        if (taskCount > 0 && mappedTaskCount < taskCount) {
+          issues.push({
+            level: 'WARNING',
+            path: 'tasks',
+            message: `${taskCount - mappedTaskCount} out of ${taskCount} tasks missing "(Addresses:)" reference to use case step.`,
+          });
+        }
+      }
+
+    } catch (error) {
+      const baseMessage = error instanceof Error ? error.message : 'Unknown error';
+      issues.push({
+        level: 'ERROR',
+        path: 'file',
+        message: `Failed to validate tasks: ${baseMessage}`,
+      });
+    }
+
+    return this.createReport(issues);
+  }
+
+  /**
+   * Validate design document for use case coverage
+   */
+  async validateDesign(filePath: string): Promise<ValidationReport> {
+    const issues: ValidationIssue[] = [];
+
+    try {
+      const content = readFileSync(filePath, 'utf-8');
+
+      // Check for Use Case Coverage section
+      if (!content.includes('## Use Case Coverage')) {
+        issues.push({
+          level: 'WARNING',
+          path: 'coverage',
+          message: 'Design missing "Use Case Coverage" section. Add this section to map design decisions to use case steps.',
+        });
+      }
+
+      // Check for Addresses references in decisions
+      const decisionMatches = content.match(/^### Decision \d+:/gm);
+      if (decisionMatches) {
+        const lines = content.split('\n');
+        let inDecision = false;
+        let currentDecision = '';
+        let hasAddresses = false;
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+
+          // Start of decision
+          const decisionMatch = trimmed.match(/^### Decision \d+:\s*(.+)/);
+          if (decisionMatch) {
+            if (inDecision && !hasAddresses) {
+              issues.push({
+                level: 'WARNING',
+                path: 'decisions',
+                message: `Decision "${currentDecision}" missing "**Addresses**" reference to use case step.`,
+              });
+            }
+            currentDecision = decisionMatch[1].trim();
+            inDecision = true;
+            hasAddresses = false;
+            continue;
+          }
+
+          // Check for addresses reference
+          if (inDecision && trimmed.includes('**Addresses**:')) {
+            hasAddresses = true;
+          }
+
+          // End of decision section
+          if (inDecision && (trimmed.match(/^## /) || trimmed.match(/^### Decision \d+:/))) {
+            if (!hasAddresses) {
+              issues.push({
+                level: 'WARNING',
+                path: 'decisions',
+                message: `Decision "${currentDecision}" missing "**Addresses**" reference to use case step.`,
+              });
+            }
+            if (trimmed.match(/^### Decision \d+:/)) {
+              // Start new decision
+              const match = trimmed.match(/^### Decision \d+:\s*(.+)/);
+              currentDecision = match ? match[1].trim() : '';
+              hasAddresses = false;
+            } else {
+              inDecision = false;
+            }
+          }
+        }
+
+        // Check last decision if file ends without new section
+        if (inDecision && !hasAddresses) {
+          issues.push({
+            level: 'WARNING',
+            path: 'decisions',
+            message: `Decision "${currentDecision}" missing "**Addresses**" reference to use case step.`,
+          });
+        }
+      }
+
+    } catch (error) {
+      const baseMessage = error instanceof Error ? error.message : 'Unknown error';
+      issues.push({
+        level: 'ERROR',
+        path: 'file',
+        message: `Failed to validate design: ${baseMessage}`,
+      });
+    }
+
+    return this.createReport(issues);
+  }
+
+  /**
+   * Validate delta-formatted spec files under a change directory.
+   * Enforces:
+   * - At least one delta across all files
+   * - ADDED/MODIFIED: each requirement has SHALL/MUST and at least one scenario
+   * - REMOVED: names only; no scenario/description required
+   * - RENAMED: pairs well-formed
+   * - No duplicates within sections; no cross-section conflicts per spec
+   * - Use case traceability for ADDED/MODIFIED requirements
+   */
   async validateChangeDeltaSpecs(changeDir: string): Promise<ValidationReport> {
     const issues: ValidationIssue[] = [];
     const specsDir = path.join(changeDir, 'specs');
@@ -349,7 +509,7 @@ export class Validator {
         issues.push({
           level: 'WARNING',
           path: `requirements[${index}]`,
-          message: `Requirement "${req.name}" missing "**Implements**" reference to use case step.`,
+          message: `Requirement at index ${index} missing "**Implements**" reference to use case step.`,
         });
       }
     });

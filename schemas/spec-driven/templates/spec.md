@@ -1,3 +1,5 @@
+# Spec: {{capabilityName}}
+
 Generated: {{date}}
 
 ## Use Case Traceability
@@ -8,9 +10,10 @@ This spec implements the following use case steps:
 
 ## ADDED Requirements
 
-### Requirement: <!-- requirement name -->
-<!-- requirement text -->
+### Requirement: [Name]
+**Implements**: UC1-S2 - [Specific use case step]
+[Requirement text]
 
-#### Scenario: <!-- scenario name -->
-- **WHEN** <!-- condition -->
-- **THEN** <!-- expected outcome -->
+#### Scenario: [Name]
+- **WHEN** [condition]
+- **THEN** [expected outcome]

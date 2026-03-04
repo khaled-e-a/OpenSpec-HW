@@ -22,6 +22,20 @@ export interface UseCaseSpecMapping {
   unmappedSteps: UseCaseStep[];
 }
 
+export interface UseCaseDesignMapping {
+  useCaseSteps: UseCaseStep[];
+  mappedDecisions: Map<string, string[]>; // decision section -> use case step IDs
+  unmappedSteps: UseCaseStep[];
+  coverageMap: Map<string, string[]>; // use case step ID -> design sections
+}
+
+export interface UseCaseTaskMapping {
+  useCaseSteps: UseCaseStep[];
+  mappedTasks: Map<string, string[]>; // task ID -> use case step IDs
+  unmappedSteps: UseCaseStep[];
+  coverageMap: Map<string, string[]>; // use case step ID -> task IDs
+}
+
 export class UseCaseSpecMapper {
   private parser: MarkdownParser;
 
@@ -44,7 +58,7 @@ export class UseCaseSpecMapper {
       const line = lines[i].trim();
 
       // Detect use case header
-      const useCaseMatch = line.match(/^### Use Case:\s*(.+)/);
+      const useCaseMatch = line.match(/^## Use Case:\s*(.+)/);
       if (useCaseMatch) {
         const useCaseName = useCaseMatch[1].trim();
         const useCaseId = this.generateUseCaseId(useCaseName);
@@ -233,14 +247,242 @@ The system SHALL ${this.generateShallStatement(step.description)}
   }
 
   /**
-   * Load and parse usecases.md file
+   * Extract design-to-usecase mapping from design content
    */
-  loadUseCases(filePath: string): UseCaseStep[] {
-    try {
-      const content = readFileSync(filePath, 'utf-8');
-      return this.parseUseCaseSteps(content);
-    } catch (error) {
-      throw new Error(`Failed to load use cases from ${filePath}: ${error}`);
+  extractDesignMapping(content: string): Map<string, string[]> {
+    const mapping = new Map<string, string[]>();
+    const lines = content.split('\n');
+
+    let currentSection: string | null = null;
+    let inDecision = false;
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+
+      // Detect section headers
+      const sectionMatch = trimmed.match(/^## (.+)/);
+      if (sectionMatch) {
+        currentSection = sectionMatch[1];
+        inDecision = false;
+        continue;
+      }
+
+      // Detect decision headers
+      const decisionMatch = trimmed.match(/^### Decision \d+:\s*(.+)/);
+      if (decisionMatch && currentSection === 'Decisions') {
+        const decisionName = decisionMatch[1].trim();
+        currentSection = `Decision: ${decisionName}`;
+        inDecision = true;
+        mapping.set(currentSection, []);
+        continue;
+      }
+
+      if (!inDecision) continue;
+
+      // Detect addresses reference
+      const addressesMatch = trimmed.match(/\*\*Addresses\*\*:\s*(UC\d+-[SE]\w+)/);
+      if (addressesMatch) {
+        const useCaseStep = addressesMatch[1];
+        const existing = mapping.get(currentSection!) || [];
+        existing.push(useCaseStep);
+        mapping.set(currentSection!, existing);
+      }
+
+      // Stop at next section or decision
+      if (trimmed.match(/^## /)) {
+        inDecision = false;
+      }
+      if (trimmed.match(/^### Decision \d+:/)) {
+        inDecision = false;
+      }
     }
+
+    return mapping;
+  }
+
+  /**
+   * Validate that all use case steps are addressed in design
+   */
+  validateDesignMapping(useCaseSteps: UseCaseStep[], designMapping: Map<string, string[]>): UseCaseDesignMapping {
+    const mappedSteps = new Set<string>();
+    const mappedDecisions = new Map<string, string[]>();
+    const coverageMap = new Map<string, string[]>();
+
+    // Build mappings
+    for (const [decision, stepIds] of designMapping.entries()) {
+      mappedDecisions.set(decision, stepIds);
+      stepIds.forEach(stepId => {
+        mappedSteps.add(stepId);
+        const existing = coverageMap.get(stepId) || [];
+        existing.push(decision);
+        coverageMap.set(stepId, existing);
+      });
+    }
+
+    // Find unmapped steps
+    const unmappedSteps = useCaseSteps.filter(step => !mappedSteps.has(step.id));
+
+    return {
+      useCaseSteps,
+      mappedDecisions,
+      unmappedSteps,
+      coverageMap
+    };
+  }
+
+  /**
+   * Extract task-to-usecase mapping from tasks content
+   */
+  extractTaskMapping(content: string): Map<string, string[]> {
+    const mapping = new Map<string, string[]>();
+    const lines = content.split('\n');
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+
+      // Match task lines: - [ ] X.Y Task description (Addresses: UC1-S1, UC1-S2)
+      const taskMatch = trimmed.match(/^-\s*\[\s*\]\s+(\d+\.\d+)\s+(.+?)\s+\(Addresses:\s*([^)]+)\)/);
+      if (taskMatch) {
+        const taskId = taskMatch[1];
+        const addresses = taskMatch[3].split(',').map(s => s.trim());
+        mapping.set(taskId, addresses);
+      }
+    }
+
+    return mapping;
+  }
+
+  /**
+   * Validate that all use case steps are covered by tasks
+   */
+  validateTaskMapping(useCaseSteps: UseCaseStep[], taskMapping: Map<string, string[]>): UseCaseTaskMapping {
+    const mappedSteps = new Set<string>();
+    const mappedTasks = new Map<string, string[]>();
+    const coverageMap = new Map<string, string[]>();
+
+    // Build mappings
+    for (const [taskId, stepIds] of taskMapping.entries()) {
+      mappedTasks.set(taskId, stepIds);
+      stepIds.forEach(stepId => {
+        mappedSteps.add(stepId);
+        const existing = coverageMap.get(stepId) || [];
+        existing.push(taskId);
+        coverageMap.set(stepId, existing);
+      });
+    }
+
+    // Find unmapped steps
+    const unmappedSteps = useCaseSteps.filter(step => !mappedSteps.has(step.id));
+
+    return {
+      useCaseSteps,
+      mappedTasks,
+      unmappedSteps,
+      coverageMap
+    };
+  }
+
+  /**
+   * Generate task suggestions for unmapped use case steps
+   */
+  generateTaskSuggestions(unmappedSteps: UseCaseStep[]): string[] {
+    const suggestions: string[] = [];
+
+    for (const step of unmappedSteps) {
+      const taskName = this.generateTaskName(step);
+      suggestions.push(`- [ ] X.Y ${taskName} (Addresses: ${step.id})`);
+    }
+
+    return suggestions;
+  }
+
+  /**
+   * Generate a task name from a use case step
+   */
+  private generateTaskName(step: UseCaseStep): string {
+    // Convert step description to a task name
+    let taskName = step.description
+      .replace(/^(.+?)\s+(verifies|validates|ensures|does|provides|selects|clicks|navigates|enters|displays|creates|sends|grants)/i, '$2')
+      .replace(/^System\s+/i, '')
+      .replace(/^User\s+/i, 'Implement ');
+
+    // Capitalize first letter
+    taskName = taskName.charAt(0).toUpperCase() + taskName.slice(1);
+
+    return taskName;
+  }
+
+  /**
+   * Generate use case traceability section for tasks
+   */
+  generateTaskTraceabilitySection(useCaseSteps: UseCaseStep[]): string {
+    const lines = [
+      '## Use Case Traceability',
+      'This implementation addresses the following use case steps:'
+    ];
+
+    for (const step of useCaseSteps) {
+      lines.push(`- ${step.id}: ${step.description}`);
+    }
+
+    lines.push('');
+    lines.push('Each task below indicates which use case step(s) it implements.');
+
+    return lines.join('\n');
+  }
+
+  /**
+   * Generate design section suggestions for unmapped use case steps
+   */
+  generateDesignSuggestions(unmappedSteps: UseCaseStep[]): string[] {
+    const suggestions: string[] = [];
+
+    for (const step of unmappedSteps) {
+      const section = this.suggestDesignSection(step);
+      suggestions.push(`- ${step.id}: ${step.description} → Address in ${section} section`);
+    }
+
+    return suggestions;
+  }
+
+  /**
+   * Generate use case coverage section for design document
+   */
+  generateDesignCoverageSection(useCaseSteps: UseCaseStep[]): string {
+    const lines = ['## Use Case Coverage', 'This design addresses the following use case steps:'];
+
+    for (const step of useCaseSteps) {
+      const section = this.suggestDesignSection(step);
+      lines.push(`- ${step.id}: ${step.description} → [${section} section]`);
+    }
+
+    lines.push('', '### Unaddressed Use Case Steps', '<!-- List any use case steps not covered in this design and why -->');
+
+    return lines.join('\n');
+  }
+
+  /**
+   * Suggest which design section should address a use case step
+   */
+  suggestDesignSection(step: UseCaseStep): string {
+    const description = step.description.toLowerCase();
+
+    // Context section for user-facing interactions
+    if (description.includes('actor') || description.includes('user') || description.includes('customer')) {
+      return 'Context';
+    }
+
+    // Decisions for technical implementations
+    if (description.includes('system') || description.includes('validate') || description.includes('verify')) {
+      return 'Decisions';
+    }
+
+    // Risks for error conditions
+    if (step.type === 'extension' || description.includes('error') || description.includes('fail')) {
+      return 'Risks';
+    }
+
+    // Default to Decisions
+    return 'Decisions';
   }
 }

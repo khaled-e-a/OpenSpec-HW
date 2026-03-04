@@ -101,20 +101,6 @@ Common artifact patterns:
 **spec-driven schema** (proposal → usecases → specs → design → tasks):
 - **proposal.md**: Ask user about the change if not clear. Fill in Why, What Changes, Capabilities, Impact, Use Case Requirements.
   - The Capabilities section is critical - each capability listed will need a spec file.
-  - The Use Case Requirements section is critical. There must be a separate use case requirement section for each requirement in the proposal. Each use case must contain these subsections, written following Cockburn's guidelines:
-    - **Name**: A short active verb phrase stating the goal (e.g., "Register new customer"). Write at user-goal level — something completable in a single sitting (2–20 min). Ask: "Can I go to lunch when this is done?"
-    - **Primary Actor**: The role whose goal this use case satisfies (e.g., "Customer", "Clerk"). Use role names, not job titles.
-    - **Stakeholders & Interests**: Everyone with a vested interest in the outcome, even if they don't directly interact with the system. For each, state what interest must be protected (e.g., "Auditor: all transactions must be logged").
-    - **Preconditions**: Only facts the system can guarantee are true before this use case starts. Do NOT list things that are usually true but cannot be guaranteed by the system.
-    - **Trigger**: The event or condition that initiates this use case (user action, time-based event, or state change).
-    - **Main Scenario** (Happy Path): 3–9 numbered steps with no "if" statements. Rules:
-      - Each step must distinctly move the goal forward — ask "Why is the actor doing this?" and write the answer, not the physical action
-      - Write from a neutral bird's eye view: "Actor verbs [object] [with data]", "System verifies [condition]", "System updates [state]"
-      - Use "verifies"/"validates"/"ensures" for validation steps — never "checks" (which implies an unresolved if-statement)
-      - Show actor intent, not UI interactions: "Customer provides shipping address" not "Customer clicks Address field"
-      - Always be clear who is acting at each step ("Who's got the ball?")
-    - **Extensions** (Alternative & Exception Paths): All failure conditions and alternative paths, each referenced to the main scenario step where they arise. Format: "2a. <condition>: <action>". Brainstorm: bad/missing input, validation failures, service unavailability, timeouts, unexpected internal state.
-    - **Postconditions**: State of the world after successful completion. Assert each stakeholder's interests are satisfied (e.g., "Order placed. Inventory reserved. Payment logged. Customer has confirmation.").
   - At the end of each propsal.md file, you must put this singature: "Created by Khaled@Huawei".
 - **usecases.md**: Create use cases based on the proposal, following Cockburn's methodology.
   - For each capability or user-facing goal, write a use case with:
@@ -134,8 +120,23 @@ Common artifact patterns:
   - Example mapping:
     * UC1-S2 "System displays drag preview" → Requirement: "System SHALL show drag preview"
     * UC1-E2a "Invalid position" → Requirement: "System SHALL validate drop position"
-- **design.md**: Document technical decisions, architecture, and implementation approach.
-- **tasks.md**: Break down implementation into checkboxed tasks.
+- **design.md**: Create technical design that ADDRESSES all use cases.
+  - MUST read usecases.md first and map each use case step to design sections
+  - Create "Use Case Coverage" section listing all steps
+  - Use format: "**Addresses**: UC1-S2 - [step description]" in each decision
+  - Ensure every main scenario step has design consideration
+  - Example mapping:
+    * UC1-S2 "System displays drag preview" → Decision: "Use React DnD library for drag preview"
+    * UC1-E3a "Invalid position" → Decision: "Implement collision detection algorithm"
+- **tasks.md**: Break down implementation into checkboxed tasks that ADDRESS use cases.
+  - MUST read usecases.md first and map each task to specific use case steps
+  - Create "Use Case Traceability" section listing all steps
+  - Use format: "(Addresses: UC1-S2)" or "(Addresses: UC1-S2, UC1-S3)" for multiple steps
+  - Ensure every main scenario step has at least one implementing task
+  - Example mapping:
+    * "Create registration form UI" → (Addresses: UC1-S2)
+    * "Implement email validation" → (Addresses: UC1-E2a)
+    * "Build login API endpoint" → (Addresses: UC2-S3, UC2-S4)
 
 For other schemas, follow the \`instruction\` field from the CLI output.
 
@@ -252,20 +253,6 @@ Common artifact patterns:
 **spec-driven schema** (proposal → usecases → specs → design → tasks):
 - **proposal.md**: Ask user about the change if not clear. Fill in Why, What Changes, Capabilities, Impact, Use Case Requirements.
   - The Capabilities section is critical - each capability listed will need a spec file.
-  - The Use Case Requirements section is critical. There must be a separate use case requirement section for each requirement in the proposal. Each use case must contain these subsections, written following Cockburn's guidelines:
-    - **Name**: A short active verb phrase stating the goal (e.g., "Register new customer"). Write at user-goal level — something completable in a single sitting (2–20 min). Ask: "Can I go to lunch when this is done?"
-    - **Primary Actor**: The role whose goal this use case satisfies (e.g., "Customer", "Clerk"). Use role names, not job titles.
-    - **Stakeholders & Interests**: Everyone with a vested interest in the outcome, even if they don't directly interact with the system. For each, state what interest must be protected (e.g., "Auditor: all transactions must be logged").
-    - **Preconditions**: Only facts the system can guarantee are true before this use case starts. Do NOT list things that are usually true but cannot be guaranteed by the system.
-    - **Trigger**: The event or condition that initiates this use case (user action, time-based event, or state change).
-    - **Main Scenario** (Happy Path): 3–9 numbered steps with no "if" statements. Rules:
-      - Each step must distinctly move the goal forward — ask "Why is the actor doing this?" and write the answer, not the physical action
-      - Write from a neutral bird's eye view: "Actor verbs [object] [with data]", "System verifies [condition]", "System updates [state]"
-      - Use "verifies"/"validates"/"ensures" for validation steps — never "checks" (which implies an unresolved if-statement)
-      - Show actor intent, not UI interactions: "Customer provides shipping address" not "Customer clicks Address field"
-      - Always be clear who is acting at each step ("Who's got the ball?")
-    - **Extensions** (Alternative & Exception Paths): All failure conditions and alternative paths, each referenced to the main scenario step where they arise. Format: "2a. <condition>: <action>". Brainstorm: bad/missing input, validation failures, service unavailability, timeouts, unexpected internal state.
-    - **Postconditions**: State of the world after successful completion. Assert each stakeholder's interests are satisfied (e.g., "Order placed. Inventory reserved. Payment logged. Customer has confirmation.").
   - At the end of each propsal.md file, you must put this singature: "Created by Khaled@Huawei".
 - **usecases.md**: Create use cases based on the proposal, following Cockburn's methodology.
   - For each capability or user-facing goal, write a use case with:
@@ -285,7 +272,22 @@ Common artifact patterns:
   - Example mapping:
     * UC1-S2 "System displays drag preview" → Requirement: "System SHALL show drag preview"
     * UC1-E2a "Invalid position" → Requirement: "System SHALL validate drop position"
-- **design.md**: Document technical decisions, architecture, and implementation approach.
+- **tasks.md**: Break down implementation into checkboxed tasks that ADDRESS use cases.
+  - MUST read usecases.md first and map each task to specific use case steps
+  - Create "Use Case Traceability" section listing all steps
+  - Use format: "(Addresses: UC1-S2)" or "(Addresses: UC1-S2, UC1-S3)" for multiple steps
+  - Ensure every main scenario step has at least one implementing task
+  - Example mapping:
+    * "Create registration form UI" → (Addresses: UC1-S2)
+    * "Implement email validation" → (Addresses: UC1-E2a)
+    * "Build login API endpoint" → (Addresses: UC2-S3, UC2-S4)
+  - MUST read usecases.md first and map each use case step to design sections
+  - Create "Use Case Coverage" section listing all steps
+  - Use format: "**Addresses**: UC1-S2 - [step description]" in each decision
+  - Ensure every main scenario step has design consideration
+  - Example mapping:
+    * UC1-S2 "System displays drag preview" → Decision: "Use React DnD library for drag preview"
+    * UC1-E3a "Invalid position" → Decision: "Implement collision detection algorithm"
 - **tasks.md**: Break down implementation into checkboxed tasks.
 
 For other schemas, follow the \`instruction\` field from the CLI output.
