@@ -1,0 +1,22 @@
+.dashboard-grid {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.grid-cell {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px dashed #ddd;
+  transition: all 0.2s ease;
+  pointer-events: all;
+}
+
+.grid-cell--hover {
+  background-color: rgba(76, 175, 80, 0.2);
+  border-color: #4caf50;
+}
+
+.grid-cell--occupied {
+  background-color: rgba(255, 193, 7, 0.1);
+  border-color: #ffc107;
+}

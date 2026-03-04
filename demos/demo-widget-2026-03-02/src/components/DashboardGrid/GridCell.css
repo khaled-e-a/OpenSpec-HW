@@ -1,0 +1,8 @@
+.grid-cell {
+  min-height: 100px;
+  position: relative;
+}
+
+.grid-cell:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
