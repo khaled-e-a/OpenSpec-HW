@@ -1,0 +1,77 @@
+.save-button-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.save-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-button:hover:not(:disabled) {
+  background-color: #45a049;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.save-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.save-button.dirty {
+  background-color: #ff9800;
+}
+
+.save-button.dirty:hover:not(:disabled) {
+  background-color: #e68900;
+}
+
+.save-button.error {
+  background-color: #f44336;
+}
+
+.save-spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.save-notification {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 8px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.save-notification.success {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.save-notification.error {
+  background-color: #f44336;
+  color: white;
+}

@@ -1,0 +1,80 @@
+.analytics-display {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 999;
+}
+
+.analytics-toggle {
+  background-color: #673ab7;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.analytics-toggle:hover {
+  background-color: #5e35b1;
+  transform: scale(1.1);
+}
+
+.analytics-panel {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 250px;
+}
+
+.analytics-panel h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.analytics-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.analytics-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.analytics-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.analytics-details {
+  font-size: 12px;
+  color: #666;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+}
+
+.analytics-details div {
+  margin: 4px 0;
+}

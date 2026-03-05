@@ -3,9 +3,10 @@
 <!-- Background and current state -->
 
 ## Use Case Coverage
+See usecases.md "Use Case Traceability Mapping" section for the complete list of use case steps.
 This design addresses the following use case steps:
-- UC1-S1: [Use case step description] → [Design section that addresses it]
-- UC1-S2: [Use case step description] → [Design section that addresses it]
+- UC1-S1: [Step description] → [Design section that addresses it]
+- UC1-S2: [Step description] → [Design section that addresses it]
 - UC1-E2a: [Extension description] → [Design section that addresses it]
 
 ### Unaddressed Use Case Steps

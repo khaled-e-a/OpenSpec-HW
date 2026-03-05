@@ -116,17 +116,42 @@ Common artifact patterns:
   - MUST read usecases.md first and map each requirement to specific use case steps
   - Use format: "**Implements**: UC1-S1 - [step description]"
   - Ensure every main scenario step becomes a requirement
+- **specs/<capability>/spec.md**: Create one spec per capability that IMPLEMENTS use cases.
+  - MUST reference the centralized "Use Case Traceability Mapping" in usecases.md
+  - Copy step descriptions from the mapping table for consistency
+  - Use format: "**Implements**: UC1-S1 - [step description from table]"
+  - Ensure every main scenario step becomes a requirement
   - Map extensions to requirements when they represent system behavior
+  - Example mapping:
+    * UC1-S2 "System displays drag preview" → Requirement: "System SHALL show drag preview"
+    * UC1-E2a "Invalid position" → Requirement: "System SHALL validate drop position"
   - Example mapping:
     * UC1-S2 "System displays drag preview" → Requirement: "System SHALL show drag preview"
     * UC1-E2a "Invalid position" → Requirement: "System SHALL validate drop position"
 - **design.md**: Create technical design that ADDRESSES all use cases.
   - MUST read usecases.md first and map each use case step to design sections
-  - Create "Use Case Coverage" section listing all steps
+- **design.md**: Create technical design that ADDRESSES all use cases.
+  - MUST reference the centralized "Use Case Traceability Mapping" in usecases.md
+  - Copy step descriptions from the mapping table for consistency
+  - Use format: "**Addresses**: UC1-S2 - [step description from table]"
+  - Ensure every main scenario step has design consideration
+  - Example mapping:
+    * UC1-S2 "System displays drag preview" → Decision: "Use React DnD library for drag preview"
+    * UC1-E3a "Invalid position" → Decision: "Implement collision detection algorithm"
   - Use format: "**Addresses**: UC1-S2 - [step description]" in each decision
   - Ensure every main scenario step has design consideration
   - Example mapping:
     * UC1-S2 "System displays drag preview" → Decision: "Use React DnD library for drag preview"
+    * UC1-E3a "Invalid position" → Decision: "Implement collision detection algorithm"
+- **tasks.md**: Break down implementation into checkboxed tasks that ADDRESS use cases.
+  - MUST reference the centralized "Use Case Traceability Mapping" in usecases.md
+  - Copy step descriptions from the mapping table for consistency
+  - Use format: "(Addresses: UC1-S2)" or "(Addresses: UC1-S2, UC1-S3)" for multiple steps
+  - Ensure every main scenario step has at least one implementing task
+  - Example mapping:
+    * "Create registration form UI" → (Addresses: UC1-S2)
+    * "Implement email validation" → (Addresses: UC1-E2a)
+    * "Build login API endpoint" → (Addresses: UC2-S3, UC2-S4)
     * UC1-E3a "Invalid position" → Decision: "Implement collision detection algorithm"
 - **tasks.md**: Break down implementation into checkboxed tasks that ADDRESS use cases.
   - MUST read usecases.md first and map each task to specific use case steps
@@ -260,7 +285,17 @@ Common artifact patterns:
     - **Primary Actor**: Role whose goal this satisfies (e.g., "Customer", "User")
     - **Stakeholders & Interests**: Everyone with vested interest in outcome
     - **Preconditions**: Facts the system guarantees before start
-    - **Trigger**: Event that initiates the use case
+    * UC1-S2 "System displays drag preview" → Decision: "Use React DnD library for drag preview"
+    * UC1-E3a "Invalid position" → Decision: "Implement collision detection algorithm"
+- **tasks.md**: Break down implementation into checkboxed tasks that ADDRESS use cases.
+  - MUST reference the centralized "Use Case Traceability Mapping" in usecases.md
+  - Copy step descriptions from the mapping table for consistency
+  - Use format: "(Addresses: UC1-S2)" or "(Addresses: UC1-S2, UC1-S3)" for multiple steps
+  - Ensure every main scenario step has at least one implementing task
+  - Example mapping:
+    * "Create registration form UI" → (Addresses: UC1-S2)
+    * "Implement email validation" → (Addresses: UC1-E2a)
+    * "Build login API endpoint" → (Addresses: UC2-S3, UC2-S4)
     - **Main Success Scenario**: 3-9 numbered steps showing goal progression
     - **Extensions**: Failure/alternative paths referenced to main steps
     - **Postconditions**: State after successful completion

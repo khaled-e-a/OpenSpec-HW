@@ -41,6 +41,10 @@ artifacts:
       - HOW the interaction unfolds (main success scenario, 3-9 steps)
       - WHAT can go wrong (extensions/alternate flows)
 
+      CRITICAL: After writing all use cases, create the "Use Case Traceability Mapping"
+      section with a table of ALL use case steps. This centralized mapping will be
+      referenced by specs, design, and tasks.
+
       Guidelines (from "Writing Effective Use Cases"):
       - Title should be an active-verb goal phrase (e.g., "Register new user")
       - Each step shows a goal succeeding - highlight the actor's intention, not UI details
@@ -58,6 +62,12 @@ artifacts:
       Most use cases should be at User goal level.
       Start with the main success scenario, then brainstorm extensions.
       Each use case is a potential test case - make scenarios concrete and verifiable.
+
+      Final Step - Create Traceability Mapping:
+      1. After all use cases are written, add "Use Case Traceability Mapping" section
+      2. Create table with ALL use case steps (UC1-S1, UC1-S2, UC1-E1a, etc.)
+      3. Copy each step description into the table
+      4. This table becomes the single source of truth for downstream artifacts
     requires:
       - proposal
 
@@ -71,17 +81,17 @@ artifacts:
       CRITICAL: Each requirement MUST map to specific use case steps from usecases.md.
 
       Mapping Requirements:
-      1. Read usecases.md first and identify all use case steps for this capability
-      2. Create requirements that implement each use case step
-      3. Use format: "**Implements**: UC1-S1 - [step description]"
+      1. Read the "Use Case Traceability Mapping" section in usecases.md
+      2. Create requirements that implement each use case step for your capability
+      3. Use format: "**Implements**: UC1-S1 - [step description from mapping table]"
       4. Ensure every main scenario step has at least one requirement
       5. Map extensions to specific requirements when applicable
 
       Use Case to Spec Mapping Process:
-      1. Parse usecases.md for your capability
-      2. List all UC steps in "Use Case Traceability" section
+      1. Reference the centralized mapping in usecases.md "Use Case Traceability Mapping"
+      2. Copy step descriptions from the mapping table
       3. Create requirements that implement each step
-      4. Reference the UC step in each requirement
+      4. Reference the UC step in each requirement using the centralized descriptions
 
       Create one spec file per capability listed in the proposal's Capabilities section.
       - New capabilities: use the exact kebab-case name from the proposal (specs/<capability>/spec.md).
@@ -149,16 +159,16 @@ artifacts:
       CRITICAL: Each design decision MUST address specific use case steps from usecases.md.
 
       Use Case to Design Mapping Requirements:
-      1. Read usecases.md first and identify all use case steps for this capability
-      2. Create "Use Case Coverage" section listing all use case steps and which design section addresses each
-      3. For each technical decision, add "**Addresses**: UC1-S1 - [step description]"
+      1. Read the "Use Case Traceability Mapping" section in usecases.md
+      2. Reference the centralized step descriptions from the mapping table
+      3. For each technical decision, add "**Addresses**: UC1-S1 - [step description from table]"
       4. Ensure every main scenario step has corresponding design consideration
       5. Map extensions to design decisions when they affect technical approach
       6. List any unaddressed use case steps and explain why
 
       Design Process:
-      1. Parse usecases.md for all use case steps
-      2. Map each step to relevant design sections (Context, Decisions, Risks, etc.)
+      1. Use the centralized "Use Case Traceability Mapping" in usecases.md
+      2. Copy step descriptions from the mapping table for consistency
       3. Write technical decisions that explicitly support the mapped use case steps
       4. Validate all steps are covered before finalizing
 
@@ -195,19 +205,20 @@ artifacts:
       CRITICAL: Each task MUST reference specific use case steps from usecases.md.
 
       Use Case to Task Mapping Requirements:
-      1. Read usecases.md first and identify all use case steps for this capability
-      2. Create "Use Case Traceability" section listing all use case steps
+      1. Read the "Use Case Traceability Mapping" section in usecases.md
+      2. Reference the centralized step descriptions from the mapping table
       3. For each task, add "(Addresses: UC1-S1)" or "(Addresses: UC1-S1, UC1-S2)" for multiple steps
       4. Ensure every main scenario step is addressed by at least one task
       5. Map extensions to tasks when they represent implementation work
       6. Tasks can address multiple use case steps if they are closely related
 
       Task Mapping Process:
-      1. Parse usecases.md for all use case steps
-      2. Create tasks that implement each step
-      3. Reference the UC step(s) in each task using (Addresses: UCx-Sy) format
-      4. Group related tasks under appropriate headings
-      5. Validate all steps are covered before finalizing
+      1. Use the centralized "Use Case Traceability Mapping" in usecases.md
+      2. Copy step descriptions from the mapping table for consistency
+      3. Create tasks that implement each step
+      4. Reference the UC step(s) in each task using (Addresses: UCx-Sy) format
+      5. Group related tasks under appropriate headings
+      6. Validate all steps are covered before finalizing
 
       **IMPORTANT: Follow the template below exactly.** The apply phase parses
       checkbox format to track progress. Tasks not using `- [ ]` won't be tracked.

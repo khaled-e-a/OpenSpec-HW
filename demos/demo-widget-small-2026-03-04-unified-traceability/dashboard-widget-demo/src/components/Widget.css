@@ -1,0 +1,63 @@
+.widget {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+}
+
+.widget:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Focus styles for keyboard navigation */
+.draggable-widget {
+  outline: none;
+  transition: outline 0.2s ease;
+}
+
+.draggable-widget.focused {
+  outline: 2px solid #2196F3;
+  outline-offset: 2px;
+}
+
+.draggable-widget:focus-visible {
+  outline: 2px solid #2196F3;
+  outline-offset: 2px;
+}
+
+.widget--small {
+  grid-column: span 3;
+  grid-row: span 2;
+}
+
+.widget--medium {
+  grid-column: span 6;
+  grid-row: span 3;
+}
+
+.widget--large {
+  grid-column: span 9;
+  grid-row: span 4;
+}
+
+.widget__header {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.widget__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.widget__content {
+  flex: 1;
+  overflow: auto;
+}

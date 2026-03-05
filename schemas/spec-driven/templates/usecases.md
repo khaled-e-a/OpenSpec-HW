@@ -47,3 +47,17 @@ This document captures the use cases for the {{changeName}} change, following Co
 - Keep UI details out of the steps - focus on intent
 - Extensions should cover significant alternatives and failures
 - Use cases should be testable - each scenario is a potential test case
+
+## Use Case Traceability Mapping
+This section provides a centralized mapping of all use case steps for reference by specs, design, and tasks.
+
+| Use Case Step | Description |
+|---------------|-------------|
+| UC1-S1 | [Actor does something] |
+| UC1-S2 | [System responds] |
+| UC1-E2a | [Extension description] |
+
+### Mapping Guidelines for Downstream Artifacts:
+- **Specs**: Reference steps using "**Implements**: UC1-S1 - [description]"
+- **Design**: Reference steps using "**Addresses**: UC1-S1 - [description]"
+- **Tasks**: Reference steps using "(Addresses: UC1-S1)" or "(Addresses: UC1-S1, UC1-S2)"

@@ -485,4 +485,60 @@ The system SHALL ${this.generateShallStatement(step.description)}
     // Default to Decisions
     return 'Decisions';
   }
+
+  /**
+   * Extract the centralized traceability mapping from usecases.md
+   */
+  extractTraceabilityMapping(content: string): Map<string, string> {
+    const mapping = new Map<string, string>();
+    const lines = content.split('\n');
+
+    let inMappingSection = false;
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+
+      // Detect start of traceability mapping section
+      if (trimmed === '## Use Case Traceability Mapping') {
+        inMappingSection = true;
+        continue;
+      }
+
+      // Stop at next section
+      if (inMappingSection && trimmed.startsWith('## ')) {
+        break;
+      }
+
+      if (!inMappingSection) continue;
+
+      // Parse mapping table rows
+      const rowMatch = trimmed.match(/^\|\s*(UC\d+-[SE]\w+)\s*\|\s*(.+?)\s*\|/);
+      if (rowMatch) {
+        const stepId = rowMatch[1];
+        const description = rowMatch[2].trim();
+        mapping.set(stepId, description);
+      }
+    }
+
+    return mapping;
+  }
+
+  /**
+   * Get step description from centralized mapping or fallback to parsed step
+   */
+  getStepDescription(stepId: string, traceabilityMapping: Map<string, string>, useCaseStep?: UseCaseStep): string {
+    // First try the centralized mapping
+    const mappedDescription = traceabilityMapping.get(stepId);
+    if (mappedDescription) {
+      return mappedDescription;
+    }
+
+    // Fallback to parsed step if available
+    if (useCaseStep) {
+      return useCaseStep.description;
+    }
+
+    // Last resort - return the step ID
+    return stepId;
+  }
 }

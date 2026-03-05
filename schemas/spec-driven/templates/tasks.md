@@ -1,9 +1,6 @@
-## Use Case Traceability
-This implementation addresses the following use case steps:
-- UC1-S1: [Use case step description]
-- UC1-S2: [Use case step description]
-- UC1-E2a: [Extension description]
-
+## Implementation Overview
+This task list implements the {{changeName}} change.
+See usecases.md "Use Case Traceability Mapping" section for the complete list of use case steps.
 Each task below indicates which use case step(s) it implements.
 
 ## 1. <!-- Task Group Name -->

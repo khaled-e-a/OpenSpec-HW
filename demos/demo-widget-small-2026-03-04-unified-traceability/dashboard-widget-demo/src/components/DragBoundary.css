@@ -1,0 +1,58 @@
+.boundary-warning {
+  position: fixed;
+  z-index: 1001;
+  pointer-events: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.boundary-warning.top {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.boundary-warning.bottom {
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.boundary-warning.left {
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.boundary-warning.right {
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.boundary-message {
+  background-color: #ff9800;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.boundary-icon {
+  font-size: 16px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
