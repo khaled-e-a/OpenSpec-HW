@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import Widget, { WidgetProps } from './Widget';
 
 interface AnimatedWidgetProps extends WidgetProps {
@@ -12,7 +12,7 @@ const AnimatedWidget: React.FC<AnimatedWidgetProps> = ({
   isDropping = false,
   ...widgetProps
 }) => {
-  const variants = {
+  const variants: Variants = {
     idle: {
       scale: 1,
       rotate: 0,

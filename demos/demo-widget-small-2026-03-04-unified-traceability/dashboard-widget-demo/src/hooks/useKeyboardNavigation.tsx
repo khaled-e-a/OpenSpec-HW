@@ -17,35 +17,6 @@ export const useKeyboardNavigation = ({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (!isDragging && focusedWidgetId) {
-        switch (event.key) {
-          case 'Enter':
-          case ' ':
-            event.preventDefault();
-            // Start dragging the focused widget
-            const draggableElement = document.querySelector(`[data-rbd-drag-handle-draggable-id="${focusedWidgetId}"]`);
-            if (draggableElement) {
-              (draggableElement as HTMLElement).focus();
-              // Simulate drag start
-              const dragHandle = draggableElement.closest('[data-rbd-drag-handle-draggable-id]');
-              if (dragHandle) {
-                const mouseDownEvent = new MouseEvent('mousedown', {
-                  bubbles: true,
-                  cancelable: true,
-                  view: window,
-                });
-                dragHandle.dispatchEvent(mouseDownEvent);
-              }
-            }
-            break;
-          case 'Tab':
-            // Let default tab behavior handle focus
-            break;
-          default:
-            break;
-        }
-      }
-
       if (isDragging) {
         switch (event.key) {
           case 'Escape':
@@ -81,7 +52,7 @@ export const useKeyboardNavigation = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isDragging, focusedWidgetId, onMove, onCancel, onConfirm]);
+  }, [isDragging, onMove, onCancel, onConfirm]);
 
   const handleWidgetFocus = (widgetId: string) => {
     setFocusedWidgetId(widgetId);
@@ -98,7 +69,6 @@ export const useKeyboardNavigation = ({
   };
 };
 
-// Helper component to add keyboard instructions
 export const KeyboardInstructions: React.FC = () => {
   return (
     <div className="keyboard-instructions" role="status" aria-live="polite">

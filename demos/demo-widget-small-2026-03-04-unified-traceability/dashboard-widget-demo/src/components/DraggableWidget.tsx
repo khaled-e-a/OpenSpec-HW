@@ -50,7 +50,7 @@ const DraggableWidget: React.FC<DraggableWidgetProps> = ({
               <AnimatedWidget
                 {...widgetProps}
                 isDragging={snapshot.isDragging}
-                isDropping={!snapshot.isDragging && provided.draggableProps.style?.transform}
+                isDropping={!snapshot.isDragging && !!provided.draggableProps.style?.transform}
               />
             </ShakeAnimation>
           </div>
