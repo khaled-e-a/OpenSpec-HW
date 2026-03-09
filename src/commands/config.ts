@@ -82,6 +82,10 @@ const WORKFLOW_PROMPT_META: Record<string, WorkflowPromptMeta> = {
     name: 'Verify change',
     description: 'Run verification checks against a change',
   },
+  'verify-spec': {
+    name: 'Verify spec traceability',
+    description: 'Audit and fix use case traceability across all artifacts',
+  },
   onboard: {
     name: 'Onboard',
     description: 'Guided onboarding flow for OpenSpec',

@@ -15,6 +15,7 @@ export { getSyncSpecsSkillTemplate, getOpsxSyncCommandTemplate } from './workflo
 export { getArchiveChangeSkillTemplate, getOpsxArchiveCommandTemplate } from './workflows/archive-change.js';
 export { getBulkArchiveChangeSkillTemplate, getOpsxBulkArchiveCommandTemplate } from './workflows/bulk-archive-change.js';
 export { getVerifyChangeSkillTemplate, getOpsxVerifyCommandTemplate } from './workflows/verify-change.js';
+export { getVerifySpecSkillTemplate, getOpsxVerifySpecCommandTemplate } from './workflows/verify-spec.js';
 export { getOnboardSkillTemplate, getOpsxOnboardCommandTemplate } from './workflows/onboard.js';
 export { getGenTestsSkillTemplate, getOpsxGenTestsCommandTemplate } from './workflows/gen-tests.js';
 export { getRunTestsSkillTemplate, getOpsxRunTestsCommandTemplate } from './workflows/run-tests.js';
