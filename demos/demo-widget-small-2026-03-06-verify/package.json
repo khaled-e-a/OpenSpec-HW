@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Drag-and-drop dashboard grid widget demo",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
     "test": "vitest run",
     "test:watch": "vitest"
   },

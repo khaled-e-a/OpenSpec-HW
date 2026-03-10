@@ -88,28 +88,28 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
    | ID | Requirement | Type | Test Type | Test Case | Status |
    |----|-------------|------|-----------|-----------|--------|
-   | R1-UC1 | <Name> Full Flow | Flow | Integration | \`test/integration.test.ts\` | ✅ |
-   | R1-UC1-S1 | <Step Description> | Step | Unit | \`test/unit.test.ts\` | ✅ |
-   | R1-UC1-S1 | <Step Description> | Step | Component | \`test/comp.test.ts\` | ✅ |
-   | R1-UC1-E2a | <Extension Description>| Extension | Component | \`test/comp2.test.ts\` | ⚠️ |
-   | R2-UC1 | <Name> Full Flow | Flow | Integration |  | ❌ |
+   | UC1 | <Name> Full Flow | Flow | Integration | \`test/integration.test.ts\` | ✅ |
+   | UC1-S1 | <Step Description> | Step | Unit | \`test/unit.test.ts\` | ✅ |
+   | UC1-S1 | <Step Description> | Step | Component | \`test/comp.test.ts\` | ✅ |
+   | UC1-E2a | <Extension Description>| Extension | Component | \`test/comp2.test.ts\` | ⚠️ |
+   | UC1 | <Name> Full Flow | Flow | Integration |  | ❌ |
    ...
 
    ## Use Case Details: <name> (ID: UC1)
 
    ### Main Scenario
-   - **R1-UC1-S1**: <description>
+   - **UC1-S1**: <description>
      - \`test/unit.test.ts:42\` <test description> (Unit)
      - \`test/comp.test.ts:12\` <test description> (Component)
-   - **R1-UC1-S2**: <description> -> \`test/bar.test.ts:15\` <test description> (Component)
+   - **UC1-S2**: <description> -> \`test/bar.test.ts:15\` <test description> (Component)
    - ...
 
    ### Extensions
-   - **R1-UC1-E2a**: <description> -> \`test/comp2.test.ts:5\` <test description> (Component)
+   - **UC1-E2a**: <description> -> \`test/comp2.test.ts:5\` <test description> (Component)
    - ...
 
    ### Full Flow Tests
-   - \`R1-UC1\` — "<description>" -> \`test/integration.test.ts:10\` <test description> (Integration)
+   - \`UC1\` — "<description>" -> \`test/integration.test.ts:10\` <test description> (Integration)
    \`\`\`
 
    (Repeat for every use case.)
@@ -144,29 +144,29 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 - Prompt: "Run \`/opsx-hw:run-tests\` to execute the suite and generate a spec-coverage report."`;
 
 export function getGenTestsSkillTemplate(): SkillTemplate {
-  return {
-    name: 'openspec-gen-tests',
-    description:
-      'Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.',
-    instructions: `Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
+   return {
+      name: 'openspec-gen-tests',
+      description:
+         'Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.',
+      instructions: `Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
 
 ${INSTRUCTIONS_BODY}`,
-    license: 'MIT',
-    compatibility: 'Requires openspec-hw CLI.',
-    metadata: { author: 'openspec', version: '1.0' },
-  };
+      license: 'MIT',
+      compatibility: 'Requires openspec-hw CLI.',
+      metadata: { author: 'openspec', version: '1.0' },
+   };
 }
 
 export function getOpsxGenTestsCommandTemplate(): CommandTemplate {
-  return {
-    name: 'OPSX: Gen Tests',
-    description: 'Analyse usecases.md use cases, discover existing tests, write missing stubs, and produce spec-tests.md',
-    category: 'Workflow',
-    tags: ['workflow', 'test', 'gen-tests', 'coverage'],
-    content: `Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
+   return {
+      name: 'OPSX: Gen Tests',
+      description: 'Analyse usecases.md use cases, discover existing tests, write missing stubs, and produce spec-tests.md',
+      category: 'Workflow',
+      tags: ['workflow', 'test', 'gen-tests', 'coverage'],
+      content: `Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
 
 **Input**: Optionally specify a change name after \`/opsx-hw:gen-tests\` (e.g., \`/opsx-hw:gen-tests add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 ${INSTRUCTIONS_BODY}`,
-  };
+   };
 }
