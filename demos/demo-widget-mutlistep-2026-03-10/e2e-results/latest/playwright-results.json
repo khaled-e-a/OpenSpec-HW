@@ -1,0 +1,310 @@
+{
+  "config": {
+    "configFile": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-mutlistep-2026-03-10/playwright.config.ts",
+    "rootDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-mutlistep-2026-03-10/tests/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-mutlistep-2026-03-10/e2e-results/latest/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-mutlistep-2026-03-10/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-mutlistep-2026-03-10/e2e-results/latest/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "mobile-chrome",
+        "name": "mobile-chrome",
+        "testDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-mutlistep-2026-03-10/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "e2e-results/latest/playwright-results.json"
+        }
+      ],
+      [
+        "line",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 4,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:5173",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "drag-drop-mobile.spec.ts",
+      "file": "drag-drop-mobile.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "TP-3: Touch drag on mobile device (UC1-E1a)",
+          "file": "drag-drop-mobile.spec.ts",
+          "line": 31,
+          "column": 6,
+          "specs": [
+            {
+              "title": "touch long-press activates drag; widget moves on lift",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2119,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-11T17:41:23.797Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-mutlistep-2026-03-10/e2e-results/latest/artifacts/drag-drop-mobile-TP-3-Touc-4367b-s-drag-widget-moves-on-lift-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e8190bf2ba2dc2f095df-a4a807b235630057f701",
+              "file": "drag-drop-mobile.spec.ts",
+              "line": 32,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "drag-drop.spec.ts",
+      "file": "drag-drop.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "TP-1: Full drag interaction cycle (UC1-S1+S4+S6+S8)",
+          "file": "drag-drop.spec.ts",
+          "line": 48,
+          "column": 6,
+          "specs": [
+            {
+              "title": "widget lifts, ghost appears, widget snaps to new position on drop",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 2250,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-11T17:41:23.808Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-mutlistep-2026-03-10/e2e-results/latest/artifacts/drag-drop-TP-1-Full-drag-i-51973-aps-to-new-position-on-drop-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1e19528dd527cbd19c0c-fbb068cda44b878465e0",
+              "file": "drag-drop.spec.ts",
+              "line": 49,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "TP-2: Layout state committed with correct col/row (UC1-S8)",
+          "file": "drag-drop.spec.ts",
+          "line": 111,
+          "column": 6,
+          "specs": [
+            {
+              "title": "KPI Card dragged left one column commits to new position without overlap",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1936,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-11T17:41:26.672Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-mutlistep-2026-03-10/e2e-results/latest/artifacts/drag-drop-TP-2-Layout-stat-057e2-ew-position-without-overlap-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1e19528dd527cbd19c0c-add149155b6764dee40e",
+              "file": "drag-drop.spec.ts",
+              "line": 112,
+              "column": 7
+            }
+          ]
+        },
+        {
+          "title": "TP-4: Collision rejection (UC1-E7a)",
+          "file": "drag-drop.spec.ts",
+          "line": 167,
+          "column": 6,
+          "specs": [
+            {
+              "title": "dragging KPI Card onto occupied cell: ghost turns red, widget snaps back",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1955,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-11T17:41:28.620Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-mutlistep-2026-03-10/e2e-results/latest/artifacts/drag-drop-TP-4-Collision-r-0a7b8-turns-red-widget-snaps-back-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1e19528dd527cbd19c0c-848c4df120a9cb406c66",
+              "file": "drag-drop.spec.ts",
+              "line": 168,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-03-11T17:41:22.317Z",
+    "duration": 8335.596000000001,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
