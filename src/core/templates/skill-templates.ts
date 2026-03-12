@@ -19,5 +19,6 @@ export { getVerifySpecSkillTemplate, getOpsxVerifySpecCommandTemplate } from './
 export { getOnboardSkillTemplate, getOpsxOnboardCommandTemplate } from './workflows/onboard.js';
 export { getGenTestsSkillTemplate, getOpsxGenTestsCommandTemplate } from './workflows/gen-tests.js';
 export { getRunTestsSkillTemplate, getOpsxRunTestsCommandTemplate } from './workflows/run-tests.js';
+export { getCiSkillTemplate, getOpsxCiCommandTemplate } from './workflows/ci.js';
 export { getOpsxProposeSkillTemplate, getOpsxProposeCommandTemplate } from './workflows/propose.js';
 export { getFeedbackSkillTemplate } from './workflows/feedback.js';

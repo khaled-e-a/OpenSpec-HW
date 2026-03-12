@@ -31,6 +31,7 @@ export const ALL_WORKFLOWS = [
   'onboard',
   'gen-tests',
   'run-tests',
+  'ci',
 ] as const;
 
 export type WorkflowId = (typeof ALL_WORKFLOWS)[number];

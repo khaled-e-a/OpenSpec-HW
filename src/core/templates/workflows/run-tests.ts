@@ -151,7 +151,8 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 - File:line references for existing tests
 - Specific, actionable recommendations for missing coverage
 - If test plan was generated: "Test plan saved to \`openspec/changes/<name>/test-plan.md\` — follow it to manually verify N uncovered steps."
-- If coverage is complete: suggest \`/opsx-hw:archive\` to archive and close the change`;
+- If coverage is complete: suggest \`/opsx-hw:archive\` to archive and close the change
+- For full CI pipeline (all tests + e2e + coverage + screenshot comparison in one step): run \`/opsx-hw:ci\``;
 
 export function getRunTestsSkillTemplate(): SkillTemplate {
   return {

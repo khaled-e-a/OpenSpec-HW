@@ -19,6 +19,7 @@ import {
   getOpsxProposeSkillTemplate,
   getGenTestsSkillTemplate,
   getRunTestsSkillTemplate,
+  getCiSkillTemplate,
   getOpsxExploreCommandTemplate,
   getOpsxNewCommandTemplate,
   getOpsxContinueCommandTemplate,
@@ -33,6 +34,7 @@ import {
   getOpsxProposeCommandTemplate,
   getOpsxGenTestsCommandTemplate,
   getOpsxRunTestsCommandTemplate,
+  getOpsxCiCommandTemplate,
   type SkillTemplate,
 } from '../templates/skill-templates.js';
 import type { CommandContent } from '../command-generation/index.js';
@@ -75,6 +77,7 @@ export function getSkillTemplates(workflowFilter?: readonly string[]): SkillTemp
     { template: getOpsxProposeSkillTemplate(), dirName: 'openspec-propose', workflowId: 'propose' },
     { template: getGenTestsSkillTemplate(), dirName: 'openspec-gen-tests', workflowId: 'gen-tests' },
     { template: getRunTestsSkillTemplate(), dirName: 'openspec-run-tests', workflowId: 'run-tests' },
+    { template: getCiSkillTemplate(), dirName: 'openspec-ci', workflowId: 'ci' },
   ];
 
   if (!workflowFilter) return all;
@@ -104,6 +107,7 @@ export function getCommandTemplates(workflowFilter?: readonly string[]): Command
     { template: getOpsxProposeCommandTemplate(), id: 'propose' },
     { template: getOpsxGenTestsCommandTemplate(), id: 'gen-tests' },
     { template: getOpsxRunTestsCommandTemplate(), id: 'run-tests' },
+    { template: getOpsxCiCommandTemplate(), id: 'ci' },
   ];
 
   if (!workflowFilter) return all;

@@ -26,6 +26,7 @@ export const WORKFLOW_TO_SKILL_DIR: Record<WorkflowId, string> = {
   'propose': 'openspec-propose',
   'gen-tests': 'openspec-gen-tests',
   'run-tests': 'openspec-run-tests',
+  'ci': 'openspec-ci',
 };
 
 function toKnownWorkflows(workflows: readonly string[]): WorkflowId[] {
