@@ -36,13 +36,27 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
    Scan for \`test-plan.md\` files under \`openspec/changes/*/test-plan.md\`.
    If none found: note "No test-plan.md files found — skipping e2e phase."
 
-   For each \`test-plan.md\`, for entries with \`**Recommended tool**: Playwright\`:
-   - Check for \`playwright.config.ts\` or \`playwright.config.js\` in the project root.
-   - If found: run \`npx playwright test --reporter=json\` (once, not per plan) and save
-     output to \`e2e-results/latest/playwright-results.json\`.
-   - If not found: note "Playwright config not detected — skipping browser tests.
-     Run \`npx playwright install\` to enable."
-   - Map each TP entry result (pass/fail) from the Playwright output.
+   For each \`test-plan.md\`, collect all entries that have a \`**Recommended tool**\` field
+   (any tool name counts — Playwright, Cypress, WebdriverIO, etc.). Determine which e2e
+   tool(s) are required by inspecting those fields.
+
+   For each required tool:
+   - Detect if the tool is configured in the project (e.g. \`playwright.config.ts\`,
+     \`cypress.config.ts\`, \`wdio.conf.ts\`, or a matching entry in \`package.json\` devDependencies).
+   - If the tool config is not found: note "No config detected for <tool> — skipping those entries."
+   - If the tool config is found but the tool or its dependencies are not installed,
+     **install them automatically** — do not skip. For example:
+     - Playwright: run \`npx playwright install --with-deps\`
+     - Cypress: run \`npx cypress install\`
+     - Any npm-based tool: run \`npm install\` (or \`pnpm install\` / \`yarn install\`) in the
+       project directory to restore missing node_modules, then install tool-specific
+       browsers/binaries as needed.
+   - After ensuring the tool is installed, run the e2e suite using the appropriate command
+     (e.g. \`npx playwright test --reporter=json\`, \`npx cypress run --reporter json\`) and
+     save the output to \`e2e-results/latest/<tool>-results.json\`.
+   - Map each TP entry result (pass/fail) from the tool's output.
+
+   **Never skip e2e tests because a dependency is missing — always install it first.**
 
 4. **Compare screenshots against previous run**
 
@@ -126,7 +140,7 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 
 - Some changes missing \`spec-tests.md\`/\`test-report.md\`: report those as unchecked, continue with the rest.
 - No \`test-plan.md\` found in any change: run unit/integration only, skip e2e.
-- Playwright not installed: skip e2e, note how to install.
+- E2e tool or browsers not installed: install the missing dependency automatically before running. Never skip e2e tests because a dependency is missing.
 - No previous screenshots: save as baseline, skip comparison.
 - Test runner detection fails: ask the user rather than failing silently.
 - Coverage tooling not configured: skip coverage metrics, note the gap.
