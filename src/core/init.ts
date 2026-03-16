@@ -39,6 +39,7 @@ import {
   getSkillTemplates,
   getCommandContents,
   generateSkillContent,
+  generateSkillScripts,
   type ToolSkillStatus,
 } from './shared/index.js';
 import { getGlobalConfig, type Delivery, type Profile } from './global-config.js';
@@ -548,6 +549,11 @@ export class InitCommand {
 
             // Write the skill file
             await FileSystemUtils.writeFile(skillFile, skillContent);
+
+            // Write any additional script files bundled with the skill
+            for (const { filePath, content } of generateSkillScripts(template, skillDir)) {
+              await FileSystemUtils.writeFile(filePath, content);
+            }
           }
         }
         if (!shouldGenerateSkills) {

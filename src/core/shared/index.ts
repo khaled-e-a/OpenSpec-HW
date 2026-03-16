@@ -27,4 +27,5 @@ export {
   getCommandTemplates,
   getCommandContents,
   generateSkillContent,
+  generateSkillScripts,
 } from './skill-generation.js';

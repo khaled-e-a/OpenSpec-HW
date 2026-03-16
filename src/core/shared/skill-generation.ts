@@ -4,6 +4,7 @@
  * Shared utilities for generating skill and command files.
  */
 
+import path from 'path';
 import {
   getExploreSkillTemplate,
   getNewChangeSkillTemplate,
@@ -20,6 +21,7 @@ import {
   getGenTestsSkillTemplate,
   getRunTestsSkillTemplate,
   getCiSkillTemplate,
+  getCompareImagesSkillTemplate,
   getOpsxExploreCommandTemplate,
   getOpsxNewCommandTemplate,
   getOpsxContinueCommandTemplate,
@@ -40,12 +42,14 @@ import {
 import type { CommandContent } from '../command-generation/index.js';
 
 /**
- * Skill template with directory name and workflow ID mapping.
+ * Skill template with directory name and optional workflow ID mapping.
+ * Entries without a workflowId are utility skills that bypass profile filtering
+ * and are always installed unconditionally.
  */
 export interface SkillTemplateEntry {
   template: SkillTemplate;
   dirName: string;
-  workflowId: string;
+  workflowId?: string;
 }
 
 /**
@@ -78,12 +82,15 @@ export function getSkillTemplates(workflowFilter?: readonly string[]): SkillTemp
     { template: getGenTestsSkillTemplate(), dirName: 'openspec-gen-tests', workflowId: 'gen-tests' },
     { template: getRunTestsSkillTemplate(), dirName: 'openspec-run-tests', workflowId: 'run-tests' },
     { template: getCiSkillTemplate(), dirName: 'openspec-ci', workflowId: 'ci' },
+    // Utility skills — no workflowId, always installed regardless of profile
+    { template: getCompareImagesSkillTemplate(), dirName: 'openspec-compare-images' },
   ];
 
   if (!workflowFilter) return all;
 
   const filterSet = new Set(workflowFilter);
-  return all.filter(entry => filterSet.has(entry.workflowId));
+  // Entries without a workflowId are utility skills that always pass the filter
+  return all.filter(entry => !entry.workflowId || filterSet.has(entry.workflowId));
 }
 
 /**
@@ -130,6 +137,24 @@ export function getCommandContents(workflowFilter?: readonly string[]): CommandC
     category: template.category,
     tags: template.tags,
     body: template.content,
+  }));
+}
+
+/**
+ * Generates the list of script files to write for a skill template.
+ *
+ * @param template - The skill template (may have no scripts)
+ * @param skillDir - Absolute path to the skill directory (e.g. `/project/.claude/skills/openspec-compare-images`)
+ * @returns Array of `{ filePath, content }` objects ready to be written
+ */
+export function generateSkillScripts(
+  template: SkillTemplate,
+  skillDir: string
+): Array<{ filePath: string; content: string }> {
+  if (!template.scripts) return [];
+  return Object.entries(template.scripts).map(([relativePath, content]) => ({
+    filePath: path.join(skillDir, relativePath),
+    content,
   }));
 }
 

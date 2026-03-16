@@ -22,6 +22,7 @@ import {
   getSkillTemplates,
   getCommandContents,
   generateSkillContent,
+  generateSkillScripts,
   getToolsWithSkillsDir,
   type ToolVersionStatus,
 } from './shared/index.js';
@@ -196,6 +197,11 @@ export class UpdateCommand {
             const transformer = tool.value === 'opencode' ? transformToHyphenCommands : undefined;
             const skillContent = generateSkillContent(template, OPENSPEC_VERSION, transformer);
             await FileSystemUtils.writeFile(skillFile, skillContent);
+
+            // Write any additional script files bundled with the skill
+            for (const { filePath, content } of generateSkillScripts(template, skillDir)) {
+              await FileSystemUtils.writeFile(filePath, content);
+            }
           }
         }
 
@@ -589,6 +595,11 @@ export class UpdateCommand {
             const transformer = tool.value === 'opencode' ? transformToHyphenCommands : undefined;
             const skillContent = generateSkillContent(template, OPENSPEC_VERSION, transformer);
             await FileSystemUtils.writeFile(skillFile, skillContent);
+
+            // Write any additional script files bundled with the skill
+            for (const { filePath, content } of generateSkillScripts(template, skillDir)) {
+              await FileSystemUtils.writeFile(filePath, content);
+            }
           }
         }
 

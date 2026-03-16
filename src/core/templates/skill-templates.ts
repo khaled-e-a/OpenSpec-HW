@@ -22,3 +22,4 @@ export { getRunTestsSkillTemplate, getOpsxRunTestsCommandTemplate } from './work
 export { getCiSkillTemplate, getOpsxCiCommandTemplate } from './workflows/ci.js';
 export { getOpsxProposeSkillTemplate, getOpsxProposeCommandTemplate } from './workflows/propose.js';
 export { getFeedbackSkillTemplate } from './workflows/feedback.js';
+export { getCompareImagesSkillTemplate } from './workflows/compare-images.js';

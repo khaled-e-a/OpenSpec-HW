@@ -1,0 +1,214 @@
+{
+  "config": {
+    "configFile": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-12-integration-ci-2/playwright.config.ts",
+    "rootDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-12-integration-ci-2/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-12-integration-ci-2/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-12-integration-ci-2/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "e2e-results/latest/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:5173",
+      "reuseExistingServer": false,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "widget-drag-drop.spec.ts",
+      "file": "widget-drag-drop.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "widget-drag-drop e2e",
+          "file": "widget-drag-drop.spec.ts",
+          "line": 11,
+          "column": 6,
+          "specs": [
+            {
+              "title": "TP-1: UC1-S1 — dragging a widget dims the original slot to 0.3 opacity",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1089,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-13T13:30:54.794Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-12-integration-ci-2/test-results/widget-drag-drop-widget-dr-5d0f7-riginal-slot-to-0-3-opacity-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e43a948dfa594b97f0b8-5f3fe05b819be451fc57",
+              "file": "widget-drag-drop.spec.ts",
+              "line": 20,
+              "column": 7
+            },
+            {
+              "title": "TP-2: UC1-E3a1 — DropPreview shows red highlight over occupied grid cell",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1068,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-13T13:30:56.985Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-12-integration-ci-2/test-results/widget-drag-drop-widget-dr-3b1e4-ght-over-occupied-grid-cell-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e43a948dfa594b97f0b8-a854cd1baaf051f3a340",
+              "file": "widget-drag-drop.spec.ts",
+              "line": 49,
+              "column": 7
+            },
+            {
+              "title": "TP-3: UC2-S3/S4 — resize handle drag shows live DropPreview overlay",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 896,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-13T13:30:58.078Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-12-integration-ci-2/test-results/widget-drag-drop-widget-dr-2e6c9-ws-live-DropPreview-overlay-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "e43a948dfa594b97f0b8-ee7ffea0c8880baa6ba0",
+              "file": "widget-drag-drop.spec.ts",
+              "line": 92,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-03-13T13:30:51.379Z",
+    "duration": 7717.077,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

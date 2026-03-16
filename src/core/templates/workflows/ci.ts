@@ -64,11 +64,14 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
    - Previous run: find the most recent timestamped directory under \`e2e-results/\`
      (format: \`YYYY-MM-DD_HH-MM-SS/artifacts/\`).
 
-   For each PNG in the current run, find the matching filename in the previous run.
-   Read both images and compare visually. Classify each pair as:
-   - **MATCH** — no meaningful visual difference
-   - **MINOR_DIFF** — layout noise, font rendering, or anti-aliasing artifact
-   - **REGRESSION** — visible functional difference (missing element, wrong color, broken layout)
+   **Never read or view image files directly.** For each PNG in the current run, find the
+   matching filename in the previous run, then use the Skill tool to invoke
+   \`openspec-compare-images\`, passing the two image paths and asking it to compare them.
+
+   Classify each pair based on the \`percent_diff\` value returned by the skill:
+   - **MATCH** — \`percent_diff\` is 0
+   - **MINOR_DIFF** — \`percent_diff\` ≤ 1.0 — likely layout noise or anti-aliasing
+   - **REGRESSION** — \`percent_diff\` > 1.0 — meaningful visual difference
 
    If no previous run exists: "No previous run found — screenshots saved as baseline."
 
@@ -131,8 +134,8 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 - If the test runner already produces coverage (e.g., \`vitest --coverage\` is in package.json scripts),
   reuse that output rather than adding a duplicate flag.
 - e2e tests do not produce line coverage — note this in the coverage section.
-- Screenshot comparison uses visual judgment; err toward MINOR_DIFF over REGRESSION for
-  sub-pixel or font-rendering differences.
+- Screenshot comparison must always be done by invoking the \`openspec-compare-images\` skill
+  via the Skill tool. Never read or view image files directly.
 - Overall CI verdict: **PASS** (all suites pass + no REGRESSION), **FAIL** (any suite failure or REGRESSION),
   **PARTIAL** (e2e skipped, coverage data unavailable, or some changes lack spec-tests.md).
 
