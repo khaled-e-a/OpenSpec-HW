@@ -29,6 +29,37 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
    Run: \`<detected-runner>\`
    Capture stdout/stderr output.
 
+3b. **Promote PBT counterexamples to regression tests**
+
+   Scan the captured stdout/stderr for PBT failure markers. Each major framework prints a minimal (shrunk) counterexample when a property fails:
+
+   | Framework | Failure marker in output |
+   |-----------|--------------------------|
+   | fast-check | \`Property failed after N tests\` + \`Counterexample: [...]\` |
+   | Hypothesis | \`Falsifying example:\` |
+   | jqwik | \`Falsified!\` + parameter values |
+   | rapid / rapidcheck | \`Falsifiable input:\` |
+   | proptest | \`FAILED. Minimal failing input:\` |
+
+   For each counterexample found:
+   1. Extract the minimal failing input values from the output.
+   2. Write a **deterministic regression unit test** that hardcodes those exact inputs, named \`pbt-regression-<uc-id>-<N>.<ext>\`, placed in the same test directory as the failing property test. This test must pass once the bug is fixed and must never be deleted.
+   3. Append an entry to \`openspec/changes/<name>/pbt-regressions.md\` (create the file if it does not exist):
+
+   \`\`\`markdown
+   ## PBT Regressions: <change-name>
+
+   | # | UC Step | Framework | Counterexample | Regression Test | Status |
+   |---|---------|-----------|----------------|-----------------|--------|
+   | 1 | UC1-S2 | fast-check | \`onGrid=["clock"]\` | \`test/pbt-regression-uc1-s2-1.test.ts\` | ❌ open |
+   \`\`\`
+
+   Status starts as \`❌ open\`. On a subsequent run where the regression test passes, update its status to \`✅ fixed\`.
+
+   **If no PBT failures are found**: note "No PBT counterexamples found" and skip the rest of this step.
+
+   **If no PBT tests exist** (no \`.property.test.*\` files found anywhere): note "No PBT tests found — run \`/opsx-hw:gen-tests\` to generate them."
+
 4. **Generate Test Coverage Report**
 
    Save this file to \`openspec/changes/<name>/test-report.md\`.
@@ -50,6 +81,13 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
    ### Uncovered Requirements
    - ❌ **UC1-E2a**: <description>: No test found
      → Run /opsx-hw:gen-tests to generate missing tests
+   ...
+
+   ### PBT Results
+   | UC Step | Scenario | Outcome | Counterexample | Regression Test |
+   |---------|----------|---------|----------------|-----------------|
+   | UC1-S2 | Catalogue shows only absent widgets | ✅ passed (100 runs) | — | — |
+   | UC1-E4a1 | Error when no grid space | ❌ failed | \`gridSize=0, widgetCount=1\` | \`test/pbt-regression-uc1-e4a1-1.test.ts\` |
    ...
 
    ### Test Run Results
@@ -143,6 +181,8 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 - If tests fail: still show the coverage report; highlight failures separately
 - If no spec-tests.md: note "Run /opsx-hw:gen-tests first for accurate coverage mapping"
+- If no PBT tests found: note "No PBT tests found — run /opsx-hw:gen-tests to generate them" and skip step 3b
+- If pbt-regressions.md already exists: update it in place (append new entries, update status of previously open regressions that now pass)
 
 **Output Format**
 

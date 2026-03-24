@@ -115,6 +115,12 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
    |--------|----|-------------|---------|
    | add-auth | TP-1 | ... | ✅ PASS |
 
+   ### PBT & Regression Tests
+   | Change | PBT Tests | Counterexamples Found | Regression Tests | Status |
+   |--------|-----------|----------------------|-----------------|--------|
+   | add-auth | 5 | 1 | 1 | ⚠️ 1 open |
+   | fix-bug | 3 | 0 | 0 | ✅ |
+
    ### Screenshot Comparison
    | Screenshot | Compared Against | Result |
    |------------|-----------------|--------|
@@ -136,8 +142,8 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 - e2e tests do not produce line coverage — note this in the coverage section.
 - Screenshot comparison must always be done by invoking the \`openspec-compare-images\` skill
   via the Skill tool. Never read or view image files directly.
-- Overall CI verdict: **PASS** (all suites pass + no REGRESSION), **FAIL** (any suite failure or REGRESSION),
-  **PARTIAL** (e2e skipped, coverage data unavailable, or some changes lack spec-tests.md).
+- Overall CI verdict: **PASS** (all suites pass + no REGRESSION + no open PBT counterexamples), **FAIL** (any suite failure, REGRESSION, or open PBT counterexample in pbt-regressions.md),
+  **PARTIAL** (e2e skipped, coverage data unavailable, some changes lack spec-tests.md, or pbt-regressions.md not yet run).
 
 **Graceful Degradation**
 
@@ -145,6 +151,7 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 - No \`test-plan.md\` found in any change: run unit/integration only, skip e2e.
 - E2e tool or browsers not installed: install the missing dependency automatically before running. Never skip e2e tests because a dependency is missing.
 - No previous screenshots: save as baseline, skip comparison.
+- No pbt-regressions.md for a change: note "PBT not yet run for \`<name>\` — suggest \`/opsx-hw:run-tests\`" and treat that change as PARTIAL, not FAIL.
 - Test runner detection fails: ask the user rather than failing silently.
 - Coverage tooling not configured: skip coverage metrics, note the gap.
 

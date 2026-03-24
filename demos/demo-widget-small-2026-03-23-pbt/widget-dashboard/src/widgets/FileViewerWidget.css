@@ -1,0 +1,122 @@
+/* Task 8.3 — File viewer styles */
+.file-viewer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Empty state (UC3-S2) */
+.file-viewer__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+  padding: 16px;
+  text-align: center;
+}
+
+.file-viewer__empty-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* Reload hint (UC3-E9b2) */
+.file-viewer__hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Error text */
+.file-viewer__error {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #ef4444;
+}
+
+/* Content area */
+.file-viewer__content-area {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Warning banner (UC3-E6b1) */
+.file-viewer__warning {
+  background: #fef3c7;
+  border-bottom: 1px solid #fcd34d;
+  color: #92400e;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  flex-shrink: 0;
+}
+
+/* Toolbar with file name and re-select */
+.file-viewer__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+  gap: 8px;
+  min-height: 0;
+}
+
+.file-viewer__filename {
+  font-size: 0.75rem;
+  color: #475569;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+/* Scrollable pre (UC3-S7) */
+.file-viewer__pre {
+  margin: 0;
+  padding: 8px;
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow: auto;
+  flex: 1;
+  color: #1e293b;
+  background: #fff;
+  min-height: 0;
+}
+
+/* Buttons */
+.file-viewer__btn {
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.file-viewer__btn:hover {
+  background: #2563eb;
+}
+
+.file-viewer__btn--sm {
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  border-radius: 4px;
+}

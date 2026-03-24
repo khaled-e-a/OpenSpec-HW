@@ -57,26 +57,68 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
    - **Component**: the test verifies multiple steps within a single use case (e.g., UC1-S1 through UC1-S4) but does not cross use case boundaries.
    - **Integration**: the test verifies the full flow of a use case (entire UC), or requirements that span multiple use cases.
 
-6. **Generate missing tests**
+6. **Generate missing example-based tests**
 
    For each uncovered step or extension:
    - Propose a test case: test name, **type based on requirement scope** (Unit = single step/extension; Component = multiple steps within one UC; Integration = full UC flow or cross-UC), input conditions, expected output/behavior.
    - Write test stubs, mocks, or tests to the appropriate test file (or create one if none exists).
    - Test files must be placed in an appropriate location in the codebase, follow the best practices of the codebase structure, and follow the same style as existing tests.
 
-7. **Update spec-tests.md**
+7. **Generate property-based tests (PBT)**
+
+   First, detect which PBT framework to use:
+
+   | Language | Framework | How to detect |
+   |----------|-----------|---------------|
+   | TypeScript / JavaScript | \`fast-check\` | import in existing test files or \`fast-check\` in package.json |
+   | Python | \`hypothesis\` | import in existing test files or \`hypothesis\` in deps |
+   | Java / Kotlin | \`jqwik\` | \`@Property\` annotation or jqwik in build file |
+   | Go | \`rapid\` (\`pgregory.net/rapid\`) | import in existing test files or go.mod |
+   | Rust | \`proptest\` | import in existing test files or Cargo.toml |
+   | C / C++ | \`rapidcheck\` | include or CMake/Conan config |
+   | Other / unknown | ask the user | use **AskUserQuestion** |
+
+   Detection order: scan existing test files for PBT imports first; if none found, infer from project language; if ambiguous, use AskUserQuestion.
+
+   **Every WHEN/THEN scenario extracted in step 4 must have exactly one PBT test** — no exceptions:
+   - **WHEN** clause → generator expression + precondition guard (filter/assume)
+   - **THEN** clause → invariant (property assertion that must hold for all generated inputs)
+   - When the WHEN clause has no parameterisable variable (e.g. "WHEN the app loads"), generate arbitrary system/environment state as the input and use the THEN clause alone as the invariant.
+
+   Write one PBT test per scenario, named \`<uc-id>_<scenario-slug>.property.test.<ext>\`, placed alongside the regular tests for that requirement. Example (fast-check / TypeScript):
+
+   \`\`\`ts
+   // UC1-S2: catalogue shows only absent widgets — property
+   it('UC1-S2: catalogue always shows only absent widgets', () => {
+     fc.assert(
+       fc.property(
+         fc.array(fc.string()),  // arbitrary set of widget IDs already on the grid
+         (onGrid) => {
+           const catalogue = openCatalogue({ onGrid });
+           const listed = catalogue.getListedWidgetIds();
+           // invariant: no listed widget is already on the grid
+           return listed.every(id => !onGrid.includes(id));
+         }
+       )
+     );
+   });
+   \`\`\`
+
+8. **Update spec-tests.md**
 
    Update \`openspec/changes/<name>/spec-tests.md\`.
 
-   **Note: A single requirement or step can (and often should) map to multiple tests of varying types.** Add multiple rows or comma-separated test files in the matrix if a step has multiple tests.
+   **Note: A single requirement or step can (and often should) map to multiple tests of varying types.** Add multiple rows or comma-separated test files in the matrix if a step has multiple tests. \`PBT\` is a valid value for Test Type alongside Unit, Component, and Integration.
 
    Note for the requirement traceability matrix:
    - ID: The ID of the requirement or step.
    - Requirement: The description of the requirement or step.
    - Type: The type of the requirement or step (Flow, Step, or Extension).
-   - Test Type: The type of the test (Unit, Component, or Integration).
+   - Test Type: The type of the test (Unit, Component, Integration, or **PBT**).
    - Test Case: The test case that verifies the requirement or step.
    - Status: The status of the test case (✅ test exists, ⚠️ test exists but is partial, ❌ test does not exist).
+
+   After the Requirement Traceability Matrix, add a **PBT Coverage** section tracking every WHEN/THEN scenario:
 
    Format:
 
@@ -90,9 +132,19 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
    |----|-------------|------|-----------|-----------|--------|
    | UC1 | <Name> Full Flow | Flow | Integration | \`test/integration.test.ts\` | ✅ |
    | UC1-S1 | <Step Description> | Step | Unit | \`test/unit.test.ts\` | ✅ |
+   | UC1-S1 | <Step Description> | Step | PBT | \`test/uc1-s1.property.test.ts\` | ✅ |
    | UC1-S1 | <Step Description> | Step | Component | \`test/comp.test.ts\` | ✅ |
    | UC1-E2a | <Extension Description>| Extension | Component | \`test/comp2.test.ts\` | ⚠️ |
    | UC1 | <Name> Full Flow | Flow | Integration |  | ❌ |
+   ...
+
+   ## PBT Coverage
+
+   | UC Step | Scenario | PBT Test | Framework | Status |
+   |---------|----------|----------|-----------|--------|
+   | UC1-S1 | <scenario description> | \`test/uc1-s1.property.test.ts:5\` | fast-check | ✅ |
+   | UC1-S2 | <scenario description> | \`test/uc1-s2.property.test.ts:12\` | fast-check | ✅ |
+   | UC1-E2a | <scenario description> | \`test/uc1-e2a.property.test.ts:8\` | fast-check | ❌ missing |
    ...
 
    ## Use Case Details: <name> (ID: UC1)
@@ -101,6 +153,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
    - **UC1-S1**: <description>
      - \`test/unit.test.ts:42\` <test description> (Unit)
      - \`test/comp.test.ts:12\` <test description> (Component)
+     - \`test/uc1-s1.property.test.ts:5\` <property description> (PBT)
    - **UC1-S2**: <description> -> \`test/bar.test.ts:15\` <test description> (Component)
    - ...
 
@@ -114,11 +167,11 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
    (Repeat for every use case.)
 
-8. **Decision point (Re-generate or output)**
+9. **Decision point (Re-generate or output)**
 
-   - Report the missing or incomplete tests to the user.
-   - **Ask if they want to generate / update missing and incomplete tests.**
-   - If the user confirms, go back to step 6 and generate / update tests.
+   - Report missing or incomplete **example-based tests** AND any **PBT Coverage** rows marked \`❌ missing\`.
+   - **Ask if they want to generate / update all missing and incomplete tests (both kinds).**
+   - If the user confirms, go back to steps 6–7 and generate / update tests.
    - If the user does not confirm, proceed to the output step.
    - Do not proceed to the output step without user confirmation.
 
@@ -127,9 +180,11 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 - Prefer writing tests in the same file/directory as existing tests for that module
 - Follow existing test framework (don't introduce a new one)
+- Follow the existing PBT framework — never introduce a PBT library that isn't already present unless the user confirms
 - Classify by requirement boundary, not by code layer. A test that calls a low-level function but verifies a single spec step is still a Unit test. A test that exercises the UI but covers an entire use case flow is an Integration test.
 - Map requirements to tests via: exact name match, keyword match, file path match
 - When uncertain about test implementation status, mark as ⚠️ (partial) not ✅
+- Every WHEN/THEN scenario must have a PBT test. When the WHEN clause has no parameterisable input, generate arbitrary system/environment state and use the THEN clause as the invariant — do not skip the scenario.
 
 **Graceful Degradation**
 

@@ -1,0 +1,122 @@
+/* Task 8.4 — Webpage viewer styles */
+.webpage-viewer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* URL bar (UC4-S2) */
+.webpage-viewer__url-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 6px;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.webpage-viewer__url-input {
+  flex: 1;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 0.78rem;
+  outline: none;
+  min-width: 0;
+}
+
+.webpage-viewer__url-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
+}
+
+.webpage-viewer__go-btn {
+  background: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.webpage-viewer__go-btn:hover {
+  background: #2563eb;
+}
+
+/* Validation error (UC4-E5a1) */
+.webpage-viewer__url-error {
+  background: #fef2f2;
+  border-bottom: 1px solid #fecaca;
+  color: #dc2626;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  flex-shrink: 0;
+}
+
+/* Empty state */
+.webpage-viewer__empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.webpage-viewer__empty-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+/* iframe container */
+.webpage-viewer__iframe-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* iframe (UC4-S8, UC4-S9) */
+.webpage-viewer__iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Blocked overlay (UC4-E8a2, UC4-E8a3) — task 8.4 */
+.webpage-viewer__blocked-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(248, 250, 252, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  z-index: 10;
+}
+
+.webpage-viewer__blocked-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #475569;
+  font-weight: 500;
+}
+
+.webpage-viewer__open-link {
+  color: #3b82f6;
+  font-size: 0.82rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.webpage-viewer__open-link:hover {
+  color: #2563eb;
+}
