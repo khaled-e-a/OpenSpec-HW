@@ -223,7 +223,7 @@ export function getOpsxContinueCommandTemplate(): CommandTemplate {
    **If all artifacts are complete (\`isComplete: true\`)**:
    - Congratulate the user
    - Show final status including the schema used
-   - Suggest: "All artifacts created! You can now implement this change with \`/opsx-hw:apply\` or archive it with \`/opsx-hw:archive\`."
+   - Suggest: "All artifacts created! Implement this change with \`/opsx-hw:apply\` (or \`/opsx-hw:tdd\` for red-green-refactor TDD), or archive it with \`/opsx-hw:archive\`."
    - STOP
 
    ---

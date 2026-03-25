@@ -1,0 +1,622 @@
+{
+  "config": {
+    "configFile": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/playwright.config.ts",
+    "rootDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        {
+          "outputFile": "e2e-results/latest/playwright-results.json"
+        }
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "e2e-results/latest/html",
+          "open": "never"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 4,
+    "webServer": {
+      "command": "npx vite --port 5173",
+      "url": "http://localhost:5173",
+      "reuseExistingServer": true,
+      "timeout": 30000
+    }
+  },
+  "suites": [
+    {
+      "title": "widget-drag-drop.spec.ts",
+      "file": "widget-drag-drop.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TP-7: UC2 — full initial render flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2303,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:36.051Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-7-UC2-—-full-initial-render-flow-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e43a948dfa594b97f0b8-8e30e659e0022545dfae",
+          "file": "widget-drag-drop.spec.ts",
+          "line": 31,
+          "column": 5
+        },
+        {
+          "title": "TP-1: UC1-S2 — drag visual feedback: overlay follows pointer, grid highlighted",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2402,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:39.565Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-1-UC1--68518-ws-pointer-grid-highlighted-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e43a948dfa594b97f0b8-7f8fc1cacb2c040df2ce",
+          "file": "widget-drag-drop.spec.ts",
+          "line": 52,
+          "column": 5
+        },
+        {
+          "title": "TP-2: UC1-S7 — valid drop updates widget position in layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2737,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "metrics before: { col: \u001b[32m'1 / span 3'\u001b[39m, row: \u001b[32m'3 / span 1'\u001b[39m } → after: { col: \u001b[32m'1 / span 3'\u001b[39m, row: \u001b[32m'3 / span 1'\u001b[39m }\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:42.097Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-2-UC1--37be0-s-widget-position-in-layout-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e43a948dfa594b97f0b8-b4358b71ed31a451524c",
+          "file": "widget-drag-drop.spec.ts",
+          "line": 79,
+          "column": 5
+        },
+        {
+          "title": "TP-5: UC1-E6a3 — layout unchanged after dropping onto occupied cell",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2709,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:44.959Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-5-UC1--a1def-dropping-onto-occupied-cell-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e43a948dfa594b97f0b8-9f60f188d0458b84689f",
+          "file": "widget-drag-drop.spec.ts",
+          "line": 108,
+          "column": 5
+        },
+        {
+          "title": "TP-3: UC1-E5a1 — widget returns to origin after out-of-bounds drop",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2706,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:47.685Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-3-UC1--842ce-in-after-out-of-bounds-drop-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e43a948dfa594b97f0b8-6aff7386ed62ca18b0b1",
+          "file": "widget-drag-drop.spec.ts",
+          "line": 141,
+          "column": 5
+        },
+        {
+          "title": "TP-4: UC1-E6a2 — drop preview shows correct colour during drag",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2166,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Drop preview over occupied cells bg: rgba(239, 68, 68, 0.25)\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:50.417Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-4-UC1--66e5e--correct-colour-during-drag-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e43a948dfa594b97f0b8-3555f694ed2bb1e1ff44",
+          "file": "widget-drag-drop.spec.ts",
+          "line": 179,
+          "column": 5
+        },
+        {
+          "title": "TP-6: UC1 — full drag-and-drop repositioning flow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2515,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:52.612Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-6-UC1--1ffe4-and-drop-repositioning-flow-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e43a948dfa594b97f0b8-3dec5b795966d0671b30",
+          "file": "widget-drag-drop.spec.ts",
+          "line": 229,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "widget-types.spec.ts",
+      "file": "widget-types.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "TP-2: initial render — all four widget types display correctly",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2048,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:36.059Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-2-initial--a1046-get-types-display-correctly-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7e0bf89e425ff29467dd-f443170929318a4ea0f3",
+          "file": "widget-types.spec.ts",
+          "line": 14,
+          "column": 5
+        },
+        {
+          "title": "TP-3: UC2-S4/S5/S6 — image widget file pick renders image",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2415,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:39.342Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-3-UC2-S4-S-ec4cf-get-file-pick-renders-image-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7e0bf89e425ff29467dd-84fb757e94dc2beb7c87",
+          "file": "widget-types.spec.ts",
+          "line": 38,
+          "column": 5
+        },
+        {
+          "title": "TP-4: UC3-S4/S5/S6 — file widget shows text content after pick",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2185,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:41.794Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-4-UC3-S4-S-05df5-ows-text-content-after-pick-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7e0bf89e425ff29467dd-c43c7e5ced2f994a726e",
+          "file": "widget-types.spec.ts",
+          "line": 69,
+          "column": 5
+        },
+        {
+          "title": "TP-5: UC4-S4/S5/S6 — webpage widget renders iframe after URL entry",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 7546,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('webpage-config-panel')\nExpected: not visible\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"not toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('webpage-config-panel')\u001b[22m\n\u001b[2m    9 × locator resolved to <div data-testid=\"webpage-config-panel\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"visible\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('webpage-config-panel')\nExpected: not visible\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"not toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('webpage-config-panel')\u001b[22m\n\u001b[2m    9 × locator resolved to <div data-testid=\"webpage-config-panel\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"visible\"\u001b[22m\n\n    at /Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts:109:62",
+                    "location": {
+                      "file": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts",
+                      "column": 62,
+                      "line": 109
+                    },
+                    "snippet": "  107 |\n  108 |   // Config panel closed\n> 109 |   await expect(page.getByTestId('webpage-config-panel')).not.toBeVisible();\n      |                                                              ^\n  110 |\n  111 |   // iframe rendered with correct src\n  112 |   const iframe = page.getByTestId('widget-activity').locator('iframe');"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts",
+                        "column": 62,
+                        "line": 109
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('webpage-config-panel')\nExpected: not visible\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"not toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('webpage-config-panel')\u001b[22m\n\u001b[2m    9 × locator resolved to <div data-testid=\"webpage-config-panel\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"visible\"\u001b[22m\n\n\n  107 |\n  108 |   // Config panel closed\n> 109 |   await expect(page.getByTestId('webpage-config-panel')).not.toBeVisible();\n      |                                                              ^\n  110 |\n  111 |   // iframe rendered with correct src\n  112 |   const iframe = page.getByTestId('widget-activity').locator('iframe');\n    at /Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts:109:62"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:44.107Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-5-UC4-S4-S-d4289-ders-iframe-after-URL-entry-chromium/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-5-UC4-S4-S-d4289-ders-iframe-after-URL-entry-chromium/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-5-UC4-S4-S-d4289-ders-iframe-after-URL-entry-chromium/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts",
+                    "column": 62,
+                    "line": 109
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7e0bf89e425ff29467dd-e4c950eb60605efea374",
+          "file": "widget-types.spec.ts",
+          "line": 94,
+          "column": 5
+        },
+        {
+          "title": "TP-6: UC5 — change image widget source; grid position unchanged",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1924,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-03-25T14:32:55.573Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-6-UC5-—-ch-8697e-rce-grid-position-unchanged-chromium/test-finished-1.png"
+                    }
+                  ]
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7e0bf89e425ff29467dd-9e038110e986b96e2756",
+          "file": "widget-types.spec.ts",
+          "line": 123,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-03-25T14:32:31.774Z",
+    "duration": 26905.058,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

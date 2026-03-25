@@ -45,7 +45,7 @@ import {
 import { getGlobalConfig, type Delivery, type Profile } from './global-config.js';
 import { getProfileWorkflows, CORE_WORKFLOWS, ALL_WORKFLOWS } from './profiles.js';
 import { getAvailableTools } from './available-tools.js';
-import { migrateIfNeeded } from './migration.js';
+import { migrateIfNeeded, upgradeCustomWorkflows } from './migration.js';
 
 const require = createRequire(import.meta.url);
 const { version: OPENSPEC_VERSION } = require('../../package.json');
@@ -121,6 +121,9 @@ export class InitCommand {
     if (extendMode) {
       migrateIfNeeded(projectPath, detectedTools);
     }
+
+    // Upgrade custom profile to include any newly added workflows
+    upgradeCustomWorkflows();
 
     // Show animated welcome screen (interactive mode only)
     const canPrompt = this.canPromptInteractively();

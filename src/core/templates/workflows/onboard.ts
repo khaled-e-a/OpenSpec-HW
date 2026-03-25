@@ -482,6 +482,7 @@ This same rhythm works for any size change—a small fix or a major feature.
 | \`/opsx-hw:propose\` | Create a change and generate all artifacts |
 | \`/opsx-hw:explore\` | Think through problems before/during work |
 | \`/opsx-hw:apply\` | Implement tasks from a change |
+| \`/opsx-hw:tdd\` | Implement tasks using red-green-refactor TDD |
 | \`/opsx-hw:archive\` | Archive a completed change |
 
 **Additional commands:**
@@ -514,6 +515,7 @@ No problem! Your change is saved at \`openspec/changes/<name>/\`.
 To pick up where we left off later:
 - \`/opsx-hw:continue <name>\` - Resume artifact creation
 - \`/opsx-hw:apply <name>\` - Jump to implementation (if tasks exist)
+- \`/opsx-hw:tdd <name>\` - Jump to TDD implementation (red-green-refactor)
 
 The work won't be lost. Come back whenever you're ready.
 \`\`\`
@@ -534,6 +536,7 @@ If the user says they just want to see the commands or skip the tutorial:
 | \`/opsx-hw:propose <name>\` | Create a change and generate all artifacts |
 | \`/opsx-hw:explore\` | Think through problems (no code changes) |
 | \`/opsx-hw:apply <name>\` | Implement tasks |
+| \`/opsx-hw:tdd <name>\` | Implement tasks with red-green-refactor TDD |
 | \`/opsx-hw:archive <name>\` | Archive when done |
 
 **Additional commands:**

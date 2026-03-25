@@ -16,6 +16,7 @@ export const SKILL_NAMES = [
   'openspec-new-change',
   'openspec-continue-change',
   'openspec-apply-change',
+  'openspec-tdd',
   'openspec-ff-change',
   'openspec-sync-specs',
   'openspec-archive-change',
@@ -26,6 +27,7 @@ export const SKILL_NAMES = [
   'openspec-propose',
   'openspec-gen-tests',
   'openspec-run-tests',
+  'openspec-ci',
 ] as const;
 
 export type SkillName = (typeof SKILL_NAMES)[number];
@@ -38,6 +40,7 @@ export const COMMAND_IDS = [
   'new',
   'continue',
   'apply',
+  'tdd',
   'ff',
   'sync',
   'archive',
@@ -48,6 +51,7 @@ export const COMMAND_IDS = [
   'propose',
   'gen-tests',
   'run-tests',
+  'ci',
 ] as const;
 
 export type CommandId = (typeof COMMAND_IDS)[number];

@@ -19,7 +19,7 @@ I'll create a change with artifacts:
 - design.md (how)
 - tasks.md (implementation steps)
 
-When ready to implement, run /opsx-hw:apply
+When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refactor TDD)
 
 ---
 
@@ -93,7 +93,7 @@ After completing all artifacts, summarize:
 - Change name and location
 - List of artifacts created with brief descriptions
 - What's ready: "All artifacts created! Ready for implementation."
-- Prompt: "Run \`/opsx-hw:apply\` or ask me to implement to start working on the tasks."
+- Prompt: "Run \`/opsx-hw:apply\` to implement tasks, or \`/opsx-hw:tdd\` for red-green-refactor TDD."
 
 **Artifact Creation Guidelines**
 
@@ -130,7 +130,7 @@ I'll create a change with artifacts:
 - design.md (how)
 - tasks.md (implementation steps)
 
-When ready to implement, run /opsx-hw:apply
+When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refactor TDD)
 
 ---
 
@@ -204,7 +204,7 @@ After completing all artifacts, summarize:
 - Change name and location
 - List of artifacts created with brief descriptions
 - What's ready: "All artifacts created! Ready for implementation."
-- Prompt: "Run \`/opsx-hw:apply\` to start implementing."
+- Prompt: "Run \`/opsx-hw:apply\` to implement tasks, or \`/opsx-hw:tdd\` for red-green-refactor TDD."
 
 **Artifact Creation Guidelines**
 

@@ -82,6 +82,41 @@ function inferDelivery(artifacts: InstalledWorkflowArtifacts): Delivery {
 }
 
 /**
+ * Ensures a custom profile's workflow list includes all currently known workflows.
+ *
+ * When new workflows are added to ALL_WORKFLOWS, existing users with a custom profile
+ * would otherwise miss them on the next init/update. This function appends any missing
+ * entries so that custom profiles grow with the tool rather than being frozen at setup time.
+ *
+ * Called on every init and update, before profile resolution.
+ */
+export function upgradeCustomWorkflows(): void {
+  const configPath = getGlobalConfigPath();
+  let rawConfig: Record<string, unknown> = {};
+  try {
+    if (fs.existsSync(configPath)) {
+      rawConfig = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+    }
+  } catch {
+    return;
+  }
+
+  if (rawConfig.profile !== 'custom' || !Array.isArray(rawConfig.workflows)) {
+    return;
+  }
+
+  const existing = new Set(rawConfig.workflows as string[]);
+  const newWorkflows = ALL_WORKFLOWS.filter((w) => !existing.has(w));
+  if (newWorkflows.length === 0) {
+    return;
+  }
+
+  const config = getGlobalConfig();
+  config.workflows = [...(rawConfig.workflows as string[]), ...newWorkflows];
+  saveGlobalConfig(config);
+}
+
+/**
  * Performs one-time migration if the global config does not yet have a profile field.
  * Called by both init and update before profile resolution.
  *

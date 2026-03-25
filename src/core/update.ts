@@ -47,6 +47,7 @@ import {
 import {
   scanInstalledWorkflows as scanInstalledWorkflowsShared,
   migrateIfNeeded as migrateIfNeededShared,
+  upgradeCustomWorkflows,
 } from './migration.js';
 
 const require = createRequire(import.meta.url);
@@ -93,6 +94,7 @@ export class UpdateCommand {
     // Use detected tool directories to preserve existing opsx-hw skills/commands.
     const detectedTools = getAvailableTools(resolvedProjectPath);
     migrateIfNeededShared(resolvedProjectPath, detectedTools);
+    upgradeCustomWorkflows();
 
     // 3. Read global config for profile/delivery
     const globalConfig = getGlobalConfig();
