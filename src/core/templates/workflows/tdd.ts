@@ -481,6 +481,294 @@ export function getTddSkillTemplate(): SkillTemplate {
     license: 'MIT',
     compatibility: 'Requires openspec-hw CLI.',
     metadata: { author: 'openspec', version: '1.0' },
+    scripts: {
+      'testing-anti-patterns.md': `# Testing Anti-Patterns to Avoid
+
+This guide outlines common testing anti-patterns that lead to brittle, hard-to-maintain tests. Follow these guidelines to write robust, valuable tests that actually help your development process.
+
+## 1. Testing Implementation Details
+
+**Anti-Pattern**: Testing how the code works rather than what it does.
+
+\`\`\`javascript
+// ❌ Bad: Testing internal state
+it('should set internal flag to true', () => {
+  const service = new UserService();
+  service.processUser({ name: 'John' });
+  expect(service._processingComplete).toBe(true);
+});
+
+// ✅ Good: Testing observable behavior
+it('should mark user as processed', () => {
+  const service = new UserService();
+  const result = service.processUser({ name: 'John' });
+  expect(result.status).toBe('processed');
+});
+\`\`\`
+
+## 2. Excessive Mocking
+
+**Anti-Pattern**: Mocking everything, including stable dependencies.
+
+\`\`\`javascript
+// ❌ Bad: Mocking stable utilities
+it('should calculate correct sum', () => {
+  const addMock = jest.fn((a, b) => a + b);
+  const result = calculator.process([1, 2, 3], addMock);
+  expect(addMock).toHaveBeenCalledTimes(2);
+  expect(result).toBe(6);
+});
+
+// ✅ Good: Use real implementations for stable dependencies
+it('should calculate correct sum', () => {
+  const result = calculator.process([1, 2, 3], add);
+  expect(result).toBe(6);
+});
+\`\`\`
+
+## 3. Testing Mock Behavior
+
+**Anti-Pattern**: Testing that mocks were called rather than actual functionality.
+
+\`\`\`javascript
+// ❌ Bad: Testing mock interactions
+it('should call database save', async () => {
+  const saveMock = jest.fn();
+  const repo = { save: saveMock };
+  const service = new UserService(repo);
+
+  await service.createUser({ name: 'John' });
+
+  expect(saveMock).toHaveBeenCalledTimes(1);
+  expect(saveMock).toHaveBeenCalledWith({ name: 'John' });
+});
+
+// ✅ Good: Test actual behavior
+it('should create user successfully', async () => {
+  const repo = createInMemoryRepository();
+  const service = new UserService(repo);
+
+  const user = await service.createUser({ name: 'John' });
+
+  expect(user.id).toBeDefined();
+  expect(await repo.findById(user.id)).toEqual(user);
+});
+\`\`\`
+
+## 4. Brittle Test Data
+
+**Anti-Pattern**: Using magic numbers or strings without context.
+
+\`\`\`javascript
+// ❌ Bad: Magic values
+it('should calculate discount', () => {
+  const price = 100;
+  const discount = 0.2;
+  const result = calculateDiscount(price, discount);
+  expect(result).toBe(80); // Why 80?
+});
+
+// ✅ Good: Clear test data
+it('should calculate 20% discount correctly', () => {
+  const originalPrice = 100;
+  const discountPercentage = 20; // 20%
+
+  const discountedPrice = calculateDiscount(originalPrice, discountPercentage);
+
+  expect(discountedPrice).toBe(80); // 100 - 20% = 80
+});
+\`\`\`
+
+## 5. Testing Multiple Behaviors in One Test
+
+**Anti-Pattern**: One test that checks many things.
+
+\`\`\`javascript
+// ❌ Bad: Testing multiple behaviors
+it('should handle user operations', () => {
+  const service = new UserService();
+
+  // Create
+  const user = service.create({ name: 'John' });
+  expect(user.name).toBe('John');
+
+  // Update
+  const updated = service.update(user.id, { name: 'Jane' });
+  expect(updated.name).toBe('Jane');
+
+  // Delete
+  const deleted = service.delete(user.id);
+  expect(deleted).toBe(true);
+});
+
+// ✅ Good: One behavior per test
+it('should create user with given name', () => {
+  const service = new UserService();
+  const user = service.create({ name: 'John' });
+  expect(user.name).toBe('John');
+});
+
+it('should update user name', () => {
+  const service = new UserService();
+  const user = service.create({ name: 'John' });
+  const updated = service.update(user.id, { name: 'Jane' });
+  expect(updated.name).toBe('Jane');
+});
+\`\`\`
+
+## 6. Ignoring Edge Cases
+
+**Anti-Pattern**: Only testing happy paths.
+
+\`\`\`javascript
+// ❌ Bad: Only happy path
+it('should divide numbers', () => {
+  expect(divide(10, 2)).toBe(5);
+});
+
+// ✅ Good: Include edge cases
+it('should divide positive numbers', () => {
+  expect(divide(10, 2)).toBe(5);
+});
+
+it('should throw on division by zero', () => {
+  expect(() => divide(10, 0)).toThrow('Division by zero');
+});
+
+it('should handle negative numbers', () => {
+  expect(divide(-10, 2)).toBe(-5);
+  expect(divide(10, -2)).toBe(-5);
+  expect(divide(-10, -2)).toBe(5);
+});
+\`\`\`
+
+## 7. Test Code Duplication
+
+**Anti-Pattern**: Copy-pasting setup code across tests.
+
+\`\`\`javascript
+// ❌ Bad: Duplicated setup
+it('should process valid user', () => {
+  const user = new User('John', 'john@example.com', 25);
+  user.validate();
+  user.activate();
+  expect(user.isActive).toBe(true);
+});
+
+it('should deactivate user', () => {
+  const user = new User('John', 'john@example.com', 25);
+  user.validate();
+  user.activate();
+  user.deactivate();
+  expect(user.isActive).toBe(false);
+});
+
+// ✅ Good: Use setup functions or beforeEach
+function createActiveUser() {
+  const user = new User('John', 'john@example.com', 25);
+  user.validate();
+  user.activate();
+  return user;
+}
+
+it('should process valid user', () => {
+  const user = createActiveUser();
+  expect(user.isActive).toBe(true);
+});
+
+it('should deactivate user', () => {
+  const user = createActiveUser();
+  user.deactivate();
+  expect(user.isActive).toBe(false);
+});
+\`\`\`
+
+## 8. Time-Dependent Tests
+
+**Anti-Pattern**: Tests that depend on specific timing or dates.
+
+\`\`\`javascript
+// ❌ Bad: Depends on current time
+it('should format current date', () => {
+  const result = formatCurrentDate();
+  expect(result).toBe('2024-01-15'); // Will fail tomorrow!
+});
+
+// ✅ Good: Inject time dependency
+it('should format given date', () => {
+  const date = new Date('2024-01-15T00:00:00Z');
+  const result = formatDate(date);
+  expect(result).toBe('2024-01-15');
+});
+\`\`\`
+
+## 9. Testing Private Methods
+
+**Anti-Pattern**: Testing internal methods that should be private.
+
+\`\`\`javascript
+// ❌ Bad: Testing private method
+it('should parse date correctly', () => {
+  const parser = new DateParser();
+  const result = parser._parseDateString('2024-01-15');
+  expect(result.day).toBe(15);
+  expect(result.month).toBe(0); // January
+  expect(result.year).toBe(2024);
+});
+
+// ✅ Good: Test through public interface
+it('should parse and format date', () => {
+  const parser = new DateParser();
+  const result = parser.parse('2024-01-15');
+  expect(result).toBe('January 15, 2024');
+});
+\`\`\`
+
+## 10. Overly Complex Test Setup
+
+**Anti-Pattern**: Tests that require extensive, complex setup.
+
+\`\`\`javascript
+// ❌ Bad: Complex setup
+it('should calculate shipping cost', () => {
+  const db = new Database();
+  const user = db.createUser({ type: 'premium', address: { country: 'US', state: 'CA' } });
+  const order = db.createOrder({ userId: user.id, items: [...], shippingMethod: 'express' });
+  const taxService = new TaxService(db);
+  const shippingService = new ShippingService(db, taxService);
+
+  const cost = shippingService.calculateCost(order.id);
+
+  expect(cost).toBe(15.99);
+});
+
+// ✅ Good: Simplified setup with test doubles
+it('should calculate shipping cost for premium user', () => {
+  const order = createTestOrder({
+    userType: 'premium',
+    destination: { country: 'US', state: 'CA' },
+    shippingMethod: 'express'
+  });
+
+  const cost = calculateShipping(order);
+
+  expect(cost).toBe(15.99);
+});
+\`\`\`
+
+## Summary
+
+Good tests should:
+- Test behavior, not implementation
+- Be independent and isolated
+- Have clear, meaningful assertions
+- Test one thing at a time
+- Include edge cases
+- Be maintainable and readable
+- Use minimal, focused mocking
+
+Remember: Tests are code too. Apply the same quality standards to your tests as you do to your production code.`
+    }
   };
 }
 
