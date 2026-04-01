@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomodoro Timer</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #16213e;
+      border-radius: 20px;
+      padding: 48px 56px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      min-width: 320px;
+    }
+
+    /* ── Mode label ── */
+    .mode-label {
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+      transition: color 0.4s;
+    }
+    .mode-label.work  { color: #e94560; }  /* warm tomato-red */
+    .mode-label.rest  { color: #0f9b8e; }  /* calm teal */
+
+    /* ── Timer display ── */
+    .timer-display {
+      font-size: 5rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin-bottom: 12px;
+      transition: opacity 0.3s;
+    }
+
+    /* Paused state — dimmed */
+    .timer-display.paused {
+      opacity: 0.4;
+    }
+
+    /* Flash animation on session end */
+    .timer-display.flash {
+      animation: flash 0.5s ease-in-out 3;
+    }
+    @keyframes flash {
+      0%   { opacity: 1; }
+      50%  { opacity: 0.1; }
+      100% { opacity: 1; }
+    }
+
+    /* ── Completion message ── */
+    .completion-msg {
+      font-size: 1rem;
+      color: #f5a623;
+      font-weight: 600;
+      min-height: 1.5em;
+      margin-bottom: 8px;
+    }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 28px;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    button:active { transform: scale(0.96); }
+
+    #btn-primary {
+      background: #e94560;
+      color: #fff;
+      min-width: 110px;
+    }
+    #btn-primary.rest-mode { background: #0f9b8e; }
+    #btn-primary:hover { filter: brightness(1.1); }
+
+    #btn-reset {
+      background: #2a2a4a;
+      color: #aaa;
+      min-width: 90px;
+    }
+    #btn-reset:hover { background: #3a3a5a; color: #eee; }
+    #btn-reset.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="mode-label work" id="mode-label">🍅 Work</div>
+    <div class="timer-display" id="timer-display">25:00</div>
+    <div class="completion-msg" id="completion-msg"></div>
+    <div class="controls">
+      <button id="btn-primary">Start</button>
+      <button id="btn-reset" class="hidden">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    // ── Constants ──────────────────────────────────────────────
+    const DURATIONS = { work: 1800, rest: 900 };
+
+    // ── State ──────────────────────────────────────────────────
+    const state = {
+      mode: 'work',                        // 'work' | 'rest'
+      status: 'idle',                      // 'idle' | 'running' | 'paused' | 'ended'
+      remainingSeconds: DURATIONS.work,    // preserved across pause/resume
+      intervalId: null                     // setInterval handle
+    };
+
+    // ── DOM refs ───────────────────────────────────────────────
+    const elDisplay    = document.getElementById('timer-display');
+    const elModeLabel  = document.getElementById('mode-label');
+    const elCompletion = document.getElementById('completion-msg');
+    const elBtnPrimary = document.getElementById('btn-primary');
+    const elBtnReset   = document.getElementById('btn-reset');
+
+    // ── Helpers ────────────────────────────────────────────────
+
+    /** Returns zero-padded MM:SS string, e.g. 1500 → "25:00", 61 → "01:01" */
+    function formatTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    }
+
+    // ── Render ─────────────────────────────────────────────────
+
+    function render() {
+      // Time display
+      elDisplay.textContent = formatTime(state.remainingSeconds);
+
+      // Mode label
+      if (state.mode === 'work') {
+        elModeLabel.textContent = '🍅 Work';
+        elModeLabel.className   = 'mode-label work';
+        elBtnPrimary.classList.remove('rest-mode');
+      } else {
+        elModeLabel.textContent = '☕ Rest';
+        elModeLabel.className   = 'mode-label rest';
+        elBtnPrimary.classList.add('rest-mode');
+      }
+
+      // Paused indicator
+      if (state.status === 'paused') {
+        elDisplay.classList.add('paused');
+      } else {
+        elDisplay.classList.remove('paused');
+      }
+
+      // Completion message & flash
+      if (state.status === 'ended') {
+        const msg = state.mode === 'work'
+          ? 'Work Complete! → Rest'
+          : 'Rest Complete! → Work';
+        elCompletion.textContent = msg;
+        // Trigger flash (remove then re-add to restart animation)
+        elDisplay.classList.remove('flash');
+        void elDisplay.offsetWidth; // force reflow
+        elDisplay.classList.add('flash');
+      } else {
+        elCompletion.textContent = '';
+        elDisplay.classList.remove('flash');
+      }
+
+      // Primary button label
+      if (state.status === 'idle' || state.status === 'ended') {
+        elBtnPrimary.textContent = 'Start';
+      } else if (state.status === 'running') {
+        elBtnPrimary.textContent = 'Pause';
+      } else if (state.status === 'paused') {
+        elBtnPrimary.textContent = 'Resume';
+      }
+
+      // Reset button visibility
+      if (state.status === 'running' || state.status === 'paused') {
+        elBtnReset.classList.remove('hidden');
+      } else {
+        elBtnReset.classList.add('hidden');
+      }
+    }
+
+    // ── Timer core ─────────────────────────────────────────────
+
+    function startTimer() {
+      // Guard: ignore if already running
+      if (state.status === 'running') return;
+      state.status = 'running';
+      state.intervalId = setInterval(tick, 1000);
+      render();
+    }
+
+    function tick() {
+      state.remainingSeconds -= 1;
+      if (state.remainingSeconds <= 0) {
+        state.remainingSeconds = 0;
+        clearInterval(state.intervalId);
+        state.intervalId = null;
+        onSessionEnd();
+      } else {
+        render();
+      }
+    }
+
+    function pauseTimer() {
+      if (state.status !== 'running') return;
+      clearInterval(state.intervalId);
+      state.intervalId = null;
+      state.status = 'paused';
+      render();
+    }
+
+    function resumeTimer() {
+      if (state.status !== 'paused') return;
+      state.status = 'running';
+      state.intervalId = setInterval(tick, 1000);
+      render();
+    }
+
+    function resetTimer() {
+      clearInterval(state.intervalId);
+      state.intervalId = null;
+      state.remainingSeconds = DURATIONS[state.mode];
+      state.status = 'idle';
+      render();
+    }
+
+    function onSessionEnd() {
+      state.status = 'ended';
+      render();
+      // Auto-transition to the opposite mode after 1500 ms
+      setTimeout(autoTransition, 1500);
+    }
+
+    function autoTransition() {
+      state.mode = state.mode === 'work' ? 'rest' : 'work';
+      state.remainingSeconds = DURATIONS[state.mode];
+      state.status = 'idle';
+      render();
+    }
+
+    // ── Button wiring ──────────────────────────────────────────
+
+    elBtnPrimary.addEventListener('click', () => {
+      if (state.status === 'idle' || state.status === 'ended') {
+        startTimer();
+      } else if (state.status === 'running') {
+        pauseTimer();
+      } else if (state.status === 'paused') {
+        resumeTimer();
+      }
+    });
+
+    elBtnReset.addEventListener('click', resetTimer);
+
+    // ── Initial render ─────────────────────────────────────────
+    render();
+  </script>
+
+</body>
+</html>
