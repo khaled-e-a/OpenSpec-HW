@@ -350,7 +350,7 @@ export function getCompareImagesSkillTemplate(): SkillTemplate {
     description: 'Pixel-level image comparison utility. Compares two images and reports the percentage of differing pixels, optionally saving a visual diff image.',
     instructions: INSTRUCTIONS_BODY,
     license: 'MIT',
-    compatibility: 'Requires uv (https://docs.astral.sh/uv/). Run scripts with: uv run scripts/compare_images.py',
+    compatibility: "Requires uv (https://docs.astral.sh/uv/). Run scripts with: uv run scripts/compare_images.py",
     metadata: {
       author: 'openspec',
       version: '1.0',

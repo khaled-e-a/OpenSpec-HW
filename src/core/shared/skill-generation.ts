@@ -178,13 +178,24 @@ export function generateSkillContent(
     ? transformInstructions(template.instructions)
     : template.instructions;
 
+  // Helper function to properly quote YAML strings
+  const quoteYaml = (value: string | undefined): string => {
+    if (!value) return '""';
+    // Quote if contains special YAML characters or is empty
+    if (/[:\[\]{}\(\)\",\n\r]/.test(value) || value.trim() !== value || value === '') {
+      // Escape any existing double quotes and wrap in double quotes
+      return `"${value.replace(/"/g, '\\"')}"`;
+    }
+    return value;
+  };
+
   return `---
-name: ${template.name}
-description: ${template.description}
-license: ${template.license || 'MIT'}
-compatibility: ${template.compatibility || 'Requires openspec CLI.'}
+name: ${quoteYaml(template.name)}
+description: ${quoteYaml(template.description)}
+license: ${quoteYaml(template.license || 'MIT')}
+compatibility: ${quoteYaml(template.compatibility || 'Requires openspec CLI.')}
 metadata:
-  author: ${template.metadata?.author || 'openspec'}
+  author: ${quoteYaml(template.metadata?.author || 'openspec')}
   version: "${template.metadata?.version || '1.0'}"
   generatedBy: "${generatedByVersion}"
 ---
