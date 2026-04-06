@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pomodoro Timer</title>
+  <style>
+    /* ------------------------------------------------------------------ */
+    /* Base                                                                  */
+    /* ------------------------------------------------------------------ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Timer card                                                            */
+    /* ------------------------------------------------------------------ */
+    .card {
+      background: #16213e;
+      border-radius: 20px;
+      padding: 48px 56px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      min-width: 320px;
+    }
+
+    /* Session label */
+    #session-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e94560;
+      margin-bottom: 8px;
+      transition: color 0.3s;
+    }
+    .short-rest  #session-label { color: #0f9b8e; }
+    .long-rest   #session-label { color: #533483; }
+
+    /* Countdown display — task 4.2 */
+    #countdown {
+      font-size: 5rem;
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      margin: 16px 0;
+      color: #fff;
+    }
+
+    /* Paused indicator — task 4.5 */
+    #paused-indicator {
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #f5a623;
+      min-height: 1.2em;
+      margin-bottom: 4px;
+    }
+
+    /* Pomodoro count — task 4.4 */
+    #pomodoro-count {
+      font-size: 0.95rem;
+      color: #aaa;
+      margin-bottom: 32px;
+    }
+
+    /* Controls — tasks 4.6, 4.7, 4.8 */
+    .controls {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, opacity 0.2s, transform 0.1s;
+    }
+    button:active { transform: scale(0.96); }
+    button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    #btn-start  { background: #e94560; color: #fff; }
+    #btn-pause  { background: #0f3460; color: #fff; }
+    #btn-reset  { background: #2a2a4a; color: #ccc; }
+
+    /* ------------------------------------------------------------------ */
+    /* Notification banner — tasks 5.2, 5.4                                */
+    /* ------------------------------------------------------------------ */
+    #banner {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: #e94560;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      white-space: nowrap;
+      z-index: 100;
+    }
+    #banner.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Task Notes section                                                    */
+    /* ------------------------------------------------------------------ */
+    .notes-section {
+      margin-top: 28px;
+      width: 100%;
+      max-width: 420px;
+      text-align: left;
+    }
+
+    .notes-section label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 8px;
+    }
+
+    #task-notes {
+      width: 100%;
+      min-height: 110px;
+      background: #0f3460;
+      color: #eee;
+      border: 1px solid #2a2a6a;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      line-height: 1.5;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    #task-notes:focus {
+      border-color: #e94560;
+    }
+
+    #task-notes::placeholder {
+      color: #556;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+    <!-- Task 4.3 — session label -->
+    <div id="session-label">Work Session</div>
+
+    <!-- Task 4.2 — countdown display -->
+    <div id="countdown">30:00</div>
+
+    <!-- Task 4.5 — paused indicator -->
+    <div id="paused-indicator"></div>
+
+    <!-- Task 4.4 — pomodoro count -->
+    <div id="pomodoro-count">Pomodoros completed: 0</div>
+
+    <!-- Tasks 4.6, 4.7, 4.8 — controls -->
+    <div class="controls">
+      <button id="btn-start">Start</button>
+      <button id="btn-pause" disabled>Pause</button>
+      <button id="btn-reset">Reset</button>
+    </div>
+  </div>
+
+  <!-- Task Notes — independent of timer state, never cleared by timer -->
+  <div class="notes-section">
+    <label for="task-notes">Task Notes</label>
+    <textarea id="task-notes" placeholder="Notes about your current task…"></textarea>
+  </div>
+
+  <!-- Task 5.2 — in-page banner -->
+  <div id="banner"></div>
+
+  <script type="module">
+    import {
+      State, SessionType, SESSION_LABELS,
+      startTimer, pauseTimer, resumeTimer, resetTimer,
+      onTick, onComplete, getSnapshot,
+    } from './src/timer.js';
+
+    // ------------------------------------------------------------------
+    // DOM refs
+    // ------------------------------------------------------------------
+    const elLabel   = document.getElementById('session-label');
+    const elCountdown = document.getElementById('countdown');
+    const elPaused  = document.getElementById('paused-indicator');
+    const elCount   = document.getElementById('pomodoro-count');
+    const elCard    = document.getElementById('card');
+    const elBanner  = document.getElementById('banner');
+    const btnStart  = document.getElementById('btn-start');
+    const btnPause  = document.getElementById('btn-pause');
+    const btnReset  = document.getElementById('btn-reset');
+
+    // ------------------------------------------------------------------
+    // Task 5.1 — request notification permission on load
+    // ------------------------------------------------------------------
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+
+    // ------------------------------------------------------------------
+    // Helper — format seconds as MM:SS
+    // ------------------------------------------------------------------
+    function formatTime(secs) {
+      const m = Math.floor(secs / 60).toString().padStart(2, '0');
+      const s = (secs % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    // ------------------------------------------------------------------
+    // Task 4.2–4.8 — render snapshot to UI
+    // ------------------------------------------------------------------
+    function render(snap) {
+      // Task 4.3 — session label
+      elLabel.textContent = snap.label;
+
+      // Task 4.2 — countdown
+      elCountdown.textContent = formatTime(snap.remainingSeconds);
+
+      // Task 4.4 — pomodoro count
+      elCount.textContent = `Pomodoros completed: ${snap.pomodoroCount}`;
+
+      // Task 4.5 — paused indicator
+      elPaused.textContent = snap.state === State.PAUSED ? '⏸ Paused' : '';
+
+      // Card colour theme
+      elCard.className = 'card';
+      if (snap.sessionType === SessionType.SHORT_REST) elCard.classList.add('short-rest');
+      if (snap.sessionType === SessionType.LONG_REST)  elCard.classList.add('long-rest');
+
+      // Task 4.6 — Start/Resume button
+      btnStart.textContent = snap.state === State.PAUSED ? 'Resume' : 'Start';
+      btnStart.disabled    = snap.state === State.RUNNING;
+
+      // Task 4.7 — Pause button
+      btnPause.disabled    = snap.state !== State.RUNNING;
+
+      // Task 4.8 — Reset always enabled (no-op: never disabled)
+      btnReset.disabled    = false;
+    }
+
+    // ------------------------------------------------------------------
+    // Register timer callbacks
+    // ------------------------------------------------------------------
+    onTick(render);
+
+    // Task 5.2, 5.3, 5.4 — handle session completion
+    onComplete((completedType, snap) => {
+      render(snap);
+
+      const messages = {
+        [SessionType.WORK]:       '🍅 Work session complete! Time for a break.',
+        [SessionType.SHORT_REST]: '☕ Short rest over! Ready to work?',
+        [SessionType.LONG_REST]:  '🎉 Long rest over! Start a new cycle.',
+      };
+      const msg = messages[completedType] ?? 'Session complete!';
+
+      // Task 5.2 — in-page banner (always shown)
+      showBanner(msg);
+
+      // Task 5.3 — browser notification if granted
+      if ('Notification' in window && Notification.permission === 'granted') {
+        new Notification('Pomodoro Timer', { body: msg, icon: '' });
+      }
+    });
+
+    // ------------------------------------------------------------------
+    // Banner helpers — task 5.4 auto-dismiss
+    // ------------------------------------------------------------------
+    let _bannerTimeout = null;
+
+    function showBanner(text) {
+      elBanner.textContent = text;
+      elBanner.classList.add('show');
+      clearTimeout(_bannerTimeout);
+      _bannerTimeout = setTimeout(hideBanner, 5000);
+    }
+
+    function hideBanner() {
+      elBanner.classList.remove('show');
+    }
+
+    // Dismiss on any click (task 5.4 "on next user interaction")
+    document.addEventListener('click', hideBanner, { passive: true });
+
+    // ------------------------------------------------------------------
+    // Task 4.9 — wire button click handlers
+    // ------------------------------------------------------------------
+    btnStart.addEventListener('click', () => {
+      const snap = getSnapshot();
+      if (snap.state === State.PAUSED) {
+        resumeTimer();
+      } else {
+        startTimer();
+      }
+    });
+
+    btnPause.addEventListener('click', pauseTimer);
+    btnReset.addEventListener('click', resetTimer);
+
+    // ------------------------------------------------------------------
+    // Initial render
+    // ------------------------------------------------------------------
+    render(getSnapshot());
+  </script>
+</body>
+</html>

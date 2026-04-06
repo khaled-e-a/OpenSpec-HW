@@ -1,0 +1,397 @@
+{
+  "config": {
+    "configFile": "/Users/khaledea/data/claude-research/SynergySpec/demos/demo-pomodoro-2026-04-02-verify/playwright.config.js",
+    "rootDir": "/Users/khaledea/data/claude-research/SynergySpec/demos/demo-pomodoro-2026-04-02-verify/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/khaledea/data/claude-research/SynergySpec/demos/demo-pomodoro-2026-04-02-verify/e2e-results/latest/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/khaledea/data/claude-research/SynergySpec/demos/demo-pomodoro-2026-04-02-verify/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        {
+          "outputFile": "e2e-results/latest/playwright-results.json"
+        }
+      ],
+      [
+        "list",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.59.1",
+    "workers": 4,
+    "webServer": {
+      "command": "npx serve . -p 3001 -n",
+      "url": "http://localhost:3001",
+      "reuseExistingServer": true,
+      "timeout": 15000
+    }
+  },
+  "suites": [
+    {
+      "title": "test-plan.spec.js",
+      "file": "test-plan.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "TP-1: R4-S1 — Notes area visible in all timer states",
+          "file": "test-plan.spec.js",
+          "line": 13,
+          "column": 6,
+          "specs": [
+            {
+              "title": "notes textarea is visible in IDLE, RUNNING, and PAUSED states",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1143,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-02T15:29:17.265Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/SynergySpec/demos/demo-pomodoro-2026-04-02-verify/e2e-results/latest/artifacts/test-plan-TP-1-R4-S1-—-Not-deeb1-E-RUNNING-and-PAUSED-states-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "87bd86ee5b772330e943-cca4cfa86944b674cc66",
+              "file": "test-plan.spec.js",
+              "line": 14,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "TP-2: R4-S5 — Notes area has visible placeholder when empty",
+          "file": "test-plan.spec.js",
+          "line": 38,
+          "column": 6,
+          "specs": [
+            {
+              "title": "placeholder text is set on empty textarea",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 441,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-02T15:29:18.711Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/SynergySpec/demos/demo-pomodoro-2026-04-02-verify/e2e-results/latest/artifacts/test-plan-TP-2-R4-S5-—-Not-8bd0a-xt-is-set-on-empty-textarea-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "87bd86ee5b772330e943-bbfed6ed2cf14b910256",
+              "file": "test-plan.spec.js",
+              "line": 39,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "TP-3: UC3-S1 — User clicks notes area and types",
+          "file": "test-plan.spec.js",
+          "line": 54,
+          "column": 6,
+          "specs": [
+            {
+              "title": "textarea accepts input and retains value",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 526,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-02T15:29:19.178Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/SynergySpec/demos/demo-pomodoro-2026-04-02-verify/e2e-results/latest/artifacts/test-plan-TP-3-UC3-S1-—-Us-009ad-pts-input-and-retains-value-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "87bd86ee5b772330e943-4d0f5aa316a03eb95544",
+              "file": "test-plan.spec.js",
+              "line": 55,
+              "column": 3
+            },
+            {
+              "title": "notes value is preserved after session transition",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1673,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-02T15:29:19.726Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/SynergySpec/demos/demo-pomodoro-2026-04-02-verify/e2e-results/latest/artifacts/test-plan-TP-3-UC3-S1-—-Us-3c8a6-ed-after-session-transition-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "87bd86ee5b772330e943-cff8526c2bfa08de9e29",
+              "file": "test-plan.spec.js",
+              "line": 66,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "TP-4: R3-S3 — Countdown shows correct full durations on load",
+          "file": "test-plan.spec.js",
+          "line": 83,
+          "column": 6,
+          "specs": [
+            {
+              "title": "countdown shows 30:00 on fresh load",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 366,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-02T15:29:21.422Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/SynergySpec/demos/demo-pomodoro-2026-04-02-verify/e2e-results/latest/artifacts/test-plan-TP-4-R3-S3-—-Cou-15731-n-shows-30-00-on-fresh-load-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "87bd86ee5b772330e943-2006839a551830782f7f",
+              "file": "test-plan.spec.js",
+              "line": 84,
+              "column": 3
+            },
+            {
+              "title": "countdown decrements after starting",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2584,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-02T15:29:21.813Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/SynergySpec/demos/demo-pomodoro-2026-04-02-verify/e2e-results/latest/artifacts/test-plan-TP-4-R3-S3-—-Cou-038ad-n-decrements-after-starting-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "87bd86ee5b772330e943-fbe49949b51ce33354bc",
+              "file": "test-plan.spec.js",
+              "line": 93,
+              "column": 3
+            },
+            {
+              "title": "countdown resets to 30:00 after reset",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1905,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-04-02T15:29:24.416Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/khaledea/data/claude-research/SynergySpec/demos/demo-pomodoro-2026-04-02-verify/e2e-results/latest/artifacts/test-plan-TP-4-R3-S3-—-Cou-d0140-resets-to-30-00-after-reset-chromium/test-finished-1.png"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "87bd86ee5b772330e943-fc84caedd92f1b0dbefd",
+              "file": "test-plan.spec.js",
+              "line": 108,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-04-02T15:29:14.099Z",
+    "duration": 12332.386999999999,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

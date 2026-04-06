@@ -152,12 +152,119 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
 - **False Positives**: When uncertain, prefer SUGGESTION over WARNING, WARNING over CRITICAL
 - **Actionability**: Every issue must have a specific recommendation with file/line references where applicable
 
+9. **Spec Impact Analysis — Generate Blast Radius**
+
+   This step identifies which existing specs in \`openspec/specs/\` are affected
+   by the code changes made for this change. Run it after the Verification Report.
+
+   **9a. Get changed files via git diff**
+
+   Run:
+   \`\`\`bash
+   git diff --name-only $(git merge-base HEAD main) HEAD
+   \`\`\`
+   If that fails (no \`main\` branch, detached HEAD, not a git repo), fall back to:
+   \`\`\`bash
+   git diff --name-only HEAD~1 HEAD
+   \`\`\`
+   If still no output or git is unavailable:
+   - Note "No git diff available — skipping blast radius analysis."
+   - Write a minimal \`spec-blast-radius.md\` with that note and stop this step.
+
+   **9b. Build a keyword index from changed files**
+
+   For each changed file path, extract:
+   - Directory name segments (e.g. \`src/auth/session.ts\` → \`["auth", "session"]\`)
+   - Exported symbol names: grep each changed file for \`export (function|class|const|type|interface) \\w+\`
+   - Limit to the first 100 changed files to avoid runaway analysis.
+
+   **9c. Scan all existing specs**
+
+   Enumerate all files matching \`openspec/specs/**/*.md\`.
+   If none found: note "No existing specs found — skipping blast radius analysis."
+
+   For each spec file, extract:
+   - **Capability name**: the parent folder name (e.g. \`openspec/specs/user-auth/spec.md\` → \`user-auth\`)
+   - **Requirement names**: all lines matching \`### Requirement:\`
+   - **UC step references**: all \`**Implements**: UCx-Sy\` patterns
+   - **Keyword set**: all meaningful words (>4 chars) from requirement names and WHEN/THEN clauses
+
+   **9d. Cross-reference and score each existing spec**
+
+   Score each spec against the keyword index from 9b:
+
+   - **High impact** (include in blast radius): any of:
+     - A changed file path segment exactly matches the spec's capability name
+       (e.g. changed file in \`src/user-auth/\` matches spec \`openspec/specs/user-auth/\`)
+     - The change's own delta specs (in \`openspec/changes/<name>/specs/\`) contain
+       \`**Implements**\` references (UCx-Sy IDs) that also appear in this existing spec
+   - **Medium impact** (include in blast radius): 2 or more keywords from changed file
+     path segments or exported symbols appear in the spec's requirement text or scenarios
+   - **Low / No impact**: fewer than 2 keyword matches — exclude from blast radius
+
+   **9e. Identify affected tests per impacted spec**
+
+   For each High/Medium spec, check \`openspec/changes/<name>/spec-tests.md\` (if it exists).
+   Look in the Requirement Traceability Matrix for rows where the "Requirement" column
+   contains text matching the impacted requirement names. Collect the "Test Case" file paths
+   from those rows.
+
+   **9f. Write \`openspec/changes/<name>/spec-blast-radius.md\`**
+
+   Use this format:
+
+   \`\`\`markdown
+   # Spec Blast Radius: <change-name>
+   Generated: <ISO timestamp>
+
+   ## Summary
+   <N> spec(s) impacted by this change.
+
+   ## Impacted Specs
+
+   ### openspec/specs/<capability>/spec.md
+   **Impact Level**: High
+   **Reason**: Changed file \`src/<path>\` matches capability name "<capability>"
+   **Impacted Requirements**:
+   - Requirement: <name> (UC1-S4)
+   - Requirement: <name> (UC1-S5)
+   **Affected Tests**: \`test/session.test.ts\`, \`test/integration/auth.test.ts\`
+
+   ### openspec/specs/<other>/spec.md
+   **Impact Level**: Medium
+   **Reason**: Keywords "auth", "token" from changed files match 3 requirements
+   **Impacted Requirements**:
+   - Requirement: <name>
+   **Affected Tests**: (none mapped in spec-tests.md)
+
+   ## Unimpacted Specs
+   - openspec/specs/gallery/spec.md — no keyword overlap detected
+   \`\`\`
+
+   If no specs are impacted, write:
+
+   \`\`\`markdown
+   # Spec Blast Radius: <change-name>
+   Generated: <ISO timestamp>
+
+   ## Summary
+   No existing specs impacted by this change.
+   \`\`\`
+
+   **9g. Append blast radius summary to the Verification Report**
+
+   Add a final line to the report output:
+   - If impacted: "📍 Blast radius: <N> spec(s) impacted → \`openspec/changes/<name>/spec-blast-radius.md\`"
+   - If none: "📍 Blast radius: No existing specs impacted."
+   - If skipped: "📍 Blast radius: Skipped (<reason>)."
+
 **Graceful Degradation**
 
 - If only tasks.md exists: verify task completion only, skip spec/design checks
 - If tasks + specs exist: verify completeness and correctness, skip design
 - If full artifacts: verify all three dimensions
 - Always note which checks were skipped and why
+- If git diff unavailable or \`openspec/specs/\` is empty: skip blast radius gracefully
 
 **Output Format**
 
@@ -321,12 +428,119 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
 - **False Positives**: When uncertain, prefer SUGGESTION over WARNING, WARNING over CRITICAL
 - **Actionability**: Every issue must have a specific recommendation with file/line references where applicable
 
+9. **Spec Impact Analysis — Generate Blast Radius**
+
+   This step identifies which existing specs in \`openspec/specs/\` are affected
+   by the code changes made for this change. Run it after the Verification Report.
+
+   **9a. Get changed files via git diff**
+
+   Run:
+   \`\`\`bash
+   git diff --name-only $(git merge-base HEAD main) HEAD
+   \`\`\`
+   If that fails (no \`main\` branch, detached HEAD, not a git repo), fall back to:
+   \`\`\`bash
+   git diff --name-only HEAD~1 HEAD
+   \`\`\`
+   If still no output or git is unavailable:
+   - Note "No git diff available — skipping blast radius analysis."
+   - Write a minimal \`spec-blast-radius.md\` with that note and stop this step.
+
+   **9b. Build a keyword index from changed files**
+
+   For each changed file path, extract:
+   - Directory name segments (e.g. \`src/auth/session.ts\` → \`["auth", "session"]\`)
+   - Exported symbol names: grep each changed file for \`export (function|class|const|type|interface) \\w+\`
+   - Limit to the first 100 changed files to avoid runaway analysis.
+
+   **9c. Scan all existing specs**
+
+   Enumerate all files matching \`openspec/specs/**/*.md\`.
+   If none found: note "No existing specs found — skipping blast radius analysis."
+
+   For each spec file, extract:
+   - **Capability name**: the parent folder name (e.g. \`openspec/specs/user-auth/spec.md\` → \`user-auth\`)
+   - **Requirement names**: all lines matching \`### Requirement:\`
+   - **UC step references**: all \`**Implements**: UCx-Sy\` patterns
+   - **Keyword set**: all meaningful words (>4 chars) from requirement names and WHEN/THEN clauses
+
+   **9d. Cross-reference and score each existing spec**
+
+   Score each spec against the keyword index from 9b:
+
+   - **High impact** (include in blast radius): any of:
+     - A changed file path segment exactly matches the spec's capability name
+       (e.g. changed file in \`src/user-auth/\` matches spec \`openspec/specs/user-auth/\`)
+     - The change's own delta specs (in \`openspec/changes/<name>/specs/\`) contain
+       \`**Implements**\` references (UCx-Sy IDs) that also appear in this existing spec
+   - **Medium impact** (include in blast radius): 2 or more keywords from changed file
+     path segments or exported symbols appear in the spec's requirement text or scenarios
+   - **Low / No impact**: fewer than 2 keyword matches — exclude from blast radius
+
+   **9e. Identify affected tests per impacted spec**
+
+   For each High/Medium spec, check \`openspec/changes/<name>/spec-tests.md\` (if it exists).
+   Look in the Requirement Traceability Matrix for rows where the "Requirement" column
+   contains text matching the impacted requirement names. Collect the "Test Case" file paths
+   from those rows.
+
+   **9f. Write \`openspec/changes/<name>/spec-blast-radius.md\`**
+
+   Use this format:
+
+   \`\`\`markdown
+   # Spec Blast Radius: <change-name>
+   Generated: <ISO timestamp>
+
+   ## Summary
+   <N> spec(s) impacted by this change.
+
+   ## Impacted Specs
+
+   ### openspec/specs/<capability>/spec.md
+   **Impact Level**: High
+   **Reason**: Changed file \`src/<path>\` matches capability name "<capability>"
+   **Impacted Requirements**:
+   - Requirement: <name> (UC1-S4)
+   - Requirement: <name> (UC1-S5)
+   **Affected Tests**: \`test/session.test.ts\`, \`test/integration/auth.test.ts\`
+
+   ### openspec/specs/<other>/spec.md
+   **Impact Level**: Medium
+   **Reason**: Keywords "auth", "token" from changed files match 3 requirements
+   **Impacted Requirements**:
+   - Requirement: <name>
+   **Affected Tests**: (none mapped in spec-tests.md)
+
+   ## Unimpacted Specs
+   - openspec/specs/gallery/spec.md — no keyword overlap detected
+   \`\`\`
+
+   If no specs are impacted, write:
+
+   \`\`\`markdown
+   # Spec Blast Radius: <change-name>
+   Generated: <ISO timestamp>
+
+   ## Summary
+   No existing specs impacted by this change.
+   \`\`\`
+
+   **9g. Append blast radius summary to the Verification Report**
+
+   Add a final line to the report output:
+   - If impacted: "📍 Blast radius: <N> spec(s) impacted → \`openspec/changes/<name>/spec-blast-radius.md\`"
+   - If none: "📍 Blast radius: No existing specs impacted."
+   - If skipped: "📍 Blast radius: Skipped (<reason>)."
+
 **Graceful Degradation**
 
 - If only tasks.md exists: verify task completion only, skip spec/design checks
 - If tasks + specs exist: verify completeness and correctness, skip design
 - If full artifacts: verify all three dimensions
 - Always note which checks were skipped and why
+- If git diff unavailable or \`openspec/specs/\` is empty: skip blast radius gracefully
 
 **Output Format**
 

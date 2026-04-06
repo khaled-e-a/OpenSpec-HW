@@ -1,0 +1,170 @@
+/* ─── Layout ─────────────────────────────────────────────────────────────── */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, sans-serif;
+  background: #fafafa;
+  color: #1a1a1a;
+}
+
+.app-header {
+  margin-bottom: 2rem;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #444;
+}
+
+.app-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* ─── Timer Display (task 9.1) ───────────────────────────────────────────── */
+
+.timer-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2.5rem 3.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+  min-width: 280px;
+}
+
+/* 9.2 — Colour per session type */
+.timer-display--work {
+  background: #fff3f0;
+  border: 2px solid #ff6b6b;
+}
+
+.timer-display--shortRest {
+  background: #f0fff4;
+  border: 2px solid #51cf66;
+}
+
+.timer-display--longRest {
+  background: #e8f4fd;
+  border: 2px solid #339af0;
+}
+
+.session-label {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #666;
+}
+
+.countdown {
+  font-size: 5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* 5.3 — Pomodoro dots */
+.pomodoro-dots {
+  display: flex;
+  gap: 0.4rem;
+  font-size: 1.25rem;
+}
+
+.dot--filled {
+  color: #ff6b6b;
+}
+
+.dot--empty {
+  color: #ccc;
+}
+
+/* 7.1, 7.2 — Status badges */
+.status-badge {
+  margin-top: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-badge--paused {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffc107;
+}
+
+.status-badge--completed {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #28a745;
+  font-size: 1rem;
+}
+
+/* ─── Controls (tasks 6.1–6.5, 9.3) ─────────────────────────────────────── */
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* 9.3 — accessible, keyboard-focusable buttons */
+.btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+}
+
+.btn--primary {
+  background: #ff6b6b;
+  color: #fff;
+  border-color: #ff6b6b;
+}
+
+.btn--primary:hover {
+  background: #fa5252;
+}
+
+.btn--secondary {
+  background: #f8f9fa;
+  color: #333;
+  border-color: #ced4da;
+}
+
+.btn--secondary:hover {
+  background: #e9ecef;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: #868e96;
+  border-color: #dee2e6;
+}
+
+.btn--ghost:hover {
+  background: #f1f3f5;
+  color: #495057;
+}

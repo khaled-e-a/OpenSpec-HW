@@ -31,6 +31,49 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 
    This single run covers all changes since the project test suite is shared.
 
+2b. **Spec Blast Radius Coverage** (if any blast radius files exist)
+
+   Scan for blast radius files: \`openspec/changes/*/spec-blast-radius.md\`
+   If none found: skip this sub-step and continue to step 3.
+
+   For each \`spec-blast-radius.md\` found:
+   - Read the file and extract all entries under "## Impacted Specs"
+   - For each impacted spec entry, collect:
+     - The spec path (e.g. \`openspec/specs/auth/spec.md\`)
+     - The impact level (High / Medium)
+     - The impacted requirements list
+     - The "Affected Tests" file paths (if listed)
+   - Cross-reference the "Affected Tests" with the test results from step 2:
+     - If the test file appears in the runner output and **passed**: mark ✅ PASS
+     - If the test file appears in the runner output and **failed**: mark ❌ FAIL
+     - If the test file was not run or is not listed in step 2 output: mark ⚠️ NO COVERAGE
+
+   Add a new **Spec Blast Radius Coverage** section to \`openspec/ci-report.md\` after the
+   "Unit/Integration Test Results" table:
+
+   \`\`\`markdown
+   ### Spec Blast Radius Coverage
+   | Change | Impacted Spec | Impact | Affected Tests | Status |
+   |--------|--------------|--------|----------------|--------|
+   | add-auth | openspec/specs/session/spec.md | High | \`test/session.test.ts\` | ✅ PASS |
+   | add-auth | openspec/specs/payments/spec.md | Medium | (none mapped) | ⚠️ NO COVERAGE |
+
+   **Coverage gaps**: 1 spec(s) have no test coverage for blast-radius-impacted requirements.
+   Suggestion: run \`/opsx-hw:gen-tests\` for: add-auth (openspec/specs/payments/spec.md)
+   \`\`\`
+
+   If all impacted specs have covered and passing tests, show:
+   \`\`\`
+   ✅ All blast-radius-impacted specs have passing test coverage.
+   \`\`\`
+
+   **Notes**:
+   - This section is additive — it does not change which tests are run, only what is reported.
+   - The overall CI verdict (PASS/FAIL/PARTIAL) is not affected by blast-radius gaps alone,
+     but a ❌ FAIL in the Affected Tests column does count as a CI failure.
+   - If "Affected Tests" is "(none mapped)" for a High-impact spec, treat it as ⚠️ NO COVERAGE
+     and include it in the coverage gap suggestion.
+
 3. **Collect and run all e2e test plans**
 
    Scan for \`test-plan.md\` files under \`openspec/changes/*/test-plan.md\`.

@@ -48,14 +48,14 @@ const EXPECTED_FUNCTION_HASHES: Record<string, string> = {
   getOpsxContinueCommandTemplate: '2d29dee4bfa23e959e6971f9035fd582388ba0a336335ea2fea7c840db8a3f3e',
   getOpsxApplyCommandTemplate: 'bc4a47315a5d4d24ab7420616262636bc74f1c05d9443930389dd98abb7c76cf',
   getOpsxFfCommandTemplate: '25016f0b3e204bbdb37e4a58441abe087b829a13c337d385faab3d8812b17b5a',
-  getArchiveChangeSkillTemplate: 'd8863ba21f444f97bfa8ba80743a7974ed4132a3968e9cd176117c407b18e593',
+  getArchiveChangeSkillTemplate: 'b174182bc2a844138bbbc07eee512a4a25ad11c477046cb33510cf9ace581d6c',
   getBulkArchiveChangeSkillTemplate: 'f56100c59d4ff68ea3d1c2565cb7f9a7e12e0b6f08284de982f78579c1544da3',
   getOpsxSyncCommandTemplate: '8853e82d430ae15085208a9d123c1a3dde057b01e2c69f2fe4158a6bbd793b7a',
-  getVerifyChangeSkillTemplate: '48f1ff82cc4d4f2b0edef69ef7e886b3017f03afe8285ed8c29d4f6f49cc46be',
-  getOpsxArchiveCommandTemplate: 'f935c7a95cf16228ef07f30be908bd8ca999e213567bd305e005afb713603749',
+  getVerifyChangeSkillTemplate: 'a22b1250b536b09366c10355b262303c68dcda2574675453099c96f5ef0c61f8',
+  getOpsxArchiveCommandTemplate: 'c7fbe9da6e2f01e7268eb4ad7532a308b35304f5049762d187d77b7e4284774c',
   getOpsxOnboardCommandTemplate: 'a8677d6fbe092af550cef0ca6e5c3d1b70c041cfa9ddafa6edca6d4d993b3d8c',
   getOpsxBulkArchiveCommandTemplate: '0a1ebc238fb67d7281d43ee84184ce15bfbce68a9c4e4edf10d5745a541a969a',
-  getOpsxVerifyCommandTemplate: 'da6545abbbc7502da5901e7ff141595545d415d4c8ad758e33b16ee8f299ae84',
+  getOpsxVerifyCommandTemplate: '85cc9c24130d4e38699f173c8eb5445877ea554d4fb7833be7fd691d28437f38',
   getOpsxProposeSkillTemplate: '48a5e70f83f650f347b10469bf066ff6945526a1139a8cb50647f72f45af4a50',
   getOpsxProposeCommandTemplate: 'c8268972689114a214f8f619736178870a85b56602e59db50f4eb76135bc6e13',
   getFeedbackSkillTemplate: '6c462ddce227b01774b0d48ee52c8968937ef74cb969533444f1ecc26134c02d',
@@ -63,8 +63,8 @@ const EXPECTED_FUNCTION_HASHES: Record<string, string> = {
   getOpsxGenTestsCommandTemplate: '28bccfdf6d8b73c6302634fb09446dd7c559ce9ca0dd263e03c54848ef8631c7',
   getRunTestsSkillTemplate: '3cc1b1963190b10cc625140db5eeb900f911b420f901522d1ff6015e80e8ad22',
   getOpsxRunTestsCommandTemplate: '66b8a649499f73b07ec6b8fc5ec0a37b79f21e8c1d4cf9fa94732cabf4a6b499',
-  getCiSkillTemplate: '409bbc0c67b61a1d0597502af7e8e296d1f2bd5f9bb4def02b7f9261febed775',
-  getOpsxCiCommandTemplate: 'b7fa01b42605cadc0cf4056b8cc105a4a1a6db3ccce85134b361928b56680148',
+  getCiSkillTemplate: '685e690392ba253307b76324cb528c3fa4b6292ebf0b4c8a5caa0de991e4860c',
+  getOpsxCiCommandTemplate: '79e30e776151e59c1df385e47c8a4c20c845a344c64987a2d319fba718e4de3a',
 };
 
 const EXPECTED_GENERATED_SKILL_CONTENT_HASHES: Record<string, string> = {
@@ -74,14 +74,14 @@ const EXPECTED_GENERATED_SKILL_CONTENT_HASHES: Record<string, string> = {
   'openspec-apply-change': 'bc000cd6594fbaafbaf88ba98916c8e9575c08241df51332eb7e913648094e65',
   'openspec-ff-change': 'b3da7c140e3c67e1d91c70a64b57ac0b4afe9be54ae0605840c75cfc2514022a',
   'openspec-sync-specs': '6774c4742675d1cd150a184b187446b920e0c9aac07c58446513660b1c4a5d7d',
-  'openspec-archive-change': '02d7efb2a09283fc6bc049af74798ce03ec6fe998c342ebf789ce1cd2b96ae7f',
+  'openspec-archive-change': '0fe834ae1d9e96317f56123d8033cabfcec6f64089de7217605afacb53a74791',
   'openspec-bulk-archive-change': 'd4f3af709ae572d12f4622ebd8fce184ea9547753ac0076c8c7f934fe29fd7b0',
-  'openspec-verify-change': 'd1c34513f316cc129ca4bb50316460b4dfecbaa4b342e906884de9acd8c22635',
+  'openspec-verify-change': '7c7000c697ae5f45eda293186f9e94208fc42124dbbc3fc5f254483d11f9a060',
   'openspec-onboard': '25acf60392736c2570fa39bbd65de39e0af9b21515cbd9480806b67cc5244e64',
   'openspec-propose': '7bf9c63107839a4ff968da4e844b0c354bcfeebf523e3612e1fe0c3e0626642d',
   'openspec-gen-tests': '0db0906a13e6b4171ca4748a73931e99c64d1c8726dad04e5fe2277dd0fd549a',
   'openspec-run-tests': 'df3b830d4e39dabf3e7983cac068307352eaa68ee18c90bdc1e7619a27ba3e1c',
-  'openspec-ci': 'f91200912a5a4ee3a88e57e20541024c47c875618969252771ecb21c7c460b6b',
+  'openspec-ci': 'c913cd15c73035b007936205fc2a9dcd0a8e1710e088a0be3af47f90babf299a',
 };
 
 function stableStringify(value: unknown): string {

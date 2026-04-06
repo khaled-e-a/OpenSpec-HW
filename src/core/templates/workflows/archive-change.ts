@@ -66,6 +66,53 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
 
    If user chooses sync, use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke openspec-sync-specs for change '<name>'. Delta spec analysis: <include the analyzed delta spec summary>"). Proceed to archive regardless of choice.
 
+4b. **Spec Blast Radius Review** (if spec-blast-radius.md exists)
+
+   Check for \`openspec/changes/<name>/spec-blast-radius.md\`.
+   If it doesn't exist: note "No blast radius file found — skipping impact review." and proceed.
+   If the file exists but its Summary says "No existing specs impacted": note that and proceed.
+
+   **If blast radius file exists and has impacted specs:**
+
+   Read the file and extract all entries under "## Impacted Specs".
+   For each entry, collect: spec path, impact level, impacted requirements list.
+
+   Display a triage table to the user:
+
+   \`\`\`
+   ## Spec Impact Review
+
+   This change impacted the following existing specs. Please decide what action to take for each.
+
+   | # | Spec | Impact | Requirements Affected |
+   |---|------|--------|----------------------|
+   | 1 | openspec/specs/auth/spec.md | High | Session expiry, Token refresh |
+   | 2 | openspec/specs/payments/spec.md | Medium | Checkout flow |
+   \`\`\`
+
+   Then, for each impacted spec, use the **AskUserQuestion tool** with these options:
+   - **"Sync now"** — delegate spec merge to openspec-sync-specs
+   - **"Mark for review"** — add a review notice to the spec file
+   - **"Skip"** — no action for this spec
+
+   Process each selected action:
+
+   - **Sync now**: Use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke
+     openspec-sync-specs. Sync the spec at '<spec-path>' using the delta from change '<name>'.")
+   - **Mark for review**: Read the spec file, prepend the following comment block at the very top,
+     then write it back:
+     \`\`\`markdown
+     <!-- NEEDS REVIEW
+     Impacted by change: <change-name>
+     Date: <YYYY-MM-DD>
+     Reason: <impact level> impact — <list impacted requirements>
+     Run /opsx-hw:verify-spec to assess what needs updating.
+     -->
+     \`\`\`
+   - **Skip**: Take no action on this spec.
+
+   Track triage results for the archive summary (e.g. "2 synced, 1 marked for review, 0 skipped").
+
 5. **Perform the archive**
 
    Create the archive directory if it doesn't exist:
@@ -90,6 +137,7 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
    - Schema that was used
    - Archive location
    - Whether specs were synced (if applicable)
+   - Blast radius triage results (e.g. "2 specs synced, 1 marked for review" or "No blast radius")
    - Note about any warnings (incomplete artifacts/tasks)
 
 **Output On Success**
@@ -100,7 +148,8 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
 **Change:** <change-name>
 **Schema:** <schema-name>
 **Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
-**Specs:** ✓ Synced to main specs (or "No delta specs" or "Sync skipped")
+**Delta specs:** ✓ Synced to main specs (or "No delta specs" or "Sync skipped")
+**Blast radius:** 2 spec(s) synced, 1 marked for review (or "No impacted specs" or "No blast radius file")
 
 All artifacts complete. All tasks complete.
 \`\`\`
@@ -112,7 +161,8 @@ All artifacts complete. All tasks complete.
 - Preserve .openspec.yaml when moving to archive (it moves with the directory)
 - Show clear summary of what happened
 - If sync is requested, use openspec-sync-specs approach (agent-driven)
-- If delta specs exist, always run the sync assessment and show the combined summary before prompting`,
+- If delta specs exist, always run the sync assessment and show the combined summary before prompting
+- If spec-blast-radius.md does not exist, skip step 4b silently (no warning needed)`,
       license: 'MIT',
       compatibility: 'Requires openspec-hw CLI.',
       metadata: { author: 'openspec', version: '1.0' },
@@ -181,6 +231,53 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
 
    If user chooses sync, use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke openspec-sync-specs for change '<name>'. Delta spec analysis: <include the analyzed delta spec summary>"). Proceed to archive regardless of choice.
 
+4b. **Spec Blast Radius Review** (if spec-blast-radius.md exists)
+
+   Check for \`openspec/changes/<name>/spec-blast-radius.md\`.
+   If it doesn't exist: note "No blast radius file found — skipping impact review." and proceed.
+   If the file exists but its Summary says "No existing specs impacted": note that and proceed.
+
+   **If blast radius file exists and has impacted specs:**
+
+   Read the file and extract all entries under "## Impacted Specs".
+   For each entry, collect: spec path, impact level, impacted requirements list.
+
+   Display a triage table to the user:
+
+   \`\`\`
+   ## Spec Impact Review
+
+   This change impacted the following existing specs. Please decide what action to take for each.
+
+   | # | Spec | Impact | Requirements Affected |
+   |---|------|--------|----------------------|
+   | 1 | openspec/specs/auth/spec.md | High | Session expiry, Token refresh |
+   | 2 | openspec/specs/payments/spec.md | Medium | Checkout flow |
+   \`\`\`
+
+   Then, for each impacted spec, use the **AskUserQuestion tool** with these options:
+   - **"Sync now"** — delegate spec merge to openspec-sync-specs
+   - **"Mark for review"** — add a review notice to the spec file
+   - **"Skip"** — no action for this spec
+
+   Process each selected action:
+
+   - **Sync now**: Use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke
+     openspec-sync-specs. Sync the spec at '<spec-path>' using the delta from change '<name>'.")
+   - **Mark for review**: Read the spec file, prepend the following comment block at the very top,
+     then write it back:
+     \`\`\`markdown
+     <!-- NEEDS REVIEW
+     Impacted by change: <change-name>
+     Date: <YYYY-MM-DD>
+     Reason: <impact level> impact — <list impacted requirements>
+     Run /opsx-hw:verify-spec to assess what needs updating.
+     -->
+     \`\`\`
+   - **Skip**: Take no action on this spec.
+
+   Track triage results for the archive summary (e.g. "2 synced, 1 marked for review, 0 skipped").
+
 5. **Perform the archive**
 
    Create the archive directory if it doesn't exist:
@@ -205,6 +302,7 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
    - Schema that was used
    - Archive location
    - Spec sync status (synced / sync skipped / no delta specs)
+   - Blast radius triage results (e.g. "2 specs synced, 1 marked for review" or "No blast radius")
    - Note about any warnings (incomplete artifacts/tasks)
 
 **Output On Success**
@@ -215,7 +313,8 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
 **Change:** <change-name>
 **Schema:** <schema-name>
 **Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
-**Specs:** ✓ Synced to main specs
+**Delta specs:** ✓ Synced to main specs
+**Blast radius:** 2 spec(s) synced, 1 marked for review (or "No impacted specs")
 
 All artifacts complete. All tasks complete.
 \`\`\`
@@ -228,7 +327,8 @@ All artifacts complete. All tasks complete.
 **Change:** <change-name>
 **Schema:** <schema-name>
 **Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
-**Specs:** No delta specs
+**Delta specs:** No delta specs
+**Blast radius:** No impacted specs (or triage results if blast radius file exists)
 
 All artifacts complete. All tasks complete.
 \`\`\`
@@ -241,7 +341,8 @@ All artifacts complete. All tasks complete.
 **Change:** <change-name>
 **Schema:** <schema-name>
 **Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
-**Specs:** Sync skipped (user chose to skip)
+**Delta specs:** Sync skipped (user chose to skip)
+**Blast radius:** 1 marked for review, 1 skipped
 
 **Warnings:**
 - Archived with 2 incomplete artifacts
@@ -274,6 +375,7 @@ Target archive directory already exists.
 - Preserve .openspec.yaml when moving to archive (it moves with the directory)
 - Show clear summary of what happened
 - If sync is requested, use the Skill tool to invoke \`openspec-sync-specs\` (agent-driven)
-- If delta specs exist, always run the sync assessment and show the combined summary before prompting`
+- If delta specs exist, always run the sync assessment and show the combined summary before prompting
+- If spec-blast-radius.md does not exist, skip step 4b silently (no warning needed)`
    };
 }
