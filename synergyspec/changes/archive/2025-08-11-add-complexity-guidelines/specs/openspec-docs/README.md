@@ -1,10 +1,10 @@
-# OpenSpec Instructions
+# SynergySpec Instructions
 
-This document provides instructions for AI coding assistants on how to use OpenSpec conventions for spec-driven development. Follow these rules precisely when working on OpenSpec-enabled projects.
+This document provides instructions for AI coding assistants on how to use SynergySpec conventions for spec-driven development. Follow these rules precisely when working on SynergySpec-enabled projects.
 
 ## Core Principle
 
-OpenSpec is an AI-native system for change-driven development where:
+SynergySpec is an AI-native system for change-driven development where:
 - **Specs** (`specs/`) reflect what IS currently built and deployed
 - **Changes** (`changes/`) contain proposals for what SHOULD be changed
 - **AI drives the process** - You generate proposals, humans review and approve
@@ -30,9 +30,9 @@ When triggered, document the specific justification in your change proposal.
 ## Directory Structure
 
 ```
-openspec/
+synergyspec/
 ├── project.md              # Project-specific context (tech stack, conventions)
-├── README.md               # This file - OpenSpec instructions
+├── README.md               # This file - SynergySpec instructions
 ├── specs/                  # Current truth - what IS built
 │   ├── [capability]/       # Single, focused capability
 │   │   ├── spec.md         # WHAT the capability does and WHY
@@ -100,7 +100,7 @@ When a user requests a significant change:
 
 ```bash
 # 1. Create the change directory
-openspec/changes/[descriptive-name]/
+synergyspec/changes/[descriptive-name]/
 
 # 2. Generate proposal.md with all context
 ## Why
@@ -389,7 +389,7 @@ Default to creating a proposal. It's easier to skip an unnecessary proposal than
 
 ### AI Workflow Adaptations
 
-Task tracking with OpenSpec:
+Task tracking with SynergySpec:
 - Track exploration tasks separately from implementation
 - Document proposal creation steps as you go
 - Keep implementation tasks separate until proposal approved

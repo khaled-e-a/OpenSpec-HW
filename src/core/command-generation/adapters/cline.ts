@@ -10,14 +10,14 @@ import type { CommandContent, ToolCommandAdapter } from '../types.js';
 
 /**
  * Cline adapter for command generation.
- * File path: .clinerules/workflows/opsx-hw-<id>.md
+ * File path: .clinerules/workflows/synspec-<id>.md
  * Format: Markdown header with description
  */
 export const clineAdapter: ToolCommandAdapter = {
   toolId: 'cline',
 
   getFilePath(commandId: string): string {
-    return path.join('.clinerules', 'workflows', `opsx-hw-${commandId}.md`);
+    return path.join('.clinerules', 'workflows', `synspec-${commandId}.md`);
   },
 
   formatFile(content: CommandContent): string {

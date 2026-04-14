@@ -8,12 +8,12 @@
 
 ## 2. Core List Logic
 - [x] 2.1 Extend `src/core/list.ts` to accept a mode: `changes` (default) or `specs`
-- [x] 2.2 Implement `specs` listing: scan `openspec/specs/*/spec.md`, compute requirement count via parser, format output consistently
+- [x] 2.2 Implement `specs` listing: scan `synergyspec/specs/*/spec.md`, compute requirement count via parser, format output consistently
 - [x] 2.3 Share output structure for both modes; preserve current text table; ensure JSON parity in future change
 
 ## 3. Specs and Conventions
-- [x] 3.1 Update `openspec/specs/cli-list/spec.md` to document `--specs` (and default to changes)
-- [x] 3.2 Update `openspec/specs/openspec-conventions/spec.md` with a requirement for verb–noun CLI design and deprecation guidance
+- [x] 3.1 Update `synergyspec/specs/cli-list/spec.md` to document `--specs` (and default to changes)
+- [x] 3.2 Update `synergyspec/specs/synergyspec-conventions/spec.md` with a requirement for verb–noun CLI design and deprecation guidance
 
 ## 4. Tests and Docs
 - [x] 4.1 Update tests: ensure `openspec list` works for changes and specs; keep `change list` tests but assert warning

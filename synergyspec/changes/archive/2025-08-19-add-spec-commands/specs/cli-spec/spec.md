@@ -14,7 +14,7 @@ The system SHALL provide a `spec` command with subcommands for displaying, listi
 #### Scenario: List all specs
 
 - **WHEN** executing `openspec spec list`
-- **THEN** scan the openspec/specs directory
+- **THEN** scan the synergyspec/specs directory
 - **AND** return list of all available capabilities
 - **AND** support JSON output with `--json` flag
 

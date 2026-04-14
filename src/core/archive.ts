@@ -53,15 +53,15 @@ export class ArchiveCommand {
     options: { yes?: boolean; skipSpecs?: boolean; noValidate?: boolean; validate?: boolean } = {}
   ): Promise<void> {
     const targetPath = '.';
-    const changesDir = path.join(targetPath, 'openspec', 'changes');
+    const changesDir = path.join(targetPath, 'synergyspec', 'changes');
     const archiveDir = path.join(changesDir, 'archive');
-    const mainSpecsDir = path.join(targetPath, 'openspec', 'specs');
+    const mainSpecsDir = path.join(targetPath, 'synergyspec', 'specs');
 
     // Check if changes directory exists
     try {
       await fs.access(changesDir);
     } catch {
-      throw new Error("No OpenSpec changes directory found. Run 'openspec init' first.");
+      throw new Error("No SynergySpec changes directory found. Run 'synergyspec-hw init' first.");
     }
 
     // Get change name interactively if not provided

@@ -1,4 +1,4 @@
-# Add Diff Command to OpenSpec CLI
+# Add Diff Command to SynergySpec CLI
 
 ## Why
 

@@ -8,9 +8,9 @@ With per-change schema metadata in place (see `add-per-change-schema-metadata`),
 
 **Depends on:** `add-per-change-schema-metadata` (must be implemented first)
 
-- Update `openspec-new-change` skill to prompt user for schema selection
-- Update `openspec-continue-change` skill to work with any schema's artifacts
-- Update `openspec-apply-change` skill to handle schema-specific task structures
+- Update `synergyspec-new-change` skill to prompt user for schema selection
+- Update `synergyspec-continue-change` skill to work with any schema's artifacts
+- Update `synergyspec-apply-change` skill to handle schema-specific task structures
 - Add schema descriptions to help users choose appropriate workflow
 
 ## Capabilities

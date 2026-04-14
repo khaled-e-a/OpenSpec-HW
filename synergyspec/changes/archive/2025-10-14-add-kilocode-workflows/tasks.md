@@ -3,7 +3,7 @@
 - [x] 1.2 Register a `KiloCodeSlashCommandConfigurator` alongside other slash-command tools.
 
 ## 2. Workflow generation
-- [x] 2.1 Implement the configurator so it creates `.kilocode/workflows/` (if needed) and writes `openspec-{proposal,apply,archive}.md` with OpenSpec markers.
+- [x] 2.1 Implement the configurator so it creates `.kilocode/workflows/` (if needed) and writes `synergyspec-{proposal,apply,archive}.md` with SynergySpec markers.
 - [x] 2.2 Reuse the shared slash-command bodies without front matter; verify resulting files stay Markdown-only with no extra metadata.
 
 ## 3. Update support

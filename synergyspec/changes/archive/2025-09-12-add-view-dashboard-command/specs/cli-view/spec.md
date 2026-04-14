@@ -11,9 +11,9 @@ The system SHALL provide a `view` command that displays a dashboard overview of 
 - **WHEN** user runs `openspec view`
 - **THEN** system displays a formatted dashboard with sections for summary, active changes, completed changes, and specifications
 
-#### Scenario: No OpenSpec directory
+#### Scenario: No SynergySpec directory
 
-- **WHEN** user runs `openspec view` in a directory without OpenSpec
+- **WHEN** user runs `openspec view` in a directory without SynergySpec
 - **THEN** system displays error message "✗ No openspec directory found"
 
 ### Requirement: Summary Section

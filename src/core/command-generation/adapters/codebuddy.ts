@@ -9,14 +9,14 @@ import type { CommandContent, ToolCommandAdapter } from '../types.js';
 
 /**
  * CodeBuddy adapter for command generation.
- * File path: .codebuddy/commands/opsx-hw/<id>.md
+ * File path: .codebuddy/commands/synspec/<id>.md
  * Frontmatter: name, description, argument-hint
  */
 export const codebuddyAdapter: ToolCommandAdapter = {
   toolId: 'codebuddy',
 
   getFilePath(commandId: string): string {
-    return path.join('.codebuddy', 'commands', 'opsx-hw', `${commandId}.md`);
+    return path.join('.codebuddy', 'commands', 'synspec', `${commandId}.md`);
   },
 
   formatFile(content: CommandContent): string {

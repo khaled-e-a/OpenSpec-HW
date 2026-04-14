@@ -8,8 +8,8 @@ import type { SkillTemplate, CommandTemplate } from '../types.js';
 
 export function getNewChangeSkillTemplate(): SkillTemplate {
    return {
-      name: 'openspec-new-change',
-      description: 'Start a new OpenSpec change using the experimental artifact workflow. Use when the user wants to create a new feature, fix, or modification with a structured step-by-step approach.',
+      name: 'synergyspec-new-change',
+      description: 'Start a new SynergySpec change using the experimental artifact workflow. Use when the user wants to create a new feature, fix, or modification with a structured step-by-step approach.',
       instructions: `Start a new change using the experimental artifact-driven approach.
 
 **Input**: The user's request should include a change name (kebab-case) OR a description of what they want to build.
@@ -31,20 +31,20 @@ export function getNewChangeSkillTemplate(): SkillTemplate {
 
    **Use a different schema only if the user mentions:**
    - A specific schema name → use \`--schema <name>\`
-   - "show workflows" or "what workflows" → run \`openspec-hw schemas --json\` and let them choose
+   - "show workflows" or "what workflows" → run \`synergyspec-hw schemas --json\` and let them choose
 
    **Otherwise**: Omit \`--schema\` to use the default.
 
 3. **Create the change directory**
    \`\`\`bash
-   openspec-hw new change "<name>"
+   synergyspec-hw new change "<name>"
    \`\`\`
    Add \`--schema <name>\` only if the user requested a specific workflow.
-   This creates a scaffolded change at \`openspec/changes/<name>/\` with the selected schema.
+   This creates a scaffolded change at \`synergyspec/changes/<name>/\` with the selected schema.
 
 4. **Show the artifact status**
    \`\`\`bash
-   openspec-hw status --change "<name>"
+   synergyspec-hw status --change "<name>"
    \`\`\`
    This shows which artifacts need to be created and which are ready (dependencies satisfied).
 
@@ -52,7 +52,7 @@ export function getNewChangeSkillTemplate(): SkillTemplate {
    The first artifact depends on the schema (e.g., \`proposal\` for spec-driven).
    Check the status output to find the first artifact with status "ready".
    \`\`\`bash
-   openspec-hw instructions <first-artifact-id> --change "<name>"
+   synergyspec-hw instructions <first-artifact-id> --change "<name>"
    \`\`\`
    This outputs the template and context for creating the first artifact.
 
@@ -74,8 +74,8 @@ After completing the steps, summarize:
 - If a change with that name already exists, suggest continuing that change instead
 - Pass --schema if using a non-default workflow`,
       license: 'MIT',
-      compatibility: 'Requires openspec-hw CLI.',
-      metadata: { author: 'openspec', version: '1.0' },
+      compatibility: 'Requires synergyspec-hw CLI.',
+      metadata: { author: 'synergyspec', version: '1.0' },
    };
 }
 
@@ -87,7 +87,7 @@ export function getOpsxNewCommandTemplate(): CommandTemplate {
       tags: ['workflow', 'artifacts', 'experimental'],
       content: `Start a new change using the experimental artifact-driven approach.
 
-**Input**: The argument after \`/opsx-hw:new\` is the change name (kebab-case), OR a description of what the user wants to build.
+**Input**: The argument after \`/synspec:new\` is the change name (kebab-case), OR a description of what the user wants to build.
 
 **Steps**
 
@@ -106,27 +106,27 @@ export function getOpsxNewCommandTemplate(): CommandTemplate {
 
    **Use a different schema only if the user mentions:**
    - A specific schema name → use \`--schema <name>\`
-   - "show workflows" or "what workflows" → run \`openspec-hw schemas --json\` and let them choose
+   - "show workflows" or "what workflows" → run \`synergyspec-hw schemas --json\` and let them choose
 
    **Otherwise**: Omit \`--schema\` to use the default.
 
 3. **Create the change directory**
    \`\`\`bash
-   openspec-hw new change "<name>"
+   synergyspec-hw new change "<name>"
    \`\`\`
    Add \`--schema <name>\` only if the user requested a specific workflow.
-   This creates a scaffolded change at \`openspec/changes/<name>/\` with the selected schema.
+   This creates a scaffolded change at \`synergyspec/changes/<name>/\` with the selected schema.
 
 4. **Show the artifact status**
    \`\`\`bash
-   openspec-hw status --change "<name>"
+   synergyspec-hw status --change "<name>"
    \`\`\`
    This shows which artifacts need to be created and which are ready (dependencies satisfied).
 
 5. **Get instructions for the first artifact**
    The first artifact depends on the schema. Check the status output to find the first artifact with status "ready".
    \`\`\`bash
-   openspec-hw instructions <first-artifact-id> --change "<name>"
+   synergyspec-hw instructions <first-artifact-id> --change "<name>"
    \`\`\`
    This outputs the template and context for creating the first artifact.
 
@@ -139,13 +139,13 @@ After completing the steps, summarize:
 - Schema/workflow being used and its artifact sequence
 - Current status (0/N artifacts complete)
 - The template for the first artifact
-- Prompt: "Ready to create the first artifact? Run \`/opsx-hw:continue\` or just describe what this change is about and I'll draft it."
+- Prompt: "Ready to create the first artifact? Run \`/synspec:continue\` or just describe what this change is about and I'll draft it."
 
 **Guardrails**
 - Do NOT create any artifacts yet - just show the instructions
 - Do NOT advance beyond showing the first artifact template
 - If the name is invalid (not kebab-case), ask for a valid name
-- If a change with that name already exists, suggest using \`/opsx-hw:continue\` instead
+- If a change with that name already exists, suggest using \`/synspec:continue\` instead
 - Pass --schema if using a non-default workflow`
    };
 }

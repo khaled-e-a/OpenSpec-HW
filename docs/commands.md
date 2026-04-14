@@ -1,6 +1,6 @@
 # Commands
 
-This is the reference for OpenSpec's slash commands. These commands are invoked in your AI coding assistant's chat interface (e.g., Claude Code, Cursor, Windsurf).
+This is the reference for SynergySpec's slash commands. These commands are invoked in your AI coding assistant's chat interface (e.g., Claude Code, Cursor, Windsurf).
 
 For workflow patterns and when to use each command, see [Workflows](workflows.md). For CLI commands, see [CLI](cli.md).
 
@@ -8,28 +8,28 @@ For workflow patterns and when to use each command, see [Workflows](workflows.md
 
 | Command | Purpose |
 |---------|---------|
-| `/opsx-hw:explore` | Think through ideas before committing to a change |
-| `/opsx-hw:new` | Start a new change |
-| `/opsx-hw:continue` | Create the next artifact based on dependencies |
-| `/opsx-hw:ff` | Fast-forward: create all planning artifacts at once |
-| `/opsx-hw:apply` | Implement tasks from the change |
-| `/opsx-hw:verify` | Validate implementation matches artifacts |
-| `/opsx-hw:sync` | Merge delta specs into main specs |
-| `/opsx-hw:archive` | Archive a completed change |
-| `/opsx-hw:bulk-archive` | Archive multiple changes at once |
-| `/opsx-hw:onboard` | Guided tutorial through the complete workflow |
+| `/synspec:explore` | Think through ideas before committing to a change |
+| `/synspec:new` | Start a new change |
+| `/synspec:continue` | Create the next artifact based on dependencies |
+| `/synspec:ff` | Fast-forward: create all planning artifacts at once |
+| `/synspec:apply` | Implement tasks from the change |
+| `/synspec:verify` | Validate implementation matches artifacts |
+| `/synspec:sync` | Merge delta specs into main specs |
+| `/synspec:archive` | Archive a completed change |
+| `/synspec:bulk-archive` | Archive multiple changes at once |
+| `/synspec:onboard` | Guided tutorial through the complete workflow |
 
 ---
 
 ## Command Reference
 
-### `/opsx-hw:explore`
+### `/synspec:explore`
 
 Think through ideas, investigate problems, and clarify requirements before committing to a change.
 
 **Syntax:**
 ```
-/opsx-hw:explore [topic]
+/synspec:explore [topic]
 ```
 
 **Arguments:**
@@ -42,11 +42,11 @@ Think through ideas, investigate problems, and clarify requirements before commi
 - Investigates the codebase to answer questions
 - Compares options and approaches
 - Creates visual diagrams to clarify thinking
-- Can transition to `/opsx-hw:new` when insights crystallize
+- Can transition to `/synspec:new` when insights crystallize
 
 **Example:**
 ```text
-You: /opsx-hw:explore
+You: /synspec:explore
 
 AI:  What would you like to explore?
 
@@ -66,7 +66,7 @@ AI:  Let me investigate your current auth setup...
 
 You: Let's go with JWT. Can we start a change for that?
 
-AI:  Ready when you are. Run /opsx-hw:new add-jwt-auth to begin.
+AI:  Ready when you are. Run /synspec:new add-jwt-auth to begin.
 ```
 
 **Tips:**
@@ -77,13 +77,13 @@ AI:  Ready when you are. Run /opsx-hw:new add-jwt-auth to begin.
 
 ---
 
-### `/opsx-hw:new`
+### `/synspec:new`
 
 Start a new change. Creates the change folder structure and scaffolds it with the selected schema.
 
 **Syntax:**
 ```
-/opsx-hw:new [change-name] [--schema <schema-name>]
+/synspec:new [change-name] [--schema <schema-name>]
 ```
 
 **Arguments:**
@@ -93,42 +93,42 @@ Start a new change. Creates the change folder structure and scaffolds it with th
 | `--schema` | No | Workflow schema to use (default: from config or `spec-driven`) |
 
 **What it does:**
-- Creates `openspec/changes/<change-name>/` directory
-- Creates `.openspec.yaml` metadata file in the change folder
+- Creates `synergyspec/changes/<change-name>/` directory
+- Creates `.synergyspec.yaml` metadata file in the change folder
 - Shows the first artifact template ready for creation
 - Prompts for change name and schema if not provided
 
 **What it creates:**
 ```
-openspec/changes/<change-name>/
-└── .openspec.yaml    # Change metadata (schema, created date)
+synergyspec/changes/<change-name>/
+└── .synergyspec.yaml    # Change metadata (schema, created date)
 ```
 
 **Example:**
 ```
-You: /opsx-hw:new add-dark-mode
+You: /synspec:new add-dark-mode
 
-AI:  Created openspec/changes/add-dark-mode/
+AI:  Created synergyspec/changes/add-dark-mode/
      Schema: spec-driven
 
      Ready to create: proposal
-     Use /opsx-hw:continue to create it, or /opsx-hw:ff to create all artifacts.
+     Use /synspec:continue to create it, or /synspec:ff to create all artifacts.
 ```
 
 **Tips:**
 - Use descriptive names: `add-feature`, `fix-bug`, `refactor-module`
 - Avoid generic names like `update`, `changes`, `wip`
-- Schema can also be set in project config (`openspec/config.yaml`)
+- Schema can also be set in project config (`synergyspec/config.yaml`)
 
 ---
 
-### `/opsx-hw:continue`
+### `/synspec:continue`
 
 Create the next artifact in the dependency chain. Creates one artifact at a time for incremental progress.
 
 **Syntax:**
 ```
-/opsx-hw:continue [change-name]
+/synspec:continue [change-name]
 ```
 
 **Arguments:**
@@ -145,7 +145,7 @@ Create the next artifact in the dependency chain. Creates one artifact at a time
 
 **Example:**
 ```
-You: /opsx-hw:continue
+You: /synspec:continue
 
 AI:  Change: add-dark-mode
 
@@ -159,10 +159,10 @@ AI:  Change: add-dark-mode
 
      [Reads proposal.md, creates specs based on requirements]
 
-     ✓ Created openspec/changes/add-dark-mode/specs/ui/spec.md
+     ✓ Created synergyspec/changes/add-dark-mode/specs/ui/spec.md
 
      Now available: tasks
-     Run /opsx-hw:continue to create the next artifact.
+     Run /synspec:continue to create the next artifact.
 ```
 
 **Tips:**
@@ -173,13 +173,13 @@ AI:  Change: add-dark-mode
 
 ---
 
-### `/opsx-hw:ff`
+### `/synspec:ff`
 
 Fast-forward through artifact creation. Creates all planning artifacts at once.
 
 **Syntax:**
 ```
-/opsx-hw:ff [change-name]
+/synspec:ff [change-name]
 ```
 
 **Arguments:**
@@ -195,7 +195,7 @@ Fast-forward through artifact creation. Creates all planning artifacts at once.
 
 **Example:**
 ```
-You: /opsx-hw:ff add-dark-mode
+You: /synspec:ff add-dark-mode
 
 AI:  Fast-forwarding add-dark-mode...
 
@@ -205,24 +205,24 @@ AI:  Fast-forwarding add-dark-mode...
      ✓ Creating tasks.md
 
      All planning artifacts complete!
-     Ready for implementation. Run /opsx-hw:apply to begin.
+     Ready for implementation. Run /synspec:apply to begin.
 ```
 
 **Tips:**
 - Use when you have a clear picture of what you're building
-- Faster than `/opsx-hw:continue` for straightforward changes
+- Faster than `/synspec:continue` for straightforward changes
 - You can still edit artifacts afterward
 - Good for small to medium features
 
 ---
 
-### `/opsx-hw:apply`
+### `/synspec:apply`
 
 Implement tasks from the change. Works through the task list, writing code and checking off items.
 
 **Syntax:**
 ```
-/opsx-hw:apply [change-name]
+/synspec:apply [change-name]
 ```
 
 **Arguments:**
@@ -238,7 +238,7 @@ Implement tasks from the change. Works through the task list, writing code and c
 
 **Example:**
 ```
-You: /opsx-hw:apply
+You: /synspec:apply
 
 AI:  Implementing add-dark-mode...
 
@@ -266,13 +266,13 @@ AI:  Implementing add-dark-mode...
 
 ---
 
-### `/opsx-hw:verify`
+### `/synspec:verify`
 
 Validate that implementation matches your change artifacts. Checks completeness, correctness, and coherence.
 
 **Syntax:**
 ```
-/opsx-hw:verify [change-name]
+/synspec:verify [change-name]
 ```
 
 **Arguments:**
@@ -296,7 +296,7 @@ Validate that implementation matches your change artifacts. Checks completeness,
 
 **Example:**
 ```
-You: /opsx-hw:verify
+You: /synspec:verify
 
 AI:  Verifying add-dark-mode...
 
@@ -334,13 +334,13 @@ AI:  Verifying add-dark-mode...
 
 ---
 
-### `/opsx-hw:sync`
+### `/synspec:sync`
 
 **Optional command.** Merge delta specs from a change into main specs. Archive will prompt to sync if needed, so you typically don't need to run this manually.
 
 **Syntax:**
 ```
-/opsx-hw:sync [change-name]
+/synspec:sync [change-name]
 ```
 
 **Arguments:**
@@ -351,27 +351,27 @@ AI:  Verifying add-dark-mode...
 **What it does:**
 - Reads delta specs from change folder
 - Parses ADDED/MODIFIED/REMOVED/RENAMED sections
-- Merges changes into main `openspec/specs/` directory
+- Merges changes into main `synergyspec/specs/` directory
 - Preserves existing content not mentioned in delta
 - Does not archive the change (remains active)
 
 **Example:**
 ```text
-You: /opsx-hw:sync
+You: /synspec:sync
 
 AI:  Syncing add-dark-mode delta specs...
 
-     Reading: openspec/changes/add-dark-mode/specs/ui/spec.md
-     Target:  openspec/specs/ui/spec.md
+     Reading: synergyspec/changes/add-dark-mode/specs/ui/spec.md
+     Target:  synergyspec/specs/ui/spec.md
 
      Changes to apply:
      ✓ ADDED: Theme Selection requirement (2 scenarios)
      ✓ ADDED: Accessibility requirement (1 scenario)
 
      Merging...
-     ✓ openspec/specs/ui/spec.md updated
+     ✓ synergyspec/specs/ui/spec.md updated
 
-     Change remains active. Run /opsx-hw:archive when ready to complete.
+     Change remains active. Run /synspec:archive when ready to complete.
 ```
 
 **When to use manually:**
@@ -391,13 +391,13 @@ AI:  Syncing add-dark-mode delta specs...
 
 ---
 
-### `/opsx-hw:archive`
+### `/synspec:archive`
 
 Archive a completed change. Finalizes the change and moves it to the archive folder.
 
 **Syntax:**
 ```
-/opsx-hw:archive [change-name]
+/synspec:archive [change-name]
 ```
 
 **Arguments:**
@@ -409,12 +409,12 @@ Archive a completed change. Finalizes the change and moves it to the archive fol
 - Checks artifact completion status
 - Checks task completion (warns if incomplete)
 - Offers to sync delta specs if not already synced
-- Moves change folder to `openspec/changes/archive/YYYY-MM-DD-<name>/`
+- Moves change folder to `synergyspec/changes/archive/YYYY-MM-DD-<name>/`
 - Preserves all artifacts for audit trail
 
 **Example:**
 ```text
-You: /opsx-hw:archive
+You: /synspec:archive
 
 AI:  Archiving add-dark-mode...
 
@@ -429,8 +429,8 @@ AI:  Archiving add-dark-mode...
 
 You: Yes
 
-AI:  ✓ Synced specs to openspec/specs/ui/spec.md
-     ✓ Moved to openspec/changes/archive/2025-01-24-add-dark-mode/
+AI:  ✓ Synced specs to synergyspec/specs/ui/spec.md
+     ✓ Moved to synergyspec/changes/archive/2025-01-24-add-dark-mode/
 
      Change archived successfully.
 ```
@@ -439,17 +439,17 @@ AI:  ✓ Synced specs to openspec/specs/ui/spec.md
 - Archive won't block on incomplete tasks, but will warn
 - Delta specs can be synced during archive or beforehand
 - Archived changes are preserved for history
-- Use `/opsx-hw:verify` first to catch issues
+- Use `/synspec:verify` first to catch issues
 
 ---
 
-### `/opsx-hw:bulk-archive`
+### `/synspec:bulk-archive`
 
 Archive multiple completed changes at once. Handles spec conflicts between changes.
 
 **Syntax:**
 ```
-/opsx-hw:bulk-archive [change-names...]
+/synspec:bulk-archive [change-names...]
 ```
 
 **Arguments:**
@@ -466,7 +466,7 @@ Archive multiple completed changes at once. Handles spec conflicts between chang
 
 **Example:**
 ```
-You: /opsx-hw:bulk-archive
+You: /synspec:bulk-archive
 
 AI:  Found 3 completed changes:
      - add-dark-mode (8/8 tasks complete)
@@ -499,13 +499,13 @@ AI:  ✓ Archived add-dark-mode
 
 ---
 
-### `/opsx-hw:onboard`
+### `/synspec:onboard`
 
-Guided onboarding through the complete OpenSpec workflow. An interactive tutorial using your actual codebase.
+Guided onboarding through the complete SynergySpec workflow. An interactive tutorial using your actual codebase.
 
 **Syntax:**
 ```
-/opsx-hw:onboard
+/synspec:onboard
 ```
 
 **What it does:**
@@ -519,21 +519,21 @@ Guided onboarding through the complete OpenSpec workflow. An interactive tutoria
 **Phases:**
 1. Welcome and codebase analysis
 2. Finding an improvement opportunity
-3. Creating a change (`/opsx-hw:new`)
+3. Creating a change (`/synspec:new`)
 4. Writing the proposal
 5. Creating specs
 6. Writing the design
 7. Creating tasks
-8. Implementing tasks (`/opsx-hw:apply`)
+8. Implementing tasks (`/synspec:apply`)
 9. Verifying implementation
 10. Archiving the change
 11. Summary and next steps
 
 **Example:**
 ```
-You: /opsx-hw:onboard
+You: /synspec:onboard
 
-AI:  Welcome to OpenSpec!
+AI:  Welcome to SynergySpec!
 
      I'll walk you through the complete workflow using your actual codebase.
      We'll find something small to improve, create a proper change for it,
@@ -565,11 +565,11 @@ Different AI tools use slightly different command syntax. Use the format that ma
 
 | Tool | Syntax Example |
 |------|----------------|
-| Claude Code | `/opsx-hw:new`, `/opsx-hw:apply` |
-| Cursor | `/opsx-new`, `/opsx-apply` |
-| Windsurf | `/opsx-new`, `/opsx-apply` |
-| Copilot (IDE) | `/opsx-new`, `/opsx-apply` |
-| Trae | `/openspec-new-change`, `/openspec-apply-change` |
+| Claude Code | `/synspec:new`, `/synspec:apply` |
+| Cursor | `/synspec-new`, `/synspec-apply` |
+| Windsurf | `/synspec-new`, `/synspec-apply` |
+| Copilot (IDE) | `/synspec-new`, `/synspec-apply` |
+| Trae | `/synergyspec-new-change`, `/synergyspec-apply-change` |
 
 The functionality is identical regardless of syntax.
 
@@ -604,8 +604,8 @@ Legacy changes can be continued with OPSX commands. The artifact structure is co
 The command couldn't identify which change to work on.
 
 **Solutions:**
-- Specify the change name explicitly: `/opsx-hw:apply add-dark-mode`
-- Check that the change folder exists: `openspec-hw list`
+- Specify the change name explicitly: `/synspec:apply add-dark-mode`
+- Check that the change folder exists: `synergyspec-hw list`
 - Verify you're in the right project directory
 
 ### "No artifacts ready"
@@ -613,7 +613,7 @@ The command couldn't identify which change to work on.
 All artifacts are either complete or blocked by missing dependencies.
 
 **Solutions:**
-- Run `openspec-hw status --change <name>` to see what's blocking
+- Run `synergyspec-hw status --change <name>` to see what's blocking
 - Check if required artifacts exist
 - Create missing dependency artifacts first
 
@@ -622,17 +622,17 @@ All artifacts are either complete or blocked by missing dependencies.
 The specified schema doesn't exist.
 
 **Solutions:**
-- List available schemas: `openspec-hw schemas`
+- List available schemas: `synergyspec-hw schemas`
 - Check spelling of schema name
-- Create the schema if it's custom: `openspec-hw schema init <name>`
+- Create the schema if it's custom: `synergyspec-hw schema init <name>`
 
 ### Commands not recognized
 
-The AI tool doesn't recognize OpenSpec commands.
+The AI tool doesn't recognize SynergySpec commands.
 
 **Solutions:**
-- Ensure OpenSpec is initialized: `openspec-hw init`
-- Regenerate skills: `openspec-hw update`
+- Ensure SynergySpec is initialized: `synergyspec-hw init`
+- Regenerate skills: `synergyspec-hw update`
 - Check that `.claude/skills/` directory exists (for Claude Code)
 - Restart your AI tool to pick up new skills
 
@@ -641,10 +641,10 @@ The AI tool doesn't recognize OpenSpec commands.
 The AI creates incomplete or incorrect artifacts.
 
 **Solutions:**
-- Add project context in `openspec/config.yaml`
+- Add project context in `synergyspec/config.yaml`
 - Add per-artifact rules for specific guidance
 - Provide more detail in your change description
-- Use `/opsx-hw:continue` instead of `/opsx-hw:ff` for more control
+- Use `/synspec:continue` instead of `/synspec:ff` for more control
 
 ---
 

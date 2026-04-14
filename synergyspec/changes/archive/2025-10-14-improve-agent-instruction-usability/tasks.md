@@ -1,5 +1,5 @@
 ## 1. Instruction redesign
-- [x] 1.1 Draft a quick-reference section that surfaces file templates and formatting rules at the top of `openspec/AGENTS.md`.
+- [x] 1.1 Draft a quick-reference section that surfaces file templates and formatting rules at the top of `synergyspec/AGENTS.md`.
 - [x] 1.2 Reorganize the workflow narrative with inline examples and progressive disclosure for advanced topics.
 
 ## 2. Templates and checklists

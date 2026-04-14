@@ -9,15 +9,15 @@ The update command SHALL update only existing AI tool configuration files and SH
 - **WHEN** a user runs `openspec update`
 - **THEN** update each AI tool configuration file that exists (e.g., CLAUDE.md, COPILOT.md)
 - **AND** do not create missing tool configuration files
-- **AND** preserve user content outside OpenSpec markers
+- **AND** preserve user content outside SynergySpec markers
 
 ### Requirement: Core Files Always Updated
 
-The update command SHALL always update the core OpenSpec files and display an ASCII-safe success message.
+The update command SHALL always update the core SynergySpec files and display an ASCII-safe success message.
 
 #### Scenario: Successful update
 
 - **WHEN** the update completes successfully
-- **THEN** replace `openspec/README.md` with the latest template
+- **THEN** replace `synergyspec/README.md` with the latest template
 - **AND** update existing AI tool configuration files within markers
-- **AND** display the message: "Updated OpenSpec instructions"
+- **AND** display the message: "Updated SynergySpec instructions"

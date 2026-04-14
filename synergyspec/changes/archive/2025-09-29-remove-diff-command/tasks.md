@@ -6,7 +6,7 @@
 - [x] Remove diff command registration from CLI
 
 ## 2. Remove Specifications
-- [x] Delete `/openspec/specs/cli-diff/spec.md`
+- [x] Delete `/synergyspec/specs/cli-diff/spec.md`
 - [x] Archive the spec for historical reference if needed
 
 ## 3. Update Dependencies
@@ -15,7 +15,7 @@
 
 ## 4. Update Documentation
 - [x] Update main README.md to remove diff command references
-- [x] Update openspec/README.md to remove diff command from command list
+- [x] Update synergyspec/README.md to remove diff command from command list
 - [x] Update CLAUDE.md template if it mentions diff command
 - [x] Update any example workflows that use diff command
 

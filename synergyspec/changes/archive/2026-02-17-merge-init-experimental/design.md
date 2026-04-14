@@ -2,8 +2,8 @@
 
 Currently `openspec init` and `openspec experimental` are separate commands with distinct purposes:
 
-- **init**: Creates `openspec/` directory, generates `AGENTS.md`/`project.md`, configures tool config files (`CLAUDE.md`, etc.), generates old slash commands (`/openspec:proposal`, etc.)
-- **experimental**: Generates skills (9 per tool), generates opsx slash commands (`/opsx-hw:new`, etc.), creates `config.yaml`
+- **init**: Creates `synergyspec/` directory, generates `AGENTS.md`/`project.md`, configures tool config files (`CLAUDE.md`, etc.), generates old slash commands (`/openspec:proposal`, etc.)
+- **experimental**: Generates skills (9 per tool), generates opsx slash commands (`/synspec:new`, etc.), creates `config.yaml`
 
 The skill-based workflow (experimental) is the direction we're going, so we're making it the default by merging into `init`.
 
@@ -45,30 +45,30 @@ The skill-based workflow (experimental) is the direction we're going, so we're m
 
 ### Decision 3: Surgical removal of legacy content
 
-**Choice**: For files with mixed content (OpenSpec markers + user content), only remove the OpenSpec marker block. For files that are 100% OpenSpec content, delete the entire file.
+**Choice**: For files with mixed content (SynergySpec markers + user content), only remove the SynergySpec marker block. For files that are 100% SynergySpec content, delete the entire file.
 
-**Rationale**: Respects user customizations. CLAUDE.md might have other instructions beyond OpenSpec.
+**Rationale**: Respects user customizations. CLAUDE.md might have other instructions beyond SynergySpec.
 
 **Edge cases**:
 - **Config files with mixed content**: Remove only `<!-- OPENSPEC:START -->` to `<!-- OPENSPEC:END -->` block
-- **Config files that are 100% OpenSpec**: Delete file entirely (check if content outside markers is empty/whitespace)
-- **Old slash command directories** (`.claude/commands/openspec/`): Delete entire directory (ours)
-- **`openspec/AGENTS.md`**: Delete (ours)
-- **Root `AGENTS.md`**: Only remove OpenSpec marker block, preserve rest
+- **Config files that are 100% SynergySpec**: Delete file entirely (check if content outside markers is empty/whitespace)
+- **Old slash command directories** (`.claude/commands/synergyspec/`): Delete entire directory (ours)
+- **`synergyspec/AGENTS.md`**: Delete (ours)
+- **Root `AGENTS.md`**: Only remove SynergySpec marker block, preserve rest
 
 ### Decision 6: Preserve project.md with migration hint
 
-**Choice**: Do NOT auto-delete `openspec/project.md`. Preserve it and show a message directing users to manually migrate content to `config.yaml`'s `context:` field.
+**Choice**: Do NOT auto-delete `synergyspec/project.md`. Preserve it and show a message directing users to manually migrate content to `config.yaml`'s `context:` field.
 
 **Rationale**:
 - `project.md` may contain valuable user-written project documentation
 - The new workflow uses `config.yaml.context` for the same purpose (auto-injected into artifacts)
 - Auto-deleting would lose user content; auto-migrating is complex (needs LLM to compress)
-- Users can migrate manually or use `/opsx-hw:explore` to get AI assistance
+- Users can migrate manually or use `/synspec:explore` to get AI assistance
 
 **Migration path**:
-1. During legacy cleanup, detect `openspec/project.md` but do not delete
-2. Show in output: "openspec/project.md still exists - migrate content to config.yaml's context: field, then delete"
+1. During legacy cleanup, detect `synergyspec/project.md` but do not delete
+2. Show in output: "synergyspec/project.md still exists - migrate content to config.yaml's context: field, then delete"
 3. User migrates manually or asks Claude in explore mode: "help me migrate project.md to config.yaml"
 4. User deletes project.md when ready
 
@@ -104,22 +104,22 @@ The skill-based workflow (experimental) is the direction we're going, so we're m
 ### What init creates (after merge)
 
 ```
-openspec/
+synergyspec/
   ├── config.yaml           # Schema settings (from experimental)
   ├── specs/                # Empty, for user's specs
   └── changes/              # Empty, for user's changes
       └── archive/
 
 .<tool>/skills/             # 9 skills per selected tool
-  ├── openspec-explore/SKILL.md
-  ├── openspec-new-change/SKILL.md
-  ├── openspec-continue-change/SKILL.md
-  ├── openspec-apply-change/SKILL.md
-  ├── openspec-ff-change/SKILL.md
-  ├── openspec-verify-change/SKILL.md
-  ├── openspec-sync-specs/SKILL.md
-  ├── openspec-archive-change/SKILL.md
-  └── openspec-bulk-archive-change/SKILL.md
+  ├── synergyspec-explore/SKILL.md
+  ├── synergyspec-new-change/SKILL.md
+  ├── synergyspec-continue-change/SKILL.md
+  ├── synergyspec-apply-change/SKILL.md
+  ├── synergyspec-ff-change/SKILL.md
+  ├── synergyspec-verify-change/SKILL.md
+  ├── synergyspec-sync-specs/SKILL.md
+  ├── synergyspec-archive-change/SKILL.md
+  └── synergyspec-bulk-archive-change/SKILL.md
 
 .<tool>/commands/opsx/      # 9 slash commands per selected tool
   ├── explore.md
@@ -136,20 +136,20 @@ openspec/
 ### What init no longer creates
 
 - `CLAUDE.md`, `.cursorrules`, `.windsurfrules`, etc. (config files)
-- `openspec/AGENTS.md`
-- `openspec/project.md`
+- `synergyspec/AGENTS.md`
+- `synergyspec/project.md`
 - Root `AGENTS.md` stub
-- `.claude/commands/openspec/` (old slash commands)
+- `.claude/commands/synergyspec/` (old slash commands)
 
 ### Legacy detection targets
 
 | Artifact Type | Detection Method | Removal Method |
 |--------------|------------------|----------------|
-| Config files (CLAUDE.md, etc.) | File exists AND contains OpenSpec markers | Remove marker block; delete file if empty after |
-| Old slash command dirs | Directory exists at `.<tool>/commands/openspec/` | Delete entire directory |
-| openspec/AGENTS.md | File exists at `openspec/AGENTS.md` | Delete file |
-| openspec/project.md | File exists at `openspec/project.md` | **Preserve** - show migration hint only |
-| Root AGENTS.md | File exists at `AGENTS.md` AND contains OpenSpec markers | Remove marker block; delete file if empty after |
+| Config files (CLAUDE.md, etc.) | File exists AND contains SynergySpec markers | Remove marker block; delete file if empty after |
+| Old slash command dirs | Directory exists at `.<tool>/commands/synergyspec/` | Delete entire directory |
+| synergyspec/AGENTS.md | File exists at `synergyspec/AGENTS.md` | Delete file |
+| synergyspec/project.md | File exists at `synergyspec/project.md` | **Preserve** - show migration hint only |
+| Root AGENTS.md | File exists at `AGENTS.md` AND contains SynergySpec markers | Remove marker block; delete file if empty after |
 
 ### Code to remove
 
@@ -177,10 +177,10 @@ openspec/
 
 1. **What happens to `openspec update`?** - RESOLVED
 
-   **Current behavior**: Updates `openspec/AGENTS.md`, config files (`CLAUDE.md`, etc.) via `ToolRegistry`, and old slash commands (`/openspec:*`) via `SlashCommandRegistry`.
+   **Current behavior**: Updates `synergyspec/AGENTS.md`, config files (`CLAUDE.md`, etc.) via `ToolRegistry`, and old slash commands (`/openspec:*`) via `SlashCommandRegistry`.
 
    **New behavior**: Rewrite to refresh skills and opsx commands instead:
-   - Detect which tools have skills installed (check for `.claude/skills/openspec-*/`, etc.)
+   - Detect which tools have skills installed (check for `.claude/skills/synergyspec-*/`, etc.)
    - Refresh all 9 skill files per installed tool using `skill-templates.ts`
    - Refresh all 9 opsx command files per installed tool using `command-generation/` adapters
    - Remove imports of `ToolRegistry`, `SlashCommandRegistry`, `agentsTemplate`

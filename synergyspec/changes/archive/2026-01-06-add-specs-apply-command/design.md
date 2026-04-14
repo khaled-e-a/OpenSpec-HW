@@ -10,7 +10,7 @@ Users want flexibility to sync specs earlier, especially when iterating. The arc
 
 **Goals:**
 - Decouple spec syncing from archiving
-- Provide `/opsx-hw:sync` skill for agents to sync specs on demand
+- Provide `/synspec:sync` skill for agents to sync specs on demand
 - Keep operation idempotent (safe to run multiple times)
 
 **Non-Goals:**
@@ -40,12 +40,12 @@ Users want flexibility to sync specs earlier, especially when iterating. The arc
 - Simpler implementation and mental model
 
 **Alternatives considered**:
-- Track `specsSynced: true` in `.openspec.yaml` (rejected: unnecessary complexity)
+- Track `specsSynced: true` in `.synergyspec.yaml` (rejected: unnecessary complexity)
 - Store snapshot of synced deltas (rejected: over-engineering)
 
 ### 3. Agent-driven approach (no CLI command)
 
-**Decision**: The `/opsx-hw:sync` skill is fully agent-driven - the agent reads delta specs and directly edits main specs.
+**Decision**: The `/synspec:sync` skill is fully agent-driven - the agent reads delta specs and directly edits main specs.
 
 **Rationale**:
 - Allows intelligent merging (add scenarios without copying entire requirements)
@@ -57,7 +57,7 @@ Users want flexibility to sync specs earlier, especially when iterating. The arc
 
 **Decision**: Archive continues to apply specs as part of its flow. If specs are already reconciled, the operation is a no-op.
 
-**Rationale**: Backward compatibility. Users who don't use `/opsx-hw:sync` get the same experience.
+**Rationale**: Backward compatibility. Users who don't use `/synspec:sync` get the same experience.
 
 ## Risks / Trade-offs
 
@@ -65,7 +65,7 @@ Users want flexibility to sync specs earlier, especially when iterating. The arc
 → Last to sync wins. Same as today with archive. Users should coordinate or use sequential archives.
 
 **[Risk] User syncs specs then continues editing deltas**
-→ Running `/opsx-hw:sync` again reconciles. Idempotent design handles this.
+→ Running `/synspec:sync` again reconciles. Idempotent design handles this.
 
 **[Trade-off] No undo mechanism**
 → Users can `git checkout` main specs if needed. Explicit undo command is out of scope.
@@ -73,5 +73,5 @@ Users want flexibility to sync specs earlier, especially when iterating. The arc
 ## Implementation Approach
 
 1. Extract spec application logic from `ArchiveCommand.buildUpdatedSpec()` into `src/core/specs-apply.ts`
-2. Add skill template for `/opsx-hw:sync` in `skill-templates.ts`
+2. Add skill template for `/synspec:sync` in `skill-templates.ts`
 3. Register skill in managed skills

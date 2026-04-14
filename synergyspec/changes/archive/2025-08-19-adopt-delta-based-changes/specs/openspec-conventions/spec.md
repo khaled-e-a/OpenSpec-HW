@@ -1,4 +1,4 @@
-# OpenSpec Conventions - Changes
+# SynergySpec Conventions - Changes
 
 ## MODIFIED Requirements
 

@@ -11,7 +11,7 @@ Validation output SHALL include specific guidance to fix each error, including e
 - **WHEN** validating a change with zero parsed deltas
 - **THEN** show error "No deltas found" with guidance:
   - Explain that change specs must include `## ADDED Requirements`, `## MODIFIED Requirements`, `## REMOVED Requirements`, or `## RENAMED Requirements`
-  - Remind authors that files must live under `openspec/changes/{id}/specs/<capability>/spec.md`
+  - Remind authors that files must live under `synergyspec/changes/{id}/specs/<capability>/spec.md`
   - Include an explicit note: "Spec delta files cannot start with titles before the operation headers"
   - Suggest running `openspec change show {id} --json --deltas-only` for debugging
 
@@ -21,14 +21,14 @@ Validation output SHALL include specific guidance to fix each error, including e
   - For Spec: `## Purpose`, `## Requirements`
   - For Change: `## Why`, `## What Changes`
   - Provide an example snippet of the missing section with placeholder prose ready to copy
-  - Mention the quick-reference section in `openspec/AGENTS.md` as the authoritative template
+  - Mention the quick-reference section in `synergyspec/AGENTS.md` as the authoritative template
 
 #### Scenario: Missing requirement descriptive text
 - **WHEN** a requirement header lacks descriptive text before scenarios
 - **THEN** emit an error explaining that `### Requirement:` lines must be followed by narrative text before any `#### Scenario:` headers
   - Show compliant example: "### Requirement: Foo" followed by "The system SHALL ..."
   - Suggest adding 1-2 sentences describing the normative behavior prior to listing scenarios
-  - Reference the pre-validation checklist in `openspec/AGENTS.md`
+  - Reference the pre-validation checklist in `synergyspec/AGENTS.md`
 
 ### Requirement: Validator SHALL detect likely misformatted scenarios and warn with a fix
 The validator SHALL recognize bulleted lines that look like scenarios (e.g., lines beginning with WHEN/THEN/AND) and emit a targeted warning with a conversion example to `#### Scenario:`.
@@ -45,7 +45,7 @@ The validator SHALL recognize bulleted lines that look like scenarios (e.g., lin
 
 ### Requirement: All issues SHALL include file paths and structured locations
 Error, warning, and info messages SHALL include:
-- Source file path (`openspec/changes/{id}/proposal.md`, `.../specs/{cap}/spec.md`)
+- Source file path (`synergyspec/changes/{id}/proposal.md`, `.../specs/{cap}/spec.md`)
 - Structured path (e.g., `deltas[0].requirements[0].scenarios`)
 
 #### Scenario: Zod validation error
@@ -94,31 +94,31 @@ The validate command SHALL support flags for bulk validation (--all) and filtere
 #### Scenario: Validate everything
 
 - **WHEN** executing `openspec validate --all`
-- **THEN** validate all changes in openspec/changes/ (excluding archive)
-- **AND** validate all specs in openspec/specs/
+- **THEN** validate all changes in synergyspec/changes/ (excluding archive)
+- **AND** validate all specs in synergyspec/specs/
 - **AND** display a summary showing passed/failed items
 - **AND** exit with code 1 if any validation fails
 
 #### Scenario: Scope of bulk validation
 
 - **WHEN** validating with `--all` or `--changes`
-- **THEN** include all change proposals under `openspec/changes/`
-- **AND** exclude the `openspec/changes/archive/` directory
+- **THEN** include all change proposals under `synergyspec/changes/`
+- **AND** exclude the `synergyspec/changes/archive/` directory
 
 - **WHEN** validating with `--specs`
-- **THEN** include all specs that have a `spec.md` under `openspec/specs/<id>/spec.md`
+- **THEN** include all specs that have a `spec.md` under `synergyspec/specs/<id>/spec.md`
 
 #### Scenario: Validate all changes
 
 - **WHEN** executing `openspec validate --changes`
-- **THEN** validate all changes in openspec/changes/ (excluding archive)
+- **THEN** validate all changes in synergyspec/changes/ (excluding archive)
 - **AND** display results for each change
 - **AND** show summary statistics
 
 #### Scenario: Validate all specs
 
 - **WHEN** executing `openspec validate --specs`
-- **THEN** validate all specs in openspec/specs/
+- **THEN** validate all specs in synergyspec/specs/
 - **AND** display results for each spec
 - **AND** show summary statistics
 

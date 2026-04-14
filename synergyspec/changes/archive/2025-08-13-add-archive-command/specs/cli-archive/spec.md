@@ -1,7 +1,7 @@
 # CLI Archive Command Specification
 
 ## Purpose
-The archive command moves completed changes from the active changes directory to the archive folder with date-based naming, following OpenSpec conventions.
+The archive command moves completed changes from the active changes directory to the archive folder with date-based naming, following SynergySpec conventions.
 
 ## Command Syntax
 ```bash
@@ -57,7 +57,7 @@ THEN:
 2. Display a summary of spec updates to the user (see Confirmation Behavior below)
 3. Prompt for confirmation unless `--yes` flag is provided
 4. If confirmed, for each capability spec in the change directory:
-   - Copy the spec from `changes/[name]/specs/[capability]/spec.md` to `openspec/specs/[capability]/spec.md`
+   - Copy the spec from `changes/[name]/specs/[capability]/spec.md` to `synergyspec/specs/[capability]/spec.md`
    - Create the target directory structure if it doesn't exist
    - Overwrite existing spec files (specs represent current reality, change specs are the new reality)
    - Track which specs were updated for the success message
@@ -95,7 +95,7 @@ AND exit with non-zero status code
 ## Error Handling
 
 SHALL handle the following error conditions:
-- Missing openspec/changes/ directory
+- Missing synergyspec/changes/ directory
 - Change not found
 - Archive target already exists
 - File system permissions issues

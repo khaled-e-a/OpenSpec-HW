@@ -6,14 +6,14 @@ The goal: **get users to an "aha moment" in under a minute**.
 
 ```text
 0:00  $ openspec init
-      ✓ Done. Run /opsx-hw:propose "your idea"
+      ✓ Done. Run /synspec:propose "your idea"
 
-0:15  /opsx-hw:propose "add user authentication"
+0:15  /synspec:propose "add user authentication"
 
 0:45  Agent creates proposal.md, design.md, tasks.md
       "Whoa, it planned the whole thing for me" ← AHA
 
-1:00  /opsx-hw:apply
+1:00  /synspec:apply
 ```
 
 Additionally, users have different preferences for how workflows are delivered (skills vs commands vs both), but this should be a power-user configuration, not something new users think about.
@@ -34,11 +34,11 @@ Detected tools:
 
 Press Enter to confirm, or Space to toggle
 
-Setting up OpenSpec...
+Setting up SynergySpec...
 ✓ Done
 
 Start your first change:
-  /opsx-hw:propose "add dark mode"
+  /synspec:propose "add dark mode"
 ```
 
 **No prompts for profile or delivery.** Defaults are:
@@ -74,7 +74,7 @@ The `propose` workflow is new - it combines `new` + `ff` into a single command t
 
 ### 5. Improved Propose UX
 
-`/opsx-hw:propose` should naturally onboard users by explaining what it's doing:
+`/synspec:propose` should naturally onboard users by explaining what it's doing:
 
 ```text
 I'll create a change with 3 artifacts:
@@ -82,7 +82,7 @@ I'll create a change with 3 artifacts:
 - design.md (how)
 - tasks.md (implementation steps)
 
-When ready to implement, run /opsx-hw:apply
+When ready to implement, run /synspec:apply
 ```
 
 This teaches as it goes - no separate onboarding needed for most users.
@@ -95,7 +95,7 @@ Delivery controls how workflows are installed:
 - **skills**: Skills only
 - **commands**: Commands only
 
-Stored in existing global config (`~/.config/openspec/config.json`). Not prompted during init.
+Stored in existing global config (`~/.config/synergyspec/config.json`). Not prompted during init.
 
 ### 7. New CLI Commands
 
@@ -184,7 +184,7 @@ After migration, subsequent `init` and `update` commands respect the migrated co
 
 ### Global Config Schema Extension
 ```json
-// ~/.config/openspec/config.json (extends existing)
+// ~/.config/synergyspec/config.json (extends existing)
 {
   "telemetry": { ... },          // existing
   "featureFlags": { ... },       // existing

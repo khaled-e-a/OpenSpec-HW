@@ -20,7 +20,7 @@ Path metadata SHALL support both project and global install targets via resolver
 - **WHEN** effective scope is `project` for skills
 - **THEN** `skillsDir` SHALL be treated as a tool-specific container path under project root
 - **AND** managed skill artifacts SHALL be written under `<projectRoot>/<skillsDir>/skills/`
-- **AND** tool definitions SHALL set `skillsDir` accordingly (for example `.openspec` -> `.openspec/skills/`)
+- **AND** tool definitions SHALL set `skillsDir` accordingly (for example `.openspec` -> `.synergyspec/skills/`)
 
 #### Scenario: Global scope path
 - **WHEN** effective scope is `global` for a supported tool/surface

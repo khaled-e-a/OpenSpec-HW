@@ -69,24 +69,24 @@ export interface CommandTemplateEntry {
  */
 export function getSkillTemplates(workflowFilter?: readonly string[]): SkillTemplateEntry[] {
   const all: SkillTemplateEntry[] = [
-    { template: getExploreSkillTemplate(), dirName: 'openspec-explore', workflowId: 'explore' },
-    { template: getNewChangeSkillTemplate(), dirName: 'openspec-new-change', workflowId: 'new' },
-    { template: getContinueChangeSkillTemplate(), dirName: 'openspec-continue-change', workflowId: 'continue' },
-    { template: getApplyChangeSkillTemplate(), dirName: 'openspec-apply-change', workflowId: 'apply' },
-    { template: getTddSkillTemplate(), dirName: 'openspec-tdd', workflowId: 'tdd' },
-    { template: getFfChangeSkillTemplate(), dirName: 'openspec-ff-change', workflowId: 'ff' },
-    { template: getSyncSpecsSkillTemplate(), dirName: 'openspec-sync-specs', workflowId: 'sync' },
-    { template: getArchiveChangeSkillTemplate(), dirName: 'openspec-archive-change', workflowId: 'archive' },
-    { template: getBulkArchiveChangeSkillTemplate(), dirName: 'openspec-bulk-archive-change', workflowId: 'bulk-archive' },
-    { template: getVerifyChangeSkillTemplate(), dirName: 'openspec-verify-change', workflowId: 'verify' },
-    { template: getVerifySpecSkillTemplate(), dirName: 'openspec-verify-spec', workflowId: 'verify-spec' },
-    { template: getOnboardSkillTemplate(), dirName: 'openspec-onboard', workflowId: 'onboard' },
-    { template: getOpsxProposeSkillTemplate(), dirName: 'openspec-propose', workflowId: 'propose' },
-    { template: getGenTestsSkillTemplate(), dirName: 'openspec-gen-tests', workflowId: 'gen-tests' },
-    { template: getRunTestsSkillTemplate(), dirName: 'openspec-run-tests', workflowId: 'run-tests' },
-    { template: getCiSkillTemplate(), dirName: 'openspec-ci', workflowId: 'ci' },
+    { template: getExploreSkillTemplate(), dirName: 'synergyspec-explore', workflowId: 'explore' },
+    { template: getNewChangeSkillTemplate(), dirName: 'synergyspec-new-change', workflowId: 'new' },
+    { template: getContinueChangeSkillTemplate(), dirName: 'synergyspec-continue-change', workflowId: 'continue' },
+    { template: getApplyChangeSkillTemplate(), dirName: 'synergyspec-apply-change', workflowId: 'apply' },
+    { template: getTddSkillTemplate(), dirName: 'synergyspec-tdd', workflowId: 'tdd' },
+    { template: getFfChangeSkillTemplate(), dirName: 'synergyspec-ff-change', workflowId: 'ff' },
+    { template: getSyncSpecsSkillTemplate(), dirName: 'synergyspec-sync-specs', workflowId: 'sync' },
+    { template: getArchiveChangeSkillTemplate(), dirName: 'synergyspec-archive-change', workflowId: 'archive' },
+    { template: getBulkArchiveChangeSkillTemplate(), dirName: 'synergyspec-bulk-archive-change', workflowId: 'bulk-archive' },
+    { template: getVerifyChangeSkillTemplate(), dirName: 'synergyspec-verify-change', workflowId: 'verify' },
+    { template: getVerifySpecSkillTemplate(), dirName: 'synergyspec-verify-spec', workflowId: 'verify-spec' },
+    { template: getOnboardSkillTemplate(), dirName: 'synergyspec-onboard', workflowId: 'onboard' },
+    { template: getOpsxProposeSkillTemplate(), dirName: 'synergyspec-propose', workflowId: 'propose' },
+    { template: getGenTestsSkillTemplate(), dirName: 'synergyspec-gen-tests', workflowId: 'gen-tests' },
+    { template: getRunTestsSkillTemplate(), dirName: 'synergyspec-run-tests', workflowId: 'run-tests' },
+    { template: getCiSkillTemplate(), dirName: 'synergyspec-ci', workflowId: 'ci' },
     // Utility skills — no workflowId, always installed regardless of profile
-    { template: getCompareImagesSkillTemplate(), dirName: 'openspec-compare-images' },
+    { template: getCompareImagesSkillTemplate(), dirName: 'synergyspec-compare-images' },
   ];
 
   if (!workflowFilter) return all;
@@ -148,7 +148,7 @@ export function getCommandContents(workflowFilter?: readonly string[]): CommandC
  * Generates the list of script files to write for a skill template.
  *
  * @param template - The skill template (may have no scripts)
- * @param skillDir - Absolute path to the skill directory (e.g. `/project/.claude/skills/openspec-compare-images`)
+ * @param skillDir - Absolute path to the skill directory (e.g. `/project/.claude/skills/synergyspec-compare-images`)
  * @returns Array of `{ filePath, content }` objects ready to be written
  */
 export function generateSkillScripts(
@@ -166,7 +166,7 @@ export function generateSkillScripts(
  * Generates skill file content with YAML frontmatter.
  *
  * @param template - The skill template
- * @param generatedByVersion - The OpenSpec version to embed in the file
+ * @param generatedByVersion - The SynergySpec version to embed in the file
  * @param transformInstructions - Optional callback to transform the instructions content
  */
 export function generateSkillContent(
@@ -193,9 +193,9 @@ export function generateSkillContent(
 name: ${quoteYaml(template.name)}
 description: ${quoteYaml(template.description)}
 license: ${quoteYaml(template.license || 'MIT')}
-compatibility: ${quoteYaml(template.compatibility || 'Requires openspec CLI.')}
+compatibility: ${quoteYaml(template.compatibility || 'Requires synergyspec-hw CLI.')}
 metadata:
-  author: ${quoteYaml(template.metadata?.author || 'openspec')}
+  author: ${quoteYaml(template.metadata?.author || 'synergyspec')}
   version: "${template.metadata?.version || '1.0'}"
   generatedBy: "${generatedByVersion}"
 ---

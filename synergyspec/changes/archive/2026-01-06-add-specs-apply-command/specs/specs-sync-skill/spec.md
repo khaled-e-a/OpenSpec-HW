@@ -1,21 +1,21 @@
 ## ADDED Requirements
 
 ### Requirement: Specs Sync Skill
-The system SHALL provide an `/opsx-hw:sync` skill that syncs delta specs from a change to the main specs.
+The system SHALL provide an `/synspec:sync` skill that syncs delta specs from a change to the main specs.
 
 #### Scenario: Sync delta specs to main specs
-- **WHEN** agent executes `/opsx-hw:sync` with a change name
-- **THEN** the agent reads delta specs from `openspec/changes/<name>/specs/`
-- **AND** reads corresponding main specs from `openspec/specs/`
+- **WHEN** agent executes `/synspec:sync` with a change name
+- **THEN** the agent reads delta specs from `synergyspec/changes/<name>/specs/`
+- **AND** reads corresponding main specs from `synergyspec/specs/`
 - **AND** reconciles main specs to match what the deltas describe
 
 #### Scenario: Idempotent operation
-- **WHEN** agent executes `/opsx-hw:sync` multiple times on the same change
+- **WHEN** agent executes `/synspec:sync` multiple times on the same change
 - **THEN** the result is the same as running it once
 - **AND** no duplicate requirements are created
 
 #### Scenario: Change selection prompt
-- **WHEN** agent executes `/opsx-hw:sync` without specifying a change
+- **WHEN** agent executes `/synspec:sync` without specifying a change
 - **THEN** the agent prompts user to select from available changes
 - **AND** shows changes that have delta specs
 
@@ -49,7 +49,7 @@ The agent SHALL reconcile main specs with delta specs using the delta operation 
 
 #### Scenario: New capability spec
 - **WHEN** delta spec exists for a capability not in main specs
-- **THEN** create new main spec file at `openspec/specs/<capability>/spec.md`
+- **THEN** create new main spec file at `synergyspec/specs/<capability>/spec.md`
 
 ### Requirement: Skill Output
 The skill SHALL provide clear feedback on what was synced.

@@ -2,7 +2,7 @@ import { CompletionGenerator, CommandDefinition, FlagDefinition } from '../types
 import { POWERSHELL_DYNAMIC_HELPERS } from '../templates/powershell-templates.js';
 
 /**
- * Generates PowerShell completion scripts for the OpenSpec CLI.
+ * Generates PowerShell completion scripts for the SynergySpec CLI.
  * Uses Register-ArgumentCompleter for command completion.
  */
 export class PowerShellGenerator implements CompletionGenerator {
@@ -41,11 +41,11 @@ export class PowerShellGenerator implements CompletionGenerator {
     const helpers = POWERSHELL_DYNAMIC_HELPERS;
 
     // Assemble final script with template literal
-    return `# PowerShell completion script for OpenSpec CLI
+    return `# PowerShell completion script for SynergySpec CLI
 # Auto-generated - do not edit manually
 
 ${helpers}
-$openspecHwCompleter = {
+$synergyspecHwCompleter = {
     param($wordToComplete, $commandAst, $cursorPosition)
 
     $tokens = $commandAst.ToString() -split "\\s+"
@@ -69,7 +69,7 @@ ${commandCases}
     }
 }
 
-Register-ArgumentCompleter -CommandName openspec-hw -ScriptBlock $openspecHwCompleter
+Register-ArgumentCompleter -CommandName synergyspec-hw -ScriptBlock $synergyspecHwCompleter
 `;
   }
 
@@ -182,17 +182,17 @@ Register-ArgumentCompleter -CommandName openspec-hw -ScriptBlock $openspecHwComp
 
     switch (positionalType) {
       case 'change-id':
-        lines.push(`${indent}Get-OpenSpecChanges | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object {`);
+        lines.push(`${indent}Get-SynergySpecChanges | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object {`);
         lines.push(`${indent}    [System.Management.Automation.CompletionResult]::new($_, $_, "ParameterValue", "Change: $_")`);
         lines.push(`${indent}}`);
         break;
       case 'spec-id':
-        lines.push(`${indent}Get-OpenSpecSpecs | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object {`);
+        lines.push(`${indent}Get-SynergySpecSpecs | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object {`);
         lines.push(`${indent}    [System.Management.Automation.CompletionResult]::new($_, $_, "ParameterValue", "Spec: $_")`);
         lines.push(`${indent}}`);
         break;
       case 'change-or-spec-id':
-        lines.push(`${indent}$items = @(Get-OpenSpecChanges) + @(Get-OpenSpecSpecs)`);
+        lines.push(`${indent}$items = @(Get-SynergySpecChanges) + @(Get-SynergySpecSpecs)`);
         lines.push(`${indent}$items | Where-Object { $_ -like "$wordToComplete*" } | ForEach-Object {`);
         lines.push(`${indent}    [System.Management.Automation.CompletionResult]::new($_, $_, "ParameterValue", $_)`);
         lines.push(`${indent}}`);

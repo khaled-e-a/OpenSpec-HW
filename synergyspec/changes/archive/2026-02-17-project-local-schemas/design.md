@@ -1,10 +1,10 @@
 ## Context
 
-OpenSpec currently resolves schemas from two locations:
-1. User override: `~/.local/share/openspec/schemas/<name>/`
+SynergySpec currently resolves schemas from two locations:
+1. User override: `~/.local/share/synergyspec/schemas/<name>/`
 2. Package built-in: `<npm-package>/schemas/<name>/`
 
-This change adds a third, highest-priority level: project-local schemas at `./openspec/schemas/<name>/`.
+This change adds a third, highest-priority level: project-local schemas at `./synergyspec/schemas/<name>/`.
 
 The resolver functions in `src/core/artifact-graph/resolver.ts` currently don't take a `projectRoot` parameter because user and package paths are absolute. To support project-local schemas, we need to pass project root context into the resolver.
 
@@ -52,8 +52,8 @@ resolveSchema(name: string, projectRoot?: string): SchemaYaml
 - Package built-ins are the fallback defaults
 
 ```
-1. ./openspec/schemas/<name>/              # Project-local (highest)
-2. ~/.local/share/openspec/schemas/<name>/ # User override
+1. ./synergyspec/schemas/<name>/              # Project-local (highest)
+2. ~/.local/share/synergyspec/schemas/<name>/ # User override
 3. <npm-package>/schemas/<name>/           # Package built-in (lowest)
 ```
 
@@ -84,7 +84,7 @@ function getProjectSchemasDir(projectRoot: string): string {
 ## Risks / Trade-offs
 
 ### Risk: Confusion when project schema shadows built-in
-A team could create `openspec/schemas/spec-driven/` that shadows the built-in, causing confusion when someone expects default behavior.
+A team could create `synergyspec/schemas/spec-driven/` that shadows the built-in, causing confusion when someone expects default behavior.
 
 **Mitigation:** The `openspec schemas` command shows the source of each schema. Users can see `spec-driven (project)` vs `spec-driven (package)`.
 

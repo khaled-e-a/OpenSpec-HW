@@ -8,7 +8,7 @@ Validation output SHALL include specific guidance to fix each error, including e
 #### Scenario: No deltas found in change
 - **WHEN** validating a change with zero parsed deltas
 - **THEN** show error "No deltas found" with guidance:
-  - Ensure `openspec/changes/{id}/specs/` exists with `.md` files
+  - Ensure `synergyspec/changes/{id}/specs/` exists with `.md` files
   - Use delta headers: `## ADDED Requirements`, `## MODIFIED Requirements`, `## REMOVED Requirements`, `## RENAMED Requirements`
   - Each requirement must include at least one `#### Scenario:` block
   - Try: `openspec change show {id} --json --deltas-only` to inspect what was parsed
@@ -35,7 +35,7 @@ The validator SHALL recognize bulleted lines that look like scenarios (e.g., lin
 
 ### Requirement: All issues SHALL include file paths and structured locations
 Error, warning, and info messages SHALL include:
-- Source file path (`openspec/changes/{id}/proposal.md`, `.../specs/{cap}/spec.md`)
+- Source file path (`synergyspec/changes/{id}/proposal.md`, `.../specs/{cap}/spec.md`)
 - Structured path (e.g., `deltas[0].requirements[0].scenarios`)
 
 #### Scenario: Zod validation error

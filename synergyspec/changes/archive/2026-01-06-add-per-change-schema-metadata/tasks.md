@@ -11,7 +11,7 @@
 
 ## 3. Auto-Detection in Instruction Loader
 
-- [x] 3.1 Modify `loadChangeContext()` to read schema from `.openspec.yaml`
+- [x] 3.1 Modify `loadChangeContext()` to read schema from `.synergyspec.yaml`
 - [x] 3.2 Make `schemaName` parameter optional (fall back to metadata, then default)
 
 ## 4. CLI Updates

@@ -6,7 +6,7 @@
 The update command SHALL refresh existing slash command files for configured tools without creating new ones, and ensure the OpenCode archive command accepts change ID arguments.
 
 #### Scenario: Updating slash commands for OpenCode
-- **WHEN** `.opencode/command/` contains `openspec-proposal.md`, `openspec-apply.md`, and `openspec-archive.md`
+- **WHEN** `.opencode/command/` contains `synergyspec-proposal.md`, `synergyspec-apply.md`, and `synergyspec-archive.md`
 - **THEN** refresh each file using shared templates
 - **AND** ensure templates include instructions for the relevant workflow stage
 - **AND** ensure the archive command includes `$ARGUMENTS` placeholder in frontmatter for accepting change ID arguments

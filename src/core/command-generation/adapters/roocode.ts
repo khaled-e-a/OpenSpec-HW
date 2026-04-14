@@ -10,14 +10,14 @@ import type { CommandContent, ToolCommandAdapter } from '../types.js';
 
 /**
  * RooCode adapter for command generation.
- * File path: .roo/commands/opsx-hw-<id>.md
+ * File path: .roo/commands/synspec-<id>.md
  * Format: Markdown header with description
  */
 export const roocodeAdapter: ToolCommandAdapter = {
   toolId: 'roocode',
 
   getFilePath(commandId: string): string {
-    return path.join('.roo', 'commands', `opsx-hw-${commandId}.md`);
+    return path.join('.roo', 'commands', `synspec-${commandId}.md`);
   },
 
   formatFile(content: CommandContent): string {

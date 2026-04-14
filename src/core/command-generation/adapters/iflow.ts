@@ -9,20 +9,20 @@ import type { CommandContent, ToolCommandAdapter } from '../types.js';
 
 /**
  * iFlow adapter for command generation.
- * File path: .iflow/commands/opsx-hw-<id>.md
+ * File path: .iflow/commands/synspec-<id>.md
  * Frontmatter: name, id, category, description
  */
 export const iflowAdapter: ToolCommandAdapter = {
   toolId: 'iflow',
 
   getFilePath(commandId: string): string {
-    return path.join('.iflow', 'commands', `opsx-hw-${commandId}.md`);
+    return path.join('.iflow', 'commands', `synspec-${commandId}.md`);
   },
 
   formatFile(content: CommandContent): string {
     return `---
-name: /opsx-hw-${content.id}
-id: opsx-hw-${content.id}
+name: /synspec-${content.id}
+id: synspec-${content.id}
 category: ${content.category}
 description: ${content.description}
 ---

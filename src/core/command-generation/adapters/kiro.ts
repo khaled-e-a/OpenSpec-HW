@@ -9,14 +9,14 @@ import type { CommandContent, ToolCommandAdapter } from '../types.js';
 
 /**
  * Kiro adapter for command generation.
- * File path: .kiro/prompts/opsx-hw-<id>.prompt.md
+ * File path: .kiro/prompts/synspec-<id>.prompt.md
  * Frontmatter: description
  */
 export const kiroAdapter: ToolCommandAdapter = {
   toolId: 'kiro',
 
   getFilePath(commandId: string): string {
-    return path.join('.kiro', 'prompts', `opsx-hw-${commandId}.prompt.md`);
+    return path.join('.kiro', 'prompts', `synspec-${commandId}.prompt.md`);
   },
 
   formatFile(content: CommandContent): string {

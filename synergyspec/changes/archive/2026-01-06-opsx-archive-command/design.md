@@ -1,11 +1,11 @@
 ## Context
 
 The experimental workflow (OPSX) provides a complete lifecycle for creating changes:
-- `/opsx-hw:new` - Scaffold a new change with schema
-- `/opsx-hw:continue` - Create next artifact
-- `/opsx-hw:ff` - Fast-forward all artifacts
-- `/opsx-hw:apply` - Implement tasks
-- `/opsx-hw:sync` - Sync delta specs to main
+- `/synspec:new` - Scaffold a new change with schema
+- `/synspec:continue` - Create next artifact
+- `/synspec:ff` - Fast-forward all artifacts
+- `/synspec:apply` - Implement tasks
+- `/synspec:sync` - Sync delta specs to main
 
 The missing piece is archiving. The existing `openspec archive` command works but:
 1. Applies specs programmatically (not agent-driven)
@@ -15,10 +15,10 @@ The missing piece is archiving. The existing `openspec archive` command works bu
 ## Goals / Non-Goals
 
 **Goals:**
-- Add `/opsx-hw:archive` skill to complete the OPSX workflow lifecycle
+- Add `/synspec:archive` skill to complete the OPSX workflow lifecycle
 - Use artifact graph for schema-aware completion checking
-- Integrate with `/opsx-hw:sync` for agent-driven spec syncing
-- Preserve `.openspec.yaml` schema metadata in archive
+- Integrate with `/synspec:sync` for agent-driven spec syncing
+- Preserve `.synergyspec.yaml` schema metadata in archive
 
 **Non-Goals:**
 - Replacing the existing `openspec archive` CLI command
@@ -29,7 +29,7 @@ The missing piece is archiving. The existing `openspec archive` command works bu
 
 ### Decision 1: Skill-only implementation (no new CLI command)
 
-The `/opsx-hw:archive` will be a slash command/skill only, not a new CLI command.
+The `/synspec:archive` will be a slash command/skill only, not a new CLI command.
 
 **Rationale**: The existing `openspec archive` CLI command already handles the core archive functionality (moving to archive folder, date prefixing). The OPSX version just needs different pre-archive checks and optional sync prompting, which are agent behaviors better suited to a skill.
 
@@ -41,12 +41,12 @@ The `/opsx-hw:archive` will be a slash command/skill only, not a new CLI command
 
 The skill will check for unsynced delta specs and prompt the user before archiving.
 
-**Rationale**: The OPSX philosophy is agent-driven intelligent merging via `/opsx-hw:sync`. Rather than programmatically applying specs like the regular archive command, we prompt the user to sync first if needed. This maintains workflow flexibility (user can decline and just archive).
+**Rationale**: The OPSX philosophy is agent-driven intelligent merging via `/synspec:sync`. Rather than programmatically applying specs like the regular archive command, we prompt the user to sync first if needed. This maintains workflow flexibility (user can decline and just archive).
 
 **Flow**:
 1. Check if `specs/` directory exists in the change
 2. If yes, ask: "This change has delta specs. Would you like to sync them to main specs before archiving?"
-3. If user says yes, execute `/opsx-hw:sync` logic
+3. If user says yes, execute `/synspec:sync` logic
 4. Proceed with archive regardless of answer
 
 ### Decision 3: Use artifact graph for completion checking
@@ -68,14 +68,14 @@ The skill will parse tasks.md and warn about incomplete tasks, same as regular a
 
 ### Decision 5: Move change to archive/ with date prefix
 
-Same archive behavior as regular command: move to `openspec/changes/archive/YYYY-MM-DD-<name>/`.
+Same archive behavior as regular command: move to `synergyspec/changes/archive/YYYY-MM-DD-<name>/`.
 
-**Rationale**: Consistency with existing archive convention. The `.openspec.yaml` file moves with the change, preserving schema metadata.
+**Rationale**: Consistency with existing archive convention. The `.synergyspec.yaml` file moves with the change, preserving schema metadata.
 
 ## Risks / Trade-offs
 
-**Risk**: Users confused about when to use `/opsx-hw:archive` vs `openspec archive`
-→ **Mitigation**: Documentation should clarify: use `/opsx-hw:archive` if you've been using the OPSX workflow, use `openspec archive` otherwise. Both produce the same archived result.
+**Risk**: Users confused about when to use `/synspec:archive` vs `openspec archive`
+→ **Mitigation**: Documentation should clarify: use `/synspec:archive` if you've been using the OPSX workflow, use `openspec archive` otherwise. Both produce the same archived result.
 
 **Risk**: Incomplete sync if user declines and has delta specs
 → **Mitigation**: The prompt is informational; user has full control. They may want to archive without syncing (e.g., abandoned change). Log a note in output.

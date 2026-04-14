@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Provide a CLI interface for viewing and modifying global OpenSpec configuration. Enables users to manage settings without manually editing JSON files, with support for scripting and automation.
+Provide a CLI interface for viewing and modifying global SynergySpec configuration. Enables users to manage settings without manually editing JSON files, with support for scripting and automation.
 
 ## ADDED Requirements
 

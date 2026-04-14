@@ -53,12 +53,12 @@ function main() {
   let tgzPath;
 
   try {
-    log(`Packing @khaledea/openspec-hw@${expected}...`);
+    log(`Packing @khaledea/synergyspec-hw@${expected}...`);
     const filename = npmPack();
     tgzPath = path.resolve(filename);
     log(`Created: ${tgzPath}`);
 
-    work = mkdtempSync(path.join(tmpdir(), 'openspec-pack-check-'));
+    work = mkdtempSync(path.join(tmpdir(), 'synergyspec-pack-check-'));
     log(`Temp dir: ${work}`);
 
     // Make a tiny project
@@ -80,7 +80,7 @@ function main() {
     run('npm', ['install', tgzPath, '--silent', '--no-audit', '--no-fund'], { cwd: work, env });
 
     // Run the installed CLI via Node to avoid bin resolution/platform issues
-    const binRel = path.join('node_modules', '@khaledea', 'openspec-hw', 'bin', 'openspec.js');
+    const binRel = path.join('node_modules', '@khaledea', 'synergyspec-hw', 'bin', 'openspec.js');
     const actual = run(process.execPath, [binRel, '--version'], { cwd: work }).trim();
 
     if (actual !== expected) {

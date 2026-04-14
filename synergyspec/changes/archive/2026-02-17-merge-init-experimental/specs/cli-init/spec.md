@@ -2,14 +2,14 @@
 
 ### Requirement: Directory Creation
 
-The command SHALL create the OpenSpec directory structure with config file.
+The command SHALL create the SynergySpec directory structure with config file.
 
-#### Scenario: Creating OpenSpec structure
+#### Scenario: Creating SynergySpec structure
 
 - **WHEN** `openspec init` is executed
 - **THEN** create the following directory structure:
 ```
-openspec/
+synergyspec/
 ├── config.yaml
 ├── specs/
 └── changes/
@@ -23,7 +23,7 @@ The command SHALL configure AI coding assistants with skills and slash commands 
 #### Scenario: Prompting for AI tool selection
 
 - **WHEN** run interactively
-- **THEN** display animated welcome screen with OpenSpec logo
+- **THEN** display animated welcome screen with SynergySpec logo
 - **AND** present a searchable multi-select that shows all available tools
 - **AND** mark already configured tools with "(configured ✓)" indicator
 - **AND** pre-select configured tools for easy refresh
@@ -35,7 +35,7 @@ The command SHALL configure AI coding assistants with skills and slash commands 
 - **WHEN** user selects tools and confirms
 - **THEN** generate skills in `.<tool>/skills/` directory for each selected tool
 - **AND** generate slash commands in `.<tool>/commands/opsx/` directory for each selected tool
-- **AND** create `openspec/config.yaml` with default schema setting
+- **AND** create `synergyspec/config.yaml` with default schema setting
 
 ### Requirement: Skill Generation
 
@@ -45,15 +45,15 @@ The command SHALL generate Agent Skills for selected AI tools.
 
 - **WHEN** a tool is selected during initialization
 - **THEN** create 9 skill directories under `.<tool>/skills/`:
-  - `openspec-explore/SKILL.md`
-  - `openspec-new-change/SKILL.md`
-  - `openspec-continue-change/SKILL.md`
-  - `openspec-apply-change/SKILL.md`
-  - `openspec-ff-change/SKILL.md`
-  - `openspec-verify-change/SKILL.md`
-  - `openspec-sync-specs/SKILL.md`
-  - `openspec-archive-change/SKILL.md`
-  - `openspec-bulk-archive-change/SKILL.md`
+  - `synergyspec-explore/SKILL.md`
+  - `synergyspec-new-change/SKILL.md`
+  - `synergyspec-continue-change/SKILL.md`
+  - `synergyspec-apply-change/SKILL.md`
+  - `synergyspec-ff-change/SKILL.md`
+  - `synergyspec-verify-change/SKILL.md`
+  - `synergyspec-sync-specs/SKILL.md`
+  - `synergyspec-archive-change/SKILL.md`
+  - `synergyspec-bulk-archive-change/SKILL.md`
 - **AND** each SKILL.md SHALL contain YAML frontmatter with name and description
 - **AND** each SKILL.md SHALL contain the skill instructions
 
@@ -65,15 +65,15 @@ The command SHALL generate opsx slash commands for selected AI tools.
 
 - **WHEN** a tool is selected during initialization
 - **THEN** create 9 slash command files using the tool's command adapter:
-  - `/opsx-hw:explore`
-  - `/opsx-hw:new`
-  - `/opsx-hw:continue`
-  - `/opsx-hw:apply`
-  - `/opsx-hw:ff`
-  - `/opsx-hw:verify`
-  - `/opsx-hw:sync`
-  - `/opsx-hw:archive`
-  - `/opsx-hw:bulk-archive`
+  - `/synspec:explore`
+  - `/synspec:new`
+  - `/synspec:continue`
+  - `/synspec:apply`
+  - `/synspec:ff`
+  - `/synspec:verify`
+  - `/synspec:sync`
+  - `/synspec:archive`
+  - `/synspec:bulk-archive`
 - **AND** use tool-specific path conventions (e.g., `.claude/commands/opsx/` for Claude)
 - **AND** include tool-specific frontmatter format
 
@@ -89,9 +89,9 @@ The command SHALL provide clear, actionable next steps upon successful initializ
   - "Refreshed: <tools>" for already-configured tools that were updated
   - Count of skills and commands generated
 - **AND** display getting started section with:
-  - `/opsx-hw:new` - Start a new change
-  - `/opsx-hw:continue` - Create the next artifact
-  - `/opsx-hw:apply` - Implement tasks
+  - `/synspec:new` - Start a new change
+  - `/synspec:continue` - Create the next artifact
+  - `/synspec:apply` - Implement tasks
 - **AND** display links to documentation and feedback
 
 #### Scenario: Displaying restart instruction
@@ -101,19 +101,19 @@ The command SHALL provide clear, actionable next steps upon successful initializ
 
 ### Requirement: Config File Generation
 
-The command SHALL create an OpenSpec config file with schema settings.
+The command SHALL create an SynergySpec config file with schema settings.
 
 #### Scenario: Creating config.yaml
 
 - **WHEN** initialization completes
 - **AND** config.yaml does not exist
-- **THEN** create `openspec/config.yaml` with default schema setting
+- **THEN** create `synergyspec/config.yaml` with default schema setting
 - **AND** display config location in output
 
 #### Scenario: Preserving existing config.yaml
 
 - **WHEN** initialization runs in extend mode
-- **AND** `openspec/config.yaml` already exists
+- **AND** `synergyspec/config.yaml` already exists
 - **THEN** preserve the existing config file
 - **AND** display "(exists)" indicator in output
 
@@ -155,7 +155,7 @@ The command SHALL maintain backward compatibility with the experimental command.
 
 **Reason**: AGENTS.md and project.md are no longer generated. Skills contain all necessary instructions.
 
-**Migration**: Skills in `.<tool>/skills/` provide all OpenSpec workflow instructions. No manual file needed.
+**Migration**: Skills in `.<tool>/skills/` provide all SynergySpec workflow instructions. No manual file needed.
 
 ### Requirement: AI Tool Configuration Details
 
@@ -165,9 +165,9 @@ The command SHALL maintain backward compatibility with the experimental command.
 
 ### Requirement: Slash Command Configuration
 
-**Reason**: Old `/openspec:*` slash commands are replaced by `/opsx-hw:*` commands with richer functionality.
+**Reason**: Old `/openspec:*` slash commands are replaced by `/synspec:*` commands with richer functionality.
 
-**Migration**: Use `/opsx-hw:new`, `/opsx-hw:continue`, `/opsx-hw:apply` instead of `/openspec:proposal`, `/openspec:apply`, `/openspec:archive`.
+**Migration**: Use `/synspec:new`, `/synspec:continue`, `/synspec:apply` instead of `/openspec:proposal`, `/openspec:apply`, `/openspec:archive`.
 
 ### Requirement: Root instruction stub
 

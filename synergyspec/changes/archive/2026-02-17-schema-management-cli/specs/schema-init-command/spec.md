@@ -1,11 +1,11 @@
 ## ADDED Requirements
 
 ### Requirement: Schema init command creates project-local schema
-The CLI SHALL provide an `openspec schema init <name>` command that creates a new schema directory under `openspec/schemas/<name>/` with a valid `schema.yaml` file and default template files.
+The CLI SHALL provide an `openspec schema init <name>` command that creates a new schema directory under `synergyspec/schemas/<name>/` with a valid `schema.yaml` file and default template files.
 
 #### Scenario: Create schema with valid name
 - **WHEN** user runs `openspec schema init my-workflow`
-- **THEN** system creates directory `openspec/schemas/my-workflow/`
+- **THEN** system creates directory `synergyspec/schemas/my-workflow/`
 - **AND** creates `schema.yaml` with name, version, description, and artifacts array
 - **AND** creates template files referenced by artifacts
 - **AND** displays success message with created path
@@ -17,7 +17,7 @@ The CLI SHALL provide an `openspec schema init <name>` command that creates a ne
 - **AND** exits with non-zero code
 
 #### Scenario: Schema name already exists
-- **WHEN** user runs `openspec schema init existing-schema` and `openspec/schemas/existing-schema/` already exists
+- **WHEN** user runs `openspec schema init existing-schema` and `synergyspec/schemas/existing-schema/` already exists
 - **THEN** system displays error that schema already exists
 - **AND** suggests using `--force` to overwrite or `schema fork` to copy
 - **AND** exits with non-zero code
@@ -47,15 +47,15 @@ The CLI SHALL offer to set the newly created schema as the project default.
 #### Scenario: Set as default interactively
 - **WHEN** user runs `openspec schema init my-workflow` in interactive mode
 - **AND** user confirms setting as default
-- **THEN** system updates `openspec/config.yaml` with `defaultSchema: my-workflow`
+- **THEN** system updates `synergyspec/config.yaml` with `defaultSchema: my-workflow`
 
 #### Scenario: Set as default via flag
 - **WHEN** user runs `openspec schema init my-workflow --default`
-- **THEN** system creates schema and updates `openspec/config.yaml` with `defaultSchema: my-workflow`
+- **THEN** system creates schema and updates `synergyspec/config.yaml` with `defaultSchema: my-workflow`
 
 #### Scenario: Skip setting default
 - **WHEN** user runs `openspec schema init my-workflow --no-default`
-- **THEN** system creates schema without modifying `openspec/config.yaml`
+- **THEN** system creates schema without modifying `synergyspec/config.yaml`
 
 ### Requirement: Schema init outputs JSON format
 The CLI SHALL support `--json` flag for machine-readable output.

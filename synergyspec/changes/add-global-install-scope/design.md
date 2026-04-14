@@ -1,6 +1,6 @@
 ## Context
 
-OpenSpec today assumes project-local installation for most generated artifacts, with Codex command prompts as the main global exception. This mixed model works, but it is implicit and not user-configurable.
+SynergySpec today assumes project-local installation for most generated artifacts, with Codex command prompts as the main global exception. This mixed model works, but it is implicit and not user-configurable.
 
 The requested change is to support user-selectable install scope (`global` or `project`) for tool skills/commands, defaulting to `global` for new configurations while preserving legacy project-local behavior until explicit migration.
 
@@ -119,7 +119,7 @@ getFilePath(commandId: string, context: InstallContext): string
 When scope changes:
 
 - Writes occur in the new effective targets.
-- Cleanup/removal is limited to OpenSpec-managed files for the relevant tool/workflow IDs.
+- Cleanup/removal is limited to SynergySpec-managed files for the relevant tool/workflow IDs.
 - Output explicitly states which scope locations were updated and which were cleaned.
 
 ### 7. Scope drift state tracking

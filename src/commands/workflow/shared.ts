@@ -94,7 +94,7 @@ export async function validateChangeExists(
   changeName: string | undefined,
   projectRoot: string
 ): Promise<string> {
-  const changesPath = path.join(projectRoot, 'openspec', 'changes');
+  const changesPath = path.join(projectRoot, 'synergyspec', 'changes');
 
   // Get all change directories (not just those with proposal.md)
   const getAvailableChanges = async (): Promise<string[]> => {
@@ -111,7 +111,7 @@ export async function validateChangeExists(
   if (!changeName) {
     const available = await getAvailableChanges();
     if (available.length === 0) {
-      throw new Error('No changes found. Create one with: openspec new change <name>');
+      throw new Error('No changes found. Create one with: synergyspec-hw new change <name>');
     }
     throw new Error(
       `Missing required option --change. Available changes:\n  ${available.join('\n  ')}`
@@ -132,7 +132,7 @@ export async function validateChangeExists(
     const available = await getAvailableChanges();
     if (available.length === 0) {
       throw new Error(
-        `Change '${changeName}' not found. No changes exist. Create one with: openspec new change <name>`
+        `Change '${changeName}' not found. No changes exist. Create one with: synergyspec-hw new change <name>`
       );
     }
     throw new Error(

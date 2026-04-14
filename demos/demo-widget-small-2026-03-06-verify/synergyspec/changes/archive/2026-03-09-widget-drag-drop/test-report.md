@@ -106,4 +106,4 @@ No failures. No skipped tests.
 ---
 
 **All tests pass. Coverage is satisfactory for this change.**
-Run `/opsx-hw:archive` to archive and close the change.
+Run `/synspec:archive` to archive and close the change.

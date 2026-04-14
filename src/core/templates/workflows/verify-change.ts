@@ -8,7 +8,7 @@ import type { SkillTemplate, CommandTemplate } from '../types.js';
 
 export function getVerifyChangeSkillTemplate(): SkillTemplate {
    return {
-      name: 'openspec-verify-change',
+      name: 'synergyspec-verify-change',
       description: 'Verify implementation matches change artifacts. Use when the user wants to validate that implementation is complete, correct, and coherent before archiving.',
       instructions: `Verify that an implementation matches the change artifacts (specs, tasks, design).
 
@@ -18,7 +18,7 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
+   Run \`synergyspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
 
    Show changes that have implementation tasks (tasks artifact exists).
    Include the schema used for each change if available.
@@ -28,7 +28,7 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
 
 2. **Check status to understand the schema**
    \`\`\`bash
-   openspec-hw status --change "<name>" --json
+   synergyspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to understand:
    - \`schemaName\`: The workflow being used (e.g., "spec-driven")
@@ -37,7 +37,7 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
 3. **Get the change directory and load artifacts**
 
    \`\`\`bash
-   openspec-hw instructions apply --change "<name>" --json
+   synergyspec-hw instructions apply --change "<name>" --json
    \`\`\`
 
    This returns the change directory and context files. Read all available artifacts from \`contextFiles\`.
@@ -62,7 +62,7 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
      - Recommendation: "Complete task: <description>" or "Mark as done if already implemented"
 
    **Spec Coverage**:
-   - If delta specs exist in \`openspec/changes/<name>/specs/\`:
+   - If delta specs exist in \`synergyspec/changes/<name>/specs/\`:
      - Extract all requirements (marked with "### Requirement:")
      - For each requirement:
        - Search codebase for keywords related to the requirement
@@ -154,7 +154,7 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
 
 9. **Spec Impact Analysis — Generate Blast Radius**
 
-   This step identifies which existing specs in \`openspec/specs/\` are affected
+   This step identifies which existing specs in \`synergyspec/specs/\` are affected
    by the code changes made for this change. Run it after the Verification Report.
 
    **9a. Get changed files via git diff**
@@ -180,11 +180,11 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
 
    **9c. Scan all existing specs**
 
-   Enumerate all files matching \`openspec/specs/**/*.md\`.
+   Enumerate all files matching \`synergyspec/specs/**/*.md\`.
    If none found: note "No existing specs found — skipping blast radius analysis."
 
    For each spec file, extract:
-   - **Capability name**: the parent folder name (e.g. \`openspec/specs/user-auth/spec.md\` → \`user-auth\`)
+   - **Capability name**: the parent folder name (e.g. \`synergyspec/specs/user-auth/spec.md\` → \`user-auth\`)
    - **Requirement names**: all lines matching \`### Requirement:\`
    - **UC step references**: all \`**Implements**: UCx-Sy\` patterns
    - **Keyword set**: all meaningful words (>4 chars) from requirement names and WHEN/THEN clauses
@@ -195,8 +195,8 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
 
    - **High impact** (include in blast radius): any of:
      - A changed file path segment exactly matches the spec's capability name
-       (e.g. changed file in \`src/user-auth/\` matches spec \`openspec/specs/user-auth/\`)
-     - The change's own delta specs (in \`openspec/changes/<name>/specs/\`) contain
+       (e.g. changed file in \`src/user-auth/\` matches spec \`synergyspec/specs/user-auth/\`)
+     - The change's own delta specs (in \`synergyspec/changes/<name>/specs/\`) contain
        \`**Implements**\` references (UCx-Sy IDs) that also appear in this existing spec
    - **Medium impact** (include in blast radius): 2 or more keywords from changed file
      path segments or exported symbols appear in the spec's requirement text or scenarios
@@ -204,12 +204,12 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
 
    **9e. Identify affected tests per impacted spec**
 
-   For each High/Medium spec, check \`openspec/changes/<name>/spec-tests.md\` (if it exists).
+   For each High/Medium spec, check \`synergyspec/changes/<name>/spec-tests.md\` (if it exists).
    Look in the Requirement Traceability Matrix for rows where the "Requirement" column
    contains text matching the impacted requirement names. Collect the "Test Case" file paths
    from those rows.
 
-   **9f. Write \`openspec/changes/<name>/spec-blast-radius.md\`**
+   **9f. Write \`synergyspec/changes/<name>/spec-blast-radius.md\`**
 
    Use this format:
 
@@ -222,7 +222,7 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
 
    ## Impacted Specs
 
-   ### openspec/specs/<capability>/spec.md
+   ### synergyspec/specs/<capability>/spec.md
    **Impact Level**: High
    **Reason**: Changed file \`src/<path>\` matches capability name "<capability>"
    **Impacted Requirements**:
@@ -230,7 +230,7 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
    - Requirement: <name> (UC1-S5)
    **Affected Tests**: \`test/session.test.ts\`, \`test/integration/auth.test.ts\`
 
-   ### openspec/specs/<other>/spec.md
+   ### synergyspec/specs/<other>/spec.md
    **Impact Level**: Medium
    **Reason**: Keywords "auth", "token" from changed files match 3 requirements
    **Impacted Requirements**:
@@ -238,7 +238,7 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
    **Affected Tests**: (none mapped in spec-tests.md)
 
    ## Unimpacted Specs
-   - openspec/specs/gallery/spec.md — no keyword overlap detected
+   - synergyspec/specs/gallery/spec.md — no keyword overlap detected
    \`\`\`
 
    If no specs are impacted, write:
@@ -254,7 +254,7 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
    **9g. Append blast radius summary to the Verification Report**
 
    Add a final line to the report output:
-   - If impacted: "📍 Blast radius: <N> spec(s) impacted → \`openspec/changes/<name>/spec-blast-radius.md\`"
+   - If impacted: "📍 Blast radius: <N> spec(s) impacted → \`synergyspec/changes/<name>/spec-blast-radius.md\`"
    - If none: "📍 Blast radius: No existing specs impacted."
    - If skipped: "📍 Blast radius: Skipped (<reason>)."
 
@@ -264,7 +264,7 @@ export function getVerifyChangeSkillTemplate(): SkillTemplate {
 - If tasks + specs exist: verify completeness and correctness, skip design
 - If full artifacts: verify all three dimensions
 - Always note which checks were skipped and why
-- If git diff unavailable or \`openspec/specs/\` is empty: skip blast radius gracefully
+- If git diff unavailable or \`synergyspec/specs/\` is empty: skip blast radius gracefully
 
 **Output Format**
 
@@ -275,8 +275,8 @@ Use clear markdown with:
 - Specific, actionable recommendations
 - No vague suggestions like "consider reviewing"`,
       license: 'MIT',
-      compatibility: 'Requires openspec-hw CLI.',
-      metadata: { author: 'openspec', version: '1.0' },
+      compatibility: 'Requires synergyspec-hw CLI.',
+      metadata: { author: 'synergyspec', version: '1.0' },
    };
 }
 
@@ -288,13 +288,13 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
       tags: ['workflow', 'verify', 'experimental'],
       content: `Verify that an implementation matches the change artifacts (specs, tasks, design).
 
-**Input**: Optionally specify a change name after \`/opsx-hw:verify\` (e.g., \`/opsx-hw:verify add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
+**Input**: Optionally specify a change name after \`/synspec:verify\` (e.g., \`/synspec:verify add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 **Steps**
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
+   Run \`synergyspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
 
    Show changes that have implementation tasks (tasks artifact exists).
    Include the schema used for each change if available.
@@ -304,7 +304,7 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
 
 2. **Check status to understand the schema**
    \`\`\`bash
-   openspec-hw status --change "<name>" --json
+   synergyspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to understand:
    - \`schemaName\`: The workflow being used (e.g., "spec-driven")
@@ -313,7 +313,7 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
 3. **Get the change directory and load artifacts**
 
    \`\`\`bash
-   openspec-hw instructions apply --change "<name>" --json
+   synergyspec-hw instructions apply --change "<name>" --json
    \`\`\`
 
    This returns the change directory and context files. Read all available artifacts from \`contextFiles\`.
@@ -338,7 +338,7 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
      - Recommendation: "Complete task: <description>" or "Mark as done if already implemented"
 
    **Spec Coverage**:
-   - If delta specs exist in \`openspec/changes/<name>/specs/\`:
+   - If delta specs exist in \`synergyspec/changes/<name>/specs/\`:
      - Extract all requirements (marked with "### Requirement:")
      - For each requirement:
        - Search codebase for keywords related to the requirement
@@ -430,7 +430,7 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
 
 9. **Spec Impact Analysis — Generate Blast Radius**
 
-   This step identifies which existing specs in \`openspec/specs/\` are affected
+   This step identifies which existing specs in \`synergyspec/specs/\` are affected
    by the code changes made for this change. Run it after the Verification Report.
 
    **9a. Get changed files via git diff**
@@ -456,11 +456,11 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
 
    **9c. Scan all existing specs**
 
-   Enumerate all files matching \`openspec/specs/**/*.md\`.
+   Enumerate all files matching \`synergyspec/specs/**/*.md\`.
    If none found: note "No existing specs found — skipping blast radius analysis."
 
    For each spec file, extract:
-   - **Capability name**: the parent folder name (e.g. \`openspec/specs/user-auth/spec.md\` → \`user-auth\`)
+   - **Capability name**: the parent folder name (e.g. \`synergyspec/specs/user-auth/spec.md\` → \`user-auth\`)
    - **Requirement names**: all lines matching \`### Requirement:\`
    - **UC step references**: all \`**Implements**: UCx-Sy\` patterns
    - **Keyword set**: all meaningful words (>4 chars) from requirement names and WHEN/THEN clauses
@@ -471,8 +471,8 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
 
    - **High impact** (include in blast radius): any of:
      - A changed file path segment exactly matches the spec's capability name
-       (e.g. changed file in \`src/user-auth/\` matches spec \`openspec/specs/user-auth/\`)
-     - The change's own delta specs (in \`openspec/changes/<name>/specs/\`) contain
+       (e.g. changed file in \`src/user-auth/\` matches spec \`synergyspec/specs/user-auth/\`)
+     - The change's own delta specs (in \`synergyspec/changes/<name>/specs/\`) contain
        \`**Implements**\` references (UCx-Sy IDs) that also appear in this existing spec
    - **Medium impact** (include in blast radius): 2 or more keywords from changed file
      path segments or exported symbols appear in the spec's requirement text or scenarios
@@ -480,12 +480,12 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
 
    **9e. Identify affected tests per impacted spec**
 
-   For each High/Medium spec, check \`openspec/changes/<name>/spec-tests.md\` (if it exists).
+   For each High/Medium spec, check \`synergyspec/changes/<name>/spec-tests.md\` (if it exists).
    Look in the Requirement Traceability Matrix for rows where the "Requirement" column
    contains text matching the impacted requirement names. Collect the "Test Case" file paths
    from those rows.
 
-   **9f. Write \`openspec/changes/<name>/spec-blast-radius.md\`**
+   **9f. Write \`synergyspec/changes/<name>/spec-blast-radius.md\`**
 
    Use this format:
 
@@ -498,7 +498,7 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
 
    ## Impacted Specs
 
-   ### openspec/specs/<capability>/spec.md
+   ### synergyspec/specs/<capability>/spec.md
    **Impact Level**: High
    **Reason**: Changed file \`src/<path>\` matches capability name "<capability>"
    **Impacted Requirements**:
@@ -506,7 +506,7 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
    - Requirement: <name> (UC1-S5)
    **Affected Tests**: \`test/session.test.ts\`, \`test/integration/auth.test.ts\`
 
-   ### openspec/specs/<other>/spec.md
+   ### synergyspec/specs/<other>/spec.md
    **Impact Level**: Medium
    **Reason**: Keywords "auth", "token" from changed files match 3 requirements
    **Impacted Requirements**:
@@ -514,7 +514,7 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
    **Affected Tests**: (none mapped in spec-tests.md)
 
    ## Unimpacted Specs
-   - openspec/specs/gallery/spec.md — no keyword overlap detected
+   - synergyspec/specs/gallery/spec.md — no keyword overlap detected
    \`\`\`
 
    If no specs are impacted, write:
@@ -530,7 +530,7 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
    **9g. Append blast radius summary to the Verification Report**
 
    Add a final line to the report output:
-   - If impacted: "📍 Blast radius: <N> spec(s) impacted → \`openspec/changes/<name>/spec-blast-radius.md\`"
+   - If impacted: "📍 Blast radius: <N> spec(s) impacted → \`synergyspec/changes/<name>/spec-blast-radius.md\`"
    - If none: "📍 Blast radius: No existing specs impacted."
    - If skipped: "📍 Blast radius: Skipped (<reason>)."
 
@@ -540,7 +540,7 @@ export function getOpsxVerifyCommandTemplate(): CommandTemplate {
 - If tasks + specs exist: verify completeness and correctness, skip design
 - If full artifacts: verify all three dimensions
 - Always note which checks were skipped and why
-- If git diff unavailable or \`openspec/specs/\` is empty: skip blast radius gracefully
+- If git diff unavailable or \`synergyspec/specs/\` is empty: skip blast radius gracefully
 
 **Output Format**
 

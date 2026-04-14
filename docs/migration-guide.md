@@ -1,6 +1,6 @@
 # Migrating to OPSX
 
-This guide helps you transition from the legacy OpenSpec workflow to OPSX. The migration is designed to be smooth—your existing work is preserved, and the new system offers more flexibility.
+This guide helps you transition from the legacy SynergySpec workflow to OPSX. The migration is designed to be smooth—your existing work is preserved, and the new system offers more flexibility.
 
 ## What's Changing?
 
@@ -8,11 +8,11 @@ OPSX replaces the old phase-locked workflow with a fluid, action-based approach.
 
 | Aspect | Legacy | OPSX |
 |--------|--------|------|
-| **Commands** | `/openspec:proposal`, `/openspec:apply`, `/openspec:archive` | `/opsx-hw:new`, `/opsx-hw:continue`, `/opsx-hw:apply`, and more |
+| **Commands** | `/openspec:proposal`, `/openspec:apply`, `/openspec:archive` | `/synspec:new`, `/synspec:continue`, `/synspec:apply`, and more |
 | **Workflow** | Create all artifacts at once | Create incrementally or all at once—your choice |
 | **Going back** | Awkward phase gates | Natural—update any artifact anytime |
 | **Customization** | Fixed structure | Schema-driven, fully hackable |
-| **Configuration** | `CLAUDE.md` with markers + `project.md` | Clean config in `openspec/config.yaml` |
+| **Configuration** | `CLAUDE.md` with markers + `project.md` | Clean config in `synergyspec/config.yaml` |
 
 **The philosophy change:** Work isn't linear. OPSX stops pretending it is.
 
@@ -24,50 +24,50 @@ OPSX replaces the old phase-locked workflow with a fluid, action-based approach.
 
 The migration process is designed with preservation in mind:
 
-- **Active changes in `openspec/changes/`** — Completely preserved. You can continue them with OPSX commands.
+- **Active changes in `synergyspec/changes/`** — Completely preserved. You can continue them with OPSX commands.
 - **Archived changes** — Untouched. Your history remains intact.
-- **Main specs in `openspec/specs/`** — Untouched. These are your source of truth.
-- **Your content in CLAUDE.md, AGENTS.md, etc.** — Preserved. Only the OpenSpec marker blocks are removed; everything you wrote stays.
+- **Main specs in `synergyspec/specs/`** — Untouched. These are your source of truth.
+- **Your content in CLAUDE.md, AGENTS.md, etc.** — Preserved. Only the SynergySpec marker blocks are removed; everything you wrote stays.
 
 ### What Gets Removed
 
-Only OpenSpec-managed files that are being replaced:
+Only SynergySpec-managed files that are being replaced:
 
 | What | Why |
 |------|-----|
 | Legacy slash command directories/files | Replaced by the new skills system |
-| `openspec/AGENTS.md` | Obsolete workflow trigger |
-| OpenSpec markers in `CLAUDE.md`, `AGENTS.md`, etc. | No longer needed |
+| `synergyspec/AGENTS.md` | Obsolete workflow trigger |
+| SynergySpec markers in `CLAUDE.md`, `AGENTS.md`, etc. | No longer needed |
 
 **Legacy command locations by tool** (examples—your tool may vary):
 
-- Claude Code: `.claude/commands/openspec/`
-- Cursor: `.cursor/commands/openspec-*.md`
-- Windsurf: `.windsurf/workflows/openspec-*.md`
-- Cline: `.clinerules/workflows/openspec-*.md`
-- Roo: `.roo/commands/openspec-*.md`
-- GitHub Copilot: `.github/prompts/openspec-*.prompt.md` (IDE extensions only; not supported in Copilot CLI)
+- Claude Code: `.claude/commands/synergyspec/`
+- Cursor: `.cursor/commands/synergyspec-*.md`
+- Windsurf: `.windsurf/workflows/synergyspec-*.md`
+- Cline: `.clinerules/workflows/synergyspec-*.md`
+- Roo: `.roo/commands/synergyspec-*.md`
+- GitHub Copilot: `.github/prompts/synergyspec-*.prompt.md` (IDE extensions only; not supported in Copilot CLI)
 - And others (Augment, Continue, Amazon Q, etc.)
 
 The migration detects whichever tools you have configured and cleans up their legacy files.
 
-The removal list may seem long, but these are all files that OpenSpec originally created. Your own content is never deleted.
+The removal list may seem long, but these are all files that SynergySpec originally created. Your own content is never deleted.
 
 ### What Needs Your Attention
 
 One file requires manual migration:
 
-**`openspec/project.md`** — This file isn't deleted automatically because it may contain project context you've written. You'll need to:
+**`synergyspec/project.md`** — This file isn't deleted automatically because it may contain project context you've written. You'll need to:
 
 1. Review its contents
-2. Move useful context to `openspec/config.yaml` (see guidance below)
+2. Move useful context to `synergyspec/config.yaml` (see guidance below)
 3. Delete the file when ready
 
 **Why we made this change:**
 
 The old `project.md` was passive—agents might read it, might not, might forget what they read. We found reliability was inconsistent.
 
-The new `config.yaml` context is **actively injected into every OpenSpec planning request**. This means your project conventions, tech stack, and rules are always present when the AI is creating artifacts. Higher reliability.
+The new `config.yaml` context is **actively injected into every SynergySpec planning request**. This means your project conventions, tech stack, and rules are always present when the AI is creating artifacts. Higher reliability.
 
 **The tradeoff:**
 
@@ -82,41 +82,41 @@ Don't worry about getting it perfect. We're still learning what works best here,
 
 ## Running the Migration
 
-Both `openspec-hw init` and `openspec-hw update` detect legacy files and guide you through the same cleanup process. Use whichever fits your situation:
+Both `synergyspec-hw init` and `synergyspec-hw update` detect legacy files and guide you through the same cleanup process. Use whichever fits your situation:
 
-### Using `openspec-hw init`
+### Using `synergyspec-hw init`
 
 Run this if you want to add new tools or reconfigure which tools are set up:
 
 ```bash
-openspec-hw init
+synergyspec-hw init
 ```
 
 The init command detects legacy files and guides you through cleanup:
 
 ```
-Upgrading to the new OpenSpec
+Upgrading to the new SynergySpec
 
-OpenSpec now uses agent skills, the emerging standard across coding
+SynergySpec now uses agent skills, the emerging standard across coding
 agents. This simplifies your setup while keeping everything working
 as before.
 
 Files to remove
 No user content to preserve:
-  • .claude/commands/openspec/
-  • openspec/AGENTS.md
+  • .claude/commands/synergyspec/
+  • synergyspec/AGENTS.md
 
 Files to update
-OpenSpec markers will be removed, your content preserved:
+SynergySpec markers will be removed, your content preserved:
   • CLAUDE.md
   • AGENTS.md
 
 Needs your attention
-  • openspec/project.md
+  • synergyspec/project.md
     We won't delete this file. It may contain useful project context.
 
-    The new openspec/config.yaml has a "context:" section for planning
-    context. This is included in every OpenSpec request and works more
+    The new synergyspec/config.yaml has a "context:" section for planning
+    context. This is included in every SynergySpec request and works more
     reliably than the old project.md approach.
 
     Review project.md, move any useful content to config.yaml's context
@@ -128,17 +128,17 @@ Needs your attention
 **What happens when you say yes:**
 
 1. Legacy slash command directories are removed
-2. OpenSpec markers are stripped from `CLAUDE.md`, `AGENTS.md`, etc. (your content stays)
-3. `openspec/AGENTS.md` is deleted
+2. SynergySpec markers are stripped from `CLAUDE.md`, `AGENTS.md`, etc. (your content stays)
+3. `synergyspec/AGENTS.md` is deleted
 4. New skills are installed in `.claude/skills/`
-5. `openspec/config.yaml` is created with a default schema
+5. `synergyspec/config.yaml` is created with a default schema
 
-### Using `openspec-hw update`
+### Using `synergyspec-hw update`
 
 Run this if you just want to migrate and refresh your existing tools to the latest version:
 
 ```bash
-openspec-hw update
+synergyspec-hw update
 ```
 
 The update command also detects and cleans up legacy artifacts, then refreshes your skills to the latest version.
@@ -148,7 +148,7 @@ The update command also detects and cleans up legacy artifacts, then refreshes y
 For scripted migrations:
 
 ```bash
-openspec-hw init --force --tools claude
+synergyspec-hw init --force --tools claude
 ```
 
 The `--force` flag skips prompts and auto-accepts cleanup.
@@ -157,7 +157,7 @@ The `--force` flag skips prompts and auto-accepts cleanup.
 
 ## Migrating project.md to config.yaml
 
-The old `openspec/project.md` was a freeform markdown file for project context. The new `openspec/config.yaml` is structured and—critically—**injected into every planning request** so your conventions are always present when the AI works.
+The old `synergyspec/project.md` was a freeform markdown file for project context. The new `synergyspec/config.yaml` is structured and—critically—**injected into every planning request** so your conventions are always present when the AI works.
 
 ### Before (project.md)
 
@@ -257,7 +257,7 @@ When migrating, be selective. Ask yourself: "Does the AI need this for *every* p
 If you're unsure how to distill your project.md, ask your AI assistant:
 
 ```
-I'm migrating from OpenSpec's old project.md to the new config.yaml format.
+I'm migrating from SynergySpec's old project.md to the new config.yaml format.
 
 Here's my current project.md:
 [paste your project.md content]
@@ -279,35 +279,35 @@ After migration, you have 9 OPSX commands instead of 3:
 
 | Command | Purpose |
 |---------|---------|
-| `/opsx-hw:explore` | Think through ideas with no structure |
-| `/opsx-hw:new` | Start a new change |
-| `/opsx-hw:continue` | Create the next artifact (one at a time) |
-| `/opsx-hw:ff` | Fast-forward—create all planning artifacts at once |
-| `/opsx-hw:apply` | Implement tasks from tasks.md |
-| `/opsx-hw:verify` | Validate implementation matches specs |
-| `/opsx-hw:sync` | Preview spec merge (optional—archive prompts if needed) |
-| `/opsx-hw:archive` | Finalize and archive the change |
-| `/opsx-hw:bulk-archive` | Archive multiple changes at once |
+| `/synspec:explore` | Think through ideas with no structure |
+| `/synspec:new` | Start a new change |
+| `/synspec:continue` | Create the next artifact (one at a time) |
+| `/synspec:ff` | Fast-forward—create all planning artifacts at once |
+| `/synspec:apply` | Implement tasks from tasks.md |
+| `/synspec:verify` | Validate implementation matches specs |
+| `/synspec:sync` | Preview spec merge (optional—archive prompts if needed) |
+| `/synspec:archive` | Finalize and archive the change |
+| `/synspec:bulk-archive` | Archive multiple changes at once |
 
 ### Command Mapping from Legacy
 
 | Legacy | OPSX Equivalent |
 |--------|-----------------|
-| `/openspec:proposal` | `/opsx-hw:new` then `/opsx-hw:ff` |
-| `/openspec:apply` | `/opsx-hw:apply` |
-| `/openspec:archive` | `/opsx-hw:archive` |
+| `/openspec:proposal` | `/synspec:new` then `/synspec:ff` |
+| `/openspec:apply` | `/synspec:apply` |
+| `/openspec:archive` | `/synspec:archive` |
 
 ### New Capabilities
 
 **Granular artifact creation:**
 ```
-/opsx-hw:continue
+/synspec:continue
 ```
 Creates one artifact at a time based on dependencies. Use this when you want to review each step.
 
 **Exploration mode:**
 ```
-/opsx-hw:explore
+/synspec:explore
 ```
 Think through ideas with a partner before committing to a change.
 
@@ -365,14 +365,14 @@ Artifacts form a directed graph. Dependencies are enablers, not gates:
                      specs, design)
 ```
 
-When you run `/opsx-hw:continue`, it checks what's ready and offers the next artifact. You can also create multiple ready artifacts in any order.
+When you run `/synspec:continue`, it checks what's ready and offers the next artifact. You can also create multiple ready artifacts in any order.
 
 ### Skills vs Commands
 
 The legacy system used tool-specific command files:
 
 ```
-.claude/commands/openspec/
+.claude/commands/synergyspec/
 ├── proposal.md
 ├── apply.md
 └── archive.md
@@ -382,10 +382,10 @@ OPSX uses the emerging **skills** standard:
 
 ```
 .claude/skills/
-├── openspec-explore/SKILL.md
-├── openspec-new-change/SKILL.md
-├── openspec-continue-change/SKILL.md
-├── openspec-apply-change/SKILL.md
+├── synergyspec-explore/SKILL.md
+├── synergyspec-new-change/SKILL.md
+├── synergyspec-continue-change/SKILL.md
+├── synergyspec-apply-change/SKILL.md
 └── ...
 ```
 
@@ -400,7 +400,7 @@ Your in-progress changes work seamlessly with OPSX commands.
 **Have an active change from the legacy workflow?**
 
 ```
-/opsx-hw:apply add-my-feature
+/synspec:apply add-my-feature
 ```
 
 OPSX reads the existing artifacts and continues from where you left off.
@@ -408,7 +408,7 @@ OPSX reads the existing artifacts and continues from where you left off.
 **Want to add more artifacts to an existing change?**
 
 ```
-/opsx-hw:continue add-my-feature
+/synspec:continue add-my-feature
 ```
 
 Shows what's ready to create based on what already exists.
@@ -416,7 +416,7 @@ Shows what's ready to create based on what already exists.
 **Need to see status?**
 
 ```bash
-openspec-hw status --change add-my-feature
+synergyspec-hw status --change add-my-feature
 ```
 
 ---
@@ -453,8 +453,8 @@ rules:
 When determining which schema to use, OPSX checks in order:
 
 1. **CLI flag**: `--schema <name>` (highest priority)
-2. **Change metadata**: `.openspec.yaml` in the change directory
-3. **Project config**: `openspec/config.yaml`
+2. **Change metadata**: `.synergyspec.yaml` in the change directory
+3. **Project config**: `synergyspec/config.yaml`
 4. **Default**: `spec-driven`
 
 ### Available Schemas
@@ -466,7 +466,7 @@ When determining which schema to use, OPSX checks in order:
 List all available schemas:
 
 ```bash
-openspec-hw schemas
+synergyspec-hw schemas
 ```
 
 ### Custom Schemas
@@ -474,13 +474,13 @@ openspec-hw schemas
 Create your own workflow:
 
 ```bash
-openspec-hw schema init my-workflow
+synergyspec-hw schema init my-workflow
 ```
 
 Or fork an existing one:
 
 ```bash
-openspec-hw schema fork spec-driven my-workflow
+synergyspec-hw schema fork spec-driven my-workflow
 ```
 
 See [Customization](customization.md) for details.
@@ -494,7 +494,7 @@ See [Customization](customization.md) for details.
 You're running in a CI or non-interactive environment. Use:
 
 ```bash
-openspec-hw init --force
+synergyspec-hw init --force
 ```
 
 ### Commands not appearing after migration
@@ -510,12 +510,12 @@ Check that your `rules:` keys match your schema's artifact IDs:
 Run this to see valid artifact IDs:
 
 ```bash
-openspec-hw schemas --json
+synergyspec-hw schemas --json
 ```
 
 ### Config not being applied
 
-1. Ensure the file is at `openspec/config.yaml` (not `.yml`)
+1. Ensure the file is at `synergyspec/config.yaml` (not `.yml`)
 2. Validate YAML syntax
 3. Config changes take effect immediately—no restart needed
 
@@ -535,35 +535,35 @@ Run init and decline the cleanup prompt—you'll see the full detection summary 
 
 ```
 project/
-├── openspec/
+├── synergyspec/
 │   ├── specs/                    # Unchanged
 │   ├── changes/                  # Unchanged
 │   │   └── archive/              # Unchanged
 │   └── config.yaml               # NEW: Project configuration
 ├── .claude/
 │   └── skills/                   # NEW: OPSX skills
-│       ├── openspec-explore/
-│       ├── openspec-new-change/
+│       ├── synergyspec-explore/
+│       ├── synergyspec-new-change/
 │       └── ...
-├── CLAUDE.md                     # OpenSpec markers removed, your content preserved
-└── AGENTS.md                     # OpenSpec markers removed, your content preserved
+├── CLAUDE.md                     # SynergySpec markers removed, your content preserved
+└── AGENTS.md                     # SynergySpec markers removed, your content preserved
 ```
 
 ### What's Gone
 
-- `.claude/commands/openspec/` — replaced by `.claude/skills/`
-- `openspec/AGENTS.md` — obsolete
-- `openspec/project.md` — migrate to `config.yaml`, then delete
-- OpenSpec marker blocks in `CLAUDE.md`, `AGENTS.md`, etc.
+- `.claude/commands/synergyspec/` — replaced by `.claude/skills/`
+- `synergyspec/AGENTS.md` — obsolete
+- `synergyspec/project.md` — migrate to `config.yaml`, then delete
+- SynergySpec marker blocks in `CLAUDE.md`, `AGENTS.md`, etc.
 
 ### Command Cheatsheet
 
 ```
-/opsx-hw:new          Start a change
-/opsx-hw:continue     Create next artifact
-/opsx-hw:ff           Create all planning artifacts
-/opsx-hw:apply        Implement tasks
-/opsx-hw:archive      Finish and archive
+/synspec:new          Start a change
+/synspec:continue     Create next artifact
+/synspec:ff           Create all planning artifacts
+/synspec:apply        Implement tasks
+/synspec:archive      Finish and archive
 ```
 
 ---
@@ -571,5 +571,5 @@ project/
 ## Getting Help
 
 - **Discord**: [discord.gg/YctCnvvshC](https://discord.gg/YctCnvvshC)
-- **GitHub Issues**: [github.com/Fission-AI/OpenSpec/issues](https://github.com/Fission-AI/OpenSpec/issues)
+- **GitHub Issues**: [github.com/Fission-AI/SynergySpec/issues](https://github.com/Fission-AI/SynergySpec/issues)
 - **Documentation**: [docs/opsx.md](opsx.md) for the full OPSX reference

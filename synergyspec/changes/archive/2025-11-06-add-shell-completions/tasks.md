@@ -4,7 +4,7 @@
 
 - [x] Create `src/utils/shell-detection.ts` with `SupportedShell` type and `detectShell()` function
 - [x] Create `src/core/completions/types.ts` with interfaces: `CompletionGenerator`, `CommandDefinition`, `FlagDefinition`
-- [x] Create `src/core/completions/command-registry.ts` with `COMMAND_REGISTRY` constant defining all OpenSpec commands, flags, and metadata
+- [x] Create `src/core/completions/command-registry.ts` with `COMMAND_REGISTRY` constant defining all SynergySpec commands, flags, and metadata
 - [x] Create `src/core/completions/completion-provider.ts` with `CompletionProvider` class for dynamic change/spec ID discovery with 2-second caching
 - [x] Write tests for shell detection (`test/utils/shell-detection.test.ts`)
 - [x] Write tests for completion provider (`test/core/completions/completion-provider.test.ts`)
@@ -48,9 +48,9 @@
 - [x] Document auto-install behavior and opt-out in README
 - [ ] Manually test Zsh completion in Oh My Zsh environment (install, test tab completion, uninstall)
 - [ ] Manually test Zsh completion in standard Zsh environment
-- [ ] Test dynamic change/spec ID completion in real OpenSpec projects
+- [ ] Test dynamic change/spec ID completion in real SynergySpec projects
 - [ ] Verify completion cache behavior (2-second TTL)
-- [ ] Test behavior outside OpenSpec projects (should skip dynamic completions)
+- [ ] Test behavior outside SynergySpec projects (should skip dynamic completions)
 - [x] Update `openspec --help` output to include completion command (automatically done via Commander)
 
 ## Phase 5: Edge Cases & Error Handling

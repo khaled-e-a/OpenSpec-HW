@@ -1,13 +1,13 @@
 ## Why
 
-The current setup has two separate commands (`openspec init` and `openspec experimental`) that configure different parts of the OpenSpec workflow. This creates confusion about which command to run, results in partial setups, and maintains two parallel systems (config files + old slash commands vs skills + opsx commands). Making the skill-based workflow the default simplifies onboarding and establishes a single, consistent way to use OpenSpec.
+The current setup has two separate commands (`openspec init` and `openspec experimental`) that configure different parts of the SynergySpec workflow. This creates confusion about which command to run, results in partial setups, and maintains two parallel systems (config files + old slash commands vs skills + opsx commands). Making the skill-based workflow the default simplifies onboarding and establishes a single, consistent way to use SynergySpec.
 
 ## What Changes
 
-- **BREAKING**: `openspec init` now generates skills and `/opsx-hw:*` commands instead of config files and `/openspec:*` commands
+- **BREAKING**: `openspec init` now generates skills and `/synspec:*` commands instead of config files and `/openspec:*` commands
 - **BREAKING**: Config files (`CLAUDE.md`, `.cursorrules`, etc.) are no longer generated
 - **BREAKING**: Old slash commands (`/openspec:proposal`, `/openspec:apply`, `/openspec:archive`) are no longer generated
-- **BREAKING**: `openspec/AGENTS.md` and `openspec/project.md` are no longer generated
+- **BREAKING**: `synergyspec/AGENTS.md` and `synergyspec/project.md` are no longer generated
 - Merge `experimental` command functionality into `init`
 - Add legacy detection and auto-cleanup with Y/N confirmation
 - Keep `openspec experimental` as hidden alias for backward compatibility
@@ -17,7 +17,7 @@ The current setup has two separate commands (`openspec init` and `openspec exper
 
 ### New Capabilities
 
-- `legacy-cleanup`: Detect and remove legacy OpenSpec artifacts (config files, old slash commands, AGENTS.md) during init
+- `legacy-cleanup`: Detect and remove legacy SynergySpec artifacts (config files, old slash commands, AGENTS.md) during init
 
 ### Modified Capabilities
 

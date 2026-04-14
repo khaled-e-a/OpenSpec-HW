@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `openspec completion` command SHALL provide shell completion functionality for all OpenSpec CLI commands, flags, and dynamic values (change IDs, spec IDs), with support for Zsh (including Oh My Zsh) and a scalable architecture ready for future shells (bash, fish, PowerShell). The completion system SHALL integrate with Zsh's native completion behavior rather than attempting to customize the user experience.
+The `openspec completion` command SHALL provide shell completion functionality for all SynergySpec CLI commands, flags, and dynamic values (change IDs, spec IDs), with support for Zsh (including Oh My Zsh) and a scalable architecture ready for future shells (bash, fish, PowerShell). The completion system SHALL integrate with Zsh's native completion behavior rather than attempting to customize the user experience.
 
 ## ADDED Requirements
 
@@ -74,17 +74,17 @@ The completion system SHALL provide context-aware dynamic completions for projec
 #### Scenario: Completing change IDs
 
 - **WHEN** completing arguments for commands that accept change names (show, validate, archive)
-- **THEN** discover active changes from `openspec/changes/` directory
-- **AND** exclude archived changes in `openspec/changes/archive/`
+- **THEN** discover active changes from `synergyspec/changes/` directory
+- **AND** exclude archived changes in `synergyspec/changes/archive/`
 - **AND** return change IDs as completion suggestions
-- **AND** only provide suggestions when inside an OpenSpec-enabled project
+- **AND** only provide suggestions when inside an SynergySpec-enabled project
 
 #### Scenario: Completing spec IDs
 
 - **WHEN** completing arguments for commands that accept spec names (show, validate)
-- **THEN** discover specs from `openspec/specs/` directory
+- **THEN** discover specs from `synergyspec/specs/` directory
 - **AND** return spec IDs as completion suggestions
-- **AND** only provide suggestions when inside an OpenSpec-enabled project
+- **AND** only provide suggestions when inside an SynergySpec-enabled project
 
 #### Scenario: Completion caching
 
@@ -95,7 +95,7 @@ The completion system SHALL provide context-aware dynamic completions for projec
 
 #### Scenario: Project detection
 
-- **WHEN** user requests completions outside an OpenSpec project
+- **WHEN** user requests completions outside an SynergySpec project
 - **THEN** skip dynamic change/spec ID completions
 - **AND** only suggest static commands and flags
 
@@ -181,7 +181,7 @@ The completion implementation SHALL follow clean architecture principles with Ty
 - **AND** implement methods:
   - `getChangeIds(): Promise<string[]>` - Discovers active change IDs
   - `getSpecIds(): Promise<string[]>` - Discovers spec IDs
-  - `isOpenSpecProject(): boolean` - Checks if current directory is OpenSpec-enabled
+  - `isSynergySpecProject(): boolean` - Checks if current directory is SynergySpec-enabled
 - **AND** implement caching with 2-second TTL using class properties
 
 #### Scenario: Command registry

@@ -4,7 +4,7 @@
  * Privacy-first design:
  * - Only tracks command name and version
  * - No arguments, file paths, or content
- * - Opt-out via OPENSPEC_TELEMETRY=0 or DO_NOT_TRACK=1
+ * - Opt-out via SYNERGYSPEC_TELEMETRY=0 or DO_NOT_TRACK=1
  * - Auto-disabled in CI environments
  * - Anonymous ID is a random UUID with no relation to the user
  */
@@ -25,13 +25,13 @@ let anonymousId: string | null = null;
  * Check if telemetry is enabled.
  *
  * Disabled when:
- * - OPENSPEC_TELEMETRY=0
+ * - SYNERGYSPEC_TELEMETRY=0
  * - DO_NOT_TRACK=1
  * - CI=true (any CI environment)
  */
 export function isTelemetryEnabled(): boolean {
   // Check explicit opt-out
-  if (process.env.OPENSPEC_TELEMETRY === '0') {
+  if (process.env.SYNERGYSPEC_TELEMETRY === '0') {
     return false;
   }
 
@@ -90,7 +90,7 @@ function getClient(): PostHog {
  * Track a command execution.
  *
  * @param commandName - The command name (e.g., 'init', 'change:apply')
- * @param version - The OpenSpec version
+ * @param version - The SynergySpec version
  */
 export async function trackCommand(commandName: string, version: string): Promise<void> {
   if (!isTelemetryEnabled()) {
@@ -132,7 +132,7 @@ export async function maybeShowTelemetryNotice(): Promise<void> {
 
     // Display notice
     console.log(
-      'Note: OpenSpec collects anonymous usage stats. Opt out: OPENSPEC_TELEMETRY=0'
+      'Note: SynergySpec collects anonymous usage stats. Opt out: SYNERGYSPEC_TELEMETRY=0'
     );
 
     // Mark as seen

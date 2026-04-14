@@ -12,22 +12,22 @@ type WorkflowId = (typeof ALL_WORKFLOWS)[number];
  * Maps workflow IDs to their skill directory names.
  */
 export const WORKFLOW_TO_SKILL_DIR: Record<WorkflowId, string> = {
-  'explore': 'openspec-explore',
-  'new': 'openspec-new-change',
-  'continue': 'openspec-continue-change',
-  'apply': 'openspec-apply-change',
-  'tdd': 'openspec-tdd',
-  'ff': 'openspec-ff-change',
-  'sync': 'openspec-sync-specs',
-  'archive': 'openspec-archive-change',
-  'bulk-archive': 'openspec-bulk-archive-change',
-  'verify': 'openspec-verify-change',
-  'verify-spec': 'openspec-verify-spec',
-  'onboard': 'openspec-onboard',
-  'propose': 'openspec-propose',
-  'gen-tests': 'openspec-gen-tests',
-  'run-tests': 'openspec-run-tests',
-  'ci': 'openspec-ci',
+  'explore': 'synergyspec-explore',
+  'new': 'synergyspec-new-change',
+  'continue': 'synergyspec-continue-change',
+  'apply': 'synergyspec-apply-change',
+  'tdd': 'synergyspec-tdd',
+  'ff': 'synergyspec-ff-change',
+  'sync': 'synergyspec-sync-specs',
+  'archive': 'synergyspec-archive-change',
+  'bulk-archive': 'synergyspec-bulk-archive-change',
+  'verify': 'synergyspec-verify-change',
+  'verify-spec': 'synergyspec-verify-spec',
+  'onboard': 'synergyspec-onboard',
+  'propose': 'synergyspec-propose',
+  'gen-tests': 'synergyspec-gen-tests',
+  'run-tests': 'synergyspec-run-tests',
+  'ci': 'synergyspec-ci',
 };
 
 function toKnownWorkflows(workflows: readonly string[]): WorkflowId[] {
@@ -38,7 +38,7 @@ function toKnownWorkflows(workflows: readonly string[]): WorkflowId[] {
 }
 
 /**
- * Checks whether a tool has at least one generated OpenSpec command file.
+ * Checks whether a tool has at least one generated SynergySpec command file.
  */
 export function toolHasAnyConfiguredCommand(projectPath: string, toolId: string): boolean {
   const adapter = CommandAdapterRegistry.get(toolId);

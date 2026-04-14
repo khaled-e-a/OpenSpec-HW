@@ -1,9 +1,9 @@
 ## Context
 
-OpenSpec uses workflow schemas to define artifact sequences for change proposals. Currently, schemas are resolved from three locations (project → user → package), but managing custom schemas requires manual file creation with no tooling support. The resolver infrastructure exists (`src/core/artifact-graph/resolver.ts`) but there's no CLI exposure for schema management operations.
+SynergySpec uses workflow schemas to define artifact sequences for change proposals. Currently, schemas are resolved from three locations (project → user → package), but managing custom schemas requires manual file creation with no tooling support. The resolver infrastructure exists (`src/core/artifact-graph/resolver.ts`) but there's no CLI exposure for schema management operations.
 
 Users who want to customize workflows must:
-1. Manually create directory structures under `openspec/schemas/<name>/`
+1. Manually create directory structures under `synergyspec/schemas/<name>/`
 2. Copy and modify `schema.yaml` files without validation
 3. Debug resolution issues by inspecting the filesystem directly
 
@@ -70,7 +70,7 @@ Use `@inquirer/prompts` (already a dependency) for:
 
 `schema fork <source>` resolves the source schema using the existing `getSchemaDir()` function, respecting the full resolution order (project → user → package). This allows forking from any accessible schema.
 
-The destination is always project-local: `openspec/schemas/<name>/`
+The destination is always project-local: `synergyspec/schemas/<name>/`
 
 **Rationale:** Forking to project scope makes sense because:
 - Custom schemas are project-specific decisions
@@ -87,7 +87,7 @@ All commands support `--json` flag for machine-readable output:
 
 Text output uses ora spinners for progress and clear success/error messaging.
 
-**Rationale:** Consistent with existing OpenSpec commands and enables scripting/automation.
+**Rationale:** Consistent with existing SynergySpec commands and enables scripting/automation.
 
 ### 7. Schema `which` Command Design
 

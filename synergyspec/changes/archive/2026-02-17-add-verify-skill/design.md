@@ -1,4 +1,4 @@
-# Design: Add /opsx-hw:verify Skill
+# Design: Add /synspec:verify Skill
 
 ## Architecture Decision: Dynamic Generation via Setup Command
 
@@ -40,13 +40,13 @@ Update `artifactExperimentalSetupCommand()` in `src/commands/artifact-workflow.t
 - Import both template functions
 - Add verify to the `skills` array (position 8)
 - Add verify to the `commands` array (position 8)
-- Update help text to list `/opsx-hw:verify`
+- Update help text to list `/synspec:verify`
 
 #### 3. Generated Artifacts
 
 When users run `openspec artifact-experimental-setup`, the command creates:
 
-- `.claude/skills/openspec-verify-change/SKILL.md` - Agent Skills format
+- `.claude/skills/synergyspec-verify-change/SKILL.md` - Agent Skills format
 - `.claude/commands/opsx/verify.md` - Slash command format
 
 Both are generated from the template functions, with YAML frontmatter automatically added.
@@ -55,7 +55,7 @@ Both are generated from the template functions, with YAML frontmatter automatica
 
 **Alternative 1: Static skill files in repository**
 
-Create `.claude/skills/openspec-verify-change/SKILL.md` as a static file in the OpenSpec repository.
+Create `.claude/skills/synergyspec-verify-change/SKILL.md` as a static file in the SynergySpec repository.
 
 **Rejected because:**
 - Inconsistent with all other opsx skills
@@ -91,6 +91,6 @@ The implementation correctly follows this design if:
 
 1. Both template functions exist in `skill-templates.ts`
 2. Verify appears in both skills and commands arrays in `artifact-workflow.ts`
-3. Help text mentions `/opsx-hw:verify`
+3. Help text mentions `/synspec:verify`
 4. Running `openspec artifact-experimental-setup` generates both skill and command files
 5. Build succeeds with no TypeScript errors

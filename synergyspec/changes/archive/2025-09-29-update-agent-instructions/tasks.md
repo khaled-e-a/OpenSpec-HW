@@ -1,6 +1,6 @@
 # Implementation Tasks
 
-## 1. Restructure OpenSpec README.md
+## 1. Restructure SynergySpec README.md
 - [x] 1.1 Front-load the three-stage workflow as primary content
 - [x] 1.2 Restructure with hierarchy: Core Workflow → Quick Start → Commands → Details → Edge Cases
 - [x] 1.3 Reduce total length by 50% (target: ~285 lines from current ~575)

@@ -4,64 +4,64 @@ The init command SHALL generate slash command files for supported editors using 
 
 #### Scenario: Generating slash commands for Claude Code
 - **WHEN** the user selects Claude Code during initialization
-- **THEN** create `.claude/commands/openspec/proposal.md`, `.claude/commands/openspec/apply.md`, and `.claude/commands/openspec/archive.md`
+- **THEN** create `.claude/commands/synergyspec/proposal.md`, `.claude/commands/synergyspec/apply.md`, and `.claude/commands/synergyspec/archive.md`
 - **AND** populate each file from shared templates so command text matches other tools
-- **AND** each template includes instructions for the relevant OpenSpec workflow stage
+- **AND** each template includes instructions for the relevant SynergySpec workflow stage
 
 #### Scenario: Generating slash commands for CodeBuddy Code
 - **WHEN** the user selects CodeBuddy Code during initialization
-- **THEN** create `.codebuddy/commands/openspec/proposal.md`, `.codebuddy/commands/openspec/apply.md`, and `.codebuddy/commands/openspec/archive.md`
+- **THEN** create `.codebuddy/commands/synergyspec/proposal.md`, `.codebuddy/commands/synergyspec/apply.md`, and `.codebuddy/commands/synergyspec/archive.md`
 - **AND** populate each file from shared templates so command text matches other tools
-- **AND** each template includes instructions for the relevant OpenSpec workflow stage
+- **AND** each template includes instructions for the relevant SynergySpec workflow stage
 
 #### Scenario: Generating slash commands for Cline
 - **WHEN** the user selects Cline during initialization
-- **THEN** create `.clinerules/openspec-proposal.md`, `.clinerules/openspec-apply.md`, and `.clinerules/openspec-archive.md`
+- **THEN** create `.clinerules/synergyspec-proposal.md`, `.clinerules/synergyspec-apply.md`, and `.clinerules/synergyspec-archive.md`
 - **AND** populate each file from shared templates so command text matches other tools
 - **AND** include Cline-specific Markdown heading frontmatter
-- **AND** each template includes instructions for the relevant OpenSpec workflow stage
+- **AND** each template includes instructions for the relevant SynergySpec workflow stage
 
 #### Scenario: Generating slash commands for Crush
 - **WHEN** the user selects Crush during initialization
-- **THEN** create `.crush/commands/openspec/proposal.md`, `.crush/commands/openspec/apply.md`, and `.crush/commands/openspec/archive.md`
+- **THEN** create `.crush/commands/synergyspec/proposal.md`, `.crush/commands/synergyspec/apply.md`, and `.crush/commands/synergyspec/archive.md`
 - **AND** populate each file from shared templates so command text matches other tools
-- **AND** include Crush-specific frontmatter with OpenSpec category and tags
-- **AND** each template includes instructions for the relevant OpenSpec workflow stage
+- **AND** include Crush-specific frontmatter with SynergySpec category and tags
+- **AND** each template includes instructions for the relevant SynergySpec workflow stage
 
 #### Scenario: Generating slash commands for Cursor
 - **WHEN** the user selects Cursor during initialization
-- **THEN** create `.cursor/commands/openspec-proposal.md`, `.cursor/commands/openspec-apply.md`, and `.cursor/commands/openspec-archive.md`
+- **THEN** create `.cursor/commands/synergyspec-proposal.md`, `.cursor/commands/synergyspec-apply.md`, and `.cursor/commands/synergyspec-archive.md`
 - **AND** populate each file from shared templates so command text matches other tools
-- **AND** each template includes instructions for the relevant OpenSpec workflow stage
+- **AND** each template includes instructions for the relevant SynergySpec workflow stage
 
 #### Scenario: Generating slash commands for OpenCode
 - **WHEN** the user selects OpenCode during initialization
-- **THEN** create `.opencode/commands/openspec-proposal.md`, `.opencode/commands/openspec-apply.md`, and `.opencode/commands/openspec-archive.md`
+- **THEN** create `.opencode/commands/synergyspec-proposal.md`, `.opencode/commands/synergyspec-apply.md`, and `.opencode/commands/synergyspec-archive.md`
 - **AND** populate each file from shared templates so command text matches other tools
-- **AND** each template includes instructions for the relevant OpenSpec workflow stage
+- **AND** each template includes instructions for the relevant SynergySpec workflow stage
 
 #### Scenario: Generating slash commands for Windsurf
 - **WHEN** the user selects Windsurf during initialization
-- **THEN** create `.windsurf/workflows/openspec-proposal.md`, `.windsurf/workflows/openspec-apply.md`, and `.windsurf/workflows/openspec-archive.md`
-- **AND** populate each file from shared templates (wrapped in OpenSpec markers) so workflow text matches other tools
-- **AND** each template includes instructions for the relevant OpenSpec workflow stage
+- **THEN** create `.windsurf/workflows/synergyspec-proposal.md`, `.windsurf/workflows/synergyspec-apply.md`, and `.windsurf/workflows/synergyspec-archive.md`
+- **AND** populate each file from shared templates (wrapped in SynergySpec markers) so workflow text matches other tools
+- **AND** each template includes instructions for the relevant SynergySpec workflow stage
 
 #### Scenario: Generating slash commands for Kilo Code
 - **WHEN** the user selects Kilo Code during initialization
-- **THEN** create `.kilocode/workflows/openspec-proposal.md`, `.kilocode/workflows/openspec-apply.md`, and `.kilocode/workflows/openspec-archive.md`
-- **AND** populate each file from shared templates (wrapped in OpenSpec markers) so workflow text matches other tools
-- **AND** each template includes instructions for the relevant OpenSpec workflow stage
+- **THEN** create `.kilocode/workflows/synergyspec-proposal.md`, `.kilocode/workflows/synergyspec-apply.md`, and `.kilocode/workflows/synergyspec-archive.md`
+- **AND** populate each file from shared templates (wrapped in SynergySpec markers) so workflow text matches other tools
+- **AND** each template includes instructions for the relevant SynergySpec workflow stage
 
 #### Scenario: Generating slash commands for Codex
 - **WHEN** the user selects Codex during initialization
-- **THEN** create global prompt files at `~/.codex/prompts/openspec-proposal.md`, `~/.codex/prompts/openspec-apply.md`, and `~/.codex/prompts/openspec-archive.md` (or under `$CODEX_HOME/prompts` if set)
+- **THEN** create global prompt files at `~/.codex/prompts/synergyspec-proposal.md`, `~/.codex/prompts/synergyspec-apply.md`, and `~/.codex/prompts/synergyspec-archive.md` (or under `$CODEX_HOME/prompts` if set)
 - **AND** populate each file from shared templates that map the first numbered placeholder (`$1`) to the primary user input (e.g., change identifier or question text)
-- **AND** wrap the generated content in OpenSpec markers so `openspec update` can refresh the prompts without touching surrounding custom notes
+- **AND** wrap the generated content in SynergySpec markers so `openspec update` can refresh the prompts without touching surrounding custom notes
 
 #### Scenario: Generating slash commands for GitHub Copilot
 - **WHEN** the user selects GitHub Copilot during initialization
-- **THEN** create `.github/prompts/openspec-proposal.prompt.md`, `.github/prompts/openspec-apply.prompt.md`, and `.github/prompts/openspec-archive.prompt.md`
+- **THEN** create `.github/prompts/synergyspec-proposal.prompt.md`, `.github/prompts/synergyspec-apply.prompt.md`, and `.github/prompts/synergyspec-archive.prompt.md`
 - **AND** populate each file with YAML frontmatter containing a `description` field that summarizes the workflow stage
 - **AND** include `$ARGUMENTS` placeholder to capture user input
-- **AND** wrap the shared template body with OpenSpec markers so `openspec update` can refresh the content
-- **AND** each template includes instructions for the relevant OpenSpec workflow stage
+- **AND** wrap the shared template body with SynergySpec markers so `openspec update` can refresh the content
+- **AND** each template includes instructions for the relevant SynergySpec workflow stage

@@ -84,8 +84,8 @@ We researched how similar tools handle config layering:
 **Key insight from ESLint:** The ESLint team explicitly removed cascading in flat config because cascading was a complexity nightmare. Their new model: one config at root, use glob patterns to target subdirectories.
 
 **Recommendation for profiles/config:** Two layers is enough.
-- **Global** = user's defaults (`~/.config/openspec/`)
-- **Project** = repo-level config (`.openspec/` or committed to repo)
+- **Global** = user's defaults (`~/.config/synergyspec/`)
+- **Project** = repo-level config (`.synergyspec/` or committed to repo)
 
 No "workspace" layer needed for config. This matches Claude Code's model.
 
@@ -111,17 +111,17 @@ The workspace question isn't about config—it's about **where specs and changes
 2. **Multi-repo**: A change might span multiple repositories entirely
 3. **Cross-functional work**: A feature affects multiple teams (backend, web, iOS, Android)
 
-### Current OpenSpec Architecture
+### Current SynergySpec Architecture
 
-OpenSpec currently assumes:
-- One `openspec/` per repo, always at root
+SynergySpec currently assumes:
+- One `synergyspec/` per repo, always at root
 - CLI doesn't walk up directories—expects you're at root
 - Changes can touch ANY spec (no scoping)
 - Single config applies to everything
 - No notion of "scope" or "boundary" within a project
 
 ```
-openspec/
+synergyspec/
 ├── specs/
 │   ├── auth/spec.md           # Domain-organized specs
 │   ├── payments/spec.md
@@ -224,12 +224,12 @@ proto/
 
 ---
 
-## Part 4: Three Models for OpenSpec
+## Part 4: Three Models for SynergySpec
 
 ### Model A: Flat Root (Current)
 
 ```
-openspec/
+synergyspec/
 ├── specs/
 │   ├── checkout-contract/    # Shared contract
 │   ├── checkout-web/         # Web-specific
@@ -254,7 +254,7 @@ openspec/
 ### Model B: Nested Specs (Domain → Platform)
 
 ```
-openspec/
+synergyspec/
 ├── specs/
 │   ├── checkout/
 │   │   ├── spec.md              # Shared contract (the "interface")
@@ -291,15 +291,15 @@ requirements:
 monorepo/
 ├── services/
 │   └── billing/
-│       └── openspec/specs/billing/spec.md
+│       └── synergyspec/specs/billing/spec.md
 ├── clients/
 │   ├── web/
-│   │   └── openspec/specs/checkout/spec.md
+│   │   └── synergyspec/specs/checkout/spec.md
 │   ├── ios/
-│   │   └── openspec/specs/checkout/spec.md
+│   │   └── synergyspec/specs/checkout/spec.md
 │   └── android/
-│       └── openspec/specs/checkout/spec.md
-└── openspec/           # Root-level for cross-cutting
+│       └── synergyspec/specs/checkout/spec.md
+└── synergyspec/           # Root-level for cross-cutting
     ├── specs/
     │   └── checkout-contract/spec.md   # Shared contract
     └── changes/        # Where do cross-cutting changes live?
@@ -308,23 +308,23 @@ monorepo/
 **Pros:**
 - Specs live near the code they describe
 - Teams own their specs naturally
-- Works for multi-repo too (each repo has its own `openspec/`)
+- Works for multi-repo too (each repo has its own `synergyspec/`)
 
 **Cons:**
 - Cross-cutting specs are awkward (where do they go?)
-- Changes that span multiple `openspec/` directories = ???
+- Changes that span multiple `synergyspec/` directories = ???
 - Need a "workspace" concept to aggregate
-- Multiple `openspec/` roots to manage
+- Multiple `synergyspec/` roots to manage
 
 ### Model D: Hybrid (Model B Inside Each Project + Model C Across Projects)
 
-Use one `openspec/` root per project, but allow nested specs within that root for clear ownership and shared contracts.
+Use one `synergyspec/` root per project, but allow nested specs within that root for clear ownership and shared contracts.
 For multi-repo work, use a workspace manifest to coordinate multiple projects without duplicating canonical specs.
 
 **Monorepo shape (single project, nested specs):**
 ```
 repo/
-└── openspec/
+└── synergyspec/
     ├── specs/
     │   ├── contracts/
     │   │   └── checkout/spec.md
@@ -351,23 +351,23 @@ repo/
 ```
 ~/work/
 ├── contracts/
-│   └── openspec/
+│   └── synergyspec/
 │       ├── specs/checkout/spec.md
 │       └── changes/add-3ds-contract/
 ├── billing-service/
-│   └── openspec/
+│   └── synergyspec/
 │       ├── specs/billing/spec.md
 │       └── changes/add-3ds-billing/
 ├── web-client/
-│   └── openspec/
+│   └── synergyspec/
 │       ├── specs/checkout/spec.md
 │       └── changes/add-3ds-web/
 ├── ios-client/
-│   └── openspec/
+│   └── synergyspec/
 │       ├── specs/checkout/spec.md
 │       └── changes/add-3ds-ios/
 └── payments-workspace/
-    └── .openspec-workspace/
+    └── .synergyspec-workspace/
         ├── workspace.yaml
         └── initiatives/add-3ds/links.yaml
 ```
@@ -398,13 +398,13 @@ For multi-repo setups, Model C (or the coordination half of Model D) is almost f
 ```
 ~/work/
 ├── billing-service/
-│   └── openspec/specs/billing/
+│   └── synergyspec/specs/billing/
 ├── web-client/
-│   └── openspec/specs/checkout/
+│   └── synergyspec/specs/checkout/
 ├── ios-client/
-│   └── openspec/specs/checkout/
+│   └── synergyspec/specs/checkout/
 └── contracts/                    # Dedicated repo for shared specs?
-    └── openspec/specs/
+    └── synergyspec/specs/
         └── checkout-contract/
 ```
 
@@ -418,7 +418,7 @@ For multi-repo setups, Model C (or the coordination half of Model D) is almost f
 2. **Where do cross-repo changes live?**
    - In one of the repos? (feels wrong—biased ownership)
    - In a separate "workspace" repo?
-   - In `~/.config/openspec/workspaces/my-platform/changes/`?
+   - In `~/.config/synergyspec/workspaces/my-platform/changes/`?
 
 3. **How do changes propagate?**
    - Change to `checkout-contract` affects all client repos
@@ -429,10 +429,10 @@ For multi-repo setups, Model C (or the coordination half of Model D) is almost f
 
 If we add workspace support, it could be:
 
-> **A workspace is a collection of OpenSpec roots that can be operated on together.**
+> **A workspace is a collection of SynergySpec roots that can be operated on together.**
 
 ```yaml
-# ~/.config/openspec/workspaces.yaml (or similar)
+# ~/.config/synergyspec/workspaces.yaml (or similar)
 workspaces:
   my-platform:
     roots:
@@ -488,12 +488,12 @@ requirements:
 ### 2. Where does the "shared kernel" live?
 
 **Option A: Root level (Model B)**
-- `openspec/specs/checkout/spec.md` is the shared kernel
+- `synergyspec/specs/checkout/spec.md` is the shared kernel
 - Platform specs nest under it
 
 **Option B: Dedicated area**
-- `openspec/specs/_shared/checkout-contract/spec.md`
-- Or `openspec/specs/_contracts/checkout/spec.md`
+- `synergyspec/specs/_shared/checkout-contract/spec.md`
+- Or `synergyspec/specs/_contracts/checkout/spec.md`
 - Explicit "shared" namespace
 
 **Option C: Separate repo (Model C for multi-repo)**
@@ -506,7 +506,7 @@ If we introduce workspaces:
 
 | Concept | Definition |
 |---------|------------|
-| **Project** | Single OpenSpec root (one `openspec/` directory) |
+| **Project** | Single SynergySpec root (one `synergyspec/` directory) |
 | **Workspace** | Collection of projects that can be operated on together |
 
 A workspace would enable:
@@ -516,10 +516,10 @@ A workspace would enable:
 
 **Question:** Do we need explicit workspace tracking, or just ad-hoc multi-root (like Claude Code's `/add-dir`)?
 
-### 4. Does OpenSpec need to understand dependencies?
+### 4. Does SynergySpec need to understand dependencies?
 
 If `checkout-web` depends on `checkout-contract`:
-- Should OpenSpec know this relationship?
+- Should SynergySpec know this relationship?
 - Should a change to `checkout-contract` warn about downstream specs?
 - Or is dependency tracking "out of scope"?
 
@@ -553,10 +553,10 @@ Based on research, teams love:
 ### Possible North Stars
 
 **Ambitious:**
-> OpenSpec automatically understands your repo structure, detects cross-cutting specs, and helps you create changes that flow to the right places.
+> SynergySpec automatically understands your repo structure, detects cross-cutting specs, and helps you create changes that flow to the right places.
 
 **Simpler:**
-> You organize specs however you want. OpenSpec just works.
+> You organize specs however you want. SynergySpec just works.
 
 **Practical:**
 > Nested specs for organization. Explicit dependencies for cross-cutting. No magic.
@@ -594,9 +594,9 @@ If needed, a separate change for:
 
 ## Part 9: Spec Philosophy (Behavior First, Lightweight, Agent-Aligned)
 
-### What is a spec in OpenSpec?
+### What is a spec in SynergySpec?
 
-For OpenSpec, a spec should be treated as a **verifiable behavior contract at a boundary**:
+For SynergySpec, a spec should be treated as a **verifiable behavior contract at a boundary**:
 - What users, integrators, or operators can observe and rely on
 - What can be validated with tests, checks, or explicit review
 - What should remain stable even if internal implementation changes
@@ -627,7 +627,7 @@ This keeps day-to-day usage lightweight while preserving clarity where failures 
 
 ### Human exploration -> agent-authored specs
 
-OpenSpec is often agent-authored from human exploration. To make that reliable:
+SynergySpec is often agent-authored from human exploration. To make that reliable:
 
 - Humans provide intent, constraints, and examples from exploration
 - Agents convert that into concise, behavior-first requirements and scenarios
@@ -640,8 +640,8 @@ In short: humans shape intent; agents produce consistent, verifiable contracts.
 
 To avoid losing this in exploration notes, codify it in:
 1. `docs/concepts.md` for human-facing framing
-2. `openspec/specs/openspec-conventions/spec.md` for normative spec conventions
-3. `openspec/specs/docs-agent-instructions/spec.md` for agent-instruction authoring rules
+2. `synergyspec/specs/synergyspec-conventions/spec.md` for normative spec conventions
+3. `synergyspec/specs/docs-agent-instructions/spec.md` for agent-instruction authoring rules
 
 ---
 

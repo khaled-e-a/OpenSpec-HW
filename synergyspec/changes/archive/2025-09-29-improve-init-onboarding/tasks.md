@@ -1,6 +1,6 @@
 ## 1. Planning & Spec Updates
 - [x] 1.1 Confirm overlap with `add-multi-agent-init` and coordinate extend-mode flow
-- [x] 1.2 Update `openspec/specs/cli-init/spec.md` to capture multi-select onboarding requirements
+- [x] 1.2 Update `synergyspec/specs/cli-init/spec.md` to capture multi-select onboarding requirements
 
 ## 2. Implementation
 - [x] 2.1 Add multi-select support to the `openspec init` prompt, including indicators for existing tool configs

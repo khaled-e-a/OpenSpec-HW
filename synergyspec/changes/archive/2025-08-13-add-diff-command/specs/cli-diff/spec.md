@@ -50,7 +50,7 @@ WHEN terminal supports colors:
 
 WHEN specified change doesn't exist THEN display error "Change '<name>' not found"
 WHEN no specs directory in change THEN display "No spec changes found for '<name>'"
-WHEN changes directory doesn't exist THEN display "No OpenSpec changes directory found"
+WHEN changes directory doesn't exist THEN display "No SynergySpec changes directory found"
 
 ## Examples
 

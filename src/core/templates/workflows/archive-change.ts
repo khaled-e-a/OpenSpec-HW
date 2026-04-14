@@ -8,7 +8,7 @@ import type { SkillTemplate, CommandTemplate } from '../types.js';
 
 export function getArchiveChangeSkillTemplate(): SkillTemplate {
    return {
-      name: 'openspec-archive-change',
+      name: 'synergyspec-archive-change',
       description: 'Archive a completed change in the experimental workflow. Use when the user wants to finalize and archive a change after implementation is complete.',
       instructions: `Archive a completed change in the experimental workflow.
 
@@ -18,7 +18,7 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
+   Run \`synergyspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
 
    Show only active changes (not already archived).
    Include the schema used for each change if available.
@@ -27,7 +27,7 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
 
 2. **Check artifact completion status**
 
-   Run \`openspec-hw status --change "<name>" --json\` to check artifact completion.
+   Run \`synergyspec-hw status --change "<name>" --json\` to check artifact completion.
 
    Parse the JSON to understand:
    - \`schemaName\`: The workflow being used
@@ -53,10 +53,10 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
 
 4. **Assess delta spec sync state**
 
-   Check for delta specs at \`openspec/changes/<name>/specs/\`. If none exist, proceed without sync prompt.
+   Check for delta specs at \`synergyspec/changes/<name>/specs/\`. If none exist, proceed without sync prompt.
 
    **If delta specs exist:**
-   - Compare each delta spec with its corresponding main spec at \`openspec/specs/<capability>/spec.md\`
+   - Compare each delta spec with its corresponding main spec at \`synergyspec/specs/<capability>/spec.md\`
    - Determine what changes would be applied (adds, modifications, removals, renames)
    - Show a combined summary before prompting
 
@@ -64,11 +64,11 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
    - If changes needed: "Sync now (recommended)", "Archive without syncing"
    - If already synced: "Archive now", "Sync anyway", "Cancel"
 
-   If user chooses sync, use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke openspec-sync-specs for change '<name>'. Delta spec analysis: <include the analyzed delta spec summary>"). Proceed to archive regardless of choice.
+   If user chooses sync, use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke synergyspec-sync-specs for change '<name>'. Delta spec analysis: <include the analyzed delta spec summary>"). Proceed to archive regardless of choice.
 
 4b. **Spec Blast Radius Review** (if spec-blast-radius.md exists)
 
-   Check for \`openspec/changes/<name>/spec-blast-radius.md\`.
+   Check for \`synergyspec/changes/<name>/spec-blast-radius.md\`.
    If it doesn't exist: note "No blast radius file found — skipping impact review." and proceed.
    If the file exists but its Summary says "No existing specs impacted": note that and proceed.
 
@@ -86,19 +86,19 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
 
    | # | Spec | Impact | Requirements Affected |
    |---|------|--------|----------------------|
-   | 1 | openspec/specs/auth/spec.md | High | Session expiry, Token refresh |
-   | 2 | openspec/specs/payments/spec.md | Medium | Checkout flow |
+   | 1 | synergyspec/specs/auth/spec.md | High | Session expiry, Token refresh |
+   | 2 | synergyspec/specs/payments/spec.md | Medium | Checkout flow |
    \`\`\`
 
    Then, for each impacted spec, use the **AskUserQuestion tool** with these options:
-   - **"Sync now"** — delegate spec merge to openspec-sync-specs
+   - **"Sync now"** — delegate spec merge to synergyspec-sync-specs
    - **"Mark for review"** — add a review notice to the spec file
    - **"Skip"** — no action for this spec
 
    Process each selected action:
 
    - **Sync now**: Use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke
-     openspec-sync-specs. Sync the spec at '<spec-path>' using the delta from change '<name>'.")
+     synergyspec-sync-specs. Sync the spec at '<spec-path>' using the delta from change '<name>'.")
    - **Mark for review**: Read the spec file, prepend the following comment block at the very top,
      then write it back:
      \`\`\`markdown
@@ -106,7 +106,7 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
      Impacted by change: <change-name>
      Date: <YYYY-MM-DD>
      Reason: <impact level> impact — <list impacted requirements>
-     Run /opsx-hw:verify-spec to assess what needs updating.
+     Run /synspec:verify-spec to assess what needs updating.
      -->
      \`\`\`
    - **Skip**: Take no action on this spec.
@@ -117,7 +117,7 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
 
    Create the archive directory if it doesn't exist:
    \`\`\`bash
-   mkdir -p openspec/changes/archive
+   mkdir -p synergyspec/changes/archive
    \`\`\`
 
    Generate target name using current date: \`YYYY-MM-DD-<change-name>\`
@@ -127,7 +127,7 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
    - If no: Move the change directory to archive
 
    \`\`\`bash
-   mv openspec/changes/<name> openspec/changes/archive/YYYY-MM-DD-<name>
+   mv synergyspec/changes/<name> synergyspec/changes/archive/YYYY-MM-DD-<name>
    \`\`\`
 
 6. **Display summary**
@@ -147,7 +147,7 @@ export function getArchiveChangeSkillTemplate(): SkillTemplate {
 
 **Change:** <change-name>
 **Schema:** <schema-name>
-**Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Archived to:** synergyspec/changes/archive/YYYY-MM-DD-<name>/
 **Delta specs:** ✓ Synced to main specs (or "No delta specs" or "Sync skipped")
 **Blast radius:** 2 spec(s) synced, 1 marked for review (or "No impacted specs" or "No blast radius file")
 
@@ -156,16 +156,16 @@ All artifacts complete. All tasks complete.
 
 **Guardrails**
 - Always prompt for change selection if not provided
-- Use artifact graph (openspec-hw status --json) for completion checking
+- Use artifact graph (synergyspec-hw status --json) for completion checking
 - Don't block archive on warnings - just inform and confirm
-- Preserve .openspec.yaml when moving to archive (it moves with the directory)
+- Preserve .synergyspec.yaml when moving to archive (it moves with the directory)
 - Show clear summary of what happened
-- If sync is requested, use openspec-sync-specs approach (agent-driven)
+- If sync is requested, use synergyspec-sync-specs approach (agent-driven)
 - If delta specs exist, always run the sync assessment and show the combined summary before prompting
 - If spec-blast-radius.md does not exist, skip step 4b silently (no warning needed)`,
       license: 'MIT',
-      compatibility: 'Requires openspec-hw CLI.',
-      metadata: { author: 'openspec', version: '1.0' },
+      compatibility: 'Requires synergyspec-hw CLI.',
+      metadata: { author: 'synergyspec', version: '1.0' },
    };
 }
 
@@ -177,13 +177,13 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
       tags: ['workflow', 'archive', 'experimental'],
       content: `Archive a completed change in the experimental workflow.
 
-**Input**: Optionally specify a change name after \`/opsx-hw:archive\` (e.g., \`/opsx-hw:archive add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
+**Input**: Optionally specify a change name after \`/synspec:archive\` (e.g., \`/synspec:archive add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 **Steps**
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
+   Run \`synergyspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
 
    Show only active changes (not already archived).
    Include the schema used for each change if available.
@@ -192,7 +192,7 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
 
 2. **Check artifact completion status**
 
-   Run \`openspec-hw status --change "<name>" --json\` to check artifact completion.
+   Run \`synergyspec-hw status --change "<name>" --json\` to check artifact completion.
 
    Parse the JSON to understand:
    - \`schemaName\`: The workflow being used
@@ -218,10 +218,10 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
 
 4. **Assess delta spec sync state**
 
-   Check for delta specs at \`openspec/changes/<name>/specs/\`. If none exist, proceed without sync prompt.
+   Check for delta specs at \`synergyspec/changes/<name>/specs/\`. If none exist, proceed without sync prompt.
 
    **If delta specs exist:**
-   - Compare each delta spec with its corresponding main spec at \`openspec/specs/<capability>/spec.md\`
+   - Compare each delta spec with its corresponding main spec at \`synergyspec/specs/<capability>/spec.md\`
    - Determine what changes would be applied (adds, modifications, removals, renames)
    - Show a combined summary before prompting
 
@@ -229,11 +229,11 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
    - If changes needed: "Sync now (recommended)", "Archive without syncing"
    - If already synced: "Archive now", "Sync anyway", "Cancel"
 
-   If user chooses sync, use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke openspec-sync-specs for change '<name>'. Delta spec analysis: <include the analyzed delta spec summary>"). Proceed to archive regardless of choice.
+   If user chooses sync, use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke synergyspec-sync-specs for change '<name>'. Delta spec analysis: <include the analyzed delta spec summary>"). Proceed to archive regardless of choice.
 
 4b. **Spec Blast Radius Review** (if spec-blast-radius.md exists)
 
-   Check for \`openspec/changes/<name>/spec-blast-radius.md\`.
+   Check for \`synergyspec/changes/<name>/spec-blast-radius.md\`.
    If it doesn't exist: note "No blast radius file found — skipping impact review." and proceed.
    If the file exists but its Summary says "No existing specs impacted": note that and proceed.
 
@@ -251,19 +251,19 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
 
    | # | Spec | Impact | Requirements Affected |
    |---|------|--------|----------------------|
-   | 1 | openspec/specs/auth/spec.md | High | Session expiry, Token refresh |
-   | 2 | openspec/specs/payments/spec.md | Medium | Checkout flow |
+   | 1 | synergyspec/specs/auth/spec.md | High | Session expiry, Token refresh |
+   | 2 | synergyspec/specs/payments/spec.md | Medium | Checkout flow |
    \`\`\`
 
    Then, for each impacted spec, use the **AskUserQuestion tool** with these options:
-   - **"Sync now"** — delegate spec merge to openspec-sync-specs
+   - **"Sync now"** — delegate spec merge to synergyspec-sync-specs
    - **"Mark for review"** — add a review notice to the spec file
    - **"Skip"** — no action for this spec
 
    Process each selected action:
 
    - **Sync now**: Use Task tool (subagent_type: "general-purpose", prompt: "Use Skill tool to invoke
-     openspec-sync-specs. Sync the spec at '<spec-path>' using the delta from change '<name>'.")
+     synergyspec-sync-specs. Sync the spec at '<spec-path>' using the delta from change '<name>'.")
    - **Mark for review**: Read the spec file, prepend the following comment block at the very top,
      then write it back:
      \`\`\`markdown
@@ -271,7 +271,7 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
      Impacted by change: <change-name>
      Date: <YYYY-MM-DD>
      Reason: <impact level> impact — <list impacted requirements>
-     Run /opsx-hw:verify-spec to assess what needs updating.
+     Run /synspec:verify-spec to assess what needs updating.
      -->
      \`\`\`
    - **Skip**: Take no action on this spec.
@@ -282,7 +282,7 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
 
    Create the archive directory if it doesn't exist:
    \`\`\`bash
-   mkdir -p openspec/changes/archive
+   mkdir -p synergyspec/changes/archive
    \`\`\`
 
    Generate target name using current date: \`YYYY-MM-DD-<change-name>\`
@@ -292,7 +292,7 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
    - If no: Move the change directory to archive
 
    \`\`\`bash
-   mv openspec/changes/<name> openspec/changes/archive/YYYY-MM-DD-<name>
+   mv synergyspec/changes/<name> synergyspec/changes/archive/YYYY-MM-DD-<name>
    \`\`\`
 
 6. **Display summary**
@@ -312,7 +312,7 @@ export function getOpsxArchiveCommandTemplate(): CommandTemplate {
 
 **Change:** <change-name>
 **Schema:** <schema-name>
-**Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Archived to:** synergyspec/changes/archive/YYYY-MM-DD-<name>/
 **Delta specs:** ✓ Synced to main specs
 **Blast radius:** 2 spec(s) synced, 1 marked for review (or "No impacted specs")
 
@@ -326,7 +326,7 @@ All artifacts complete. All tasks complete.
 
 **Change:** <change-name>
 **Schema:** <schema-name>
-**Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Archived to:** synergyspec/changes/archive/YYYY-MM-DD-<name>/
 **Delta specs:** No delta specs
 **Blast radius:** No impacted specs (or triage results if blast radius file exists)
 
@@ -340,7 +340,7 @@ All artifacts complete. All tasks complete.
 
 **Change:** <change-name>
 **Schema:** <schema-name>
-**Archived to:** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Archived to:** synergyspec/changes/archive/YYYY-MM-DD-<name>/
 **Delta specs:** Sync skipped (user chose to skip)
 **Blast radius:** 1 marked for review, 1 skipped
 
@@ -358,7 +358,7 @@ Review the archive if this was not intentional.
 ## Archive Failed
 
 **Change:** <change-name>
-**Target:** openspec/changes/archive/YYYY-MM-DD-<name>/
+**Target:** synergyspec/changes/archive/YYYY-MM-DD-<name>/
 
 Target archive directory already exists.
 
@@ -370,11 +370,11 @@ Target archive directory already exists.
 
 **Guardrails**
 - Always prompt for change selection if not provided
-- Use artifact graph (openspec-hw status --json) for completion checking
+- Use artifact graph (synergyspec-hw status --json) for completion checking
 - Don't block archive on warnings - just inform and confirm
-- Preserve .openspec.yaml when moving to archive (it moves with the directory)
+- Preserve .synergyspec.yaml when moving to archive (it moves with the directory)
 - Show clear summary of what happened
-- If sync is requested, use the Skill tool to invoke \`openspec-sync-specs\` (agent-driven)
+- If sync is requested, use the Skill tool to invoke \`synergyspec-sync-specs\` (agent-driven)
 - If delta specs exist, always run the sync assessment and show the combined summary before prompting
 - If spec-blast-radius.md does not exist, skip step 4b silently (no warning needed)`
    };

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Validates Nix flake builds and maintenance scripts in CI to ensure Nix users can reliably install and use OpenSpec. Prevents regressions in Nix support by testing builds and the update-flake.sh script on every pull request and push to main.
+Validates Nix flake builds and maintenance scripts in CI to ensure Nix users can reliably install and use SynergySpec. Prevents regressions in Nix support by testing builds and the update-flake.sh script on every pull request and push to main.
 ## Requirements
 ### Requirement: Nix Flake Build Validation
 

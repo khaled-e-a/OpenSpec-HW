@@ -1,6 +1,6 @@
 ## Context
 
-OpenSpec needs usage analytics to understand adoption and inform product decisions. PostHog provides a privacy-conscious analytics platform suitable for open source projects.
+SynergySpec needs usage analytics to understand adoption and inform product decisions. PostHog provides a privacy-conscious analytics platform suitable for open source projects.
 
 ## Goals / Non-Goals
 
@@ -23,7 +23,7 @@ OpenSpec needs usage analytics to understand adoption and inform product decisio
 **Decision:** Telemetry enabled by default, opt-out via environment variable.
 
 ```bash
-OPENSPEC_TELEMETRY=0    # Disable telemetry
+SYNERGYSPEC_TELEMETRY=0    # Disable telemetry
 DO_NOT_TRACK=1          # Industry standard, also respected
 ```
 
@@ -49,7 +49,7 @@ Auto-disabled when `CI=true` is detected.
   event: 'command_executed',
   properties: {
     command: 'init',      // Command name only
-    version: '1.2.3'      // OpenSpec version
+    version: '1.2.3'      // SynergySpec version
   }
 }
 ```
@@ -72,7 +72,7 @@ Auto-disabled when `CI=true` is detected.
 **Decision:** Random UUID, lazily generated on first telemetry send, stored in global config.
 
 ```typescript
-// ~/.config/openspec/config.json
+// ~/.config/synergyspec/config.json
 {
   "telemetry": {
     "anonymousId": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
@@ -142,7 +142,7 @@ program
 **Decision:** One-liner on first command ever, stored "seen" flag in config.
 
 ```
-Note: OpenSpec collects anonymous usage stats. Opt out: OPENSPEC_TELEMETRY=0
+Note: SynergySpec collects anonymous usage stats. Opt out: SYNERGYSPEC_TELEMETRY=0
 ```
 
 **Rationale:**

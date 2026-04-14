@@ -2,19 +2,19 @@
 
 ### Requirement: OPSX Archive Skill
 
-The system SHALL provide an `/opsx-hw:archive` skill that archives completed changes in the experimental workflow.
+The system SHALL provide an `/synspec:archive` skill that archives completed changes in the experimental workflow.
 
 #### Scenario: Archive a change with all artifacts complete
 
-- **WHEN** agent executes `/opsx-hw:archive` with a change name
+- **WHEN** agent executes `/synspec:archive` with a change name
 - **AND** all artifacts in the schema are complete
 - **AND** all tasks are complete
-- **THEN** the agent moves the change to `openspec/changes/archive/YYYY-MM-DD-<name>/`
+- **THEN** the agent moves the change to `synergyspec/changes/archive/YYYY-MM-DD-<name>/`
 - **AND** displays success message with archived location
 
 #### Scenario: Change selection prompt
 
-- **WHEN** agent executes `/opsx-hw:archive` without specifying a change
+- **WHEN** agent executes `/synspec:archive` without specifying a change
 - **THEN** the agent prompts user to select from available changes
 - **AND** shows only active changes (excludes archive/)
 
@@ -68,7 +68,7 @@ The skill SHALL prompt to sync delta specs before archiving if specs exist.
 - **WHEN** agent checks for delta specs
 - **AND** `specs/` directory exists in the change with spec files
 - **THEN** prompt user: "This change has delta specs. Would you like to sync them to main specs before archiving?"
-- **AND** if user confirms, execute `/opsx-hw:sync` logic
+- **AND** if user confirms, execute `/synspec:sync` logic
 - **AND** proceed with archive regardless of sync choice
 
 #### Scenario: No delta specs
@@ -87,7 +87,7 @@ The skill SHALL move the change to the archive folder with date prefix.
 - **THEN** create `archive/` directory if it doesn't exist
 - **AND** generate target name as `YYYY-MM-DD-<change-name>` using current date
 - **AND** move entire change directory to archive location
-- **AND** preserve `.openspec.yaml` file in archived change
+- **AND** preserve `.synergyspec.yaml` file in archived change
 
 #### Scenario: Archive already exists
 
@@ -103,7 +103,7 @@ The skill SHALL provide clear feedback about the archive operation.
 
 - **WHEN** archive completes after syncing specs
 - **THEN** display summary:
-  - Specs synced (from `/opsx-hw:sync` output)
+  - Specs synced (from `/synspec:sync` output)
   - Change archived to location
   - Schema that was used
 

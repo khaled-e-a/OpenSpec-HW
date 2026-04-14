@@ -6,7 +6,7 @@ import { describe, it, expect } from 'vitest';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..', '..');
-const specsRoot = path.join(projectRoot, 'openspec', 'specs');
+const specsRoot = path.join(projectRoot, 'synergyspec', 'specs');
 
 const DELTA_HEADER_PATTERN = /^## (ADDED|MODIFIED|REMOVED|RENAMED) Requirements$/m;
 const PURPOSE_PLACEHOLDER_PATTERN = /TBD - created by archiving change .*?\. Update Purpose after archive\./;

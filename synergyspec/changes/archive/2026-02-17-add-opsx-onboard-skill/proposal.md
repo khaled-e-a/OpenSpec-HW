@@ -1,10 +1,10 @@
 ## Why
 
-Users who run `openspec init` are left with files but no clear path to actually using the system. There's a gap between "I have OpenSpec set up" and "I understand the workflow." An onboarding skill would guide users through their first complete change cycle on a real task in their codebase, teaching the workflow by doing it.
+Users who run `openspec init` are left with files but no clear path to actually using the system. There's a gap between "I have SynergySpec set up" and "I understand the workflow." An onboarding skill would guide users through their first complete change cycle on a real task in their codebase, teaching the workflow by doing it.
 
 ## What Changes
 
-- Add new `/opsx-hw:onboard` skill that guides users through their first OpenSpec change
+- Add new `/synspec:onboard` skill that guides users through their first SynergySpec change
 - Add corresponding slash command template for editor integrations
 - The skill will:
   - Analyze the user's codebase to suggest appropriately-scoped starter tasks
@@ -15,7 +15,7 @@ Users who run `openspec init` are left with files but no clear path to actually 
 ## Capabilities
 
 ### New Capabilities
-- `opsx-onboard-skill`: The onboarding skill that guides users through their first complete OpenSpec workflow cycle with narration and codebase-aware task suggestions
+- `synspec-onboard-skill`: The onboarding skill that guides users through their first complete SynergySpec workflow cycle with narration and codebase-aware task suggestions
 
 ### Modified Capabilities
 <!-- No existing specs are being modified - this is purely additive -->

@@ -17,7 +17,7 @@ async function fileExists(filePath: string): Promise<boolean> {
 const tempRoots: string[] = [];
 
 async function prepareFixture(fixtureName: string): Promise<string> {
-  const base = await fs.mkdtemp(path.join(tmpdir(), 'openspec-cli-e2e-'));
+  const base = await fs.mkdtemp(path.join(tmpdir(), 'synergyspec-cli-e2e-'));
   tempRoots.push(base);
   const projectDir = path.join(base, 'project');
   await fs.mkdir(projectDir, { recursive: true });
@@ -30,11 +30,11 @@ afterAll(async () => {
   await Promise.all(tempRoots.map((dir) => fs.rm(dir, { recursive: true, force: true })));
 });
 
-describe('openspec CLI e2e basics', () => {
+describe('synergyspec-hw CLI e2e basics', () => {
   it('shows help output', async () => {
     const result = await runCLI(['--help']);
     expect(result.exitCode).toBe(0);
-    expect(result.stdout).toContain('Usage: openspec');
+    expect(result.stdout).toContain('Usage: synergyspec-hw');
     expect(result.stderr).toBe('');
 
   });
@@ -90,11 +90,11 @@ describe('openspec CLI e2e basics', () => {
         env: { CODEX_HOME: codexHome },
       });
       expect(result.exitCode).toBe(0);
-      expect(result.stdout).toContain('OpenSpec Setup Complete');
+      expect(result.stdout).toContain('SynergySpec Setup Complete');
 
       // Check that skills were created for multiple tools
-      const claudeSkillPath = path.join(emptyProjectDir, '.claude/skills/openspec-explore/SKILL.md');
-      const cursorSkillPath = path.join(emptyProjectDir, '.cursor/skills/openspec-explore/SKILL.md');
+      const claudeSkillPath = path.join(emptyProjectDir, '.claude/skills/synergyspec-explore/SKILL.md');
+      const cursorSkillPath = path.join(emptyProjectDir, '.cursor/skills/synergyspec-explore/SKILL.md');
       expect(await fileExists(claudeSkillPath)).toBe(true);
       expect(await fileExists(cursorSkillPath)).toBe(true);
     });
@@ -106,12 +106,12 @@ describe('openspec CLI e2e basics', () => {
 
       const result = await runCLI(['init', '--tools', 'claude'], { cwd: emptyProjectDir });
       expect(result.exitCode).toBe(0);
-      expect(result.stdout).toContain('OpenSpec Setup Complete');
+      expect(result.stdout).toContain('SynergySpec Setup Complete');
       expect(result.stdout).toContain('Claude Code');
 
       // New init creates skills, not CLAUDE.md
-      const claudeSkillPath = path.join(emptyProjectDir, '.claude/skills/openspec-explore/SKILL.md');
-      const cursorSkillPath = path.join(emptyProjectDir, '.cursor/skills/openspec-explore/SKILL.md');
+      const claudeSkillPath = path.join(emptyProjectDir, '.claude/skills/synergyspec-explore/SKILL.md');
+      const cursorSkillPath = path.join(emptyProjectDir, '.cursor/skills/synergyspec-explore/SKILL.md');
       expect(await fileExists(claudeSkillPath)).toBe(true);
       expect(await fileExists(cursorSkillPath)).toBe(false); // Not selected
     });
@@ -123,11 +123,11 @@ describe('openspec CLI e2e basics', () => {
 
       const result = await runCLI(['init', '--tools', 'none'], { cwd: emptyProjectDir });
       expect(result.exitCode).toBe(0);
-      expect(result.stdout).toContain('OpenSpec Setup Complete');
+      expect(result.stdout).toContain('SynergySpec Setup Complete');
 
       // With --tools none, no tool skills should be created
-      const claudeSkillPath = path.join(emptyProjectDir, '.claude/skills/openspec-explore/SKILL.md');
-      const cursorSkillPath = path.join(emptyProjectDir, '.cursor/skills/openspec-explore/SKILL.md');
+      const claudeSkillPath = path.join(emptyProjectDir, '.claude/skills/synergyspec-explore/SKILL.md');
+      const cursorSkillPath = path.join(emptyProjectDir, '.cursor/skills/synergyspec-explore/SKILL.md');
 
       expect(await fileExists(claudeSkillPath)).toBe(false);
       expect(await fileExists(cursorSkillPath)).toBe(false);

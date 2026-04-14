@@ -24,19 +24,19 @@ describe('skill-generation', () => {
       const templates = getSkillTemplates();
       const dirNames = templates.map(t => t.dirName);
 
-      expect(dirNames).toContain('openspec-explore');
-      expect(dirNames).toContain('openspec-new-change');
-      expect(dirNames).toContain('openspec-continue-change');
-      expect(dirNames).toContain('openspec-apply-change');
-      expect(dirNames).toContain('openspec-ff-change');
-      expect(dirNames).toContain('openspec-sync-specs');
-      expect(dirNames).toContain('openspec-archive-change');
-      expect(dirNames).toContain('openspec-bulk-archive-change');
-      expect(dirNames).toContain('openspec-verify-change');
-      expect(dirNames).toContain('openspec-onboard');
-      expect(dirNames).toContain('openspec-propose');
-      expect(dirNames).toContain('openspec-gen-tests');
-      expect(dirNames).toContain('openspec-run-tests');
+      expect(dirNames).toContain('synergyspec-explore');
+      expect(dirNames).toContain('synergyspec-new-change');
+      expect(dirNames).toContain('synergyspec-continue-change');
+      expect(dirNames).toContain('synergyspec-apply-change');
+      expect(dirNames).toContain('synergyspec-ff-change');
+      expect(dirNames).toContain('synergyspec-sync-specs');
+      expect(dirNames).toContain('synergyspec-archive-change');
+      expect(dirNames).toContain('synergyspec-bulk-archive-change');
+      expect(dirNames).toContain('synergyspec-verify-change');
+      expect(dirNames).toContain('synergyspec-onboard');
+      expect(dirNames).toContain('synergyspec-propose');
+      expect(dirNames).toContain('synergyspec-gen-tests');
+      expect(dirNames).toContain('synergyspec-run-tests');
     });
 
     it('should have valid template structure', () => {
@@ -85,7 +85,7 @@ describe('skill-generation', () => {
       const filtered = getSkillTemplates(['propose']);
       expect(filtered).toHaveLength(1);
       expect(filtered[0].workflowId).toBe('propose');
-      expect(filtered[0].dirName).toBe('openspec-propose');
+      expect(filtered[0].dirName).toBe('synergyspec-propose');
     });
   });
 
@@ -225,8 +225,8 @@ describe('skill-generation', () => {
       const content = generateSkillContent(template, '0.24.0');
 
       expect(content).toContain('license: MIT');
-      expect(content).toContain('compatibility: Requires openspec CLI.');
-      expect(content).toContain('author: openspec');
+      expect(content).toContain('compatibility: Requires synergyspec-hw CLI.');
+      expect(content).toContain('author: synergyspec');
       expect(content).toContain('version: "1.0"');
       expect(content).toContain('generatedBy: "0.24.0"');
     });
@@ -264,28 +264,28 @@ describe('skill-generation', () => {
       const template = {
         name: 'transform-test',
         description: 'Test transform callback',
-        instructions: 'Use /opsx-hw:new to start and /opsx-hw:apply to implement.',
+        instructions: 'Use /synspec:new to start and /synspec:apply to implement.',
       };
 
-      const transformer = (text: string) => text.replace(/\/opsx-hw:/g, '/opsx-');
+      const transformer = (text: string) => text.replace(/\/synspec:/g, '/synspec-');
       const content = generateSkillContent(template, '0.23.0', transformer);
 
-      expect(content).toContain('/opsx-new');
-      expect(content).toContain('/opsx-apply');
-      expect(content).not.toContain('/opsx-hw:new');
-      expect(content).not.toContain('/opsx-hw:apply');
+      expect(content).toContain('/synspec-new');
+      expect(content).toContain('/synspec-apply');
+      expect(content).not.toContain('/synspec:new');
+      expect(content).not.toContain('/synspec:apply');
     });
 
     it('should not transform instructions when callback is undefined', () => {
       const template = {
         name: 'no-transform-test',
         description: 'Test without transform',
-        instructions: 'Use /opsx-hw:new to start.',
+        instructions: 'Use /synspec:new to start.',
       };
 
       const content = generateSkillContent(template, '0.23.0', undefined);
 
-      expect(content).toContain('/opsx-hw:new');
+      expect(content).toContain('/synspec:new');
     });
 
     it('should support custom transformInstructions logic', () => {

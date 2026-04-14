@@ -1,4 +1,4 @@
-# opsx-verify-skill Specification
+# synspec-verify-skill Specification
 
 ## Purpose
 Defines the agent skill for verifying that implementation matches change artifacts (specs, tasks, design).
@@ -6,22 +6,22 @@ Defines the agent skill for verifying that implementation matches change artifac
 ## ADDED Requirements
 
 ### Requirement: Verify Skill Invocation
-The system SHALL provide an `/opsx-hw:verify` skill that validates implementation against change artifacts.
+The system SHALL provide an `/synspec:verify` skill that validates implementation against change artifacts.
 
 #### Scenario: Verify with change name provided
-- **WHEN** agent executes `/opsx-hw:verify <change-name>`
+- **WHEN** agent executes `/synspec:verify <change-name>`
 - **THEN** the agent verifies implementation for that specific change
 - **AND** produces a verification report
 
 #### Scenario: Verify without change name
-- **WHEN** agent executes `/opsx-hw:verify` without a change name
+- **WHEN** agent executes `/synspec:verify` without a change name
 - **THEN** the agent prompts user to select from available changes
 - **AND** shows only changes that have implementation tasks
 
 #### Scenario: Change has no tasks
 - **WHEN** selected change has no tasks.md or tasks are empty
 - **THEN** the agent reports "No tasks to verify"
-- **AND** suggests running `/opsx-hw:continue` to create tasks
+- **AND** suggests running `/synspec:continue` to create tasks
 
 ### Requirement: Completeness Verification
 The agent SHALL verify that all required work has been completed.
@@ -34,7 +34,7 @@ The agent SHALL verify that all required work has been completed.
 
 #### Scenario: Spec coverage check
 - **WHEN** verifying completeness
-- **AND** delta specs exist in `openspec/changes/<name>/specs/`
+- **AND** delta specs exist in `synergyspec/changes/<name>/specs/`
 - **THEN** the agent extracts all requirements from delta specs
 - **AND** searches codebase for implementation of each requirement
 - **AND** reports which requirements appear to have implementation vs which are missing

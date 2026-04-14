@@ -70,8 +70,8 @@ The update command SHALL treat a tool as configured if it has either generated s
 
 #### Scenario: Commands-only installation
 - **WHEN** user runs `openspec update`
-- **AND** a tool has generated OpenSpec command files
-- **AND** that tool has no OpenSpec skill files (commands-only delivery)
+- **AND** a tool has generated SynergySpec command files
+- **AND** that tool has no SynergySpec skill files (commands-only delivery)
 - **THEN** the tool SHALL still be treated as configured
 - **THEN** the system SHALL apply profile and delivery sync for that tool
 
@@ -87,7 +87,7 @@ The update command SHALL detect existing users (no `profile` in global config + 
 - **THEN** the system SHALL take the union of detected workflow names across all tools
 - **THEN** the system SHALL write to global config: `profile: "custom"`, `delivery: "both"`, `workflows: [<detected>]`
 - **THEN** the system SHALL display: "Migrated: custom profile with <count> workflows (<workflow-names>)"
-- **THEN** the system SHALL display: "New in this version: /opsx-hw:propose (combines new + ff). Try 'openspec config profile core' for the streamlined 4-workflow experience."
+- **THEN** the system SHALL display: "New in this version: /synspec:propose (combines new + ff). Try 'openspec config profile core' for the streamlined 4-workflow experience."
 - **THEN** the system SHALL proceed with normal update logic (using the migrated config)
 - **THEN** the result SHALL be template refresh only (no workflows added or removed)
 
@@ -151,13 +151,13 @@ The update command SHALL notify the user if new AI tool directories are detected
 - **AND** no new tool directories are detected
 - **THEN** the system SHALL NOT display any tool detection message
 
-### Requirement: Update requires an OpenSpec project
-The update command SHALL only run inside an initialized OpenSpec project.
+### Requirement: Update requires an SynergySpec project
+The update command SHALL only run inside an initialized SynergySpec project.
 
 #### Scenario: Update outside a project
 - **WHEN** user runs `openspec update`
-- **AND** no `openspec/` directory exists in the current working directory
-- **THEN** the system SHALL display: "No OpenSpec project found. Run 'openspec init' to set up."
+- **AND** no `synergyspec/` directory exists in the current working directory
+- **THEN** the system SHALL display: "No SynergySpec project found. Run 'openspec init' to set up."
 - **THEN** the system SHALL exit with code 1
 
 ### Requirement: Extra workflows preserved

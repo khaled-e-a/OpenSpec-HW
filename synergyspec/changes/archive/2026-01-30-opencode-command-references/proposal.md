@@ -1,10 +1,10 @@
 ## Why
 
-OpenCode uses hyphen-based command syntax (`/opsx-new`) but our templates contain colon-based references (`/opsx-hw:new`). This creates inconsistency where generated command files and skill files contain references that don't match the actual command invocation syntax, confusing both the AI and users.
+OpenCode uses hyphen-based command syntax (`/synspec-new`) but our templates contain colon-based references (`/synspec:new`). This creates inconsistency where generated command files and skill files contain references that don't match the actual command invocation syntax, confusing both the AI and users.
 
 ## What Changes
 
-- Create a shared transformation utility (`transformToHyphenCommands`) for converting `/opsx-hw:` to `/opsx-`
+- Create a shared transformation utility (`transformToHyphenCommands`) for converting `/synspec:` to `/synspec-`
 - Update the OpenCode command adapter to transform body text using this utility
 - Add an optional `transformInstructions` callback parameter to `generateSkillContent()`
 - Update `init.ts` and `update.ts` to pass the transformer when generating skills for OpenCode
@@ -28,5 +28,5 @@ None - no spec-level behavior changes. This is an implementation fix in the Open
   - `src/core/command-generation/adapters/opencode.ts` (use transformer)
   - `src/core/init.ts` (pass transformer for OpenCode)
   - `src/core/update.ts` (pass transformer for OpenCode)
-- **Users**: OpenCode users will see correct `/opsx-` command references in both generated command files AND skill files
+- **Users**: OpenCode users will see correct `/synspec-` command references in both generated command files AND skill files
 - **Other tools**: No impact - transformation only applies to OpenCode

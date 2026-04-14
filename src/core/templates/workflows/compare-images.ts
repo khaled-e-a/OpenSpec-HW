@@ -346,13 +346,13 @@ if __name__ == "__main__":
 
 export function getCompareImagesSkillTemplate(): SkillTemplate {
   return {
-    name: 'openspec-compare-images',
+    name: 'synergyspec-compare-images',
     description: 'Pixel-level image comparison utility. Compares two images and reports the percentage of differing pixels, optionally saving a visual diff image.',
     instructions: INSTRUCTIONS_BODY,
     license: 'MIT',
     compatibility: "Requires uv (https://docs.astral.sh/uv/). Run scripts with: uv run scripts/compare_images.py",
     metadata: {
-      author: 'openspec',
+      author: 'synergyspec',
       version: '1.0',
     },
     scripts: SCRIPTS,

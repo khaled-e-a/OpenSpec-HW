@@ -12,9 +12,9 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 
 1. **Discover all changes**
 
-   Run \`openspec-hw list --json\` to get all changes. No user selection needed.
+   Run \`synergyspec-hw list --json\` to get all changes. No user selection needed.
    For each change, note whether \`spec-tests.md\` and \`test-report.md\` exist under
-   \`openspec/changes/<name>/\`.
+   \`synergyspec/changes/<name>/\`.
 
    Report any changes missing these files (suggest running gen-tests + run-tests for those),
    then continue with the changes that do have them.
@@ -33,13 +33,13 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 
 2b. **Spec Blast Radius Coverage** (if any blast radius files exist)
 
-   Scan for blast radius files: \`openspec/changes/*/spec-blast-radius.md\`
+   Scan for blast radius files: \`synergyspec/changes/*/spec-blast-radius.md\`
    If none found: skip this sub-step and continue to step 3.
 
    For each \`spec-blast-radius.md\` found:
    - Read the file and extract all entries under "## Impacted Specs"
    - For each impacted spec entry, collect:
-     - The spec path (e.g. \`openspec/specs/auth/spec.md\`)
+     - The spec path (e.g. \`synergyspec/specs/auth/spec.md\`)
      - The impact level (High / Medium)
      - The impacted requirements list
      - The "Affected Tests" file paths (if listed)
@@ -48,18 +48,18 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
      - If the test file appears in the runner output and **failed**: mark ❌ FAIL
      - If the test file was not run or is not listed in step 2 output: mark ⚠️ NO COVERAGE
 
-   Add a new **Spec Blast Radius Coverage** section to \`openspec/ci-report.md\` after the
+   Add a new **Spec Blast Radius Coverage** section to \`synergyspec/ci-report.md\` after the
    "Unit/Integration Test Results" table:
 
    \`\`\`markdown
    ### Spec Blast Radius Coverage
    | Change | Impacted Spec | Impact | Affected Tests | Status |
    |--------|--------------|--------|----------------|--------|
-   | add-auth | openspec/specs/session/spec.md | High | \`test/session.test.ts\` | ✅ PASS |
-   | add-auth | openspec/specs/payments/spec.md | Medium | (none mapped) | ⚠️ NO COVERAGE |
+   | add-auth | synergyspec/specs/session/spec.md | High | \`test/session.test.ts\` | ✅ PASS |
+   | add-auth | synergyspec/specs/payments/spec.md | Medium | (none mapped) | ⚠️ NO COVERAGE |
 
    **Coverage gaps**: 1 spec(s) have no test coverage for blast-radius-impacted requirements.
-   Suggestion: run \`/opsx-hw:gen-tests\` for: add-auth (openspec/specs/payments/spec.md)
+   Suggestion: run \`/synspec:gen-tests\` for: add-auth (synergyspec/specs/payments/spec.md)
    \`\`\`
 
    If all impacted specs have covered and passing tests, show:
@@ -76,7 +76,7 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 
 3. **Collect and run all e2e test plans**
 
-   Scan for \`test-plan.md\` files under \`openspec/changes/*/test-plan.md\`.
+   Scan for \`test-plan.md\` files under \`synergyspec/changes/*/test-plan.md\`.
    If none found: note "No test-plan.md files found — skipping e2e phase."
 
    For each \`test-plan.md\`, collect all entries that have a \`**Recommended tool**\` field
@@ -109,7 +109,7 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 
    **Never read or view image files directly.** For each PNG in the current run, find the
    matching filename in the previous run, then use the Skill tool to invoke
-   \`openspec-compare-images\`, passing the two image paths and asking it to compare them.
+   \`synergyspec-compare-images\`, passing the two image paths and asking it to compare them.
 
    Classify each pair based on the \`percent_diff\` value returned by the skill:
    - **MATCH** — \`percent_diff\` is 0
@@ -127,7 +127,7 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 
 6. **Write ci-report.md**
 
-   Save to \`openspec/ci-report.md\` (project-level, not per-change):
+   Save to \`synergyspec/ci-report.md\` (project-level, not per-change):
 
    \`\`\`markdown
    ## CI Report
@@ -183,7 +183,7 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 - If the test runner already produces coverage (e.g., \`vitest --coverage\` is in package.json scripts),
   reuse that output rather than adding a duplicate flag.
 - e2e tests do not produce line coverage — note this in the coverage section.
-- Screenshot comparison must always be done by invoking the \`openspec-compare-images\` skill
+- Screenshot comparison must always be done by invoking the \`synergyspec-compare-images\` skill
   via the Skill tool. Never read or view image files directly.
 - Overall CI verdict: **PASS** (all suites pass + no REGRESSION + no open PBT counterexamples), **FAIL** (any suite failure, REGRESSION, or open PBT counterexample in pbt-regressions.md),
   **PARTIAL** (e2e skipped, coverage data unavailable, some changes lack spec-tests.md, or pbt-regressions.md not yet run).
@@ -194,7 +194,7 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 - No \`test-plan.md\` found in any change: run unit/integration only, skip e2e.
 - E2e tool or browsers not installed: install the missing dependency automatically before running. Never skip e2e tests because a dependency is missing.
 - No previous screenshots: save as baseline, skip comparison.
-- No pbt-regressions.md for a change: note "PBT not yet run for \`<name>\` — suggest \`/opsx-hw:run-tests\`" and treat that change as PARTIAL, not FAIL.
+- No pbt-regressions.md for a change: note "PBT not yet run for \`<name>\` — suggest \`/synspec:run-tests\`" and treat that change as PARTIAL, not FAIL.
 - Test runner detection fails: ask the user rather than failing silently.
 - Coverage tooling not configured: skip coverage metrics, note the gap.
 
@@ -203,21 +203,21 @@ const INSTRUCTIONS_BODY = `**Input**: No change name required — CI runs across
 - Overall CI verdict: PASS / FAIL / PARTIAL
 - List critical failures first
 - If regressions: "N visual regression(s) — review \`e2e-results/latest/artifacts/\`"
-- Confirmation that \`openspec/ci-report.md\` was written
-- If any change lacks spec-tests.md: suggest \`/opsx-hw:gen-tests\` + \`/opsx-hw:run-tests\` for those changes
-- If overall PASS: suggest \`/opsx-hw:archive\` to close completed changes`;
+- Confirmation that \`synergyspec/ci-report.md\` was written
+- If any change lacks spec-tests.md: suggest \`/synspec:gen-tests\` + \`/synspec:run-tests\` for those changes
+- If overall PASS: suggest \`/synspec:archive\` to close completed changes`;
 
 export function getCiSkillTemplate(): SkillTemplate {
   return {
-    name: 'openspec-ci',
+    name: 'synergyspec-ci',
     description:
       'Run all tests (unit, integration, e2e from test-plan.md), compute code coverage, compare e2e screenshots against previous runs, and save artifacts.',
     instructions: `Run all tests, compute coverage, compare e2e screenshots, and save artifacts.
 
 ${INSTRUCTIONS_BODY}`,
     license: 'MIT',
-    compatibility: 'Requires openspec-hw CLI.',
-    metadata: { author: 'openspec', version: '1.0' },
+    compatibility: 'Requires synergyspec-hw CLI.',
+    metadata: { author: 'synergyspec', version: '1.0' },
   };
 }
 

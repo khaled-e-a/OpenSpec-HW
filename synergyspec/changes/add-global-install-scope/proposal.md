@@ -1,6 +1,6 @@
 ## Why
 
-OpenSpec installation paths are currently inconsistent:
+SynergySpec installation paths are currently inconsistent:
 
 - Most skills and commands are written to project-local directories.
 - Codex commands are already global (`$CODEX_HOME/prompts` or `~/.codex/prompts`).

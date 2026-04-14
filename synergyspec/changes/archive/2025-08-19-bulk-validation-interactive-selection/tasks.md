@@ -12,7 +12,7 @@
 - [x] 2.1 Make `spec validate` accept optional `[spec-id]` in `src/commands/spec.ts` registration
 - [x] 2.2 Add `--no-interactive` flag to `spec validate`
 - [x] 2.3 Implement interactivity gate respecting TTY and `OPEN_SPEC_INTERACTIVE=0`
-- [x] 2.4 When no `[spec-id]` provided and interactivity allowed, prompt to select from `openspec/specs/*/spec.md` and validate the selected spec
+- [x] 2.4 When no `[spec-id]` provided and interactivity allowed, prompt to select from `synergyspec/specs/*/spec.md` and validate the selected spec
 - [x] 2.5 Preserve current non-interactive fallback when no spec-id and no interactivity: print existing error and exit code non-zero
 - [x] 2.6 Tests: add coverage for interactive and non-interactive flows
   - Added `test/commands/spec.interactive-validate.test.ts`
@@ -27,7 +27,7 @@
   - [x] 3.2.3 Direct item validation with automatic type detection
   - [x] 3.2.4 Ambiguity error when name exists as both change and spec; suggest `--type` or subcommands
   - [x] 3.2.5 Unknown item handling with nearest-match suggestions
-  - [x] 3.2.6 Bulk validation for `--all`, `--changes`, `--specs` (exclude `openspec/changes/archive/`)
+  - [x] 3.2.6 Bulk validation for `--all`, `--changes`, `--specs` (exclude `synergyspec/changes/archive/`)
   - [x] 3.2.7 Respect `--strict` and `--json` options; JSON shape per spec
   - [x] 3.2.8 Exit with code 1 if any validation fails
   - [x] 3.2.9 Bounded concurrency (default 4–8) for bulk validation
@@ -66,7 +66,7 @@
 ## 8. CLI Help and Docs
 - [x] 8.1 Update command descriptions/options in `src/cli/index.ts`
 - [x] 8.2 Verify help output includes `validate` command and flags
-- [x] 8.3 Ensure existing specs under `openspec/changes/bulk-validation-interactive-selection/specs/*` remain satisfied
+- [x] 8.3 Ensure existing specs under `synergyspec/changes/bulk-validation-interactive-selection/specs/*` remain satisfied
 
 ## 9. Non-functional
 - [x] 9.1 Code style and types: explicit types for exported APIs; avoid `any`

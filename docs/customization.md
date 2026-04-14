@@ -1,6 +1,6 @@
 # Customization
 
-OpenSpec provides three levels of customization:
+SynergySpec provides three levels of customization:
 
 | Level | What it does | Best for |
 |-------|--------------|----------|
@@ -12,7 +12,7 @@ OpenSpec provides three levels of customization:
 
 ## Project Configuration
 
-The `openspec/config.yaml` file is the easiest way to customize OpenSpec for your team. It lets you:
+The `synergyspec/config.yaml` file is the easiest way to customize SynergySpec for your team. It lets you:
 
 - **Set a default schema** - Skip `--schema` on every command
 - **Inject project context** - AI sees your tech stack, conventions, etc.
@@ -27,7 +27,7 @@ openspec init
 This walks you through creating a config interactively. Or create one manually:
 
 ```yaml
-# openspec/config.yaml
+# synergyspec/config.yaml
 schema: spec-driven
 
 context: |
@@ -82,22 +82,22 @@ Tech stack: TypeScript, React, Node.js, PostgreSQL
 
 ### Schema Resolution Order
 
-When OpenSpec needs a schema, it checks in this order:
+When SynergySpec needs a schema, it checks in this order:
 
 1. CLI flag: `--schema <name>`
-2. Change metadata (`.openspec.yaml` in the change folder)
-3. Project config (`openspec/config.yaml`)
+2. Change metadata (`.synergyspec.yaml` in the change folder)
+3. Project config (`synergyspec/config.yaml`)
 4. Default (`spec-driven`)
 
 ---
 
 ## Custom Schemas
 
-When project config isn't enough, create your own schema with a completely custom workflow. Custom schemas live in your project's `openspec/schemas/` directory and are version-controlled with your code.
+When project config isn't enough, create your own schema with a completely custom workflow. Custom schemas live in your project's `synergyspec/schemas/` directory and are version-controlled with your code.
 
 ```text
 your-project/
-├── openspec/
+├── synergyspec/
 │   ├── config.yaml        # Project config
 │   ├── schemas/           # Custom schemas live here
 │   │   └── my-workflow/
@@ -115,12 +115,12 @@ The fastest way to customize is to fork a built-in schema:
 openspec schema fork spec-driven my-workflow
 ```
 
-This copies the entire `spec-driven` schema to `openspec/schemas/my-workflow/` where you can edit it freely.
+This copies the entire `spec-driven` schema to `synergyspec/schemas/my-workflow/` where you can edit it freely.
 
 **What you get:**
 
 ```text
-openspec/schemas/my-workflow/
+synergyspec/schemas/my-workflow/
 ├── schema.yaml           # Workflow definition
 └── templates/
     ├── proposal.md       # Template for proposal artifact
@@ -151,7 +151,7 @@ openspec schema init rapid \
 A schema defines the artifacts in your workflow and how they depend on each other:
 
 ```yaml
-# openspec/schemas/my-workflow/schema.yaml
+# synergyspec/schemas/my-workflow/schema.yaml
 name: my-workflow
 version: 1
 description: My team's custom workflow
@@ -264,12 +264,12 @@ Output shows whether it's from your project, user directory, or the package:
 ```text
 Schema: my-workflow
 Source: project
-Path: /path/to/project/openspec/schemas/my-workflow
+Path: /path/to/project/synergyspec/schemas/my-workflow
 ```
 
 ---
 
-> **Note:** OpenSpec also supports user-level schemas at `~/.local/share/openspec/schemas/` for sharing across projects, but project-level schemas in `openspec/schemas/` are recommended since they're version-controlled with your code.
+> **Note:** SynergySpec also supports user-level schemas at `~/.local/share/synergyspec/schemas/` for sharing across projects, but project-level schemas in `synergyspec/schemas/` are recommended since they're version-controlled with your code.
 
 ---
 
@@ -280,7 +280,7 @@ Path: /path/to/project/openspec/schemas/my-workflow
 A minimal workflow for quick iterations:
 
 ```yaml
-# openspec/schemas/rapid/schema.yaml
+# synergyspec/schemas/rapid/schema.yaml
 name: rapid
 version: 1
 description: Fast iteration with minimal overhead

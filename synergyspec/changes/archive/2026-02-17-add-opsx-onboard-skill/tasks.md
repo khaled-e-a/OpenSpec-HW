@@ -12,7 +12,7 @@
 
 ## 3. Register Templates
 
-- [x] 3.1 Add onboard skill to `getSkillTemplates()` array in `src/core/shared/skill-generation.ts` with dirName `openspec-onboard`
+- [x] 3.1 Add onboard skill to `getSkillTemplates()` array in `src/core/shared/skill-generation.ts` with dirName `synergyspec-onboard`
 - [x] 3.2 Add onboard command to `getCommandTemplates()` array in `src/core/shared/skill-generation.ts` with id `onboard`
 
 ## 4. Verify

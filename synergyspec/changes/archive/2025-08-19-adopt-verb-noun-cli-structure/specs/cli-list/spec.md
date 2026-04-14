@@ -7,13 +7,13 @@ The command SHALL scan and analyze either active changes or specs based on the s
 
 #### Scenario: Scanning for changes (default)
 - **WHEN** `openspec list` is executed without flags
-- **THEN** scan the `openspec/changes/` directory for change directories
+- **THEN** scan the `synergyspec/changes/` directory for change directories
 - **AND** exclude the `archive/` subdirectory from results
 - **AND** parse each change's `tasks.md` file to count task completion
 
 #### Scenario: Scanning for specs
 - **WHEN** `openspec list --specs` is executed
-- **THEN** scan the `openspec/specs/` directory for capabilities
+- **THEN** scan the `synergyspec/specs/` directory for capabilities
 - **AND** read each capability's `spec.md`
 - **AND** parse requirements to compute requirement counts
 

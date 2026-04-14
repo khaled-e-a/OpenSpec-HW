@@ -2,7 +2,7 @@
 
 ## Why
 
-Currently, OpenSpec specs can only be viewed as markdown files. This makes programmatic access difficult and prevents integration with CI/CD pipelines, external tools, and automated processing.
+Currently, SynergySpec specs can only be viewed as markdown files. This makes programmatic access difficult and prevents integration with CI/CD pipelines, external tools, and automated processing.
 
 ## What Changes
 

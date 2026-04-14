@@ -10,31 +10,31 @@ The testing workflow is flexible and non-linear, allowing you to validate change
           ┌────────────────────────────────┐
           │                                │
           ▼                                │
-/opsx-hw:apply ──► /opsx-hw:archive        │
+/synspec:apply ──► /synspec:archive        │
      │   ▲              │                  │
      │   │              ▼                  │
-     └───┼───► /opsx-hw:gen-tests ──► /opsx-hw:run-tests
+     └───┼───► /synspec:gen-tests ──► /synspec:run-tests
          │                                 │
          └─────────────────────────────────┘
 ```
 
-- **Post-Apply**: Run `/opsx-hw:gen-tests` immediately after implementation to ensure full coverage before archiving.
+- **Post-Apply**: Run `/synspec:gen-tests` immediately after implementation to ensure full coverage before archiving.
 - **Post-Archive**: You can still generate and run tests for changes already in the archive.
-- **Iterative Fixes**: If `/opsx-hw:run-tests` identifies failures, loop back to `/opsx-hw:apply` to refine the code or implementation.
+- **Iterative Fixes**: If `/synspec:run-tests` identifies failures, loop back to `/synspec:apply` to refine the code or implementation.
 
-`/opsx-hw:gen-tests` analyses the spec, finds gaps, and generates tests. `/opsx-hw:run-tests` runs the suite and reports coverage aligned to spec use case paths.
+`/synspec:gen-tests` analyses the spec, finds gaps, and generates tests. `/synspec:run-tests` runs the suite and reports coverage aligned to spec use case paths.
 
 ---
 
 ## Commands
 
-### `/opsx-hw:gen-tests`
+### `/synspec:gen-tests`
 
 Analyse spec.md use cases, discover existing tests, generate missing unit/component/integration tests with all supporting code, and produce a `spec-tests.md` mapping file.
 
 **Syntax:**
 ```
-/opsx-hw:gen-tests [change-name]
+/synspec:gen-tests [change-name]
 ```
 
 **Arguments:**
@@ -50,23 +50,23 @@ Analyse spec.md use cases, discover existing tests, generate missing unit/compon
 - Writes the full test (not just stubs) for each uncovered path
 - Generates any missing supporting code: mocks, fakes, fixtures, helpers, factory functions
 - Asks for confirmation before creating new files
-- Writes `openspec/changes/<name>/spec-tests.md` containing a Requirement Traceability Matrix (RTM) mapping each spec path/step to test files
+- Writes `synergyspec/changes/<name>/spec-tests.md` containing a Requirement Traceability Matrix (RTM) mapping each spec path/step to test files
 
 **Tips:**
-- Run after `/opsx-hw:apply` before archiving
+- Run after `/synspec:apply` before archiving
 - Generates full tests, not just stubs — follows existing framework and style
-- `spec-tests.md` persists the spec→test mapping for use by `/opsx-hw:run-tests`
+- `spec-tests.md` persists the spec→test mapping for use by `/synspec:run-tests`
 - Supporting code (mocks, fixtures, helpers) is placed in conventional project locations
 
 ---
 
-### `/opsx-hw:run-tests`
+### `/synspec:run-tests`
 
-Run the test suite and generate a spec-coverage report. Uses `spec-tests.md` (produced by `/opsx-hw:gen-tests`) when available.
+Run the test suite and generate a spec-coverage report. Uses `spec-tests.md` (produced by `/synspec:gen-tests`) when available.
 
 **Syntax:**
 ```
-/opsx-hw:run-tests [change-name]
+/synspec:run-tests [change-name]
 ```
 
 **Arguments:**
@@ -90,20 +90,20 @@ Run the test suite and generate a spec-coverage report. Uses `spec-tests.md` (pr
 | UC-03: Resize Widget | ✅ 1/1 | ✅ 1/1 | ✅ 1/1 | 100% |
 
 **Tips:**
-- Run after `/opsx-hw:gen-tests` for accurate per-path coverage
+- Run after `/synspec:gen-tests` for accurate per-path coverage
 - Without `spec-tests.md`, falls back to keyword/file-path matching (less precise)
 - Failing tests are listed with error details
-- When coverage is complete or satisfactory, proceed to `/opsx-hw:archive`
+- When coverage is complete or satisfactory, proceed to `/synspec:archive`
 
 ---
 
 ## The `spec-tests.md` File
 
-`/opsx-hw:gen-tests` writes `openspec/changes/<name>/spec-tests.md` — a persistent mapping of spec use case paths to test files. This file:
+`/synspec:gen-tests` writes `synergyspec/changes/<name>/spec-tests.md` — a persistent mapping of spec use case paths to test files. This file:
 
 - Tracks which tests cover which spec paths/steps using IDs (UC-02-S1)
 - Maps single requirements to one or more tests of varying types (Unit, Component, Integration)
-- Is read by `/opsx-hw:run-tests` for accurate coverage reporting
+- Is read by `/synspec:run-tests` for accurate coverage reporting
 - Documents generated test infrastructure (mocks, fixtures, helpers)
 - Lives alongside the other change artifacts and is archived with the change
 

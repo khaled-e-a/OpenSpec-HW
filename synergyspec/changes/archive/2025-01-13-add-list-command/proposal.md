@@ -1,4 +1,4 @@
-# Add List Command to OpenSpec CLI
+# Add List Command to SynergySpec CLI
 
 ## Why
 

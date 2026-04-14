@@ -10,11 +10,11 @@
 ### Skill Template
 
 - [x] Add `getSyncSpecsSkillTemplate()` function in `src/core/templates/skill-templates.ts`
-  - Skill name: `openspec-sync-specs`
+  - Skill name: `synergyspec-sync-specs`
   - Description: Sync delta specs to main specs
   - **Agent-driven**: Instructions for agent to read deltas and edit main specs directly
 
-- [x] Add `/opsx-hw:sync` slash command template in `skill-templates.ts`
+- [x] Add `/synspec:sync` slash command template in `skill-templates.ts`
   - Mirror the skill template for slash command format
   - **Agent-driven**: No CLI command, agent does the merge
 

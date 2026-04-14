@@ -10,7 +10,7 @@
   - [x] 1.2.2 Connect to list.ts implementation
 
 ## 2. Error Handling
-- [x] 2.1 Handle missing openspec/changes/ directory
+- [x] 2.1 Handle missing synergyspec/changes/ directory
 - [x] 2.2 Handle changes without tasks.md files
 - [x] 2.3 Handle empty changes directory
 

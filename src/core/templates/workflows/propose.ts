@@ -8,7 +8,7 @@ import type { SkillTemplate, CommandTemplate } from '../types.js';
 
 export function getOpsxProposeSkillTemplate(): SkillTemplate {
    return {
-      name: 'openspec-propose',
+      name: 'synergyspec-propose',
       description: 'Propose a new change with all artifacts generated in one step. Use when the user wants to quickly describe what they want to build and get a complete proposal with design, specs, and tasks ready for implementation.',
       instructions: `Propose a new change - create the change and generate all artifacts in one step.
 
@@ -19,7 +19,7 @@ I'll create a change with artifacts:
 - design.md (how)
 - tasks.md (implementation steps)
 
-When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refactor TDD)
+When ready to implement, run /synspec:apply (or /synspec:tdd for red-green-refactor TDD)
 
 ---
 
@@ -38,13 +38,13 @@ When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refac
 
 2. **Create the change directory**
    \`\`\`bash
-   openspec-hw new change "<name>"
+   synergyspec-hw new change "<name>"
    \`\`\`
-   This creates a scaffolded change at \`openspec/changes/<name>/\` with \`.openspec.yaml\`.
+   This creates a scaffolded change at \`synergyspec/changes/<name>/\` with \`.synergyspec.yaml\`.
 
 3. **Get the artifact build order**
    \`\`\`bash
-   openspec-hw status --change "<name>" --json
+   synergyspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to get:
    - \`applyRequires\`: array of artifact IDs needed before implementation (e.g., \`["tasks"]\`)
@@ -59,7 +59,7 @@ When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refac
    a. **For each artifact that is \`ready\` (dependencies satisfied)**:
       - Get instructions:
         \`\`\`bash
-        openspec-hw instructions <artifact-id> --change "<name>" --json
+        synergyspec-hw instructions <artifact-id> --change "<name>" --json
         \`\`\`
       - The instructions JSON includes:
         - \`context\`: Project background (constraints for you - do NOT include in output)
@@ -74,7 +74,7 @@ When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refac
       - Show brief progress: "Created <artifact-id>"
 
    b. **Continue until all \`applyRequires\` artifacts are complete**
-      - After creating each artifact, re-run \`openspec-hw status --change "<name>" --json\`
+      - After creating each artifact, re-run \`synergyspec-hw status --change "<name>" --json\`
       - Check if every artifact ID in \`applyRequires\` has \`status: "done"\` in the artifacts array
       - Stop when all \`applyRequires\` artifacts are done
 
@@ -84,7 +84,7 @@ When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refac
 
 5. **Show final status**
    \`\`\`bash
-   openspec-hw status --change "<name>"
+   synergyspec-hw status --change "<name>"
    \`\`\`
 
 **Output**
@@ -93,11 +93,11 @@ After completing all artifacts, summarize:
 - Change name and location
 - List of artifacts created with brief descriptions
 - What's ready: "All artifacts created! Ready for implementation."
-- Prompt: "Run \`/opsx-hw:apply\` to implement tasks, or \`/opsx-hw:tdd\` for red-green-refactor TDD."
+- Prompt: "Run \`/synspec:apply\` to implement tasks, or \`/synspec:tdd\` for red-green-refactor TDD."
 
 **Artifact Creation Guidelines**
 
-- Follow the \`instruction\` field from \`openspec-hw instructions\` for each artifact type
+- Follow the \`instruction\` field from \`synergyspec-hw instructions\` for each artifact type
 - The schema defines what each artifact should contain - follow it
 - Read dependency artifacts for context before creating new ones
 - Use \`template\` as the structure for your output file - fill in its sections
@@ -112,8 +112,8 @@ After completing all artifacts, summarize:
 - If a change with that name already exists, ask if user wants to continue it or create a new one
 - Verify each artifact file exists after writing before proceeding to next`,
       license: 'MIT',
-      compatibility: 'Requires openspec-hw CLI.',
-      metadata: { author: 'openspec', version: '1.0' },
+      compatibility: 'Requires synergyspec-hw CLI.',
+      metadata: { author: 'synergyspec', version: '1.0' },
    };
 }
 
@@ -130,11 +130,11 @@ I'll create a change with artifacts:
 - design.md (how)
 - tasks.md (implementation steps)
 
-When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refactor TDD)
+When ready to implement, run /synspec:apply (or /synspec:tdd for red-green-refactor TDD)
 
 ---
 
-**Input**: The argument after \`/opsx-hw:propose\` is the change name (kebab-case), OR a description of what the user wants to build.
+**Input**: The argument after \`/synspec:propose\` is the change name (kebab-case), OR a description of what the user wants to build.
 
 **Steps**
 
@@ -149,13 +149,13 @@ When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refac
 
 2. **Create the change directory**
    \`\`\`bash
-   openspec-hw new change "<name>"
+   synergyspec-hw new change "<name>"
    \`\`\`
-   This creates a scaffolded change at \`openspec/changes/<name>/\` with \`.openspec.yaml\`.
+   This creates a scaffolded change at \`synergyspec/changes/<name>/\` with \`.synergyspec.yaml\`.
 
 3. **Get the artifact build order**
    \`\`\`bash
-   openspec-hw status --change "<name>" --json
+   synergyspec-hw status --change "<name>" --json
    \`\`\`
    Parse the JSON to get:
    - \`applyRequires\`: array of artifact IDs needed before implementation (e.g., \`["tasks"]\`)
@@ -170,7 +170,7 @@ When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refac
    a. **For each artifact that is \`ready\` (dependencies satisfied)**:
       - Get instructions:
         \`\`\`bash
-        openspec-hw instructions <artifact-id> --change "<name>" --json
+        synergyspec-hw instructions <artifact-id> --change "<name>" --json
         \`\`\`
       - The instructions JSON includes:
         - \`context\`: Project background (constraints for you - do NOT include in output)
@@ -185,7 +185,7 @@ When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refac
       - Show brief progress: "Created <artifact-id>"
 
    b. **Continue until all \`applyRequires\` artifacts are complete**
-      - After creating each artifact, re-run \`openspec-hw status --change "<name>" --json\`
+      - After creating each artifact, re-run \`synergyspec-hw status --change "<name>" --json\`
       - Check if every artifact ID in \`applyRequires\` has \`status: "done"\` in the artifacts array
       - Stop when all \`applyRequires\` artifacts are done
 
@@ -195,7 +195,7 @@ When ready to implement, run /opsx-hw:apply (or /opsx-hw:tdd for red-green-refac
 
 5. **Show final status**
    \`\`\`bash
-   openspec-hw status --change "<name>"
+   synergyspec-hw status --change "<name>"
    \`\`\`
 
 **Output**
@@ -204,11 +204,11 @@ After completing all artifacts, summarize:
 - Change name and location
 - List of artifacts created with brief descriptions
 - What's ready: "All artifacts created! Ready for implementation."
-- Prompt: "Run \`/opsx-hw:apply\` to implement tasks, or \`/opsx-hw:tdd\` for red-green-refactor TDD."
+- Prompt: "Run \`/synspec:apply\` to implement tasks, or \`/synspec:tdd\` for red-green-refactor TDD."
 
 **Artifact Creation Guidelines**
 
-- Follow the \`instruction\` field from \`openspec-hw instructions\` for each artifact type
+- Follow the \`instruction\` field from \`synergyspec-hw instructions\` for each artifact type
 - The schema defines what each artifact should contain - follow it
 - Read dependency artifacts for context before creating new ones
 - Use \`template\` as the structure for your output file - fill in its sections

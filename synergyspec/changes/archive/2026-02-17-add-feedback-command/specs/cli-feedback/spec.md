@@ -24,7 +24,7 @@ The system SHALL provide an `openspec feedback` command that creates a GitHub Is
 - **WHEN** user executes `openspec feedback "Title here" --body "Detailed description..."`
 - **THEN** the system creates a GitHub Issue with the specified title
 - **AND** the issue body contains the detailed description
-- **AND** the issue body includes metadata (OpenSpec version, platform, timestamp)
+- **AND** the issue body includes metadata (SynergySpec version, platform, timestamp)
 
 ### Requirement: GitHub CLI dependency
 
@@ -80,10 +80,10 @@ The system SHALL include relevant metadata in the GitHub Issue body.
 
 - **WHEN** creating a GitHub Issue for feedback
 - **THEN** the issue body includes:
-  - OpenSpec CLI version
+  - SynergySpec CLI version
   - Platform (darwin, linux, win32)
   - Submission timestamp
-  - Separator line: "---\nSubmitted via OpenSpec CLI"
+  - Separator line: "---\nSubmitted via SynergySpec CLI"
 
 #### Scenario: Windows platform metadata
 
@@ -106,7 +106,7 @@ The system SHALL allow feedback submission regardless of telemetry settings.
 
 #### Scenario: Feedback with telemetry disabled
 
-- **WHEN** user has disabled telemetry via `OPENSPEC_TELEMETRY=0`
+- **WHEN** user has disabled telemetry via `SYNERGYSPEC_TELEMETRY=0`
 - **AND** user runs `openspec feedback "message"`
 - **THEN** the feedback is still submitted via `gh` CLI
 - **AND** telemetry events are not sent

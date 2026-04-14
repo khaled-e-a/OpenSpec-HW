@@ -10,14 +10,14 @@ import { transformToHyphenCommands } from '../../../utils/command-references.js'
 
 /**
  * OpenCode adapter for command generation.
- * File path: .opencode/command/opsx-hw-<id>.md
+ * File path: .opencode/command/synspec-<id>.md
  * Frontmatter: description
  */
 export const opencodeAdapter: ToolCommandAdapter = {
   toolId: 'opencode',
 
   getFilePath(commandId: string): string {
-    return path.join('.opencode', 'command', `opsx-hw-${commandId}.md`);
+    return path.join('.opencode', 'command', `synspec-${commandId}.md`);
   },
 
   formatFile(content: CommandContent): string {

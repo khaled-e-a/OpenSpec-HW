@@ -4,7 +4,7 @@
 
 The explore workflow is part of the core loop (`propose`, `explore`, `apply`, `archive`). Users should be able to think through ideas in explore mode, then smoothly transition into a formal change proposal.
 
-Currently, explore references `/opsx-hw:new` and `/opsx-hw:ff` which are being replaced with `/opsx-hw:propose`. But beyond just updating references, there are deeper UX questions about how explore should work.
+Currently, explore references `/synspec:new` and `/synspec:ff` which are being replaced with `/synspec:propose`. But beyond just updating references, there are deeper UX questions about how explore should work.
 
 ## Open Questions
 
@@ -15,8 +15,8 @@ Currently, explore references `/opsx-hw:new` and `/opsx-hw:ff` which are being r
    - Would users benefit from saving exploration notes?
 
 2. **Where should exploration files live?**
-   - `openspec/explorations/<name>.md`?
-   - `openspec/changes/<change>/explorations/`?
+   - `synergyspec/explorations/<name>.md`?
+   - `synergyspec/changes/<change>/explorations/`?
    - Somewhere else?
 
 3. **What should the format be?**
@@ -38,7 +38,7 @@ Currently, explore references `/opsx-hw:new` and `/opsx-hw:ff` which are being r
 
 6. **What happens before a change proposal exists?**
    - Exploration is standalone
-   - When ready, user runs `/opsx-hw:propose`
+   - When ready, user runs `/synspec:propose`
    - Should exploration context automatically seed the proposal?
 
 7. **What happens after a change proposal exists?**
@@ -65,14 +65,14 @@ Currently, explore references `/opsx-hw:new` and `/opsx-hw:ff` which are being r
 
 ### Approach A: Ephemeral Explorations (Status Quo+)
 - Explorations remain conversational only
-- Just update references to `/opsx-hw:propose`
+- Just update references to `/synspec:propose`
 - User manually carries insights forward
 - **Pro:** Simple, no new artifacts
 - **Con:** Insights can be lost, no audit trail
 
 ### Approach B: Optional Export
 - Add "save exploration" option at end
-- Saves to `openspec/explorations/<name>.md`
+- Saves to `synergyspec/explorations/<name>.md`
 - Propose can optionally read these for context
 - **Pro:** Opt-in complexity, preserves insights
 - **Con:** Another artifact type to manage
@@ -99,5 +99,5 @@ Currently, explore references `/opsx-hw:new` and `/opsx-hw:ff` which are being r
 
 ## Related
 
-- `openspec/changes/simplify-skill-installation/` - current change updating core workflows
+- `synergyspec/changes/simplify-skill-installation/` - current change updating core workflows
 - `src/core/templates/workflows/explore.ts` - explore workflow template

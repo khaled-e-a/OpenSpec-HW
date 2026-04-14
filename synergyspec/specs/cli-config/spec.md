@@ -1,7 +1,7 @@
 # cli-config Specification
 
 ## Purpose
-Provide a user-friendly CLI interface for viewing and modifying global OpenSpec configuration settings without manually editing JSON files.
+Provide a user-friendly CLI interface for viewing and modifying global SynergySpec configuration settings without manually editing JSON files.
 ## Requirements
 ### Requirement: Command Structure
 
@@ -202,7 +202,7 @@ The `openspec config profile` command SHALL provide an action-first interactive 
 
 #### Scenario: No-op warns when current project is out of sync
 
-- **WHEN** `openspec config profile` exits with `No config changes.` inside an OpenSpec project
+- **WHEN** `openspec config profile` exits with `No config changes.` inside an SynergySpec project
 - **AND** project files are out of sync with the current global profile/delivery
 - **THEN** display a non-blocking warning that global config is not yet applied to this project
 - **AND** include guidance to run `openspec update` to sync project files
@@ -210,7 +210,7 @@ The `openspec config profile` command SHALL provide an action-first interactive 
 #### Scenario: Apply prompt is gated on actual changes
 
 - **WHEN** config values were changed and saved
-- **AND** current directory is an OpenSpec project
+- **AND** current directory is an SynergySpec project
 - **THEN** prompt `Apply changes to this project now?`
 - **AND** if confirmed, run `openspec update` for the current project
 

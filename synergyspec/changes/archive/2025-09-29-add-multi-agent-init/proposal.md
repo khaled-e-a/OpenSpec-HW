@@ -1,18 +1,18 @@
 # Allow Additional AI Tool Initialization After Setup
 
 ## Summary
-- Let `openspec init` configure new AI coding tools for projects that already contain an OpenSpec structure.
+- Let `openspec init` configure new AI coding tools for projects that already contain an SynergySpec structure.
 - Keep the initialization flow safe by skipping structure creation and only generating files for tools the user explicitly selects.
 - Provide clear feedback so users know which tool files were added versus already present.
 
 ## Motivation
-Today `openspec init` exits with an error once an `openspec/` directory exists. That protects the directory layout, but it blocks
+Today `openspec init` exits with an error once an `synergyspec/` directory exists. That protects the directory layout, but it blocks
 teams that start with one assistant (for example, Claude Code) and later want to add another such as Cursor. They have to create
 those files by hand or rerun `init` in a clean clone, which undermines the "easy onboarding" promise. Letting the command extend
 an existing installation keeps the workflow consistent and avoids manual file management.
 
 ## Proposal
-1. Detect an existing OpenSpec structure at the start of `openspec init` and branch into an "extend" mode instead of exiting.
+1. Detect an existing SynergySpec structure at the start of `openspec init` and branch into an "extend" mode instead of exiting.
    - Announce that the base structure already exists and that the command will only manage AI tool configuration files.
    - Keep the existing guard for directories or files we must not overwrite.
 2. Present the usual AI tool selection prompt even in extend mode, showing which tools are already configured.

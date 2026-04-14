@@ -4,13 +4,13 @@
 
 ## What Is It?
 
-OPSX is now the standard workflow for OpenSpec.
+OPSX is now the standard workflow for SynergySpec.
 
-It's a **fluid, iterative workflow** for OpenSpec changes. No more rigid phases — just actions you can take anytime.
+It's a **fluid, iterative workflow** for SynergySpec changes. No more rigid phases — just actions you can take anytime.
 
 ## Why This Exists
 
-The legacy OpenSpec workflow works, but it's **locked down**:
+The legacy SynergySpec workflow works, but it's **locked down**:
 
 - **Instructions are hardcoded** — buried in TypeScript, you can't change them
 - **All-or-nothing** — one big command creates everything, can't test individual pieces
@@ -39,7 +39,7 @@ Legacy workflow:                      OPSX:
 **This is for everyone:**
 - **Teams** — create workflows that match how you actually work
 - **Power users** — tweak prompts to get better AI outputs for your codebase
-- **OpenSpec contributors** — experiment with new approaches without releases
+- **SynergySpec contributors** — experiment with new approaches without releases
 
 We're all still learning what works best. OPSX lets us learn together.
 
@@ -60,12 +60,12 @@ You're "in planning phase", then "in implementation phase", then "done". But rea
 
 ```bash
 # Make sure you have openspec installed — skills are automatically generated
-openspec-hw init
+synergyspec-hw init
 ```
 
 This creates skills in `.claude/skills/` (or equivalent) that AI coding assistants auto-detect.
 
-During setup, you'll be prompted to create a **project config** (`openspec/config.yaml`). This is optional but recommended.
+During setup, you'll be prompted to create a **project config** (`synergyspec/config.yaml`). This is optional but recommended.
 
 ## Project Configuration
 
@@ -73,10 +73,10 @@ Project config lets you set defaults and inject project-specific context into al
 
 ### Creating Config
 
-Config is created during `openspec-hw init`, or manually:
+Config is created during `synergyspec-hw init`, or manually:
 
 ```yaml
-# openspec/config.yaml
+# synergyspec/config.yaml
 schema: spec-driven
 
 context: |
@@ -107,8 +107,8 @@ rules:
 
 **Schema precedence** (highest to lowest):
 1. CLI flag (`--schema <name>`)
-2. Change metadata (`.openspec.yaml` in change directory)
-3. Project config (`openspec/config.yaml`)
+2. Change metadata (`.synergyspec.yaml` in change directory)
+3. Project config (`synergyspec/config.yaml`)
 4. Default (`spec-driven`)
 
 **Context injection:**
@@ -140,10 +140,10 @@ rules:
 
 **"Unknown artifact ID in rules: X"**
 - Check artifact IDs match your schema (see list above)
-- Run `openspec-hw schemas --json` to see artifact IDs for each schema
+- Run `synergyspec-hw schemas --json` to see artifact IDs for each schema
 
 **Config not being applied:**
-- Ensure file is at `openspec/config.yaml` (not `.yml`)
+- Ensure file is at `synergyspec/config.yaml` (not `.yml`)
 - Check YAML syntax with a validator
 - Config changes take effect immediately (no restart needed)
 
@@ -155,48 +155,48 @@ rules:
 
 | Command | What it does |
 |---------|--------------|
-| `/opsx-hw:explore` | Think through ideas, investigate problems, clarify requirements |
-| `/opsx-hw:new` | Start a new change |
-| `/opsx-hw:continue` | Create the next artifact (based on what's ready) |
-| `/opsx-hw:ff` | Fast-forward — create all planning artifacts at once |
-| `/opsx-hw:apply` | Implement tasks, updating artifacts as needed |
-| `/opsx-hw:sync` | Sync delta specs to main (optional—archive prompts if needed) |
-| `/opsx-hw:archive` | Archive when done |
+| `/synspec:explore` | Think through ideas, investigate problems, clarify requirements |
+| `/synspec:new` | Start a new change |
+| `/synspec:continue` | Create the next artifact (based on what's ready) |
+| `/synspec:ff` | Fast-forward — create all planning artifacts at once |
+| `/synspec:apply` | Implement tasks, updating artifacts as needed |
+| `/synspec:sync` | Sync delta specs to main (optional—archive prompts if needed) |
+| `/synspec:archive` | Archive when done |
 
 ## Usage
 
 ### Explore an idea
 ```
-/opsx-hw:explore
+/synspec:explore
 ```
-Think through ideas, investigate problems, compare options. No structure required - just a thinking partner. When insights crystallize, transition to `/opsx-hw:new` or `/opsx-hw:ff`.
+Think through ideas, investigate problems, compare options. No structure required - just a thinking partner. When insights crystallize, transition to `/synspec:new` or `/synspec:ff`.
 
 ### Start a new change
 ```
-/opsx-hw:new
+/synspec:new
 ```
 You'll be asked what you want to build and which workflow schema to use.
 
 ### Create artifacts
 ```
-/opsx-hw:continue
+/synspec:continue
 ```
 Shows what's ready to create based on dependencies, then creates one artifact. Use repeatedly to build up your change incrementally.
 
 ```
-/opsx-hw:ff add-dark-mode
+/synspec:ff add-dark-mode
 ```
 Creates all planning artifacts at once. Use when you have a clear picture of what you're building.
 
 ### Implement (the fluid part)
 ```
-/opsx-hw:apply
+/synspec:apply
 ```
-Works through tasks, checking them off as you go. If you're juggling multiple changes, you can run `/opsx-hw:apply <name>`; otherwise it should infer from the conversation and prompt you to choose if it can't tell.
+Works through tasks, checking them off as you go. If you're juggling multiple changes, you can run `/synspec:apply <name>`; otherwise it should infer from the conversation and prompt you to choose if it can't tell.
 
 ### Finish up
 ```
-/opsx-hw:archive   # Move to archive when done (prompts to sync specs if needed)
+/synspec:archive   # Move to archive when done (prompts to sync specs if needed)
 ```
 
 ## When to Update vs. Start Fresh
@@ -287,7 +287,7 @@ Think of it like git branches:
 
 ## What's Different?
 
-| | Legacy (`/openspec:proposal`) | OPSX (`/opsx-hw:*`) |
+| | Legacy (`/openspec:proposal`) | OPSX (`/synspec:*`) |
 |---|---|---|
 | **Structure** | One big proposal document | Discrete artifacts with dependencies |
 | **Workflow** | Linear phases: plan → implement → archive | Fluid actions — do anything anytime |
@@ -359,7 +359,7 @@ This section explains how OPSX works under the hood and how it compares to the l
 │   Configurators (18+ classes, one per editor)                               │
 │                    │                                                        │
 │                    ▼                                                        │
-│   Generated Command Files (.claude/commands/openspec/*.md)                  │
+│   Generated Command Files (.claude/commands/synergyspec/*.md)                  │
 │                                                                             │
 │   • Fixed structure, no artifact awareness                                  │
 │   • Change requires code modification + rebuild                             │
@@ -395,7 +395,7 @@ This section explains how OPSX works under the hood and how it compares to the l
 │   └─────────────────────────────────────────────────────────────────────┘   │
 │                    │                                                        │
 │                    ▼                                                        │
-│   Skill Files (.claude/skills/openspec-*/SKILL.md)                          │
+│   Skill Files (.claude/skills/synergyspec-*/SKILL.md)                          │
 │                                                                             │
 │   • Cross-editor compatible (Claude Code, Cursor, Windsurf)                 │
 │   • Skills query CLI for structured data                                    │
@@ -469,13 +469,13 @@ Artifacts form a directed acyclic graph (DAG). Dependencies are **enablers**, no
 **OPSX** — agent queries for rich context:
 
 ```
-  User: "/opsx-hw:continue"
+  User: "/synspec:continue"
            │
            ▼
   ┌──────────────────────────────────────────────────────────────────────────┐
   │  Step 1: Query current state                                             │
   │  ┌────────────────────────────────────────────────────────────────────┐  │
-  │  │  $ openspec-hw status --change "add-auth" --json                      │  │
+  │  │  $ synergyspec-hw status --change "add-auth" --json                      │  │
   │  │                                                                    │  │
   │  │  {                                                                 │  │
   │  │    "artifacts": [                                                  │  │
@@ -489,7 +489,7 @@ Artifacts form a directed acyclic graph (DAG). Dependencies are **enablers**, no
   │                                                                          │
   │  Step 2: Get rich instructions for ready artifact                        │
   │  ┌────────────────────────────────────────────────────────────────────┐  │
-  │  │  $ openspec-hw instructions specs --change "add-auth" --json          │  │
+  │  │  $ synergyspec-hw instructions specs --change "add-auth" --json          │  │
   │  │                                                                    │  │
   │  │  {                                                                 │  │
   │  │    "template": "# Specification\n\n## ADDED Requirements...",      │  │
@@ -526,7 +526,7 @@ Artifacts form a directed acyclic graph (DAG). Dependencies are **enablers**, no
 **OPSX** — natural iteration:
 
 ```
-  /opsx-hw:new ───► /opsx-hw:continue ───► /opsx-hw:apply ───► /opsx-hw:archive
+  /synspec:new ───► /synspec:continue ───► /synspec:apply ───► /synspec:archive
       │                │                  │
       │                │                  ├── "The design is wrong"
       │                │                  │
@@ -535,7 +535,7 @@ Artifacts form a directed acyclic graph (DAG). Dependencies are **enablers**, no
       │                │            and continue!
       │                │                  │
       │                │                  ▼
-      │                │         /opsx-hw:apply picks up
+      │                │         /synspec:apply picks up
       │                │         where you left off
       │                │
       │                └── Creates ONE artifact, shows what's unlocked
@@ -549,23 +549,23 @@ Create custom workflows using the schema management commands:
 
 ```bash
 # Create a new schema from scratch (interactive)
-openspec-hw schema init my-workflow
+synergyspec-hw schema init my-workflow
 
 # Or fork an existing schema as a starting point
-openspec-hw schema fork spec-driven my-workflow
+synergyspec-hw schema fork spec-driven my-workflow
 
 # Validate your schema structure
-openspec-hw schema validate my-workflow
+synergyspec-hw schema validate my-workflow
 
 # See where a schema resolves from (useful for debugging)
-openspec-hw schema which my-workflow
+synergyspec-hw schema which my-workflow
 ```
 
-Schemas are stored in `openspec/schemas/` (project-local, version controlled) or `~/.local/share/openspec/schemas/` (user global).
+Schemas are stored in `synergyspec/schemas/` (project-local, version controlled) or `~/.local/share/synergyspec/schemas/` (user global).
 
 **Schema structure:**
 ```
-openspec/schemas/research-first/
+synergyspec/schemas/research-first/
 ├── schema.yaml
 └── templates/
     ├── research.md
@@ -614,31 +614,31 @@ Schemas define what artifacts exist and their dependencies. Currently available:
 
 ```bash
 # List available schemas
-openspec-hw schemas
+synergyspec-hw schemas
 
 # See all schemas with their resolution sources
-openspec-hw schema which --all
+synergyspec-hw schema which --all
 
 # Create a new schema interactively
-openspec-hw schema init my-workflow
+synergyspec-hw schema init my-workflow
 
 # Fork an existing schema for customization
-openspec-hw schema fork spec-driven my-workflow
+synergyspec-hw schema fork spec-driven my-workflow
 
 # Validate schema structure before use
-openspec-hw schema validate my-workflow
+synergyspec-hw schema validate my-workflow
 ```
 
 ## Tips
 
-- Use `/opsx-hw:explore` to think through an idea before committing to a change
-- `/opsx-hw:ff` when you know what you want, `/opsx-hw:continue` when exploring
-- During `/opsx-hw:apply`, if something's wrong — fix the artifact, then continue
+- Use `/synspec:explore` to think through an idea before committing to a change
+- `/synspec:ff` when you know what you want, `/synspec:continue` when exploring
+- During `/synspec:apply`, if something's wrong — fix the artifact, then continue
 - Tasks track progress via checkboxes in `tasks.md`
-- Check status anytime: `openspec-hw status --change "name"`
+- Check status anytime: `synergyspec-hw status --change "name"`
 
 ## Feedback
 
 This is rough. That's intentional — we're learning what works.
 
-Found a bug? Have ideas? Join us on [Discord](https://discord.gg/YctCnvvshC) or open an issue on [GitHub](https://github.com/Fission-AI/openspec/issues).
+Found a bug? Have ideas? Join us on [Discord](https://discord.gg/YctCnvvshC) or open an issue on [GitHub](https://github.com/Fission-AI/synergyspec/issues).

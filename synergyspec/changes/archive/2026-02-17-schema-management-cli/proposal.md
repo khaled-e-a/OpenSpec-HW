@@ -1,9 +1,9 @@
 ## Why
 
-Creating and managing project-local schemas currently requires manual directory creation, copying files, and hoping the structure is correct. Users only discover structural errors at runtime when commands fail. This friction discourages schema customization and makes it harder to tailor OpenSpec workflows to specific project needs.
+Creating and managing project-local schemas currently requires manual directory creation, copying files, and hoping the structure is correct. Users only discover structural errors at runtime when commands fail. This friction discourages schema customization and makes it harder to tailor SynergySpec workflows to specific project needs.
 
 Key pain points:
-- **Manual scaffolding**: Users must manually create `openspec/schemas/<name>/` with correct structure
+- **Manual scaffolding**: Users must manually create `synergyspec/schemas/<name>/` with correct structure
 - **No validation feedback**: Schema errors aren't caught until a command tries to use the schema
 - **Starting from scratch is hard**: No easy way to base a custom schema on an existing one
 - **Debugging resolution**: When a schema doesn't resolve as expected, there's no way to see the resolution path
@@ -18,7 +18,7 @@ Add a new `openspec schema` command group with subcommands for creating, forking
    - Prompts for schema description
    - Prompts for artifacts to include (with explanations)
    - Creates valid directory structure with `schema.yaml` and template files
-   - Optionally sets as project default in `openspec/config.yaml`
+   - Optionally sets as project default in `synergyspec/config.yaml`
 
 2. **`openspec schema fork <source> [name]`** - Copy an existing schema as a starting point
    - Copies from user override or package built-in

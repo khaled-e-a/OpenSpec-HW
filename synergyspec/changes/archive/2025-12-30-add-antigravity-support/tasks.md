@@ -1,6 +1,6 @@
 ## 1. CLI init support
 - [x] 1.1 Surface Antigravity in the native-tool picker (interactive + `--tools`) so it toggles alongside other IDEs.
-- [x] 1.2 Generate `.agent/workflows/openspec-proposal.md`, `openspec-apply.md`, and `openspec-archive.md` with YAML frontmatter restricted to a single `description` field for each stage and wrap the body in OpenSpec markers.
+- [x] 1.2 Generate `.agent/workflows/synergyspec-proposal.md`, `synergyspec-apply.md`, and `synergyspec-archive.md` with YAML frontmatter restricted to a single `description` field for each stage and wrap the body in SynergySpec markers.
 - [x] 1.3 Confirm workspace scaffolding covers missing directory creation and re-run scenarios so repeated init refreshes the managed block.
 
 ## 2. CLI update support

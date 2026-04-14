@@ -1,12 +1,12 @@
 # Supported Tools
 
-OpenSpec works with 20+ AI coding assistants. When you run `openspec-hw init`, you'll be prompted to select which tools you use, and OpenSpec will configure the appropriate integrations.
+SynergySpec works with 20+ AI coding assistants. When you run `synergyspec-hw init`, you'll be prompted to select which tools you use, and SynergySpec will configure the appropriate integrations.
 
 ## How It Works
 
-For each tool you select, OpenSpec installs:
+For each tool you select, SynergySpec installs:
 
-1. **Skills** — Reusable instruction files that power the `/opsx-hw:*` workflow commands
+1. **Skills** — Reusable instruction files that power the `/synspec:*` workflow commands
 2. **Commands** — Tool-specific slash command bindings
 
 ## Tool Directory Reference
@@ -21,7 +21,7 @@ For each tool you select, OpenSpec installs:
 | CodeBuddy | `.codebuddy/skills/` | `.codebuddy/commands/opsx/` |
 | Codex | `.codex/skills/` | `~/.codex/prompts/`\* |
 | Continue | `.continue/skills/` | `.continue/prompts/` |
-| CoStrict | `.cospec/skills/` | `.cospec/openspec/commands/` |
+| CoStrict | `.cospec/skills/` | `.cospec/synergyspec/commands/` |
 | Crush | `.crush/skills/` | `.crush/commands/opsx/` |
 | Cursor | `.cursor/skills/` | `.cursor/commands/` |
 | Factory Droid | `.factory/skills/` | `.factory/commands/` |
@@ -34,7 +34,7 @@ For each tool you select, OpenSpec installs:
 | Qoder | `.qoder/skills/` | `.qoder/commands/opsx/` |
 | Qwen Code | `.qwen/skills/` | `.qwen/commands/` |
 | RooCode | `.roo/skills/` | `.roo/commands/` |
-| Trae | `.trae/skills/` | `.trae/skills/` (via `/openspec-*`) |
+| Trae | `.trae/skills/` | `.trae/skills/` (via `/synergyspec-*`) |
 | Windsurf | `.windsurf/skills/` | `.windsurf/workflows/` |
 
 \* Codex commands are installed to the global home directory (`~/.codex/prompts/` or `$CODEX_HOME/prompts/`), not the project directory.
@@ -47,35 +47,35 @@ For CI/CD or scripted setup, use the `--tools` flag:
 
 ```bash
 # Configure specific tools
-openspec-hw init --tools claude,cursor
+synergyspec-hw init --tools claude,cursor
 
 # Configure all supported tools
-openspec-hw init --tools all
+synergyspec-hw init --tools all
 
 # Skip tool configuration
-openspec-hw init --tools none
+synergyspec-hw init --tools none
 ```
 
 **Available tool IDs:** `amazon-q`, `antigravity`, `auggie`, `claude`, `cline`, `codebuddy`, `codex`, `continue`, `costrict`, `crush`, `cursor`, `factory`, `gemini`, `github-copilot`, `iflow`, `kilocode`, `kiro`, `opencode`, `qoder`, `qwen`, `roocode`, `trae`, `windsurf`
 
 ## What Gets Installed
 
-For each tool, OpenSpec generates 10 skill files that power the OPSX workflow:
+For each tool, SynergySpec generates 10 skill files that power the OPSX workflow:
 
 | Skill | Purpose |
 |-------|---------|
-| `openspec-explore` | Thinking partner for exploring ideas |
-| `openspec-new-change` | Start a new change |
-| `openspec-continue-change` | Create the next artifact |
-| `openspec-ff-change` | Fast-forward through all planning artifacts |
-| `openspec-apply-change` | Implement tasks |
-| `openspec-verify-change` | Verify implementation completeness |
-| `openspec-sync-specs` | Sync delta specs to main (optional—archive prompts if needed) |
-| `openspec-archive-change` | Archive a completed change |
-| `openspec-bulk-archive-change` | Archive multiple changes at once |
-| `openspec-onboard` | Guided onboarding through a complete workflow cycle |
+| `synergyspec-explore` | Thinking partner for exploring ideas |
+| `synergyspec-new-change` | Start a new change |
+| `synergyspec-continue-change` | Create the next artifact |
+| `synergyspec-ff-change` | Fast-forward through all planning artifacts |
+| `synergyspec-apply-change` | Implement tasks |
+| `synergyspec-verify-change` | Verify implementation completeness |
+| `synergyspec-sync-specs` | Sync delta specs to main (optional—archive prompts if needed) |
+| `synergyspec-archive-change` | Archive a completed change |
+| `synergyspec-bulk-archive-change` | Archive multiple changes at once |
+| `synergyspec-onboard` | Guided onboarding through a complete workflow cycle |
 
-These skills are invoked via slash commands like `/opsx-hw:new`, `/opsx-hw:apply`, etc. See [Commands](commands.md) for the full list.
+These skills are invoked via slash commands like `/synspec:new`, `/synspec:apply`, etc. See [Commands](commands.md) for the full list.
 
 ## Adding a New Tool
 

@@ -68,20 +68,20 @@ const EXPECTED_FUNCTION_HASHES: Record<string, string> = {
 };
 
 const EXPECTED_GENERATED_SKILL_CONTENT_HASHES: Record<string, string> = {
-  'openspec-explore': '52694707f042369e11a58c4946ba91b18b3a8dd6073809299bc23f008acbbaaa',
-  'openspec-new-change': 'afbb94b79957f94f4b71f1e58482799131874a4d77c5a8bc7936becd6393db17',
-  'openspec-continue-change': 'c34d92cde714bc97186d302009832c4c8b55b2f5724221acc2279884b8e42cf9',
-  'openspec-apply-change': 'bc000cd6594fbaafbaf88ba98916c8e9575c08241df51332eb7e913648094e65',
-  'openspec-ff-change': 'b3da7c140e3c67e1d91c70a64b57ac0b4afe9be54ae0605840c75cfc2514022a',
-  'openspec-sync-specs': '6774c4742675d1cd150a184b187446b920e0c9aac07c58446513660b1c4a5d7d',
-  'openspec-archive-change': '0fe834ae1d9e96317f56123d8033cabfcec6f64089de7217605afacb53a74791',
-  'openspec-bulk-archive-change': 'd4f3af709ae572d12f4622ebd8fce184ea9547753ac0076c8c7f934fe29fd7b0',
-  'openspec-verify-change': '7c7000c697ae5f45eda293186f9e94208fc42124dbbc3fc5f254483d11f9a060',
-  'openspec-onboard': '25acf60392736c2570fa39bbd65de39e0af9b21515cbd9480806b67cc5244e64',
-  'openspec-propose': '7bf9c63107839a4ff968da4e844b0c354bcfeebf523e3612e1fe0c3e0626642d',
-  'openspec-gen-tests': '0db0906a13e6b4171ca4748a73931e99c64d1c8726dad04e5fe2277dd0fd549a',
-  'openspec-run-tests': 'df3b830d4e39dabf3e7983cac068307352eaa68ee18c90bdc1e7619a27ba3e1c',
-  'openspec-ci': 'c913cd15c73035b007936205fc2a9dcd0a8e1710e088a0be3af47f90babf299a',
+  'synergyspec-explore': '52694707f042369e11a58c4946ba91b18b3a8dd6073809299bc23f008acbbaaa',
+  'synergyspec-new-change': 'afbb94b79957f94f4b71f1e58482799131874a4d77c5a8bc7936becd6393db17',
+  'synergyspec-continue-change': 'c34d92cde714bc97186d302009832c4c8b55b2f5724221acc2279884b8e42cf9',
+  'synergyspec-apply-change': 'bc000cd6594fbaafbaf88ba98916c8e9575c08241df51332eb7e913648094e65',
+  'synergyspec-ff-change': 'b3da7c140e3c67e1d91c70a64b57ac0b4afe9be54ae0605840c75cfc2514022a',
+  'synergyspec-sync-specs': '6774c4742675d1cd150a184b187446b920e0c9aac07c58446513660b1c4a5d7d',
+  'synergyspec-archive-change': '0fe834ae1d9e96317f56123d8033cabfcec6f64089de7217605afacb53a74791',
+  'synergyspec-bulk-archive-change': 'd4f3af709ae572d12f4622ebd8fce184ea9547753ac0076c8c7f934fe29fd7b0',
+  'synergyspec-verify-change': '7c7000c697ae5f45eda293186f9e94208fc42124dbbc3fc5f254483d11f9a060',
+  'synergyspec-onboard': '25acf60392736c2570fa39bbd65de39e0af9b21515cbd9480806b67cc5244e64',
+  'synergyspec-propose': '7bf9c63107839a4ff968da4e844b0c354bcfeebf523e3612e1fe0c3e0626642d',
+  'synergyspec-gen-tests': '0db0906a13e6b4171ca4748a73931e99c64d1c8726dad04e5fe2277dd0fd549a',
+  'synergyspec-run-tests': 'df3b830d4e39dabf3e7983cac068307352eaa68ee18c90bdc1e7619a27ba3e1c',
+  'synergyspec-ci': 'c913cd15c73035b007936205fc2a9dcd0a8e1710e088a0be3af47f90babf299a',
 };
 
 function stableStringify(value: unknown): string {
@@ -149,20 +149,20 @@ describe('skill templates split parity', () => {
     // Intentionally excludes getFeedbackSkillTemplate: skillFactories only models templates
     // deployed via generateSkillContent, while feedback is covered in function payload parity.
     const skillFactories: Array<[string, () => SkillTemplate]> = [
-      ['openspec-explore', getExploreSkillTemplate],
-      ['openspec-new-change', getNewChangeSkillTemplate],
-      ['openspec-continue-change', getContinueChangeSkillTemplate],
-      ['openspec-apply-change', getApplyChangeSkillTemplate],
-      ['openspec-ff-change', getFfChangeSkillTemplate],
-      ['openspec-sync-specs', getSyncSpecsSkillTemplate],
-      ['openspec-archive-change', getArchiveChangeSkillTemplate],
-      ['openspec-bulk-archive-change', getBulkArchiveChangeSkillTemplate],
-      ['openspec-verify-change', getVerifyChangeSkillTemplate],
-      ['openspec-onboard', getOnboardSkillTemplate],
-      ['openspec-propose', getOpsxProposeSkillTemplate],
-      ['openspec-gen-tests', getGenTestsSkillTemplate],
-      ['openspec-run-tests', getRunTestsSkillTemplate],
-      ['openspec-ci', getCiSkillTemplate],
+      ['synergyspec-explore', getExploreSkillTemplate],
+      ['synergyspec-new-change', getNewChangeSkillTemplate],
+      ['synergyspec-continue-change', getContinueChangeSkillTemplate],
+      ['synergyspec-apply-change', getApplyChangeSkillTemplate],
+      ['synergyspec-ff-change', getFfChangeSkillTemplate],
+      ['synergyspec-sync-specs', getSyncSpecsSkillTemplate],
+      ['synergyspec-archive-change', getArchiveChangeSkillTemplate],
+      ['synergyspec-bulk-archive-change', getBulkArchiveChangeSkillTemplate],
+      ['synergyspec-verify-change', getVerifyChangeSkillTemplate],
+      ['synergyspec-onboard', getOnboardSkillTemplate],
+      ['synergyspec-propose', getOpsxProposeSkillTemplate],
+      ['synergyspec-gen-tests', getGenTestsSkillTemplate],
+      ['synergyspec-run-tests', getRunTestsSkillTemplate],
+      ['synergyspec-ci', getCiSkillTemplate],
     ];
 
     const actualHashes = Object.fromEntries(

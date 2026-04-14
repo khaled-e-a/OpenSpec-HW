@@ -15,9 +15,9 @@ The system SHALL define a tool-agnostic `CommandContent` interface for command d
 - **WHEN** defining a command to generate
 - **THEN** `CommandContent` SHALL include:
   - `id`: string identifier (e.g., 'explore', 'apply')
-  - `name`: human-readable name (e.g., 'OpenSpec Explore')
+  - `name`: human-readable name (e.g., 'SynergySpec Explore')
   - `description`: brief description of command purpose
-  - `category`: grouping category (e.g., 'OpenSpec')
+  - `category`: grouping category (e.g., 'SynergySpec')
   - `tags`: array of tag strings
   - `body`: the command instruction content
 
@@ -42,14 +42,14 @@ The system SHALL define a `ToolCommandAdapter` interface for per-tool formatting
 #### Scenario: Cursor adapter formatting
 
 - **WHEN** formatting a command for Cursor
-- **THEN** the adapter SHALL output YAML frontmatter with `name` as `/opsx-<id>`, `id`, `category`, `description` fields
-- **AND** file path SHALL follow pattern `.cursor/commands/opsx-<id>.md`
+- **THEN** the adapter SHALL output YAML frontmatter with `name` as `/synspec-<id>`, `id`, `category`, `description` fields
+- **AND** file path SHALL follow pattern `.cursor/commands/synspec-<id>.md`
 
 #### Scenario: Windsurf adapter formatting
 
 - **WHEN** formatting a command for Windsurf
 - **THEN** the adapter SHALL output YAML frontmatter with `name`, `description`, `category`, `tags` fields
-- **AND** file path SHALL follow pattern `.windsurf/workflows/opsx-<id>.md`
+- **AND** file path SHALL follow pattern `.windsurf/workflows/synspec-<id>.md`
 
 ### Requirement: Command generator function
 

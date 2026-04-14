@@ -19,7 +19,7 @@ This design establishes a plugin-based architecture for shell completions that p
 - **Double TAB (TAB TAB):** Displays all possible completions as a list
 - **Type more characters + TAB:** Narrows matches and completes or shows refined list
 
-**OpenSpec Integration:**
+**SynergySpec Integration:**
 ```bash
 # After installing: openspec completion install bash
 openspec val<TAB>           # Completes to "openspec validate"
@@ -37,7 +37,7 @@ openspec show add-<TAB><TAB>  # Shows all changes starting with "add-"
 - **Enter:** Selects highlighted option
 - **Ctrl+C / Esc:** Cancels completion menu
 
-**OpenSpec Integration:**
+**SynergySpec Integration:**
 ```zsh
 # After installing: openspec completion install zsh
 openspec val<TAB>    # Shows menu with "validate" and "view" highlighted
@@ -55,7 +55,7 @@ openspec show <TAB>  # Shows menu with all change IDs and spec IDs, categorized
 - **TAB again:** Cycles through options or navigates menu
 - **Enter:** Accepts current selection
 
-**OpenSpec Integration:**
+**SynergySpec Integration:**
 ```fish
 # After installing: openspec completion install fish
 openspec val       # Gray suggestion shows "validate" immediately
@@ -73,7 +73,7 @@ openspec <TAB>     # Shows all commands with descriptions in paged menu
 - **Ctrl+Space:** Shows IntelliSense-style menu (PSReadLine v2.2+)
 - **Arrow Keys:** Navigate menu if shown
 
-**OpenSpec Integration:**
+**SynergySpec Integration:**
 ```powershell
 # After installing: openspec completion install powershell
 openspec val<TAB>       # Cycles: validate → view → validate
@@ -137,7 +137,7 @@ type CommandDefinition = {
 const COMMAND_REGISTRY: CommandDefinition[] = [
   {
     name: 'init',
-    description: 'Initialize OpenSpec in your project',
+    description: 'Initialize SynergySpec in your project',
     flags: [
       { name: '--tools', description: 'Configure AI tools non-interactively', hasValue: true }
     ],
@@ -184,8 +184,8 @@ class CompletionProvider {
     // Similar caching logic
   }
 
-  isOpenSpecProject(): boolean {
-    // Check for openspec/ directory
+  isSynergySpecProject(): boolean {
+    // Check for synergyspec/ directory
   }
 }
 ```
@@ -199,7 +199,7 @@ class CompletionProvider {
 **Design Decisions:**
 - 2-second cache TTL balances freshness with performance
 - Cache per-process (not persistent) to avoid stale data across sessions
-- Graceful degradation when outside OpenSpec projects
+- Graceful degradation when outside SynergySpec projects
 
 ### 4. Separate Installation Logic
 
@@ -306,7 +306,7 @@ src/
 ├── core/
 │   └── completions/
 │       ├── types.ts               # Interfaces: CompletionGenerator, CommandDefinition, etc.
-│       ├── command-registry.ts    # Single source of truth for OpenSpec commands
+│       ├── command-registry.ts    # Single source of truth for SynergySpec commands
 │       ├── completion-provider.ts # Dynamic change/spec ID discovery with caching
 │       ├── factory.ts             # Factory for instantiating Zsh generator/installer
 │       ├── generators/
@@ -367,7 +367,7 @@ if (this.changeCache && Date.now() - this.changeCache.timestamp < this.CACHE_TTL
 Completions should degrade gracefully rather than break workflows:
 
 1. **Unsupported shell** - Clear error with list of supported shells
-2. **Not in OpenSpec project** - Skip dynamic completions, only offer static commands
+2. **Not in SynergySpec project** - Skip dynamic completions, only offer static commands
 3. **Permission errors** - Suggest alternative installation methods
 4. **Missing config directories** - Auto-create with user notification
 5. **Already installed** - Offer to reinstall/update
@@ -390,7 +390,7 @@ Each component is independently testable:
 
 3. **Manual Testing**
    - Real shell environments (Oh My Zsh, Bash, Fish, PowerShell)
-   - Tab completion behavior in OpenSpec projects
+   - Tab completion behavior in SynergySpec projects
    - Dynamic change/spec ID suggestions
    - Installation/uninstallation workflows
 

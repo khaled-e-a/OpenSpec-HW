@@ -2,21 +2,21 @@
 
 ## Purpose
 
-As a developer using OpenSpec, I want to update the OpenSpec instructions in my project when new versions are released, so that I can benefit from improvements to AI agent instructions.
+As a developer using SynergySpec, I want to update the SynergySpec instructions in my project when new versions are released, so that I can benefit from improvements to AI agent instructions.
 
 ## Core Requirements
 
 ### Update Behavior
 
-The update command SHALL update OpenSpec instruction files to the latest templates.
+The update command SHALL update SynergySpec instruction files to the latest templates.
 
 WHEN a user runs `openspec update` THEN the command SHALL:
 - Check if the `openspec` directory exists
-- Replace `openspec/README.md` with the latest template (complete replacement)
-- Update the OpenSpec-managed block in `CLAUDE.md` using markers
+- Replace `synergyspec/README.md` with the latest template (complete replacement)
+- Update the SynergySpec-managed block in `CLAUDE.md` using markers
   - Preserve user content outside markers
   - Create `CLAUDE.md` if missing
-- Display ASCII-safe success message: "Updated OpenSpec instructions"
+- Display ASCII-safe success message: "Updated SynergySpec instructions"
 
 ### Prerequisites
 
@@ -24,14 +24,14 @@ The command SHALL require:
 - An existing `openspec` directory (created by `openspec init`)
 
 IF the `openspec` directory does not exist THEN:
-- Display error: "No OpenSpec directory found. Run 'openspec init' first."
+- Display error: "No SynergySpec directory found. Run 'openspec init' first."
 - Exit with code 1
 
 ### File Handling
 
 The update command SHALL:
-- Completely replace `openspec/README.md` with the latest template
-- Update only the OpenSpec-managed block in `CLAUDE.md` using markers
+- Completely replace `synergyspec/README.md` with the latest template
+- Update only the SynergySpec-managed block in `CLAUDE.md` using markers
 - Use the default directory name `openspec`
 - Be idempotent (repeated runs have no additional effect)
 
@@ -49,7 +49,7 @@ Not supported in this change. The default directory name `openspec` SHALL be use
 ## Success Criteria
 
 Users SHALL be able to:
-- Update OpenSpec instructions with a single command
+- Update SynergySpec instructions with a single command
 - Get the latest AI agent instructions
 - See clear confirmation of the update
 

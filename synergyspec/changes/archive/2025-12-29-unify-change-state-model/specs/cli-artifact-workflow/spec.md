@@ -42,7 +42,7 @@ The system SHALL display artifact completion status for a change, including scaf
 #### Scenario: Unknown change
 
 - **WHEN** user runs `openspec status --change unknown-id`
-- **AND** directory `openspec/changes/unknown-id/` does not exist
+- **AND** directory `synergyspec/changes/unknown-id/` does not exist
 - **THEN** the system displays an error listing all available change directories
 
 ### Requirement: Next Command

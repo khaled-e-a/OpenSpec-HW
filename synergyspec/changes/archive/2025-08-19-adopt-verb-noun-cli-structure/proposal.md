@@ -34,7 +34,7 @@ Most widely used CLIs (git, docker, kubectl) start with an action (verb) followe
 
 - **Affected specs**:
   - `cli-list`: Add support for `--specs` and explicit `--changes` (default remains changes)
-  - `openspec-conventions`: Add explicit requirement establishing verb–noun CLI design and deprecation guidance
+  - `synergyspec-conventions`: Add explicit requirement establishing verb–noun CLI design and deprecation guidance
 - **Affected code**:
   - `src/cli/index.ts`: Un-deprecate top-level `list`; mark `change list` as deprecated; ensure help text and warnings align
   - `src/core/list.ts`: Support listing specs via `--specs` and default to changes; shared output shape
@@ -57,7 +57,7 @@ Most widely used CLIs (git, docker, kubectl) start with an action (verb) followe
 ## Rollout and Deprecation Policy
 
 - Show deprecation warnings on noun-based commands for one release.
-- Document new usage in `openspec/README.md` and CLI help.
+- Document new usage in `synergyspec/README.md` and CLI help.
 - After one release, consider removing noun-based commands, or keep as thin aliases without warnings.
 
 ## Open Questions

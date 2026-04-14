@@ -1,9 +1,9 @@
-# Delta: OpenSpec Conventions — Verb–Noun CLI Design
+# Delta: SynergySpec Conventions — Verb–Noun CLI Design
 
 ## ADDED Requirements
 
 ### Requirement: Verb–Noun CLI Command Structure
-OpenSpec CLI design SHALL use verbs as top-level commands with nouns provided as arguments or flags for scoping.
+SynergySpec CLI design SHALL use verbs as top-level commands with nouns provided as arguments or flags for scoping.
 
 #### Scenario: Verb-first command discovery
 - **WHEN** a user runs a command like `openspec list`

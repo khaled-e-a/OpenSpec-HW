@@ -1,6 +1,6 @@
 ## Purpose
 
-The propose workflow SHALL combine change creation and artifact generation into a single command, reducing friction for new users while teaching them the OpenSpec workflow through embedded guidance.
+The propose workflow SHALL combine change creation and artifact generation into a single command, reducing friction for new users while teaching them the SynergySpec workflow through embedded guidance.
 
 ## ADDED Requirements
 
@@ -8,13 +8,13 @@ The propose workflow SHALL combine change creation and artifact generation into 
 The system SHALL provide a `propose` workflow that creates a change and generates all artifacts in one step.
 
 #### Scenario: Basic propose invocation
-- **WHEN** user invokes `/opsx-hw:propose "add user authentication"`
+- **WHEN** user invokes `/synspec:propose "add user authentication"`
 - **THEN** the system SHALL create a change directory with kebab-case name
-- **THEN** the system SHALL create `.openspec.yaml` in the change directory (via `openspec new change`)
+- **THEN** the system SHALL create `.synergyspec.yaml` in the change directory (via `openspec new change`)
 - **THEN** the system SHALL generate all artifacts needed for implementation: proposal.md, design.md, specs/, tasks.md
 
 #### Scenario: Propose with existing change name
-- **WHEN** user invokes `/opsx-hw:propose` with a name that already exists
+- **WHEN** user invokes `/synspec:propose` with a name that already exists
 - **THEN** the system SHALL ask if user wants to continue existing change or create new
 - **THEN** if "continue": the system SHALL resume artifact generation from last completed state
 - **THEN** if "create new": the system SHALL prompt for a new name
@@ -24,9 +24,9 @@ The system SHALL provide a `propose` workflow that creates a change and generate
 The `propose` workflow SHALL include explanatory output to help new users understand the process.
 
 #### Scenario: First-time user guidance
-- **WHEN** user invokes `/opsx-hw:propose`
+- **WHEN** user invokes `/synspec:propose`
 - **THEN** the system SHALL explain what artifacts will be created (proposal.md, design.md, specs/, tasks.md)
-- **THEN** the system SHALL indicate next step (`/opsx-hw:apply` to implement)
+- **THEN** the system SHALL indicate next step (`/synspec:apply` to implement)
 
 #### Scenario: Artifact creation progress
 - **WHEN** the system creates each artifact
@@ -36,7 +36,7 @@ The `propose` workflow SHALL include explanatory output to help new users unders
 The `propose` workflow SHALL perform the same operations as running `new` followed by `ff`.
 
 #### Scenario: Equivalent to new + ff
-- **WHEN** user invokes `/opsx-hw:propose "feature name"`
-- **THEN** the result SHALL be functionally equivalent to invoking `/opsx-hw:new "feature-name"` followed by `/opsx-hw:ff feature-name`
+- **WHEN** user invokes `/synspec:propose "feature name"`
+- **THEN** the result SHALL be functionally equivalent to invoking `/synspec:new "feature-name"` followed by `/synspec:ff feature-name`
 - **THEN** the same directory structure and artifacts SHALL be created
 - **THEN** console output MAY differ (propose includes onboarding explanations)

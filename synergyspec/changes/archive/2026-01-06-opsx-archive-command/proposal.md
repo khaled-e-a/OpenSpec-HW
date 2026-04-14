@@ -1,20 +1,20 @@
 ## Why
 
-The experimental workflow (OPSX) provides a schema-driven, artifact-by-artifact approach to creating changes with `/opsx-hw:new`, `/opsx-hw:continue`, `/opsx-hw:ff`, `/opsx-hw:apply`, and `/opsx-hw:sync`. However, there's no corresponding archive command to finalize and archive completed changes. Users must currently fall back to the regular `openspec archive` command, which doesn't integrate with the OPSX philosophy of agent-driven spec syncing and schema-aware artifact tracking.
+The experimental workflow (OPSX) provides a schema-driven, artifact-by-artifact approach to creating changes with `/synspec:new`, `/synspec:continue`, `/synspec:ff`, `/synspec:apply`, and `/synspec:sync`. However, there's no corresponding archive command to finalize and archive completed changes. Users must currently fall back to the regular `openspec archive` command, which doesn't integrate with the OPSX philosophy of agent-driven spec syncing and schema-aware artifact tracking.
 
 ## What Changes
 
-- Add `/opsx-hw:archive` slash command for archiving changes in the experimental workflow
+- Add `/synspec:archive` slash command for archiving changes in the experimental workflow
 - Use artifact graph to check completion status (schema-aware) instead of just validating proposal + specs
-- Prompt for `/opsx-hw:sync` before archiving instead of programmatically applying specs
-- Preserve `.openspec.yaml` schema metadata when moving to archive
+- Prompt for `/synspec:sync` before archiving instead of programmatically applying specs
+- Preserve `.synergyspec.yaml` schema metadata when moving to archive
 - Integrate with existing OPSX commands for a cohesive workflow
 
 ## Capabilities
 
 ### New Capabilities
 
-- `opsx-archive-skill`: Slash command and skill for archiving completed changes in the experimental workflow. Checks artifact completion via artifact graph, verifies task completion, optionally syncs specs via `/opsx-hw:sync`, and moves the change to `archive/YYYY-MM-DD-<name>/`.
+- `synspec-archive-skill`: Slash command and skill for archiving completed changes in the experimental workflow. Checks artifact completion via artifact graph, verifies task completion, optionally syncs specs via `/synspec:sync`, and moves the change to `archive/YYYY-MM-DD-<name>/`.
 
 ### Modified Capabilities
 

@@ -9,39 +9,39 @@
 ### npm
 
 ```bash
-npm install -g @khaledea/openspec-hw@latest
+npm install -g @khaledea/synergyspec-hw@latest
 ```
 
 ### pnpm
 
 ```bash
-pnpm add -g @khaledea/openspec-hw@latest
+pnpm add -g @khaledea/synergyspec-hw@latest
 ```
 
 ### yarn
 
 ```bash
-yarn global add @khaledea/openspec-hw@latest
+yarn global add @khaledea/synergyspec-hw@latest
 ```
 
 ### bun
 
 ```bash
-bun add -g @khaledea/openspec-hw@latest
+bun add -g @khaledea/synergyspec-hw@latest
 ```
 
 ## Nix
 
-Run OpenSpec directly without installation:
+Run SynergySpec directly without installation:
 
 ```bash
-nix run github:Fission-AI/OpenSpec -- init
+nix run github:Fission-AI/SynergySpec -- init
 ```
 
 Or install to your profile:
 
 ```bash
-nix profile install github:Fission-AI/OpenSpec
+nix profile install github:Fission-AI/SynergySpec
 ```
 
 Or add to your development environment in `flake.nix`:
@@ -50,7 +50,7 @@ Or add to your development environment in `flake.nix`:
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    openspec.url = "github:Fission-AI/OpenSpec";
+    openspec.url = "github:Fission-AI/SynergySpec";
   };
 
   outputs = { nixpkgs, openspec, ... }: {
@@ -64,16 +64,16 @@ Or add to your development environment in `flake.nix`:
 ## Verify Installation
 
 ```bash
-openspec-hw --version
+synergyspec-hw --version
 ```
 
 ## Next Steps
 
-After installing, initialize OpenSpec in your project:
+After installing, initialize SynergySpec in your project:
 
 ```bash
 cd your-project
-openspec-hw init
+synergyspec-hw init
 ```
 
 See [Getting Started](getting-started.md) for a full walkthrough.

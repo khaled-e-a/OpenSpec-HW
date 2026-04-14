@@ -1,6 +1,6 @@
 ## Context
 
-OpenSpec currently installs 10 workflows (skills + commands) for every user, overwhelming new users. The init flow asks multiple questions (profile, delivery, tools) creating friction before users can experience value.
+SynergySpec currently installs 10 workflows (skills + commands) for every user, overwhelming new users. The init flow asks multiple questions (profile, delivery, tools) creating friction before users can experience value.
 
 Current architecture:
 - `src/core/init.ts` - Handles tool selection and skill/command generation
@@ -9,7 +9,7 @@ Current architecture:
 - `src/core/templates/workflows/*.ts` - Individual workflow templates
 - `src/prompts/searchable-multi-select.ts` - Tool selection UI
 
-Global config exists at `~/.config/openspec/config.json` for telemetry/feature flags. Profile/delivery settings will extend this existing config.
+Global config exists at `~/.config/synergyspec/config.json` for telemetry/feature flags. Profile/delivery settings will extend this existing config.
 
 ## Goals / Non-Goals
 
@@ -33,7 +33,7 @@ Global config exists at `~/.config/openspec/config.json` for telemetry/feature f
 
 ### 1. Extend Existing Global Config
 
-Add profile/delivery settings to existing `~/.config/openspec/config.json` (via `src/core/global-config.ts`).
+Add profile/delivery settings to existing `~/.config/synergyspec/config.json` (via `src/core/global-config.ts`).
 
 **Rationale:** Global config already exists with XDG/APPDATA cross-platform path handling, schema evolution, and merge-with-defaults behavior. Reusing it avoids a second config file and leverages existing infrastructure.
 
@@ -49,7 +49,7 @@ Add profile/delivery settings to existing `~/.config/openspec/config.json` (via 
 ```
 
 **Alternatives considered:**
-- New `~/.openspec/config.yaml`: Creates second config file, different format, path confusion
+- New `~/.synergyspec/config.yaml`: Creates second config file, different format, path confusion
 - Project config: Would require syncing mechanism, users edit it directly
 - Environment variables: Less discoverable, harder to persist
 
@@ -138,7 +138,7 @@ Tool selection (which assistants a project uses) is per-user AND per-project, bu
 
 - *Path-keyed global config* (`projects: { "/path": { tools: [...] } }`): Fragile on directory move/rename/delete, symlink ambiguity, and project behavior depends on invisible external state.
 - *Gitignored local file* (`.openspec.local`): Lost on fresh clone, adds file management overhead.
-- *Checked-in project config* (`openspec/config.yaml` with `tools` field): Forces tool choices on the whole team — Alice uses Claude Code, Bob uses Cursor, neither wants the other's tools mandated.
+- *Checked-in project config* (`synergyspec/config.yaml` with `tools` field): Forces tool choices on the whole team — Alice uses Claude Code, Bob uses Cursor, neither wants the other's tools mandated.
 
 The filesystem approach avoids all three problems. For teams, it's actually beneficial: checked-in skill files mean `openspec update` from any team member refreshes skills for all tools the project supports. The generated files serve as both the deliverable and the implicit tool manifest.
 
@@ -179,13 +179,13 @@ function migrateIfNeeded(projectPath: string, tools: AiTool[]): void {
 **Scanning logic:**
 - Scan all tool directories (`.claude/skills/`, `.cursor/skills/`, etc.) for workflow directories/files
 - Match only against `ALL_WORKFLOWS` constant — ignore user-created custom skills/commands
-- Map directory names back to workflow IDs (e.g., `openspec-explore/` → `explore`, `opsx-explore.md` → `explore`)
+- Map directory names back to workflow IDs (e.g., `synergyspec-explore/` → `explore`, `synspec-explore.md` → `explore`)
 - Take the union of detected workflow names across all tools
 
 **Edge cases:**
 - **User manually deleted some workflows:** Migration scans what's actually installed, respecting their choices
 - **Multiple projects with different workflow sets:** First project to trigger migration sets global config; subsequent projects use it
-- **User has custom (non-OpenSpec) skills in the directory:** Ignored — scanner only matches known workflow IDs from `ALL_WORKFLOWS`
+- **User has custom (non-SynergySpec) skills in the directory:** Ignored — scanner only matches known workflow IDs from `ALL_WORKFLOWS`
 - **Migration is idempotent:** If `profile` is already set in config, no re-migration occurs
 - **Non-interactive (CI):** Same migration logic, no confirmation needed — it's preserving existing state
 
@@ -196,7 +196,7 @@ function migrateIfNeeded(projectPath: string, tools: AiTool[]): void {
 
 ### 9. Generic Next-Step Guidance in Templates
 
-Workflow templates use generic, concept-based next-step guidance rather than referencing specific workflow commands. For example, instead of "run `/opsx-hw:propose`", templates say "create a change proposal".
+Workflow templates use generic, concept-based next-step guidance rather than referencing specific workflow commands. For example, instead of "run `/synspec:propose`", templates say "create a change proposal".
 
 **Rationale:** Conditional cross-referencing (where each template checks which other workflows are installed and renders different command names) adds significant complexity to template generation, testing, and maintenance. Generic guidance avoids this entirely while still being useful — users already know their installed workflows.
 

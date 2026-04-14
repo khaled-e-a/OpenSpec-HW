@@ -2,10 +2,10 @@
 
 ## 1. Extend Init Workflow
 - [x] 1.1 Add an "AGENTS.md standard" option to the `openspec init` tool-selection prompt, respecting the existing UI conventions.
-- [x] 1.2 Generate or refresh a root-level `AGENTS.md` file using the OpenSpec markers when that option is selected, sourcing content from the canonical template.
+- [x] 1.2 Generate or refresh a root-level `AGENTS.md` file using the SynergySpec markers when that option is selected, sourcing content from the canonical template.
 
 ## 2. Enhance Update Command
-- [x] 2.1 Ensure `openspec update` writes the root `AGENTS.md` from the latest template (creating it if missing) alongside `openspec/AGENTS.md`.
+- [x] 2.1 Ensure `openspec update` writes the root `AGENTS.md` from the latest template (creating it if missing) alongside `synergyspec/AGENTS.md`.
 - [x] 2.2 Update success messaging and logging to reflect creation vs refresh of the AGENTS standard file.
 
 ## 3. Shared Template Handling

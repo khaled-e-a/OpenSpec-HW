@@ -6,7 +6,7 @@
  */
 import type { SkillTemplate, CommandTemplate } from '../types.js';
 
-const INSTRUCTIONS_BODY = `Implement tasks from an OpenSpec change using red-green-refactor TDD.
+const INSTRUCTIONS_BODY = `Implement tasks from an SynergySpec change using red-green-refactor TDD.
 
 **Input**: Optionally specify a change name. If omitted, check context. If ambiguous, prompt.
 
@@ -17,20 +17,20 @@ const INSTRUCTIONS_BODY = `Implement tasks from an OpenSpec change using red-gre
    If a name is provided, use it. Otherwise:
    - Infer from conversation context if the user mentioned a change
    - Auto-select if only one active change exists
-   - If ambiguous, run \`openspec-hw list--json\` to get available changes and use the **AskUserQuestion tool** to let the user select
+   - If ambiguous, run \`synergyspec-hw list--json\` to get available changes and use the **AskUserQuestion tool** to let the user select
 
-   Always announce: "Using change: <name>" and how to override (e.g., \`/ opsx - hw: tdd <other>\`).
+   Always announce: "Using change: <name>" and how to override (e.g., \`/synspec: tdd <other>\`).
 
 2. **Check status and get apply instructions**
 
    \`\`\`bash
-openspec - hw status--change "<name>" --json
-openspec - hw instructions apply--change "<name>" --json
+synergyspec-hw status--change "<name>" --json
+synergyspec-hw instructions apply--change "<name>" --json
   \`\`\`
 
    Handle states identically to apply-change:
-   - If \`state: "blocked"\` (missing artifacts): show message, suggest \` / opsx - hw: continue\`
-   - If \`state: "all_done"\`: congratulate, suggest \` / opsx - hw: gen - tests\`
+   - If \`state: "blocked"\` (missing artifacts): show message, suggest \` /synspec: continue\`
+   - If \`state: "all_done"\`: congratulate, suggest \` /synspec: gen - tests\`
    - Otherwise: proceed to implementation
 
 3. **Read context files**
@@ -427,10 +427,10 @@ No exceptions without your human partner's permission.
    All tasks implemented with red - green - refactor discipline.
 
    Next steps:
-1. Run \`/ opsx - hw: gen - tests\` — generate any missing tests(PBT, coverage gaps) and map all use -case steps
-2. Run \`/ opsx - hw: run - tests\` — run the full suite and produce the spec - coverage report
-3. Run \`/ opsx - hw: ci\` — full CI run(e2e, screenshots, artifact archiving)
-4. Run \`/ opsx - hw: archive\` — close the change once CI passes
+1. Run \`/synspec: gen - tests\` — generate any missing tests(PBT, coverage gaps) and map all use -case steps
+2. Run \`/synspec: run - tests\` — run the full suite and produce the spec - coverage report
+3. Run \`/synspec: ci\` — full CI run(e2e, screenshots, artifact archiving)
+4. Run \`/synspec: archive\` — close the change once CI passes
   \`\`\`
 
   ** If paused:** explain the reason and wait for guidance.
@@ -459,10 +459,10 @@ Task 4 / 7: <task description >
 
   ** Graceful Degradation **
 
-    - If blocked(missing spec artifacts): show message, suggest\`/ opsx - hw: continue\`
+    - If blocked(missing spec artifacts): show message, suggest\`/synspec: continue\`
       - If test runner not found: ask the user for the command rather than guessing
         - If a task was already completed(checkbox already ticked): skip it silently
-          - If the change has no tasks.md: report "No tasks.md found — cannot run TDD. Run \`/ opsx - hw: continue\` to generate tasks."
+          - If the change has no tasks.md: report "No tasks.md found — cannot run TDD. Run \`/synspec: continue\` to generate tasks."
 
             ** Fluid Workflow Integration **
 
@@ -472,15 +472,15 @@ same \`- [x]\` checkboxes in tasks.md; either command can pick up where the othe
 
 export function getTddSkillTemplate(): SkillTemplate {
   return {
-    name: 'openspec-tdd',
+    name: 'synergyspec-tdd',
     description:
-      'Implement tasks from an OpenSpec change using red-green-refactor TDD. For each task: write a failing test (red), implement the minimum code to pass it (green), then refactor.',
-    instructions: `Implement tasks from an OpenSpec change using red-green - refactor TDD.
+      'Implement tasks from an SynergySpec change using red-green-refactor TDD. For each task: write a failing test (red), implement the minimum code to pass it (green), then refactor.',
+    instructions: `Implement tasks from an SynergySpec change using red-green - refactor TDD.
 
   ${INSTRUCTIONS_BODY} `,
     license: 'MIT',
-    compatibility: 'Requires openspec-hw CLI.',
-    metadata: { author: 'openspec', version: '1.0' },
+    compatibility: 'Requires synergyspec-hw CLI.',
+    metadata: { author: 'synergyspec', version: '1.0' },
     scripts: {
       'testing-anti-patterns.md': `# Testing Anti-Patterns to Avoid
 
@@ -778,9 +778,9 @@ export function getOpsxTddCommandTemplate(): CommandTemplate {
     description: 'Implement tasks one by one using red-green-refactor TDD — write failing test first, then minimum code, then refactor',
     category: 'Workflow',
     tags: ['workflow', 'tdd', 'test', 'red-green-refactor'],
-    content: `Implement tasks from an OpenSpec change using red-green - refactor TDD.
+    content: `Implement tasks from an SynergySpec change using red-green - refactor TDD.
 
-** Input **: Optionally specify a change name after \`/opsx-hw:tdd\` (e.g., \`/opsx-hw:tdd add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
+** Input **: Optionally specify a change name after \`/synspec:tdd\` (e.g., \`/synspec:tdd add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 ${INSTRUCTIONS_BODY}`,
   };

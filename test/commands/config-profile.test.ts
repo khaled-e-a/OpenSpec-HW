@@ -14,7 +14,7 @@ async function runConfigCommand(args: string[]): Promise<void> {
   const { registerConfigCommand } = await import('../../src/commands/config.js');
   const program = new Command();
   registerConfigCommand(program);
-  await program.parseAsync(['node', 'openspec', 'config', ...args]);
+  await program.parseAsync(['node', 'synergyspec', 'config', ...args]);
 }
 
 async function getPromptMocks(): Promise<{
@@ -83,19 +83,19 @@ describe('config profile interactive flow', () => {
   let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
 
   function setupDriftedProjectArtifacts(projectDir: string): void {
-    fs.mkdirSync(path.join(projectDir, 'openspec'), { recursive: true });
-    const exploreSkillPath = path.join(projectDir, '.claude', 'skills', 'openspec-explore', 'SKILL.md');
+    fs.mkdirSync(path.join(projectDir, 'synergyspec'), { recursive: true });
+    const exploreSkillPath = path.join(projectDir, '.claude', 'skills', 'synergyspec-explore', 'SKILL.md');
     fs.mkdirSync(path.dirname(exploreSkillPath), { recursive: true });
-    fs.writeFileSync(exploreSkillPath, 'name: openspec-explore\n', 'utf-8');
+    fs.writeFileSync(exploreSkillPath, 'name: synergyspec-explore\n', 'utf-8');
   }
 
   function setupSyncedCoreBothArtifacts(projectDir: string): void {
-    fs.mkdirSync(path.join(projectDir, 'openspec'), { recursive: true });
+    fs.mkdirSync(path.join(projectDir, 'synergyspec'), { recursive: true });
     const coreSkillDirs = [
-      'openspec-propose',
-      'openspec-explore',
-      'openspec-apply-change',
-      'openspec-archive-change',
+      'synergyspec-propose',
+      'synergyspec-explore',
+      'synergyspec-apply-change',
+      'synergyspec-archive-change',
     ];
     for (const dirName of coreSkillDirs) {
       const skillPath = path.join(projectDir, '.claude', 'skills', dirName, 'SKILL.md');
@@ -105,18 +105,18 @@ describe('config profile interactive flow', () => {
 
     const coreCommands = ['propose', 'explore', 'apply', 'archive'];
     for (const commandId of coreCommands) {
-      const commandPath = path.join(projectDir, '.claude', 'commands', 'opsx-hw', `${commandId}.md`);
+      const commandPath = path.join(projectDir, '.claude', 'commands', 'synspec', `${commandId}.md`);
       fs.mkdirSync(path.dirname(commandPath), { recursive: true });
       fs.writeFileSync(commandPath, `# ${commandId}\n`, 'utf-8');
     }
   }
 
   function addExtraSyncWorkflowArtifacts(projectDir: string): void {
-    const syncSkillPath = path.join(projectDir, '.claude', 'skills', 'openspec-sync-specs', 'SKILL.md');
+    const syncSkillPath = path.join(projectDir, '.claude', 'skills', 'synergyspec-sync-specs', 'SKILL.md');
     fs.mkdirSync(path.dirname(syncSkillPath), { recursive: true });
-    fs.writeFileSync(syncSkillPath, 'name: openspec-sync-specs\n', 'utf-8');
+    fs.writeFileSync(syncSkillPath, 'name: synergyspec-sync-specs\n', 'utf-8');
 
-    const syncCommandPath = path.join(projectDir, '.claude', 'commands', 'opsx-hw', 'sync.md');
+    const syncCommandPath = path.join(projectDir, '.claude', 'commands', 'synspec', 'sync.md');
     fs.mkdirSync(path.dirname(syncCommandPath), { recursive: true });
     fs.writeFileSync(syncCommandPath, '# sync\n', 'utf-8');
   }
@@ -124,7 +124,7 @@ describe('config profile interactive flow', () => {
   beforeEach(() => {
     vi.resetModules();
 
-    tempDir = path.join(os.tmpdir(), `openspec-config-profile-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+    tempDir = path.join(os.tmpdir(), `synergyspec-config-profile-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);
     fs.mkdirSync(tempDir, { recursive: true });
 
     originalEnv = { ...process.env };
@@ -274,7 +274,7 @@ describe('config profile interactive flow', () => {
     const configPath = getGlobalConfigPath();
     const beforeContent = fs.readFileSync(configPath, 'utf-8');
 
-    fs.mkdirSync(path.join(tempDir, 'openspec'), { recursive: true });
+    fs.mkdirSync(path.join(tempDir, 'synergyspec'), { recursive: true });
     select.mockResolvedValueOnce('delivery');
     select.mockResolvedValueOnce('both');
 
@@ -350,7 +350,7 @@ describe('config profile interactive flow', () => {
     const { select, confirm } = await getPromptMocks();
 
     saveGlobalConfig({ featureFlags: {}, profile: 'core', delivery: 'both', workflows: ['propose', 'explore', 'apply', 'archive'] });
-    fs.mkdirSync(path.join(tempDir, 'openspec'), { recursive: true });
+    fs.mkdirSync(path.join(tempDir, 'synergyspec'), { recursive: true });
 
     select.mockResolvedValueOnce('delivery');
     select.mockResolvedValueOnce('skills');

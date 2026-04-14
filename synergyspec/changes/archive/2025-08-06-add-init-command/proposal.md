@@ -1,18 +1,18 @@
-# Add Init Command for OpenSpec
+# Add Init Command for SynergySpec
 
 ## Why
 
-Projects need a simple way to adopt OpenSpec conventions. Currently, users must manually create the directory structure and understand all the conventions, which creates friction for adoption. An init command would enable instant OpenSpec setup with proper structure and guidance.
+Projects need a simple way to adopt SynergySpec conventions. Currently, users must manually create the directory structure and understand all the conventions, which creates friction for adoption. An init command would enable instant SynergySpec setup with proper structure and guidance.
 
 ## What Changes
 
-- Add `openspec init` CLI command that creates the complete OpenSpec directory structure
+- Add `openspec init` CLI command that creates the complete SynergySpec directory structure
 - Generate template files (README.md with AI instructions, project.md template)
 - Interactive prompt to select which AI tools to configure (Claude Code initially, others marked as "coming soon")
 - Support for multiple AI coding assistants with extensible plugin architecture
 - Smart file updates using content markers to preserve existing configurations
 - Custom directory naming with `--dir` flag
-- Validation to prevent overwriting existing OpenSpec structures
+- Validation to prevent overwriting existing SynergySpec structures
 - Clear error messages with helpful guidance (e.g., suggesting 'openspec update' for existing structures)
 - Display actionable next steps after successful initialization
 

@@ -6,9 +6,9 @@ import { execSync } from 'child_process';
 describe('top-level show command', () => {
   const projectRoot = process.cwd();
   const testDir = path.join(projectRoot, 'test-show-command-tmp');
-  const changesDir = path.join(testDir, 'openspec', 'changes');
-  const specsDir = path.join(testDir, 'openspec', 'specs');
-  const openspecBin = path.join(projectRoot, 'bin', 'openspec.js');
+  const changesDir = path.join(testDir, 'synergyspec', 'changes');
+  const specsDir = path.join(testDir, 'synergyspec', 'specs');
+  const openspecBin = path.join(projectRoot, 'bin', 'synergyspec.js');
 
 
   beforeEach(async () => {
@@ -42,9 +42,9 @@ describe('top-level show command', () => {
       expect(err.status).not.toBe(0);
       const stderr = err.stderr.toString();
       expect(stderr).toContain('Nothing to show.');
-      expect(stderr).toContain('openspec show <item>');
-      expect(stderr).toContain('openspec change show');
-      expect(stderr).toContain('openspec spec show');
+      expect(stderr).toContain('synergyspec-hw show <item>');
+      expect(stderr).toContain('synergyspec-hw change show');
+      expect(stderr).toContain('synergyspec-hw spec show');
     } finally {
       process.chdir(originalCwd);
       process.env = originalEnv;

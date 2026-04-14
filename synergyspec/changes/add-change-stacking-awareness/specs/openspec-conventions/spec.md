@@ -1,7 +1,7 @@
 ## ADDED Requirements
 
 ### Requirement: Stack-Aware Change Planning Conventions
-OpenSpec conventions SHALL define optional metadata fields for sequencing and decomposition across concurrent changes.
+SynergySpec conventions SHALL define optional metadata fields for sequencing and decomposition across concurrent changes.
 
 #### Scenario: Declaring change dependencies
 - **WHEN** authors need to sequence related changes
@@ -9,7 +9,7 @@ OpenSpec conventions SHALL define optional metadata fields for sequencing and de
 - **AND** validation guidance SHALL distinguish hard blockers from soft overlap warnings
 
 #### Scenario: Dependency source of truth during migration
-- **WHEN** both stack metadata and `openspec/changes/IMPLEMENTATION_ORDER.md` are present
+- **WHEN** both stack metadata and `synergyspec/changes/IMPLEMENTATION_ORDER.md` are present
 - **THEN** conventions SHALL treat per-change stack metadata as the normative dependency source
 - **AND** `IMPLEMENTATION_ORDER.md` SHALL be treated as optional narrative guidance
 

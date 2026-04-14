@@ -101,7 +101,7 @@ All 25 property-based tests held for all generated inputs. No counterexamples fo
 | TP-20-after-remove.png | (no previous run) | 📸 Saved as baseline |
 | TP-20-after-undo.png | (no previous run) | 📸 Saved as baseline |
 
-No previous run found — all 7 screenshots saved as baseline. Run `/opsx-hw:ci` again after the next code change to detect visual regressions.
+No previous run found — all 7 screenshots saved as baseline. Run `/synspec:ci` again after the next code change to detect visual regressions.
 
 ---
 
@@ -118,9 +118,9 @@ None. No visual regressions, no failing tests, no open PBT counterexamples.
 | Unit/PBT test results | `widget-dashboard/coverage/lcov-report/index.html` |
 | E2E screenshots (current) | `e2e-results/latest/artifacts/` |
 | E2E screenshots (archived) | `e2e-results/2026-03-23_14-38-00/artifacts/` |
-| Test report | `openspec/changes/widget-drag-drop/test-report.md` |
-| Test plan | `openspec/changes/widget-drag-drop/test-plan.md` |
-| Spec-test mapping | `openspec/changes/widget-drag-drop/spec-tests.md` |
+| Test report | `synergyspec/changes/widget-drag-drop/test-report.md` |
+| Test plan | `synergyspec/changes/widget-drag-drop/test-plan.md` |
+| Spec-test mapping | `synergyspec/changes/widget-drag-drop/spec-tests.md` |
 
 ---
 
@@ -139,4 +139,4 @@ None. No visual regressions, no failing tests, no open PBT counterexamples.
 
 The coverage gap is expected and intentional: `DashboardGrid`, `DropCellGrid`, `WidgetPicker`, and `useResizeDrag` are covered by the 8 passing e2e tests above plus the 12 manual test plan entries (TP-2 through TP-12, TP-17, TP-18) that require interactive pointer-drag events not yet automated.
 
-Next step: run `/opsx-hw:archive` to archive and close the `widget-drag-drop` change.
+Next step: run `/synspec:archive` to archive and close the `widget-drag-drop` change.

@@ -8,7 +8,7 @@ Define `openspec schema which` behavior for reporting resolved schema source, lo
 The CLI SHALL provide an `openspec schema which <name>` command that displays where a schema resolves from.
 
 #### Scenario: Schema resolves from project
-- **WHEN** user runs `openspec schema which my-workflow` and schema exists in `openspec/schemas/my-workflow/`
+- **WHEN** user runs `openspec schema which my-workflow` and schema exists in `synergyspec/schemas/my-workflow/`
 - **THEN** system displays source as "project"
 - **AND** displays full path to schema directory
 

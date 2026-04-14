@@ -1,18 +1,18 @@
-# @khaledea/openspec-hw
+# @khaledea/synergyspec-hw
 
 ## 1.1.1
 
 ### Patch Changes
 
-- [#627](https://github.com/Fission-AI/OpenSpec/pull/627) [`afb73cf`](https://github.com/Fission-AI/OpenSpec/commit/afb73cf9ec59c6f8b26d0c538c0218c203ba3c56) Thanks [@TabishB](https://github.com/TabishB)! - ### Bug Fixes
+- [#627](https://github.com/Fission-AI/SynergySpec/pull/627) [`afb73cf`](https://github.com/Fission-AI/SynergySpec/commit/afb73cf9ec59c6f8b26d0c538c0218c203ba3c56) Thanks [@TabishB](https://github.com/TabishB)! - ### Bug Fixes
 
-  - **OpenCode command references** — Command references in generated files now use the correct `/opsx-` hyphen format instead of `/opsx-hw:` colon format, ensuring commands work properly in OpenCode
+  - **OpenCode command references** — Command references in generated files now use the correct `/opsx-` hyphen format instead of `/synspec:` colon format, ensuring commands work properly in OpenCode
 
 ## 1.1.0
 
 ### Minor Changes
 
-- [#625](https://github.com/Fission-AI/OpenSpec/pull/625) [`53081fb`](https://github.com/Fission-AI/OpenSpec/commit/53081fb2a26ec66d2950ae0474b9a56cbc5b5a76) Thanks [@TabishB](https://github.com/TabishB)! - ### Bug Fixes
+- [#625](https://github.com/Fission-AI/SynergySpec/pull/625) [`53081fb`](https://github.com/Fission-AI/SynergySpec/commit/53081fb2a26ec66d2950ae0474b9a56cbc5b5a76) Thanks [@TabishB](https://github.com/TabishB)! - ### Bug Fixes
 
   - **Codex global path support** — Codex adapter now resolves global paths correctly, fixing workflow file generation when run outside the project directory (#622)
   - **Archive operations on cross-device or restricted paths** — Archive now falls back to copy+remove when rename fails with EPERM or EXDEV errors, fixing failures on networked/external drives (#605)
@@ -21,7 +21,7 @@
 
 ### Patch Changes
 
-- [#550](https://github.com/Fission-AI/OpenSpec/pull/550) [`86d2e04`](https://github.com/Fission-AI/OpenSpec/commit/86d2e04cae76a999dbd1b4571f52fa720036be0c) Thanks [@jerome-benoit](https://github.com/jerome-benoit)! - ### Improvements
+- [#550](https://github.com/Fission-AI/SynergySpec/pull/550) [`86d2e04`](https://github.com/Fission-AI/SynergySpec/commit/86d2e04cae76a999dbd1b4571f52fa720036be0c) Thanks [@jerome-benoit](https://github.com/jerome-benoit)! - ### Improvements
 
   - **Nix flake maintenance** — Version now read dynamically from package.json, reducing manual sync issues
   - **Nix build optimization** — Source filtering excludes node_modules and artifacts, improving build times
@@ -35,7 +35,7 @@
 
 ### Patch Changes
 
-- [#596](https://github.com/Fission-AI/OpenSpec/pull/596) [`e91568d`](https://github.com/Fission-AI/OpenSpec/commit/e91568deb948073f3e9d9bb2d2ab5bf8080d6cf4) Thanks [@TabishB](https://github.com/TabishB)! - ### Bug Fixes
+- [#596](https://github.com/Fission-AI/SynergySpec/pull/596) [`e91568d`](https://github.com/Fission-AI/SynergySpec/commit/e91568deb948073f3e9d9bb2d2ab5bf8080d6cf4) Thanks [@TabishB](https://github.com/TabishB)! - ### Bug Fixes
 
   - Clarified spec naming convention — Specs should be named after capabilities (`specs/<capability>/spec.md`), not changes
   - Fixed task checkbox format guidance — Tasks now clearly require `- [ ]` checkbox format for apply phase tracking
@@ -44,7 +44,7 @@
 
 ### Patch Changes
 
-- [#587](https://github.com/Fission-AI/OpenSpec/pull/587) [`943e0d4`](https://github.com/Fission-AI/OpenSpec/commit/943e0d41026d034de66b9442d1276c01b293eb2b) Thanks [@TabishB](https://github.com/TabishB)! - ### Bug Fixes
+- [#587](https://github.com/Fission-AI/SynergySpec/pull/587) [`943e0d4`](https://github.com/Fission-AI/SynergySpec/commit/943e0d41026d034de66b9442d1276c01b293eb2b) Thanks [@TabishB](https://github.com/TabishB)! - ### Bug Fixes
 
   - Fixed incorrect archive path in onboarding documentation — the template now shows the correct path `openspec/changes/archive/YYYY-MM-DD-<name>/` instead of the incorrect `openspec/archive/YYYY-MM-DD--<name>/`
 
@@ -52,7 +52,7 @@
 
 ### Major Changes
 
-- [#578](https://github.com/Fission-AI/OpenSpec/pull/578) [`0cc9d90`](https://github.com/Fission-AI/OpenSpec/commit/0cc9d9025af367faa1688a7b2606a2549053cd3f) Thanks [@TabishB](https://github.com/TabishB)! - ## OpenSpec 1.0 — The OPSX Release
+- [#578](https://github.com/Fission-AI/SynergySpec/pull/578) [`0cc9d90`](https://github.com/Fission-AI/SynergySpec/commit/0cc9d9025af367faa1688a7b2606a2549053cd3f) Thanks [@TabishB](https://github.com/TabishB)! - ## SynergySpec 1.0 — The OPSX Release
 
   The workflow has been rebuilt from the ground up. OPSX replaces the old phase-locked `/openspec:*` commands with an action-based system where AI understands what artifacts exist, what's ready to create, and what each action unlocks.
 
@@ -82,16 +82,16 @@
 
   | Command              | What it does                                         |
   | -------------------- | ---------------------------------------------------- |
-  | `/opsx-hw:explore`      | Think through ideas before committing to a change    |
-  | `/opsx-hw:new`          | Start a new change                                   |
-  | `/opsx-hw:continue`     | Create one artifact at a time (step-through)         |
-  | `/opsx-hw:ff`           | Create all planning artifacts at once (fast-forward) |
-  | `/opsx-hw:apply`        | Implement tasks                                      |
-  | `/opsx-hw:verify`       | Validate implementation matches artifacts            |
-  | `/opsx-hw:sync`         | Sync delta specs to main specs                       |
-  | `/opsx-hw:archive`      | Archive completed change                             |
-  | `/opsx-hw:bulk-archive` | Archive multiple changes with conflict detection     |
-  | `/opsx-hw:onboard`      | Guided 15-minute walkthrough of complete workflow    |
+  | `/synspec:explore`      | Think through ideas before committing to a change    |
+  | `/synspec:new`          | Start a new change                                   |
+  | `/synspec:continue`     | Create one artifact at a time (step-through)         |
+  | `/synspec:ff`           | Create all planning artifacts at once (fast-forward) |
+  | `/synspec:apply`        | Implement tasks                                      |
+  | `/synspec:verify`       | Validate implementation matches artifacts            |
+  | `/synspec:sync`         | Sync delta specs to main specs                       |
+  | `/synspec:archive`      | Archive completed change                             |
+  | `/synspec:bulk-archive` | Archive multiple changes with conflict detection     |
+  | `/synspec:onboard`      | Guided 15-minute walkthrough of complete workflow    |
 
   ### From Text Merging to Semantic Spec Syncing
 
@@ -114,7 +114,7 @@
 
   ### New Features
 
-  - **Onboarding skill** — `/opsx-hw:onboard` walks new users through their first complete change with codebase-aware task suggestions and step-by-step narration (11 phases, ~15 minutes)
+  - **Onboarding skill** — `/synspec:onboard` walks new users through their first complete change with codebase-aware task suggestions and step-by-step narration (11 phases, ~15 minutes)
 
   - **21 AI tools supported** — Claude Code, Cursor, Windsurf, Continue, Gemini CLI, GitHub Copilot, Amazon Q, Cline, RooCode, Kilo Code, Auggie, CodeBuddy, Qoder, Qwen, CoStrict, Crush, Factory, OpenCode, Antigravity, iFlow, and Codex
 
@@ -138,9 +138,9 @@
 
 ### Minor Changes
 
-- [#540](https://github.com/Fission-AI/OpenSpec/pull/540) [`c4cfdc7`](https://github.com/Fission-AI/OpenSpec/commit/c4cfdc7c499daef30d8a218f5f59b8d9e5adb754) Thanks [@TabishB](https://github.com/TabishB)! - ### New Features
+- [#540](https://github.com/Fission-AI/SynergySpec/pull/540) [`c4cfdc7`](https://github.com/Fission-AI/SynergySpec/commit/c4cfdc7c499daef30d8a218f5f59b8d9e5adb754) Thanks [@TabishB](https://github.com/TabishB)! - ### New Features
 
-  - **Bulk archive skill** — Archive multiple completed changes in a single operation with `/opsx-hw:bulk-archive`. Includes batch validation, spec conflict detection, and consolidated confirmation
+  - **Bulk archive skill** — Archive multiple completed changes in a single operation with `/synspec:bulk-archive`. Includes batch validation, spec conflict detection, and consolidated confirmation
 
   ### Other
 
@@ -150,11 +150,11 @@
 
 ### Minor Changes
 
-- [#530](https://github.com/Fission-AI/OpenSpec/pull/530) [`33466b1`](https://github.com/Fission-AI/OpenSpec/commit/33466b1e2a6798bdd6d0e19149173585b0612e6f) Thanks [@TabishB](https://github.com/TabishB)! - Add project-level configuration, project-local schemas, and schema management commands
+- [#530](https://github.com/Fission-AI/SynergySpec/pull/530) [`33466b1`](https://github.com/Fission-AI/SynergySpec/commit/33466b1e2a6798bdd6d0e19149173585b0612e6f) Thanks [@TabishB](https://github.com/TabishB)! - Add project-level configuration, project-local schemas, and schema management commands
 
   **New Features**
 
-  - **Project-level configuration** — Configure OpenSpec behavior per-project via `openspec/config.yaml`, including custom rules injection, context files, and schema resolution settings
+  - **Project-level configuration** — Configure SynergySpec behavior per-project via `openspec/config.yaml`, including custom rules injection, context files, and schema resolution settings
   - **Project-local schemas** — Define custom artifact schemas within your project's `openspec/schemas/` directory for project-specific workflows
   - **Schema management commands** — New `openspec schema` commands (`list`, `show`, `export`, `validate`) for inspecting and managing artifact schemas (experimental)
 
@@ -166,7 +166,7 @@
 
 ### Minor Changes
 
-- [#516](https://github.com/Fission-AI/OpenSpec/pull/516) [`b5a8847`](https://github.com/Fission-AI/OpenSpec/commit/b5a884748be6156a7bb140b4941cfec4f20a9fc8) Thanks [@TabishB](https://github.com/TabishB)! - Add feedback command and Nix flake support
+- [#516](https://github.com/Fission-AI/SynergySpec/pull/516) [`b5a8847`](https://github.com/Fission-AI/SynergySpec/commit/b5a884748be6156a7bb140b4941cfec4f20a9fc8) Thanks [@TabishB](https://github.com/TabishB)! - Add feedback command and Nix flake support
 
   **New Features**
 
@@ -186,11 +186,11 @@
 
 ### Minor Changes
 
-- [#502](https://github.com/Fission-AI/OpenSpec/pull/502) [`9db74aa`](https://github.com/Fission-AI/OpenSpec/commit/9db74aa5ac6547efadaed795217cfa17444f2004) Thanks [@TabishB](https://github.com/TabishB)! - Add `/opsx-hw:verify` command and fix vitest process storms
+- [#502](https://github.com/Fission-AI/SynergySpec/pull/502) [`9db74aa`](https://github.com/Fission-AI/SynergySpec/commit/9db74aa5ac6547efadaed795217cfa17444f2004) Thanks [@TabishB](https://github.com/TabishB)! - Add `/synspec:verify` command and fix vitest process storms
 
   **New Features**
 
-  - **`/opsx-hw:verify` command** — Validate that change implementations match their specifications
+  - **`/synspec:verify` command** — Validate that change implementations match their specifications
 
   **Bug Fixes**
 
@@ -202,13 +202,13 @@
 
 ### Minor Changes
 
-- eb152eb: Add Continue IDE support, shell completions, and `/opsx-hw:explore` command
+- eb152eb: Add Continue IDE support, shell completions, and `/synspec:explore` command
 
   **New Features**
 
-  - **Continue IDE support** – OpenSpec now generates slash commands for [Continue](https://continue.dev/), expanding editor integration options alongside Cursor, Windsurf, Claude Code, and others
+  - **Continue IDE support** – SynergySpec now generates slash commands for [Continue](https://continue.dev/), expanding editor integration options alongside Cursor, Windsurf, Claude Code, and others
   - **Shell completions for Bash, Fish, and PowerShell** – Run `openspec completion install` to set up tab completion in your preferred shell
-  - **`/opsx-hw:explore` command** – A new thinking partner mode for exploring ideas and investigating problems before committing to changes
+  - **`/synspec:explore` command** – A new thinking partner mode for exploring ideas and investigating problems before committing to changes
   - **Codebuddy slash command improvements** – Updated frontmatter format for better compatibility
 
   **Bug Fixes**
@@ -218,7 +218,7 @@
 
   **Other**
 
-  - Added optional anonymous usage statistics to help understand how OpenSpec is used. This is **opt-out** by default – set `OPENSPEC_TELEMETRY=0` or `DO_NOT_TRACK=1` to disable. Only command names and version are collected; no arguments, file paths, or content. Automatically disabled in CI environments.
+  - Added optional anonymous usage statistics to help understand how SynergySpec is used. This is **opt-out** by default – set `OPENSPEC_TELEMETRY=0` or `DO_NOT_TRACK=1` to disable. Only command names and version are collected; no arguments, file paths, or content. Automatically disabled in CI environments.
 
 ## 0.18.0
 
@@ -228,9 +228,9 @@
 
   **New Commands:**
 
-  - `/opsx-hw:ff` - Fast-forward through artifact creation, generating all needed artifacts in one go
-  - `/opsx-hw:sync` - Sync delta specs from a change to main specs
-  - `/opsx-hw:archive` - Archive completed changes with smart sync check
+  - `/synspec:ff` - Fast-forward through artifact creation, generating all needed artifacts in one go
+  - `/synspec:sync` - Sync delta specs from a change to main specs
+  - `/synspec:archive` - Archive completed changes with smart sync check
 
   **Artifact Workflow Enhancements:**
 
@@ -383,7 +383,7 @@
 
 ### Minor Changes
 
-- 312e1d6: Add Amazon Q Developer CLI integration. OpenSpec now supports Amazon Q Developer with automatic prompt generation in `.amazonq/prompts/` directory, allowing you to use OpenSpec slash commands with Amazon Q's @-syntax.
+- 312e1d6: Add Amazon Q Developer CLI integration. SynergySpec now supports Amazon Q Developer with automatic prompt generation in `.amazonq/prompts/` directory, allowing you to use SynergySpec slash commands with Amazon Q's @-syntax.
 
 ## 0.10.0
 
@@ -395,13 +395,13 @@
 
 ### Patch Changes
 
-- 2ae0484: Fix cross-platform path handling issues. This release includes fixes for joinPath behavior and slash command path resolution to ensure OpenSpec works correctly across all platforms.
+- 2ae0484: Fix cross-platform path handling issues. This release includes fixes for joinPath behavior and slash command path resolution to ensure SynergySpec works correctly across all platforms.
 
 ## 0.9.1
 
 ### Patch Changes
 
-- 8210970: Fix OpenSpec not working on Windows when Codex integration is selected. This release includes fixes for cross-platform path handling and normalization to ensure OpenSpec works correctly on Windows systems.
+- 8210970: Fix SynergySpec not working on Windows when Codex integration is selected. This release includes fixes for cross-platform path handling and normalization to ensure SynergySpec works correctly on Windows systems.
 
 ## 0.9.0
 
@@ -413,7 +413,7 @@
 
 ### Minor Changes
 
-- Add GitHub Copilot slash command support. OpenSpec now writes prompts to `.github/prompts/openspec-{proposal,apply,archive}.prompt.md` with YAML frontmatter and `$ARGUMENTS` placeholder, and refreshes them on `openspec update`.
+- Add GitHub Copilot slash command support. SynergySpec now writes prompts to `.github/prompts/openspec-{proposal,apply,archive}.prompt.md` with YAML frontmatter and `$ARGUMENTS` placeholder, and refreshes them on `openspec update`.
 
 ## 0.8.1
 
@@ -426,7 +426,7 @@
 ### Minor Changes
 
 - c29b06d: Add Windsurf support.
-- Add Codex slash command support. OpenSpec now writes prompts directly to Codex's global directory (`~/.codex/prompts` or `$CODEX_HOME/prompts`) and refreshes them on `openspec update`.
+- Add Codex slash command support. SynergySpec now writes prompts directly to Codex's global directory (`~/.codex/prompts` or `$CODEX_HOME/prompts`) and refreshes them on `openspec update`.
 
 ## 0.7.0
 
@@ -469,7 +469,7 @@
 
 ### Minor Changes
 
-- Add OpenSpec change proposals for CLI improvements and enhanced user experience
+- Add SynergySpec change proposals for CLI improvements and enhanced user experience
 - Add Opencode slash commands support for AI-driven development workflows
 
 ### Patch Changes

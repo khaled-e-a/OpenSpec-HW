@@ -1,20 +1,20 @@
-# OpenSpec Conventions Specification
+# SynergySpec Conventions Specification
 
 ## Purpose
 
-OpenSpec conventions SHALL define how system capabilities are documented, how changes are proposed and tracked, and how specifications evolve over time. This meta-specification serves as the source of truth for OpenSpec's own conventions.
+SynergySpec conventions SHALL define how system capabilities are documented, how changes are proposed and tracked, and how specifications evolve over time. This meta-specification serves as the source of truth for SynergySpec's own conventions.
 ## Requirements
 ### Requirement: Structured conventions for specs and changes
 
-OpenSpec conventions SHALL mandate a structured spec format with clear requirement and scenario sections so tooling can parse consistently.
+SynergySpec conventions SHALL mandate a structured spec format with clear requirement and scenario sections so tooling can parse consistently.
 
 #### Scenario: Following the structured spec format
 
-- **WHEN** writing or updating OpenSpec specifications
+- **WHEN** writing or updating SynergySpec specifications
 - **THEN** authors SHALL use `### Requirement: ...` followed by at least one `#### Scenario: ...` section
 
 ### Requirement: Behavior-First Specification Boundary
-OpenSpec specifications SHALL capture verifiable behavior contracts and avoid internal implementation detail.
+SynergySpec specifications SHALL capture verifiable behavior contracts and avoid internal implementation detail.
 
 #### Scenario: Writing behavior requirements
 - **WHEN** documenting a capability in `spec.md`
@@ -26,7 +26,7 @@ OpenSpec specifications SHALL capture verifiable behavior contracts and avoid in
 - **THEN** those details SHALL be documented in `design.md` or `tasks.md` instead of behavioral requirements
 
 ### Requirement: Progressive Rigor
-OpenSpec conventions SHALL keep specs lightweight by default and scale rigor only when risk or coordination complexity demands it.
+SynergySpec conventions SHALL keep specs lightweight by default and scale rigor only when risk or coordination complexity demands it.
 
 #### Scenario: Routine change specification
 - **WHEN** a change is local and low-risk
@@ -37,13 +37,13 @@ OpenSpec conventions SHALL keep specs lightweight by default and scale rigor onl
 - **THEN** authors increase detail and explicit validation expectations proportionally
 
 ### Requirement: Project Structure
-An OpenSpec project SHALL maintain a consistent directory structure for specifications and changes.
+An SynergySpec project SHALL maintain a consistent directory structure for specifications and changes.
 
 #### Scenario: Initializing project structure
-- **WHEN** an OpenSpec project is initialized
+- **WHEN** an SynergySpec project is initialized
 - **THEN** it SHALL have this structure:
 ```
-openspec/
+synergyspec/
 ├── project.md              # Project-specific context
 ├── AGENTS.md               # AI assistant instructions
 ├── specs/                  # Current deployed capabilities
@@ -228,7 +228,7 @@ Behavioral specifications SHALL adopt the structured format with `### Requiremen
 - **AND** use `#### Scenario:` for scenarios with bold WHEN/THEN/AND keywords
 
 ### Requirement: Verb–Noun CLI Command Structure
-OpenSpec CLI design SHALL use verbs as top-level commands with nouns provided as arguments or flags for scoping.
+SynergySpec CLI design SHALL use verbs as top-level commands with nouns provided as arguments or flags for scoping.
 
 #### Scenario: Verb-first command discovery
 - **WHEN** a user runs a command like `openspec list`
@@ -257,14 +257,14 @@ The system SHALL follow these principles:
 
 ### Requirement: Project Structure
 
-An OpenSpec project SHALL maintain a consistent directory structure for specifications and changes.
+An SynergySpec project SHALL maintain a consistent directory structure for specifications and changes.
 
 #### Scenario: Initializing project structure
 
-- **WHEN** an OpenSpec project is initialized
+- **WHEN** an SynergySpec project is initialized
 - **THEN** it SHALL have this structure:
 ```
-openspec/
+synergyspec/
 ├── project.md              # Project-specific context
 ├── AGENTS.md               # AI assistant instructions
 ├── specs/                  # Current deployed capabilities

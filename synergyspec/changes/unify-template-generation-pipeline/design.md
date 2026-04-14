@@ -1,6 +1,6 @@
 ## Context
 
-OpenSpec currently has strong building blocks (workflow templates, command adapters, generation helpers), but orchestration concerns are distributed:
+SynergySpec currently has strong building blocks (workflow templates, command adapters, generation helpers), but orchestration concerns are distributed:
 
 - Workflow definitions and projection lists are maintained separately
 - Tool support is represented in multiple places with partial overlap
@@ -34,7 +34,7 @@ Suggested shape:
 ```ts
 interface WorkflowManifestEntry {
   workflowId: string; // e.g. 'explore', 'ff', 'onboard'
-  skillDirName: string; // e.g. 'openspec-explore'
+  skillDirName: string; // e.g. 'synergyspec-explore'
   skill: SkillTemplate;
   command?: CommandTemplate;
   commandId?: string;

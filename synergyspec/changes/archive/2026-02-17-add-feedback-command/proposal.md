@@ -1,6 +1,6 @@
 ## Why
 
-Users and agents need a simple way to submit feedback about OpenSpec directly from the CLI. Currently there's no mechanism to collect user feedback, feature requests, or bug reports in a way that enables follow-up conversation. Using GitHub Issues allows us to track feedback, prevent spam via GitHub auth, and enables outreach to users.
+Users and agents need a simple way to submit feedback about SynergySpec directly from the CLI. Currently there's no mechanism to collect user feedback, feature requests, or bug reports in a way that enables follow-up conversation. Using GitHub Issues allows us to track feedback, prevent spam via GitHub auth, and enables outreach to users.
 
 ## What Changes
 

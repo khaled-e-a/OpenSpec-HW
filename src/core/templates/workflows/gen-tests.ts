@@ -12,22 +12,22 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
+   Run \`synergyspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
 
    Only show changes that have a spec artifact. **NEVER auto-select**.
 
 2. **Load the use cases**
 
    \`\`\`bash
-   openspec-hw instructions apply --change "<name>" --json
+   synergyspec-hw instructions apply --change "<name>" --json
    \`\`\`
 
-   From \`contextFiles\`, find and read \`usecases.md\` (and any spec files in \`openspec/changes/<name>/specs/\`).
+   From \`contextFiles\`, find and read \`usecases.md\` (and any spec files in \`synergyspec/changes/<name>/specs/\`).
 
 
 3. **Create an empty spec-tests.md file**
 
-   Create an empty file at \`openspec/changes/<name>/spec-tests.md\`.
+   Create an empty file at \`synergyspec/changes/<name>/spec-tests.md\`.
 
    The file contains the following sections:
    - \`# Spec-Test Mapping: <change-name>\`
@@ -106,7 +106,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 8. **Update spec-tests.md**
 
-   Update \`openspec/changes/<name>/spec-tests.md\`.
+   Update \`synergyspec/changes/<name>/spec-tests.md\`.
 
    **Note: A single requirement or step can (and often should) map to multiple tests of varying types.** Add multiple rows or comma-separated test files in the matrix if a step has multiple tests. \`PBT\` is a valid value for Test Type alongside Unit, Component, and Integration.
 
@@ -195,20 +195,20 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 **Output**
 
 - Summary of gaps found and stubs written
-- Confirmation that spec-tests.md was written to \`openspec/changes/<name>/spec-tests.md\`
-- Prompt: "Run \`/opsx-hw:run-tests\` to execute the suite and generate a spec-coverage report."`;
+- Confirmation that spec-tests.md was written to \`synergyspec/changes/<name>/spec-tests.md\`
+- Prompt: "Run \`/synspec:run-tests\` to execute the suite and generate a spec-coverage report."`;
 
 export function getGenTestsSkillTemplate(): SkillTemplate {
    return {
-      name: 'openspec-gen-tests',
+      name: 'synergyspec-gen-tests',
       description:
          'Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.',
       instructions: `Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
 
 ${INSTRUCTIONS_BODY}`,
       license: 'MIT',
-      compatibility: 'Requires openspec-hw CLI.',
-      metadata: { author: 'openspec', version: '1.0' },
+      compatibility: 'Requires synergyspec-hw CLI.',
+      metadata: { author: 'synergyspec', version: '1.0' },
    };
 }
 
@@ -220,7 +220,7 @@ export function getOpsxGenTestsCommandTemplate(): CommandTemplate {
       tags: ['workflow', 'test', 'gen-tests', 'coverage'],
       content: `Analyse usecases.md use cases, discover existing tests, write missing test stubs, and produce a spec-tests.md mapping file.
 
-**Input**: Optionally specify a change name after \`/opsx-hw:gen-tests\` (e.g., \`/opsx-hw:gen-tests add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
+**Input**: Optionally specify a change name after \`/synspec:gen-tests\` (e.g., \`/synspec:gen-tests add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 ${INSTRUCTIONS_BODY}`,
    };

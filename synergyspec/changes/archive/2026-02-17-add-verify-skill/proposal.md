@@ -1,4 +1,4 @@
-# Change: Add /opsx-hw:verify Skill
+# Change: Add /synspec:verify Skill
 
 ## Why
 
@@ -16,8 +16,8 @@ A user requested: "Can we get a :verify that will ensure that the implementation
 - Add `getOpsxVerifyCommandTemplate()` function to `skill-templates.ts`
 - Integrate verify skill into `artifactExperimentalSetupCommand` in `artifact-workflow.ts`
 - Add verify to the skills and commands arrays in the setup command
-- Update help text to include `/opsx-hw:verify` in the list of available commands
-- Create `opsx-verify-skill` capability spec
+- Update help text to include `/synspec:verify` in the list of available commands
+- Create `synspec-verify-skill` capability spec
 
 ## Verification Dimensions
 
@@ -38,11 +38,11 @@ Produces a prioritized report with:
 
 ## Impact
 
-- Affected specs: New `opsx-verify-skill` spec
+- Affected specs: New `synspec-verify-skill` spec
 - Affected code:
   - `src/core/templates/skill-templates.ts` - Added 2 new template functions
   - `src/commands/artifact-workflow.ts` - Integrated verify into experimental setup
 - Generated artifacts: When users run `openspec artifact-experimental-setup`:
-  - Creates `.claude/skills/openspec-verify-change/SKILL.md`
+  - Creates `.claude/skills/synergyspec-verify-change/SKILL.md`
   - Creates `.claude/commands/opsx/verify.md`
-- Related skills: Works alongside `/opsx-hw:apply` and before `/opsx-hw:archive`
+- Related skills: Works alongside `/synspec:apply` and before `/synspec:archive`

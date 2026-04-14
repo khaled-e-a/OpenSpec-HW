@@ -23,7 +23,7 @@
 - [x] 3.4 Pre-select current config values in picker
 - [x] 3.5 Update global config on confirmation (config-only, no file regeneration)
 - [x] 3.6 Display post-update message: "Config updated. Run `openspec update` in your projects to apply."
-- [x] 3.7 Detect if running inside an OpenSpec project and offer to run update automatically
+- [x] 3.7 Detect if running inside an SynergySpec project and offer to run update automatically
 - [x] 3.8 Implement `config profile core` preset shortcut (preserves delivery setting)
 - [x] 3.9 Handle non-interactive mode: error with helpful message
 - [x] 3.10 Update `openspec config list` to display profile, delivery, and workflows settings (indicate defaults vs explicit)
@@ -40,11 +40,11 @@
 
 - [x] 5.1 Create `src/core/templates/workflows/propose.ts`
 - [x] 5.2 Implement skill template that combines new + ff behavior
-- [x] 5.3 Ensure propose creates `.openspec.yaml` via `openspec new change` before generating artifacts
+- [x] 5.3 Ensure propose creates `.synergyspec.yaml` via `openspec new change` before generating artifacts
 - [x] 5.4 Add onboarding-style explanatory output to template
 - [x] 5.5 Implement command template for propose
 - [x] 5.6 Export templates from `src/core/templates/skill-templates.ts`
-- [x] 5.7 Add `openspec-propose` to `SKILL_NAMES` in `src/core/shared/tool-detection.ts`
+- [x] 5.7 Add `synergyspec-propose` to `SKILL_NAMES` in `src/core/shared/tool-detection.ts`
 - [x] 5.8 Add `propose` to command templates in `src/core/shared/skill-generation.ts`
 - [x] 5.9 Add `propose` to `COMMAND_IDS` in `src/core/shared/tool-detection.ts`
 - [x] 5.10 Add tests for propose template (creates change, generates artifacts, equivalent to new + ff)
@@ -65,7 +65,7 @@
 - [x] 7.3 Add migration check to init: call shared `migrateIfNeeded()` before profile resolution
 - [x] 7.4 Change tool selection to show pre-selected detected tools
 - [x] 7.5 Apply configured profile directly in init (no profile confirmation prompt)
-- [x] 7.6 Update success message to show `/opsx-hw:propose` prompt (only if propose is in the active profile)
+- [x] 7.6 Update success message to show `/synspec:propose` prompt (only if propose is in the active profile)
 - [x] 7.7 Add `--profile` flag to override global config
 - [x] 7.8 Update non-interactive mode to use defaults without prompting
 - [x] 7.9 Add tests for init flow with various scenarios (including migration on re-init and custom profile behavior)
@@ -75,8 +75,8 @@
 - [x] 8.1 Modify existing `src/commands/update.ts` to read global config for profile/delivery/workflows
 - [x] 8.2 Implement shared `scanInstalledWorkflows(projectPath, tools)` — scan tool directories, match only against `ALL_WORKFLOWS` constant, return union across tools
 - [x] 8.3 Implement shared `migrateIfNeeded(projectPath, tools)` — one-time migration logic used by both `init` and `update`
-- [x] 8.4 Display migration message: "Migrated: custom profile with N workflows" + "New in this version: /opsx-hw:propose. Try 'openspec config profile core' for the streamlined experience."
-- [x] 8.5 Add project check: exit with error if no `openspec/` directory exists
+- [x] 8.4 Display migration message: "Migrated: custom profile with N workflows" + "New in this version: /synspec:propose. Try 'openspec config profile core' for the streamlined experience."
+- [x] 8.5 Add project check: exit with error if no `synergyspec/` directory exists
 - [x] 8.6 Add logic to detect which workflows are in config but not installed (to add)
 - [x] 8.7 Add logic to detect which workflows are installed and need refresh (to update)
 - [x] 8.8 Respect delivery setting: generate only skills if `skills`, only commands if `commands`
@@ -99,17 +99,17 @@
 
 ## 10. Scaffolding Verification
 
-- [x] 10.1 Verify `openspec new change` creates `.openspec.yaml` with schema and created fields
+- [x] 10.1 Verify `openspec new change` creates `.synergyspec.yaml` with schema and created fields
 
 <!-- Note: 10.2 and 10.3 below are potential follow-up work, not core to this change -->
-<!-- - [ ] 10.2 Update ff skill to verify `.openspec.yaml` exists after `openspec new change` -->
-<!-- - [ ] 10.3 Add guardrail to skills: "Never manually create files in openspec/changes/ - use openspec new change" -->
+<!-- - [ ] 10.2 Update ff skill to verify `.synergyspec.yaml` exists after `openspec new change` -->
+<!-- - [ ] 10.3 Add guardrail to skills: "Never manually create files in synergyspec/changes/ - use openspec new change" -->
 
 ## 11. Template Next-Step Guidance
 
-- [x] 11.1 Audit all templates for hardcoded cross-workflow command references (e.g., `/opsx-hw:propose`)
+- [x] 11.1 Audit all templates for hardcoded cross-workflow command references (e.g., `/synspec:propose`)
 - [x] 11.2 Replace any specific command references with generic concept-based guidance (e.g., "create a change proposal")
-- [x] 11.3 Review explore → propose transition UX (see `openspec/explorations/explore-workflow-ux.md` for open questions)
+- [x] 11.3 Review explore → propose transition UX (see `synergyspec/explorations/explore-workflow-ux.md` for open questions)
 
 ## 12. Integration & Manual Testing
 

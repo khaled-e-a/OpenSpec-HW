@@ -3,23 +3,23 @@
 The update command SHALL refresh existing slash command files for configured tools without creating new ones.
 
 #### Scenario: Updating slash commands for Claude Code
-- **WHEN** `.claude/commands/openspec/` contains `proposal.md`, `apply.md`, and `archive.md`
+- **WHEN** `.claude/commands/synergyspec/` contains `proposal.md`, `apply.md`, and `archive.md`
 - **THEN** refresh each file using shared templates
 - **AND** ensure templates include instructions for the relevant workflow stage
 
 #### Scenario: Updating slash commands for Cursor
-- **WHEN** `.cursor/commands/` contains `openspec-proposal.md`, `openspec-apply.md`, and `openspec-archive.md`
+- **WHEN** `.cursor/commands/` contains `synergyspec-proposal.md`, `synergyspec-apply.md`, and `synergyspec-archive.md`
 - **THEN** refresh each file using shared templates
 - **AND** ensure templates include instructions for the relevant workflow stage
 
 #### Scenario: Updating slash commands for OpenCode
-- **WHEN** `.opencode/command/` contains `openspec-proposal.md`, `openspec-apply.md`, and `openspec-archive.md`
+- **WHEN** `.opencode/command/` contains `synergyspec-proposal.md`, `synergyspec-apply.md`, and `synergyspec-archive.md`
 - **THEN** refresh each file using shared templates
 - **AND** ensure templates include instructions for the relevant workflow stage
 
 #### Scenario: Updating slash commands for Windsurf
-- **WHEN** `.windsurf/workflows/` contains `openspec-proposal.md`, `openspec-apply.md`, and `openspec-archive.md`
-- **THEN** refresh each file using shared templates wrapped in OpenSpec markers
+- **WHEN** `.windsurf/workflows/` contains `synergyspec-proposal.md`, `synergyspec-apply.md`, and `synergyspec-archive.md`
+- **THEN** refresh each file using shared templates wrapped in SynergySpec markers
 - **AND** ensure templates include instructions for the relevant workflow stage
 
 #### Scenario: Missing slash command file

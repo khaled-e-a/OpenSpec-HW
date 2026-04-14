@@ -1,7 +1,7 @@
 /**
  * Init Command
  *
- * Sets up OpenSpec with Agent Skills and /opsx-hw:* slash commands.
+ * Sets up SynergySpec with Agent Skills and /synspec:* slash commands.
  * This is the unified setup command that replaces both the old init and experimental commands.
  */
 
@@ -14,7 +14,7 @@ import { FileSystemUtils } from '../utils/file-system.js';
 import { transformToHyphenCommands } from '../utils/command-references.js';
 import {
   AI_TOOLS,
-  OPENSPEC_DIR_NAME,
+  SYNERGYSPEC_DIR_NAME,
   AIToolOption,
 } from './config.js';
 import { PALETTE } from './styles/palette.js';
@@ -48,7 +48,7 @@ import { getAvailableTools } from './available-tools.js';
 import { migrateIfNeeded, upgradeCustomWorkflows } from './migration.js';
 
 const require = createRequire(import.meta.url);
-const { version: OPENSPEC_VERSION } = require('../../package.json');
+const { version: SYNERGYSPEC_VERSION } = require('../../package.json');
 
 // -----------------------------------------------------------------------------
 // Constants
@@ -62,17 +62,17 @@ const PROGRESS_SPINNER = {
 };
 
 const WORKFLOW_TO_SKILL_DIR: Record<string, string> = {
-  'explore': 'openspec-explore',
-  'new': 'openspec-new-change',
-  'continue': 'openspec-continue-change',
-  'apply': 'openspec-apply-change',
-  'ff': 'openspec-ff-change',
-  'sync': 'openspec-sync-specs',
-  'archive': 'openspec-archive-change',
-  'bulk-archive': 'openspec-bulk-archive-change',
-  'verify': 'openspec-verify-change',
-  'onboard': 'openspec-onboard',
-  'propose': 'openspec-propose',
+  'explore': 'synergyspec-explore',
+  'new': 'synergyspec-new-change',
+  'continue': 'synergyspec-continue-change',
+  'apply': 'synergyspec-apply-change',
+  'ff': 'synergyspec-ff-change',
+  'sync': 'synergyspec-sync-specs',
+  'archive': 'synergyspec-archive-change',
+  'bulk-archive': 'synergyspec-bulk-archive-change',
+  'verify': 'synergyspec-verify-change',
+  'onboard': 'synergyspec-onboard',
+  'propose': 'synergyspec-propose',
 };
 
 // -----------------------------------------------------------------------------
@@ -105,7 +105,7 @@ export class InitCommand {
 
   async execute(targetPath: string): Promise<void> {
     const projectPath = path.resolve(targetPath);
-    const openspecDir = OPENSPEC_DIR_NAME;
+    const openspecDir = SYNERGYSPEC_DIR_NAME;
     const openspecPath = path.join(projectPath, openspecDir);
 
     // Validation happens silently in the background
@@ -332,7 +332,7 @@ export class InitCommand {
       .map((toolId) => AI_TOOLS.find((t) => t.value === toolId)?.name || toolId);
 
     if (configuredNames.length > 0) {
-      console.log(`OpenSpec configured: ${configuredNames.join(', ')} (pre-selected)`);
+      console.log(`SynergySpec configured: ${configuredNames.join(', ')} (pre-selected)`);
     }
 
     const detectedOnlyNames = detectedTools
@@ -477,7 +477,7 @@ export class InitCommand {
       return;
     }
 
-    const spinner = this.startSpinner('Creating OpenSpec structure...');
+    const spinner = this.startSpinner('Creating SynergySpec structure...');
 
     const directories = [
       openspecPath,
@@ -492,7 +492,7 @@ export class InitCommand {
 
     spinner.stopAndPersist({
       symbol: PALETTE.white('▌'),
-      text: PALETTE.white('OpenSpec structure created'),
+      text: PALETTE.white('SynergySpec structure created'),
     });
   }
 
@@ -548,7 +548,7 @@ export class InitCommand {
             // Generate SKILL.md content with YAML frontmatter including generatedBy
             // Use hyphen-based command references for OpenCode
             const transformer = tool.value === 'opencode' ? transformToHyphenCommands : undefined;
-            const skillContent = generateSkillContent(template, OPENSPEC_VERSION, transformer);
+            const skillContent = generateSkillContent(template, SYNERGYSPEC_VERSION, transformer);
 
             // Write the skill file
             await FileSystemUtils.writeFile(skillFile, skillContent);
@@ -651,7 +651,7 @@ export class InitCommand {
     configStatus: 'created' | 'exists' | 'skipped'
   ): void {
     console.log();
-    console.log(chalk.bold('OpenSpec Setup Complete'));
+    console.log(chalk.bold('SynergySpec Setup Complete'));
     console.log();
 
     // Show created vs refreshed tools
@@ -699,13 +699,13 @@ export class InitCommand {
 
     // Config status
     if (configStatus === 'created') {
-      console.log(`Config: openspec/config.yaml (schema: ${DEFAULT_SCHEMA})`);
+      console.log(`Config: synergyspec/config.yaml (schema: ${DEFAULT_SCHEMA})`);
     } else if (configStatus === 'exists') {
       // Show actual filename (config.yaml or config.yml)
-      const configYaml = path.join(projectPath, OPENSPEC_DIR_NAME, 'config.yaml');
-      const configYml = path.join(projectPath, OPENSPEC_DIR_NAME, 'config.yml');
+      const configYaml = path.join(projectPath, SYNERGYSPEC_DIR_NAME, 'config.yaml');
+      const configYml = path.join(projectPath, SYNERGYSPEC_DIR_NAME, 'config.yml');
       const configName = fs.existsSync(configYaml) ? 'config.yaml' : fs.existsSync(configYml) ? 'config.yml' : 'config.yaml';
-      console.log(`Config: openspec/${configName} (exists)`);
+      console.log(`Config: synergyspec/${configName} (exists)`);
     } else {
       console.log(chalk.dim(`Config: skipped (non-interactive mode)`));
     }
@@ -717,18 +717,18 @@ export class InitCommand {
     console.log();
     if (activeWorkflows.includes('propose')) {
       console.log(chalk.bold('Getting started:'));
-      console.log('  Start your first change: /opsx-hw:propose "your idea"');
+      console.log('  Start your first change: /synspec:propose "your idea"');
     } else if (activeWorkflows.includes('new')) {
       console.log(chalk.bold('Getting started:'));
-      console.log('  Start your first change: /opsx-hw:new "your idea"');
+      console.log('  Start your first change: /synspec:new "your idea"');
     } else {
-      console.log("Done. Run 'openspec config profile' to configure your workflows.");
+      console.log("Done. Run 'synergyspec-hw config profile' to configure your workflows.");
     }
 
     // Links
     console.log();
-    console.log(`Learn more: ${chalk.cyan('https://github.com/Fission-AI/OpenSpec')}`);
-    console.log(`Feedback:   ${chalk.cyan('https://github.com/Fission-AI/OpenSpec/issues')}`);
+    console.log(`Learn more: ${chalk.cyan('https://github.com/Fission-AI/SynergySpec')}`);
+    console.log(`Feedback:   ${chalk.cyan('https://github.com/Fission-AI/SynergySpec/issues')}`);
 
     // Restart instruction if any tools were configured
     if (results.createdTools.length > 0 || results.refreshedTools.length > 0) {

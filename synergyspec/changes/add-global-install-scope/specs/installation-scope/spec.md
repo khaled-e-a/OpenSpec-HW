@@ -1,6 +1,6 @@
 ## Purpose
 
-Define the install scope model for OpenSpec-generated skills and commands, including scope preference, effective scope resolution, and fallback/error semantics.
+Define the install scope model for SynergySpec-generated skills and commands, including scope preference, effective scope resolution, and fallback/error semantics.
 
 ## ADDED Requirements
 
@@ -57,7 +57,7 @@ Scope transitions SHALL update new targets first and clean old managed targets s
 #### Scenario: Automatic cleanup for managed files on scope change
 - **WHEN** update or init applies a scope transition for a configured tool/surface
 - **THEN** the system SHALL write new artifacts in the new effective scope before cleanup
-- **AND** SHALL automatically remove only OpenSpec-managed files in the previous effective scope
+- **AND** SHALL automatically remove only SynergySpec-managed files in the previous effective scope
 
 #### Scenario: Cleanup scope boundaries
 - **WHEN** cleanup runs after a scope transition

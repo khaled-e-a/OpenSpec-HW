@@ -17,17 +17,17 @@ const ART_COLUMN_WIDTH = 24;
  */
 function getWelcomeText(): string[] {
   return [
-    chalk.white.bold('Welcome to OpenSpec'),
+    chalk.white.bold('Welcome to SynergySpec'),
     chalk.dim('A lightweight spec-driven framework'),
     '',
     chalk.white('This setup will configure:'),
     chalk.dim('  • Agent Skills for AI tools'),
-    chalk.dim('  • /opsx-hw:* slash commands'),
+    chalk.dim('  • /synspec:* slash commands'),
     '',
     chalk.white('Quick start after setup:'),
-    `  ${chalk.yellow('/opsx-hw:new')}      ${chalk.dim('Create a change')}`,
-    `  ${chalk.yellow('/opsx-hw:continue')} ${chalk.dim('Next artifact')}`,
-    `  ${chalk.yellow('/opsx-hw:apply')}    ${chalk.dim('Implement tasks')}`,
+    `  ${chalk.yellow('/synspec:new')}      ${chalk.dim('Create a change')}`,
+    `  ${chalk.yellow('/synspec:continue')} ${chalk.dim('Next artifact')}`,
+    `  ${chalk.yellow('/synspec:apply')}    ${chalk.dim('Implement tasks')}`,
     '',
     chalk.cyan('Press Enter to select tools...'),
   ];

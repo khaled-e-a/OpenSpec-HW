@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/playwright.config.ts",
-    "rootDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e",
+    "configFile": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/playwright.config.ts",
+    "rootDir": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e",
     "forbidOnly": false,
     "fullyParallel": false,
     "globalSetup": null,
@@ -16,7 +16,7 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts",
+        "outputDir": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -24,7 +24,7 @@
         },
         "id": "chromium",
         "name": "chromium",
-        "testDir": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e",
+        "testDir": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -104,7 +104,7 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-7-UC2-—-full-initial-render-flow-chromium/test-finished-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-7-UC2-—-full-initial-render-flow-chromium/test-finished-1.png"
                     }
                   ]
                 }
@@ -144,7 +144,7 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-1-UC1--68518-ws-pointer-grid-highlighted-chromium/test-finished-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-1-UC1--68518-ws-pointer-grid-highlighted-chromium/test-finished-1.png"
                     }
                   ]
                 }
@@ -188,7 +188,7 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-2-UC1--37be0-s-widget-position-in-layout-chromium/test-finished-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-2-UC1--37be0-s-widget-position-in-layout-chromium/test-finished-1.png"
                     }
                   ]
                 }
@@ -228,7 +228,7 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-5-UC1--a1def-dropping-onto-occupied-cell-chromium/test-finished-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-5-UC1--a1def-dropping-onto-occupied-cell-chromium/test-finished-1.png"
                     }
                   ]
                 }
@@ -268,7 +268,7 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-3-UC1--842ce-in-after-out-of-bounds-drop-chromium/test-finished-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-3-UC1--842ce-in-after-out-of-bounds-drop-chromium/test-finished-1.png"
                     }
                   ]
                 }
@@ -312,7 +312,7 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-4-UC1--66e5e--correct-colour-during-drag-chromium/test-finished-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-4-UC1--66e5e--correct-colour-during-drag-chromium/test-finished-1.png"
                     }
                   ]
                 }
@@ -352,7 +352,7 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-6-UC1--1ffe4-and-drop-repositioning-flow-chromium/test-finished-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-drag-drop-TP-6-UC1--1ffe4-and-drop-repositioning-flow-chromium/test-finished-1.png"
                     }
                   ]
                 }
@@ -400,7 +400,7 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-2-initial--a1046-get-types-display-correctly-chromium/test-finished-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-2-initial--a1046-get-types-display-correctly-chromium/test-finished-1.png"
                     }
                   ]
                 }
@@ -440,7 +440,7 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-3-UC2-S4-S-ec4cf-get-file-pick-renders-image-chromium/test-finished-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-3-UC2-S4-S-ec4cf-get-file-pick-renders-image-chromium/test-finished-1.png"
                     }
                   ]
                 }
@@ -480,7 +480,7 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-4-UC3-S4-S-05df5-ows-text-content-after-pick-chromium/test-finished-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-4-UC3-S4-S-05df5-ows-text-content-after-pick-chromium/test-finished-1.png"
                     }
                   ]
                 }
@@ -512,9 +512,9 @@
                   "duration": 7546,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('webpage-config-panel')\nExpected: not visible\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"not toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('webpage-config-panel')\u001b[22m\n\u001b[2m    9 × locator resolved to <div data-testid=\"webpage-config-panel\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"visible\"\u001b[22m\n",
-                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('webpage-config-panel')\nExpected: not visible\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"not toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('webpage-config-panel')\u001b[22m\n\u001b[2m    9 × locator resolved to <div data-testid=\"webpage-config-panel\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"visible\"\u001b[22m\n\n    at /Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts:109:62",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('webpage-config-panel')\nExpected: not visible\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"not toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('webpage-config-panel')\u001b[22m\n\u001b[2m    9 × locator resolved to <div data-testid=\"webpage-config-panel\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"visible\"\u001b[22m\n\n    at /Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts:109:62",
                     "location": {
-                      "file": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts",
+                      "file": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts",
                       "column": 62,
                       "line": 109
                     },
@@ -523,11 +523,11 @@
                   "errors": [
                     {
                       "location": {
-                        "file": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts",
+                        "file": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts",
                         "column": 62,
                         "line": 109
                       },
-                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('webpage-config-panel')\nExpected: not visible\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"not toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('webpage-config-panel')\u001b[22m\n\u001b[2m    9 × locator resolved to <div data-testid=\"webpage-config-panel\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"visible\"\u001b[22m\n\n\n  107 |\n  108 |   // Config panel closed\n> 109 |   await expect(page.getByTestId('webpage-config-panel')).not.toBeVisible();\n      |                                                              ^\n  110 |\n  111 |   // iframe rendered with correct src\n  112 |   const iframe = page.getByTestId('widget-activity').locator('iframe');\n    at /Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts:109:62"
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).not.\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('webpage-config-panel')\nExpected: not visible\nReceived: visible\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"not toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('webpage-config-panel')\u001b[22m\n\u001b[2m    9 × locator resolved to <div data-testid=\"webpage-config-panel\">…</div>\u001b[22m\n\u001b[2m      - unexpected value \"visible\"\u001b[22m\n\n\n  107 |\n  108 |   // Config panel closed\n> 109 |   await expect(page.getByTestId('webpage-config-panel')).not.toBeVisible();\n      |                                                              ^\n  110 |\n  111 |   // iframe rendered with correct src\n  112 |   const iframe = page.getByTestId('widget-activity').locator('iframe');\n    at /Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts:109:62"
                     }
                   ],
                   "stdout": [],
@@ -539,21 +539,21 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-5-UC4-S4-S-d4289-ders-iframe-after-URL-entry-chromium/test-failed-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-5-UC4-S4-S-d4289-ders-iframe-after-URL-entry-chromium/test-failed-1.png"
                     },
                     {
                       "name": "error-context",
                       "contentType": "text/markdown",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-5-UC4-S4-S-d4289-ders-iframe-after-URL-entry-chromium/error-context.md"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-5-UC4-S4-S-d4289-ders-iframe-after-URL-entry-chromium/error-context.md"
                     },
                     {
                       "name": "trace",
                       "contentType": "application/zip",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-5-UC4-S4-S-d4289-ders-iframe-after-URL-entry-chromium/trace.zip"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-5-UC4-S4-S-d4289-ders-iframe-after-URL-entry-chromium/trace.zip"
                     }
                   ],
                   "errorLocation": {
-                    "file": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts",
+                    "file": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e/widget-types.spec.ts",
                     "column": 62,
                     "line": 109
                   }
@@ -594,7 +594,7 @@
                     {
                       "name": "screenshot",
                       "contentType": "image/png",
-                      "path": "/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-6-UC5-—-ch-8697e-rce-grid-position-unchanged-chromium/test-finished-1.png"
+                      "path": "/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-small-2026-03-24-tdd/e2e-results/latest/artifacts/widget-types-TP-6-UC5-—-ch-8697e-rce-grid-position-unchanged-chromium/test-finished-1.png"
                     }
                   ]
                 }

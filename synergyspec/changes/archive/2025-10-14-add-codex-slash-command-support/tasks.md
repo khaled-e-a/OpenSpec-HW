@@ -1,6 +1,6 @@
 ## 1. CLI integration
 - [x] 1.1 Add Codex to the init tool picker with display text that clarifies prompts live in the global `.codex/prompts/` directory and implement "already configured" detection by checking for managed Codex prompt files.
-- [x] 1.2 Implement a `CodexSlashCommandConfigurator` that writes `.codex/prompts/openspec-{proposal,apply,archive}.md`, ensuring the prompt directory exists and wrapping content in OpenSpec markers.
+- [x] 1.2 Implement a `CodexSlashCommandConfigurator` that writes `.codex/prompts/synergyspec-{proposal,apply,archive}.md`, ensuring the prompt directory exists and wrapping content in SynergySpec markers.
 // (No helper command required)
 - [x] 1.3 Register the configurator with the slash-command registry and include Codex in init/update wiring so both commands invoke the new configurator when appropriate.
 
@@ -16,4 +16,4 @@
 
 ## 4. Documentation
 - [x] 4.1 Document Codex slash-command support in the README and changelog alongside other assistant integrations.
-- [x] 4.2 Add a release note snippet that points Codex users to the generated `/openspec-proposal`, `/openspec-apply`, and `/openspec-archive` commands.
+- [x] 4.2 Add a release note snippet that points Codex users to the generated `/synergyspec-proposal`, `/synergyspec-apply`, and `/synergyspec-archive` commands.

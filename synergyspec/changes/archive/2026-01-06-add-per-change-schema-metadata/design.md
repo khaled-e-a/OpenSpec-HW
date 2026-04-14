@@ -21,7 +21,7 @@ We need a lightweight metadata file to persist the schema choice per change.
 
 ### Decision: Zod Schema Design
 
-The metadata file (`.openspec.yaml`) will be validated with this Zod schema:
+The metadata file (`.synergyspec.yaml`) will be validated with this Zod schema:
 
 ```typescript
 // src/core/artifact-graph/types.ts (or new metadata.ts)
@@ -30,7 +30,7 @@ import { z } from 'zod';
 import { listSchemas } from './resolver.js';
 
 /**
- * Schema for per-change metadata stored in .openspec.yaml
+ * Schema for per-change metadata stored in .synergyspec.yaml
  */
 export const ChangeMetadataSchema = z.object({
   // Required: which workflow schema this change uses
@@ -56,7 +56,7 @@ export type ChangeMetadata = z.infer<typeof ChangeMetadataSchema>;
 
 ### Decision: File Location and Format
 
-**Location:** `openspec/changes/<name>/.openspec.yaml`
+**Location:** `synergyspec/changes/<name>/.synergyspec.yaml`
 
 **Format:**
 ```yaml
@@ -79,7 +79,7 @@ import * as path from 'node:path';
 import * as yaml from 'yaml';
 import { ChangeMetadataSchema, type ChangeMetadata } from '../core/artifact-graph/types.js';
 
-const METADATA_FILENAME = '.openspec.yaml';
+const METADATA_FILENAME = '.synergyspec.yaml';
 
 export function writeChangeMetadata(
   changeDir: string,
@@ -113,7 +113,7 @@ export function readChangeMetadata(
 When determining which schema to use:
 
 1. **Explicit `--schema` flag** (highest priority - user override)
-2. **`.openspec.yaml` metadata** (persisted choice)
+2. **`.synergyspec.yaml` metadata** (persisted choice)
 3. **Default `spec-driven`** (fallback)
 
 ```typescript
@@ -139,7 +139,7 @@ function resolveSchemaForChange(
 ## Migration Plan
 
 No migration needed:
-- Existing changes without `.openspec.yaml` continue to work (use default)
+- Existing changes without `.synergyspec.yaml` continue to work (use default)
 - New changes created with `openspec new change --schema X` get metadata file
 
 ## Open Questions

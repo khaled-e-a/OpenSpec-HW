@@ -70,14 +70,14 @@ The system SHALL provide an interactive picker for configuring profiles.
 - **THEN** the new profile takes effect on the next `openspec init` or `openspec update` run
 
 #### Scenario: Config profile run inside a project
-- **WHEN** user runs `openspec config profile` inside an OpenSpec project directory
+- **WHEN** user runs `openspec config profile` inside an SynergySpec project directory
 - **THEN** after updating global config, the system SHALL prompt: "Apply to this project now? (y/n)"
 - **WHEN** user confirms
 - **THEN** the system SHALL run `openspec update` automatically
 - **THEN** the system SHALL still display: "Run `openspec update` in your other projects to apply."
 
 #### Scenario: Config profile - user declines apply
-- **WHEN** user runs `openspec config profile` inside an OpenSpec project directory
+- **WHEN** user runs `openspec config profile` inside an SynergySpec project directory
 - **AND** user declines the "Apply to this project now?" prompt
 - **THEN** the system SHALL display: "Config updated. Run `openspec update` in your projects to apply."
 - **THEN** the system SHALL exit successfully without modifying project files
@@ -88,7 +88,7 @@ The system SHALL provide an interactive picker for configuring profiles.
 - **THEN** the system SHALL exit with code 1
 
 ### Requirement: Profile settings stored in global config
-Profile and delivery settings SHALL be stored in the existing global config file (`~/.config/openspec/config.json`) alongside telemetry and feature flags.
+Profile and delivery settings SHALL be stored in the existing global config file (`~/.config/synergyspec/config.json`) alongside telemetry and feature flags.
 
 #### Scenario: Config schema
 - **WHEN** reading profile configuration
@@ -109,7 +109,7 @@ Config changes SHALL NOT automatically propagate to projects.
 
 #### Scenario: Config update does not modify projects
 - **WHEN** user updates config via `openspec config profile`
-- **THEN** the system SHALL only update global config (`~/.config/openspec/config.json`)
+- **THEN** the system SHALL only update global config (`~/.config/synergyspec/config.json`)
 - **THEN** the system SHALL NOT modify any project skill/command files
 - **THEN** existing projects retain their current workflow files until user runs `openspec update`
 

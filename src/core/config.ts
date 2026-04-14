@@ -1,11 +1,11 @@
-export const OPENSPEC_DIR_NAME = 'openspec';
+export const SYNERGYSPEC_DIR_NAME = 'synergyspec';
 
-export const OPENSPEC_MARKERS = {
-  start: '<!-- OPENSPEC:START -->',
-  end: '<!-- OPENSPEC:END -->'
+export const SYNERGYSPEC_MARKERS = {
+  start: '<!-- SYNERGYSPEC:START -->',
+  end: '<!-- SYNERGYSPEC:END -->'
 };
 
-export interface OpenSpecConfig {
+export interface SynergySpecConfig {
   aiTools: string[];
 }
 

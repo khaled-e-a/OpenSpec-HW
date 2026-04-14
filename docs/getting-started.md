@@ -1,42 +1,42 @@
 # Getting Started
 
-This guide explains how OpenSpec works after you've installed and initialized it. For installation instructions, see the [main README](../README.md#quick-start).
+This guide explains how SynergySpec works after you've installed and initialized it. For installation instructions, see the [main README](../README.md#quick-start).
 
 ## How It Works
 
-OpenSpec helps you and your AI coding assistant agree on what to build before any code is written. The workflow follows a simple pattern:
+SynergySpec helps you and your AI coding assistant agree on what to build before any code is written. The workflow follows a simple pattern:
 
 ```
 ┌────────────────────┐
-│ Start a Change     │  /opsx-hw:new
+│ Start a Change     │  /synspec:new
 └────────┬───────────┘
          │
          ▼
 ┌────────────────────┐
-│ Create Artifacts   │  /opsx-hw:ff or /opsx-hw:continue
+│ Create Artifacts   │  /synspec:ff or /synspec:continue
 │ (proposal, specs,  │
 │  design, tasks)    │
 └────────┬───────────┘
          │
          ▼
 ┌────────────────────┐
-│ Implement Tasks    │  /opsx-hw:apply
+│ Implement Tasks    │  /synspec:apply
 │ (AI writes code)   │
 └────────┬───────────┘
          │
          ▼
 ┌────────────────────┐
-│ Archive & Merge    │  /opsx-hw:archive
+│ Archive & Merge    │  /synspec:archive
 │ Specs              │
 └────────────────────┘
 ```
 
-## What OpenSpec Creates
+## What SynergySpec Creates
 
-After running `openspec-hw init`, your project has this structure:
+After running `synergyspec-hw init`, your project has this structure:
 
 ```
-openspec/
+synergyspec/
 ├── specs/              # Source of truth (your system's behavior)
 │   └── <domain>/
 │       └── spec.md
@@ -81,7 +81,7 @@ You can always go back and refine earlier artifacts as you learn more during imp
 
 ## How Delta Specs Work
 
-Delta specs are the key concept in OpenSpec. They show what's changing relative to your current specs.
+Delta specs are the key concept in SynergySpec. They show what's changing relative to your current specs.
 
 ### The Format
 
@@ -125,7 +125,7 @@ When you archive a change:
 2. **MODIFIED** requirements replace the existing version
 3. **REMOVED** requirements are deleted from the main spec
 
-The change folder moves to `openspec/changes/archive/` for audit history.
+The change folder moves to `synergyspec/changes/archive/` for audit history.
 
 ## Example: Your First Change
 
@@ -134,18 +134,18 @@ Let's walk through adding dark mode to an application.
 ### 1. Start the Change
 
 ```
-You: /opsx-hw:new add-dark-mode
+You: /synspec:new add-dark-mode
 
-AI:  Created openspec/changes/add-dark-mode/
+AI:  Created synergyspec/changes/add-dark-mode/
      Ready to create: proposal
 ```
 
 ### 2. Create Artifacts
 
-Use `/opsx-hw:ff` (fast-forward) to create all planning artifacts at once:
+Use `/synspec:ff` (fast-forward) to create all planning artifacts at once:
 
 ```
-You: /opsx-hw:ff
+You: /synspec:ff
 
 AI:  Creating artifacts for add-dark-mode...
      ✓ proposal.md — why we're doing this, what's changing
@@ -221,7 +221,7 @@ The system SHALL allow users to choose between light and dark themes.
 ### 4. Implement
 
 ```
-You: /opsx-hw:apply
+You: /synspec:apply
 
 AI:  Working through tasks...
      ✓ 1.1 Created ThemeContext with light/dark state
@@ -237,11 +237,11 @@ During implementation, if you discover the design needs adjustment, just update 
 ### 5. Archive
 
 ```
-You: /opsx-hw:archive
+You: /synspec:archive
 
 AI:  Archiving add-dark-mode...
-     ✓ Merged specs into openspec/specs/ui/spec.md
-     ✓ Moved to openspec/changes/archive/2025-01-24-add-dark-mode/
+     ✓ Merged specs into synergyspec/specs/ui/spec.md
+     ✓ Moved to synergyspec/changes/archive/2025-01-24-add-dark-mode/
      Done! Ready for the next feature.
 ```
 
@@ -253,16 +253,16 @@ Use the CLI to check on your changes:
 
 ```bash
 # List active changes
-openspec-hw list
+synergyspec-hw list
 
 # View change details
-openspec-hw show add-dark-mode
+synergyspec-hw show add-dark-mode
 
 # Validate spec formatting
-openspec-hw validate add-dark-mode
+synergyspec-hw validate add-dark-mode
 
 # Interactive dashboard
-openspec-hw view
+synergyspec-hw view
 ```
 
 ## Next Steps
@@ -270,4 +270,4 @@ openspec-hw view
 - [Workflows](workflows.md) - Common patterns and when to use each command
 - [Commands](commands.md) - Full reference for all slash commands
 - [Concepts](concepts.md) - Deeper understanding of specs, changes, and schemas
-- [Customization](customization.md) - Make OpenSpec work your way
+- [Customization](customization.md) - Make SynergySpec work your way

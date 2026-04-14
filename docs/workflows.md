@@ -1,6 +1,6 @@
 # Workflows
 
-This guide covers common workflow patterns for OpenSpec and when to use each one. For basic setup, see [Getting Started](getting-started.md). For command reference, see [Commands](commands.md).
+This guide covers common workflow patterns for SynergySpec and when to use each one. For basic setup, see [Getting Started](getting-started.md). For command reference, see [Commands](commands.md).
 
 ## Philosophy: Actions, Not Phases
 
@@ -35,18 +35,18 @@ OPSX (fluid actions):
 When you know what you want to build and just need to execute:
 
 ```text
-/opsx-hw:new ──► /opsx-hw:ff ──► /opsx-hw:apply ──► /opsx-hw:verify ──► /opsx-hw:archive
+/synspec:new ──► /synspec:ff ──► /synspec:apply ──► /synspec:verify ──► /synspec:archive
 ```
 
 **Example conversation:**
 
 ```text
-You: /opsx-hw:new add-logout-button
+You: /synspec:new add-logout-button
 
-AI:  Created openspec/changes/add-logout-button/
+AI:  Created synergyspec/changes/add-logout-button/
      Ready to create: proposal
 
-You: /opsx-hw:ff
+You: /synspec:ff
 
 AI:  Creating all planning artifacts...
      ✓ proposal.md
@@ -55,7 +55,7 @@ AI:  Creating all planning artifacts...
      ✓ tasks.md
      Ready for implementation!
 
-You: /opsx-hw:apply
+You: /synspec:apply
 
 AI:  Working through tasks...
      ✓ Added logout button to header
@@ -63,7 +63,7 @@ AI:  Working through tasks...
      ✓ Added confirmation dialog
      All tasks complete!
 
-You: /opsx-hw:archive
+You: /synspec:archive
 
 AI:  ✓ Merged specs
      ✓ Archived change
@@ -76,13 +76,13 @@ AI:  ✓ Merged specs
 When requirements are unclear or you need to investigate first:
 
 ```text
-/opsx-hw:explore ──► /opsx-hw:new ──► /opsx-hw:continue ──► ... ──► /opsx-hw:apply
+/synspec:explore ──► /synspec:new ──► /synspec:continue ──► ... ──► /synspec:apply
 ```
 
 **Example conversation:**
 
 ```text
-You: /opsx-hw:explore
+You: /synspec:explore
 
 AI:  What would you like to explore?
 
@@ -102,11 +102,11 @@ AI:  Let me help investigate...
 
 You: Let's tackle the data fetching issue.
 
-You: /opsx-hw:new optimize-product-list-fetching
+You: /synspec:new optimize-product-list-fetching
 
 AI:  Created change. Ready to create: proposal
 
-You: /opsx-hw:continue
+You: /synspec:continue
 
 AI:  Creating proposal based on our exploration...
      [Writes proposal incorporating investigation insights]
@@ -114,7 +114,7 @@ AI:  Creating proposal based on our exploration...
      Ready to create: specs, design
      Which would you like next?
 
-You: /opsx-hw:continue
+You: /synspec:continue
 
 AI:  Creating specs...
 ```
@@ -126,11 +126,11 @@ AI:  Creating specs...
 Work on multiple changes at once:
 
 ```text
-Change A: /opsx-hw:new ──► /opsx-hw:ff ──► /opsx-hw:apply (in progress)
+Change A: /synspec:new ──► /synspec:ff ──► /synspec:apply (in progress)
                                          │
                                     context switch
                                          │
-Change B: /opsx-hw:new ──► /opsx-hw:ff ──────► /opsx-hw:apply
+Change B: /synspec:new ──► /synspec:ff ──────► /synspec:apply
 ```
 
 **Example conversation:**
@@ -138,27 +138,27 @@ Change B: /opsx-hw:new ──► /opsx-hw:ff ──────► /opsx-hw:appl
 ```text
 You: I'm working on add-dark-mode but got pulled into a bug fix
 
-You: /opsx-hw:new fix-login-redirect
+You: /synspec:new fix-login-redirect
 
-AI:  Created openspec/changes/fix-login-redirect/
+AI:  Created synergyspec/changes/fix-login-redirect/
 
-You: /opsx-hw:ff
+You: /synspec:ff
 
 AI:  ✓ Created planning artifacts
 
-You: /opsx-hw:apply
+You: /synspec:apply
 
 AI:  Working on fix-login-redirect...
      [Implements the fix]
      All tasks complete!
 
-You: /opsx-hw:archive
+You: /synspec:archive
 
 AI:  ✓ Archived fix-login-redirect
 
 You: Let's get back to dark mode
 
-You: /opsx-hw:apply add-dark-mode
+You: /synspec:apply add-dark-mode
 
 AI:  Resuming add-dark-mode...
      Picking up at task 2.3: Update Header...
@@ -166,10 +166,10 @@ AI:  Resuming add-dark-mode...
 
 **Best for:** Parallel work streams, urgent interrupts, team collaboration.
 
-When you have multiple completed changes, use `/opsx-hw:bulk-archive`:
+When you have multiple completed changes, use `/synspec:bulk-archive`:
 
 ```text
-You: /opsx-hw:bulk-archive
+You: /synspec:bulk-archive
 
 AI:  Found 3 completed changes:
      - add-dark-mode (all tasks done)
@@ -199,7 +199,7 @@ Bulk archive detects when multiple changes touch the same specs and resolves con
 The recommended completion flow:
 
 ```text
-/opsx-hw:apply ──► /opsx-hw:verify ──► /opsx-hw:archive
+/synspec:apply ──► /synspec:verify ──► /synspec:archive
                     │                 │
               validates          prompts to sync
               implementation     if needed
@@ -207,10 +207,10 @@ The recommended completion flow:
 
 #### Verify: Check Your Work
 
-`/opsx-hw:verify` validates implementation against your artifacts across three dimensions:
+`/synspec:verify` validates implementation against your artifacts across three dimensions:
 
 ```text
-You: /opsx-hw:verify
+You: /synspec:verify
 
 AI:  Verifying add-auth...
 
@@ -252,10 +252,10 @@ Verify won't block archive, but it surfaces issues you might want to address fir
 
 #### Archive: Finalize the Change
 
-`/opsx-hw:archive` completes the change and moves it to the archive:
+`/synspec:archive` completes the change and moves it to the archive:
 
 ```text
-You: /opsx-hw:archive
+You: /synspec:archive
 
 AI:  Archiving add-auth...
 
@@ -270,8 +270,8 @@ AI:  Archiving add-auth...
 
 You: Yes
 
-AI:  ✓ Synced specs to openspec/specs/auth/spec.md
-     ✓ Moved to openspec/changes/archive/2025-01-24-add-auth/
+AI:  ✓ Synced specs to synergyspec/specs/auth/spec.md
+     ✓ Moved to synergyspec/changes/archive/2025-01-24-add-auth/
 
      Change archived successfully.
 ```
@@ -280,17 +280,17 @@ Archive will prompt if specs aren't synced. It won't block on incomplete tasks, 
 
 ## When to Use What
 
-### `/opsx-hw:ff` vs `/opsx-hw:continue`
+### `/synspec:ff` vs `/synspec:continue`
 
 | Situation | Use |
 |-----------|-----|
-| Clear requirements, ready to build | `/opsx-hw:ff` |
-| Exploring, want to review each step | `/opsx-hw:continue` |
-| Want to iterate on proposal before specs | `/opsx-hw:continue` |
-| Time pressure, need to move fast | `/opsx-hw:ff` |
-| Complex change, want control | `/opsx-hw:continue` |
+| Clear requirements, ready to build | `/synspec:ff` |
+| Exploring, want to review each step | `/synspec:continue` |
+| Want to iterate on proposal before specs | `/synspec:continue` |
+| Time pressure, need to move fast | `/synspec:ff` |
+| Complex change, want control | `/synspec:continue` |
 
-**Rule of thumb:** If you can describe the full scope upfront, use `/opsx-hw:ff`. If you're figuring it out as you go, use `/opsx-hw:continue`.
+**Rule of thumb:** If you can describe the full scope upfront, use `/synspec:ff`. If you're figuring it out as you go, use `/synspec:continue`.
 
 ### When to Update vs Start Fresh
 
@@ -348,12 +348,12 @@ One logical unit of work per change. If you're doing "add feature X and also ref
 - Can ship independently
 - Simpler rollback if needed
 
-### Use `/opsx-hw:explore` for Unclear Requirements
+### Use `/synspec:explore` for Unclear Requirements
 
 Before committing to a change, explore the problem space:
 
 ```text
-You: /opsx-hw:explore
+You: /synspec:explore
 
 AI:  What would you like to explore?
 
@@ -374,10 +374,10 @@ Exploration clarifies thinking before you create artifacts.
 
 ### Verify Before Archiving
 
-Use `/opsx-hw:verify` to check implementation matches artifacts:
+Use `/synspec:verify` to check implementation matches artifacts:
 
 ```text
-You: /opsx-hw:verify
+You: /synspec:verify
 
 AI:  Verifying add-dark-mode...
 
@@ -392,7 +392,7 @@ Catches mismatches before you close out the change.
 
 ### Name Changes Clearly
 
-Good names make `openspec-hw list` useful:
+Good names make `synergyspec-hw list` useful:
 
 ```text
 Good:                          Avoid:
@@ -408,15 +408,15 @@ For full command details and options, see [Commands](commands.md).
 
 | Command | Purpose | When to Use |
 |---------|---------|-------------|
-| `/opsx-hw:explore` | Think through ideas | Unclear requirements, investigation |
-| `/opsx-hw:new` | Start a change | Beginning any new work |
-| `/opsx-hw:continue` | Create next artifact | Step-by-step artifact creation |
-| `/opsx-hw:ff` | Create all planning artifacts | Clear scope, ready to build |
-| `/opsx-hw:apply` | Implement tasks | Ready to write code |
-| `/opsx-hw:verify` | Validate implementation | Before archiving, catch mismatches |
-| `/opsx-hw:sync` | Merge delta specs | Optional—archive prompts if needed |
-| `/opsx-hw:archive` | Complete the change | All work finished |
-| `/opsx-hw:bulk-archive` | Archive multiple changes | Parallel work, batch completion |
+| `/synspec:explore` | Think through ideas | Unclear requirements, investigation |
+| `/synspec:new` | Start a change | Beginning any new work |
+| `/synspec:continue` | Create next artifact | Step-by-step artifact creation |
+| `/synspec:ff` | Create all planning artifacts | Clear scope, ready to build |
+| `/synspec:apply` | Implement tasks | Ready to write code |
+| `/synspec:verify` | Validate implementation | Before archiving, catch mismatches |
+| `/synspec:sync` | Merge delta specs | Optional—archive prompts if needed |
+| `/synspec:archive` | Complete the change | All work finished |
+| `/synspec:bulk-archive` | Archive multiple changes | Parallel work, batch completion |
 
 ## Next Steps
 

@@ -34,31 +34,31 @@ The validate command SHALL support flags for bulk validation (--all) and filtere
 #### Scenario: Validate everything
 
 - **WHEN** executing `openspec validate --all`
-- **THEN** validate all changes in openspec/changes/ (excluding archive)
-- **AND** validate all specs in openspec/specs/
+- **THEN** validate all changes in synergyspec/changes/ (excluding archive)
+- **AND** validate all specs in synergyspec/specs/
 - **AND** display a summary showing passed/failed items
 - **AND** exit with code 1 if any validation fails
 
 #### Scenario: Scope of bulk validation
 
 - **WHEN** validating with `--all` or `--changes`
-- **THEN** include all change proposals under `openspec/changes/`
-- **AND** exclude the `openspec/changes/archive/` directory
+- **THEN** include all change proposals under `synergyspec/changes/`
+- **AND** exclude the `synergyspec/changes/archive/` directory
 
 - **WHEN** validating with `--specs`
-- **THEN** include all specs that have a `spec.md` under `openspec/specs/<id>/spec.md`
+- **THEN** include all specs that have a `spec.md` under `synergyspec/specs/<id>/spec.md`
 
 #### Scenario: Validate all changes
 
 - **WHEN** executing `openspec validate --changes`
-- **THEN** validate all changes in openspec/changes/ (excluding archive)
+- **THEN** validate all changes in synergyspec/changes/ (excluding archive)
 - **AND** display results for each change
 - **AND** show summary statistics
 
 #### Scenario: Validate all specs
 
 - **WHEN** executing `openspec validate --specs`
-- **THEN** validate all specs in openspec/specs/
+- **THEN** validate all specs in synergyspec/specs/
 - **AND** display results for each spec
 - **AND** show summary statistics
 

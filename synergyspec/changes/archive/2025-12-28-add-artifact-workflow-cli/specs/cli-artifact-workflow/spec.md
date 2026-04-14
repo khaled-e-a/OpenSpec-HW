@@ -97,7 +97,7 @@ The system SHALL create new change directories with validation.
 
 #### Scenario: Create valid change
 - **WHEN** user runs `openspec new change add-feature`
-- **THEN** the system creates `openspec/changes/add-feature/` directory
+- **THEN** the system creates `synergyspec/changes/add-feature/` directory
 
 #### Scenario: Invalid change name
 - **WHEN** user runs `openspec new change "Add Feature"` with invalid name

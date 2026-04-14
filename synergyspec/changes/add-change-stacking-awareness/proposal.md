@@ -67,7 +67,7 @@ Update docs to describe:
 - how to model dependencies and parent/child slices
 - when to split a large change
 - how to use graph/next validation signals during parallel development
-- migration guidance for `openspec/changes/IMPLEMENTATION_ORDER.md`:
+- migration guidance for `synergyspec/changes/IMPLEMENTATION_ORDER.md`:
   - machine-readable change metadata becomes the normative dependency source
   - `IMPLEMENTATION_ORDER.md` remains optional narrative context during transition
 
@@ -81,7 +81,7 @@ Update docs to describe:
 
 - `cli-change`: Adds graph/next/split planning commands and stack-aware validation messaging
 - `change-creation`: Supports parent/dependency metadata when creating or splitting changes
-- `openspec-conventions`: Defines optional stack metadata conventions for change proposals
+- `synergyspec-conventions`: Defines optional stack metadata conventions for change proposals
 
 ## Impact
 

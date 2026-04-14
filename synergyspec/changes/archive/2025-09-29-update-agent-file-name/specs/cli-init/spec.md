@@ -1,13 +1,13 @@
 ## MODIFIED Requirements
 
 ### Requirement: Directory Creation
-The command SHALL create the complete OpenSpec directory structure with all required directories and files.
+The command SHALL create the complete SynergySpec directory structure with all required directories and files.
 
-#### Scenario: Creating OpenSpec structure
+#### Scenario: Creating SynergySpec structure
 - **WHEN** `openspec init` is executed
 - **THEN** create the following directory structure:
 ```
-openspec/
+synergyspec/
 ├── project.md
 ├── AGENTS.md
 ├── specs/
@@ -19,17 +19,17 @@ openspec/
 The command SHALL generate required template files with appropriate content for immediate use.
 
 #### Scenario: Generating template files
-- **WHEN** initializing OpenSpec
-- **THEN** generate `AGENTS.md` containing complete OpenSpec instructions for AI assistants
+- **WHEN** initializing SynergySpec
+- **THEN** generate `AGENTS.md` containing complete SynergySpec instructions for AI assistants
 - **AND** generate `project.md` with project context template
 
 ### Requirement: AI Tool Configuration Details
 
-The command SHALL properly configure selected AI tools with OpenSpec-specific instructions using a marker system.
+The command SHALL properly configure selected AI tools with SynergySpec-specific instructions using a marker system.
 
 #### Scenario: Creating new CLAUDE.md
 - **WHEN** CLAUDE.md does not exist
-- **THEN** create new file with OpenSpec content wrapped in markers including reference to `@openspec/AGENTS.md`
+- **THEN** create new file with SynergySpec content wrapped in markers including reference to `@synergyspec/AGENTS.md`
 
 ### Requirement: Success Output
 
@@ -37,4 +37,4 @@ The command SHALL provide clear, actionable next steps upon successful initializ
 
 #### Scenario: Displaying success message
 - **WHEN** initialization completes successfully
-- **THEN** include prompt: "Please explain the OpenSpec workflow from openspec/AGENTS.md and how I should work with you on this project"
+- **THEN** include prompt: "Please explain the SynergySpec workflow from synergyspec/AGENTS.md and how I should work with you on this project"

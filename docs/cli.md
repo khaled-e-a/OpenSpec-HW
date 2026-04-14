@@ -1,12 +1,12 @@
 # CLI Reference
 
-The OpenSpec CLI (`openspec-hw`) provides terminal commands for project setup, validation, status inspection, and management. These commands complement the AI slash commands (like `/opsx-hw:new`) documented in [Commands](commands.md).
+The SynergySpec CLI (`synergyspec-hw`) provides terminal commands for project setup, validation, status inspection, and management. These commands complement the AI slash commands (like `/synspec:new`) documented in [Commands](commands.md).
 
 ## Summary
 
 | Category | Commands | Purpose |
 |----------|----------|---------|
-| **Setup** | `init`, `update` | Initialize and update OpenSpec in your project |
+| **Setup** | `init`, `update` | Initialize and update SynergySpec in your project |
 | **Browsing** | `list`, `view`, `show` | Explore changes and specs |
 | **Validation** | `validate` | Check changes and specs for issues |
 | **Lifecycle** | `archive` | Finalize completed changes |
@@ -27,11 +27,11 @@ These commands are interactive and designed for terminal use:
 
 | Command | Purpose |
 |---------|---------|
-| `openspec-hw init` | Initialize project (interactive prompts) |
-| `openspec-hw view` | Interactive dashboard |
-| `openspec-hw config edit` | Open config in editor |
-| `openspec-hw feedback` | Submit feedback via GitHub |
-| `openspec-hw completion install` | Install shell completions |
+| `synergyspec-hw init` | Initialize project (interactive prompts) |
+| `synergyspec-hw view` | Interactive dashboard |
+| `synergyspec-hw config edit` | Open config in editor |
+| `synergyspec-hw feedback` | Submit feedback via GitHub |
+| `synergyspec-hw completion install` | Install shell completions |
 
 ### Agent-Compatible Commands
 
@@ -39,13 +39,13 @@ These commands support `--json` output for programmatic use by AI agents and scr
 
 | Command | Human Use | Agent Use |
 |---------|-----------|-----------|
-| `openspec-hw list` | Browse changes/specs | `--json` for structured data |
-| `openspec-hw show <item>` | Read content | `--json` for parsing |
-| `openspec-hw validate` | Check for issues | `--all --json` for bulk validation |
-| `openspec-hw status` | See artifact progress | `--json` for structured status |
-| `openspec-hw instructions` | Get next steps | `--json` for agent instructions |
-| `openspec-hw templates` | Find template paths | `--json` for path resolution |
-| `openspec-hw schemas` | List available schemas | `--json` for schema discovery |
+| `synergyspec-hw list` | Browse changes/specs | `--json` for structured data |
+| `synergyspec-hw show <item>` | Read content | `--json` for parsing |
+| `synergyspec-hw validate` | Check for issues | `--all --json` for bulk validation |
+| `synergyspec-hw status` | See artifact progress | `--json` for structured status |
+| `synergyspec-hw instructions` | Get next steps | `--json` for agent instructions |
+| `synergyspec-hw templates` | Find template paths | `--json` for path resolution |
+| `synergyspec-hw schemas` | List available schemas | `--json` for schema discovery |
 
 ---
 
@@ -63,12 +63,12 @@ These options work with all commands:
 
 ## Setup Commands
 
-### `openspec-hw init`
+### `synergyspec-hw init`
 
-Initialize OpenSpec in your project. Creates the folder structure and configures AI tool integrations.
+Initialize SynergySpec in your project. Creates the folder structure and configures AI tool integrations.
 
 ```
-openspec-hw init [path] [options]
+synergyspec-hw init [path] [options]
 ```
 
 **Arguments:**
@@ -90,25 +90,25 @@ openspec-hw init [path] [options]
 
 ```bash
 # Interactive initialization
-openspec-hw init
+synergyspec-hw init
 
 # Initialize in a specific directory
-openspec-hw init ./my-project
+synergyspec-hw init ./my-project
 
 # Non-interactive: configure for Claude and Cursor
-openspec-hw init --tools claude,cursor
+synergyspec-hw init --tools claude,cursor
 
 # Configure for all supported tools
-openspec-hw init --tools all
+synergyspec-hw init --tools all
 
 # Skip prompts and auto-cleanup legacy files
-openspec-hw init --force
+synergyspec-hw init --force
 ```
 
 **What it creates:**
 
 ```
-openspec/
+synergyspec/
 ├── specs/              # Your specifications (source of truth)
 ├── changes/            # Proposed changes
 └── config.yaml         # Project configuration
@@ -120,12 +120,12 @@ openspec/
 
 ---
 
-### `openspec-hw update`
+### `synergyspec-hw update`
 
-Update OpenSpec instruction files after upgrading the CLI. Re-generates AI tool configuration files.
+Update SynergySpec instruction files after upgrading the CLI. Re-generates AI tool configuration files.
 
 ```
-openspec-hw update [path] [options]
+synergyspec-hw update [path] [options]
 ```
 
 **Arguments:**
@@ -144,20 +144,20 @@ openspec-hw update [path] [options]
 
 ```bash
 # Update instruction files after npm upgrade
-npm update @khaledea/openspec-hw
-openspec-hw update
+npm update @khaledea/synergyspec-hw
+synergyspec-hw update
 ```
 
 ---
 
 ## Browsing Commands
 
-### `openspec-hw list`
+### `synergyspec-hw list`
 
 List changes or specs in your project.
 
 ```
-openspec-hw list [options]
+synergyspec-hw list [options]
 ```
 
 **Options:**
@@ -173,13 +173,13 @@ openspec-hw list [options]
 
 ```bash
 # List all active changes
-openspec-hw list
+synergyspec-hw list
 
 # List all specs
-openspec-hw list --specs
+synergyspec-hw list --specs
 
 # JSON output for scripts
-openspec-hw list --json
+synergyspec-hw list --json
 ```
 
 **Output (text):**
@@ -192,24 +192,24 @@ Active changes:
 
 ---
 
-### `openspec-hw view`
+### `synergyspec-hw view`
 
 Display an interactive dashboard for exploring specs and changes.
 
 ```
-openspec-hw view
+synergyspec-hw view
 ```
 
 Opens a terminal-based interface for navigating your project's specifications and changes.
 
 ---
 
-### `openspec-hw show`
+### `synergyspec-hw show`
 
 Display details of a change or spec.
 
 ```
-openspec-hw show [item-name] [options]
+synergyspec-hw show [item-name] [options]
 ```
 
 **Arguments:**
@@ -244,28 +244,28 @@ openspec-hw show [item-name] [options]
 
 ```bash
 # Interactive selection
-openspec-hw show
+synergyspec-hw show
 
 # Show a specific change
-openspec-hw show add-dark-mode
+synergyspec-hw show add-dark-mode
 
 # Show a specific spec
-openspec-hw show auth --type spec
+synergyspec-hw show auth --type spec
 
 # JSON output for parsing
-openspec-hw show add-dark-mode --json
+synergyspec-hw show add-dark-mode --json
 ```
 
 ---
 
 ## Validation Commands
 
-### `openspec-hw validate`
+### `synergyspec-hw validate`
 
 Validate changes and specs for structural issues.
 
 ```
-openspec-hw validate [item-name] [options]
+synergyspec-hw validate [item-name] [options]
 ```
 
 **Arguments:**
@@ -284,26 +284,26 @@ openspec-hw validate [item-name] [options]
 | `--type <type>` | Specify type when name is ambiguous: `change` or `spec` |
 | `--strict` | Enable strict validation mode |
 | `--json` | Output as JSON |
-| `--concurrency <n>` | Max parallel validations (default: 6, or `OPENSPEC_CONCURRENCY` env) |
+| `--concurrency <n>` | Max parallel validations (default: 6, or `SYNERGYSPEC_CONCURRENCY` env) |
 | `--no-interactive` | Disable prompts |
 
 **Examples:**
 
 ```bash
 # Interactive validation
-openspec-hw validate
+synergyspec-hw validate
 
 # Validate a specific change
-openspec-hw validate add-dark-mode
+synergyspec-hw validate add-dark-mode
 
 # Validate all changes
-openspec-hw validate --changes
+synergyspec-hw validate --changes
 
 # Validate everything with JSON output (for CI/scripts)
-openspec-hw validate --all --json
+synergyspec-hw validate --all --json
 
 # Strict validation with increased parallelism
-openspec-hw validate --all --strict --concurrency 12
+synergyspec-hw validate --all --strict --concurrency 12
 ```
 
 **Output (text):**
@@ -343,12 +343,12 @@ Validating add-dark-mode...
 
 ## Lifecycle Commands
 
-### `openspec-hw archive`
+### `synergyspec-hw archive`
 
 Archive a completed change and merge delta specs into main specs.
 
 ```
-openspec-hw archive [change-name] [options]
+synergyspec-hw archive [change-name] [options]
 ```
 
 **Arguments:**
@@ -369,24 +369,24 @@ openspec-hw archive [change-name] [options]
 
 ```bash
 # Interactive archive
-openspec-hw archive
+synergyspec-hw archive
 
 # Archive specific change
-openspec-hw archive add-dark-mode
+synergyspec-hw archive add-dark-mode
 
 # Archive without prompts (CI/scripts)
-openspec-hw archive add-dark-mode --yes
+synergyspec-hw archive add-dark-mode --yes
 
 # Archive a tooling change that doesn't affect specs
-openspec-hw archive update-ci-config --skip-specs
+synergyspec-hw archive update-ci-config --skip-specs
 ```
 
 **What it does:**
 
 1. Validates the change (unless `--no-validate`)
 2. Prompts for confirmation (unless `--yes`)
-3. Merges delta specs into `openspec/specs/`
-4. Moves change folder to `openspec/changes/archive/YYYY-MM-DD-<name>/`
+3. Merges delta specs into `synergyspec/specs/`
+4. Moves change folder to `synergyspec/changes/archive/YYYY-MM-DD-<name>/`
 
 ---
 
@@ -394,12 +394,12 @@ openspec-hw archive update-ci-config --skip-specs
 
 These commands support the artifact-driven OPSX workflow. They're useful for both humans checking progress and agents determining next steps.
 
-### `openspec-hw status`
+### `synergyspec-hw status`
 
 Display artifact completion status for a change.
 
 ```
-openspec-hw status [options]
+synergyspec-hw status [options]
 ```
 
 **Options:**
@@ -414,13 +414,13 @@ openspec-hw status [options]
 
 ```bash
 # Interactive status check
-openspec-hw status
+synergyspec-hw status
 
 # Status for specific change
-openspec-hw status --change add-dark-mode
+synergyspec-hw status --change add-dark-mode
 
 # JSON for agent use
-openspec-hw status --change add-dark-mode --json
+synergyspec-hw status --change add-dark-mode --json
 ```
 
 **Output (text):**
@@ -435,7 +435,7 @@ Artifacts:
   ◆ design       ready (requires: specs)
   ○ tasks        blocked (requires: design)
 
-Next: Create design using /opsx-hw:continue
+Next: Create design using /synspec:continue
 ```
 
 **Output (JSON):**
@@ -456,12 +456,12 @@ Next: Create design using /opsx-hw:continue
 
 ---
 
-### `openspec-hw instructions`
+### `synergyspec-hw instructions`
 
 Get enriched instructions for creating an artifact or applying tasks. Used by AI agents to understand what to create next.
 
 ```
-openspec-hw instructions [artifact] [options]
+synergyspec-hw instructions [artifact] [options]
 ```
 
 **Arguments:**
@@ -484,16 +484,16 @@ openspec-hw instructions [artifact] [options]
 
 ```bash
 # Get instructions for next artifact
-openspec-hw instructions --change add-dark-mode
+synergyspec-hw instructions --change add-dark-mode
 
 # Get specific artifact instructions
-openspec-hw instructions design --change add-dark-mode
+synergyspec-hw instructions design --change add-dark-mode
 
 # Get apply/implementation instructions
-openspec-hw instructions apply --change add-dark-mode
+synergyspec-hw instructions apply --change add-dark-mode
 
 # JSON for agent consumption
-openspec-hw instructions design --change add-dark-mode --json
+synergyspec-hw instructions design --change add-dark-mode --json
 ```
 
 **Output includes:**
@@ -505,12 +505,12 @@ openspec-hw instructions design --change add-dark-mode --json
 
 ---
 
-### `openspec-hw templates`
+### `synergyspec-hw templates`
 
 Show resolved template paths for all artifacts in a schema.
 
 ```
-openspec-hw templates [options]
+synergyspec-hw templates [options]
 ```
 
 **Options:**
@@ -524,13 +524,13 @@ openspec-hw templates [options]
 
 ```bash
 # Show template paths for default schema
-openspec-hw templates
+synergyspec-hw templates
 
 # Show templates for custom schema
-openspec-hw templates --schema my-workflow
+synergyspec-hw templates --schema my-workflow
 
 # JSON for programmatic use
-openspec-hw templates --json
+synergyspec-hw templates --json
 ```
 
 **Output (text):**
@@ -539,20 +539,20 @@ openspec-hw templates --json
 Schema: spec-driven
 
 Templates:
-  proposal  → ~/.openspec/schemas/spec-driven/templates/proposal.md
-  specs     → ~/.openspec/schemas/spec-driven/templates/specs.md
-  design    → ~/.openspec/schemas/spec-driven/templates/design.md
-  tasks     → ~/.openspec/schemas/spec-driven/templates/tasks.md
+  proposal  → ~/.synergyspec/schemas/spec-driven/templates/proposal.md
+  specs     → ~/.synergyspec/schemas/spec-driven/templates/specs.md
+  design    → ~/.synergyspec/schemas/spec-driven/templates/design.md
+  tasks     → ~/.synergyspec/schemas/spec-driven/templates/tasks.md
 ```
 
 ---
 
-### `openspec-hw schemas`
+### `synergyspec-hw schemas`
 
 List available workflow schemas with their descriptions and artifact flows.
 
 ```
-openspec-hw schemas [options]
+synergyspec-hw schemas [options]
 ```
 
 **Options:**
@@ -564,7 +564,7 @@ openspec-hw schemas [options]
 **Example:**
 
 ```bash
-openspec-hw schemas
+synergyspec-hw schemas
 ```
 
 **Output:**
@@ -587,12 +587,12 @@ Available schemas:
 
 Commands for creating and managing custom workflow schemas.
 
-### `openspec-hw schema init`
+### `synergyspec-hw schema init`
 
 Create a new project-local schema.
 
 ```
-openspec-hw schema init <name> [options]
+synergyspec-hw schema init <name> [options]
 ```
 
 **Arguments:**
@@ -616,10 +616,10 @@ openspec-hw schema init <name> [options]
 
 ```bash
 # Interactive schema creation
-openspec-hw schema init research-first
+synergyspec-hw schema init research-first
 
 # Non-interactive with specific artifacts
-openspec-hw schema init rapid \
+synergyspec-hw schema init rapid \
   --description "Rapid iteration workflow" \
   --artifacts "proposal,tasks" \
   --default
@@ -628,7 +628,7 @@ openspec-hw schema init rapid \
 **What it creates:**
 
 ```
-openspec/schemas/<name>/
+synergyspec/schemas/<name>/
 ├── schema.yaml           # Schema definition
 └── templates/
     ├── proposal.md       # Template for each artifact
@@ -639,12 +639,12 @@ openspec/schemas/<name>/
 
 ---
 
-### `openspec-hw schema fork`
+### `synergyspec-hw schema fork`
 
 Copy an existing schema to your project for customization.
 
 ```
-openspec-hw schema fork <source> [name] [options]
+synergyspec-hw schema fork <source> [name] [options]
 ```
 
 **Arguments:**
@@ -665,17 +665,17 @@ openspec-hw schema fork <source> [name] [options]
 
 ```bash
 # Fork the built-in spec-driven schema
-openspec-hw schema fork spec-driven my-workflow
+synergyspec-hw schema fork spec-driven my-workflow
 ```
 
 ---
 
-### `openspec-hw schema validate`
+### `synergyspec-hw schema validate`
 
 Validate a schema's structure and templates.
 
 ```
-openspec-hw schema validate [name] [options]
+synergyspec-hw schema validate [name] [options]
 ```
 
 **Arguments:**
@@ -695,20 +695,20 @@ openspec-hw schema validate [name] [options]
 
 ```bash
 # Validate a specific schema
-openspec-hw schema validate my-workflow
+synergyspec-hw schema validate my-workflow
 
 # Validate all schemas
-openspec-hw schema validate
+synergyspec-hw schema validate
 ```
 
 ---
 
-### `openspec-hw schema which`
+### `synergyspec-hw schema which`
 
 Show where a schema resolves from (useful for debugging precedence).
 
 ```
-openspec-hw schema which [name] [options]
+synergyspec-hw schema which [name] [options]
 ```
 
 **Arguments:**
@@ -728,32 +728,32 @@ openspec-hw schema which [name] [options]
 
 ```bash
 # Check where a schema comes from
-openspec-hw schema which spec-driven
+synergyspec-hw schema which spec-driven
 ```
 
 **Output:**
 
 ```
 spec-driven resolves from: package
-  Source: /usr/local/lib/node_modules/@khaledea/openspec-hw/schemas/spec-driven
+  Source: /usr/local/lib/node_modules/@khaledea/synergyspec-hw/schemas/spec-driven
 ```
 
 **Schema precedence:**
 
-1. Project: `openspec/schemas/<name>/`
-2. User: `~/.local/share/openspec/schemas/<name>/`
+1. Project: `synergyspec/schemas/<name>/`
+2. User: `~/.local/share/synergyspec/schemas/<name>/`
 3. Package: Built-in schemas
 
 ---
 
 ## Configuration Commands
 
-### `openspec-hw config`
+### `synergyspec-hw config`
 
-View and modify global OpenSpec configuration.
+View and modify global SynergySpec configuration.
 
 ```
-openspec-hw config <subcommand> [options]
+synergyspec-hw config <subcommand> [options]
 ```
 
 **Subcommands:**
@@ -773,57 +773,57 @@ openspec-hw config <subcommand> [options]
 
 ```bash
 # Show config file path
-openspec-hw config path
+synergyspec-hw config path
 
 # List all settings
-openspec-hw config list
+synergyspec-hw config list
 
 # Get a specific value
-openspec-hw config get telemetry.enabled
+synergyspec-hw config get telemetry.enabled
 
 # Set a value
-openspec-hw config set telemetry.enabled false
+synergyspec-hw config set telemetry.enabled false
 
 # Set a string value explicitly
-openspec-hw config set user.name "My Name" --string
+synergyspec-hw config set user.name "My Name" --string
 
 # Remove a custom setting
-openspec-hw config unset user.name
+synergyspec-hw config unset user.name
 
 # Reset all configuration
-openspec-hw config reset --all --yes
+synergyspec-hw config reset --all --yes
 
 # Edit config in your editor
-openspec-hw config edit
+synergyspec-hw config edit
 
 # Configure profile with action-based wizard
-openspec-hw config profile
+synergyspec-hw config profile
 
 # Fast preset: switch workflows to core (keeps delivery mode)
-openspec-hw config profile core
+synergyspec-hw config profile core
 ```
 
-`openspec-hw config profile` starts with a current-state summary, then lets you choose:
+`synergyspec-hw config profile` starts with a current-state summary, then lets you choose:
 - Change delivery + workflows
 - Change delivery only
 - Change workflows only
 - Keep current settings (exit)
 
 If you keep current settings, no changes are written and no update prompt is shown.
-If there are no config changes but the current project files are out of sync with your global profile/delivery, OpenSpec will show a warning and suggest running `openspec-hw update`.
+If there are no config changes but the current project files are out of sync with your global profile/delivery, SynergySpec will show a warning and suggest running `synergyspec-hw update`.
 Pressing `Ctrl+C` also cancels the flow cleanly (no stack trace) and exits with code `130`.
-In the workflow checklist, `[x]` means the workflow is selected in global config. To apply those selections to project files, run `openspec-hw update` (or choose `Apply changes to this project now?` when prompted inside a project).
+In the workflow checklist, `[x]` means the workflow is selected in global config. To apply those selections to project files, run `synergyspec-hw update` (or choose `Apply changes to this project now?` when prompted inside a project).
 
 **Interactive examples:**
 
 ```bash
 # Delivery-only update
-openspec-hw config profile
+synergyspec-hw config profile
 # choose: Change delivery only
 # choose delivery: Skills only
 
 # Workflows-only update
-openspec-hw config profile
+synergyspec-hw config profile
 # choose: Change workflows only
 # toggle workflows in the checklist, then confirm
 ```
@@ -832,12 +832,12 @@ openspec-hw config profile
 
 ## Utility Commands
 
-### `openspec-hw feedback`
+### `synergyspec-hw feedback`
 
-Submit feedback about OpenSpec. Creates a GitHub issue.
+Submit feedback about SynergySpec. Creates a GitHub issue.
 
 ```
-openspec-hw feedback <message> [options]
+synergyspec-hw feedback <message> [options]
 ```
 
 **Arguments:**
@@ -857,18 +857,18 @@ openspec-hw feedback <message> [options]
 **Example:**
 
 ```bash
-openspec-hw feedback "Add support for custom artifact types" \
+synergyspec-hw feedback "Add support for custom artifact types" \
   --body "I'd like to define my own artifact types beyond the built-in ones."
 ```
 
 ---
 
-### `openspec-hw completion`
+### `synergyspec-hw completion`
 
-Manage shell completions for the OpenSpec CLI.
+Manage shell completions for the SynergySpec CLI.
 
 ```
-openspec-hw completion <subcommand> [shell]
+synergyspec-hw completion <subcommand> [shell]
 ```
 
 **Subcommands:**
@@ -885,16 +885,16 @@ openspec-hw completion <subcommand> [shell]
 
 ```bash
 # Install completions (auto-detects shell)
-openspec-hw completion install
+synergyspec-hw completion install
 
 # Install for specific shell
-openspec-hw completion install zsh
+synergyspec-hw completion install zsh
 
 # Generate script for manual installation
-openspec-hw completion generate bash > ~/.bash_completion.d/openspec
+synergyspec-hw completion generate bash > ~/.bash_completion.d/openspec
 
 # Uninstall
-openspec-hw completion uninstall
+synergyspec-hw completion uninstall
 ```
 
 ---
@@ -912,15 +912,15 @@ openspec-hw completion uninstall
 
 | Variable | Description |
 |----------|-------------|
-| `OPENSPEC_CONCURRENCY` | Default concurrency for bulk validation (default: 6) |
-| `EDITOR` or `VISUAL` | Editor for `openspec-hw config edit` |
+| `SYNERGYSPEC_CONCURRENCY` | Default concurrency for bulk validation (default: 6) |
+| `EDITOR` or `VISUAL` | Editor for `synergyspec-hw config edit` |
 | `NO_COLOR` | Disable color output when set |
 
 ---
 
 ## Related Documentation
 
-- [Commands](commands.md) - AI slash commands (`/opsx-hw:new`, `/opsx-hw:apply`, etc.)
+- [Commands](commands.md) - AI slash commands (`/synspec:new`, `/synspec:apply`, etc.)
 - [Workflows](workflows.md) - Common patterns and when to use each command
 - [Customization](customization.md) - Create custom schemas and templates
 - [Getting Started](getting-started.md) - First-time setup guide

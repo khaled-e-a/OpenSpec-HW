@@ -48,12 +48,12 @@ export async function newChangeCommand(name: string | undefined, options: NewCha
     // If description provided, create README.md with description
     if (options.description) {
       const { promises: fs } = await import('fs');
-      const changeDir = path.join(projectRoot, 'openspec', 'changes', name);
+      const changeDir = path.join(projectRoot, 'synergyspec', 'changes', name);
       const readmePath = path.join(changeDir, 'README.md');
       await fs.writeFile(readmePath, `# ${name}\n\n${options.description}\n`, 'utf-8');
     }
 
-    spinner.succeed(`Created change '${name}' at openspec/changes/${name}/ (schema: ${result.schema})`);
+    spinner.succeed(`Created change '${name}' at synergyspec/changes/${name}/ (schema: ${result.schema})`);
   } catch (error) {
     spinner.fail(`Failed to create change '${name}'`);
     throw error;

@@ -8,7 +8,7 @@ import type { SkillTemplate, CommandTemplate } from '../types.js';
 
 export function getBulkArchiveChangeSkillTemplate(): SkillTemplate {
    return {
-      name: 'openspec-bulk-archive-change',
+      name: 'synergyspec-bulk-archive-change',
       description: 'Archive multiple completed changes at once. Use when archiving several parallel changes.',
       instructions: `Archive multiple completed changes in a single operation.
 
@@ -20,7 +20,7 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
 
 1. **Get active changes**
 
-   Run \`openspec-hw list --json\` to get all active changes.
+   Run \`synergyspec-hw list --json\` to get all active changes.
 
    If no active changes exist, inform user and stop.
 
@@ -37,15 +37,15 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
 
    For each selected change, collect:
 
-   a. **Artifact status** - Run \`openspec-hw status --change "<name>" --json\`
+   a. **Artifact status** - Run \`synergyspec-hw status --change "<name>" --json\`
       - Parse \`schemaName\` and \`artifacts\` list
       - Note which artifacts are \`done\` vs other states
 
-   b. **Task completion** - Read \`openspec/changes/<name>/tasks.md\`
+   b. **Task completion** - Read \`synergyspec/changes/<name>/tasks.md\`
       - Count \`- [ ]\` (incomplete) vs \`- [x]\` (complete)
       - If no tasks file exists, note as "No tasks"
 
-   c. **Delta specs** - Check \`openspec/changes/<name>/specs/\` directory
+   c. **Delta specs** - Check \`synergyspec/changes/<name>/specs/\` directory
       - List which capability specs exist
       - For each, extract requirement names (lines matching \`### Requirement: <name>\`)
 
@@ -122,14 +122,14 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
    Process changes in the determined order (respecting conflict resolution):
 
    a. **Sync specs** if delta specs exist:
-      - Use the openspec-sync-specs approach (agent-driven intelligent merge)
+      - Use the synergyspec-sync-specs approach (agent-driven intelligent merge)
       - For conflicts, apply in resolved order
       - Track if sync was done
 
    b. **Perform the archive**:
       \`\`\`bash
-      mkdir -p openspec/changes/archive
-      mv openspec/changes/<name> openspec/changes/archive/YYYY-MM-DD-<name>
+      mkdir -p synergyspec/changes/archive
+      mv synergyspec/changes/<name> synergyspec/changes/archive/YYYY-MM-DD-<name>
       \`\`\`
 
    c. **Track outcome** for each change:
@@ -242,12 +242,12 @@ No active changes found. Create a new change to get started.
 - Show clear per-change status before confirming
 - Use single confirmation for entire batch
 - Track and report all outcomes (success/skip/fail)
-- Preserve .openspec.yaml when moving to archive
+- Preserve .synergyspec.yaml when moving to archive
 - Archive directory target uses current date: YYYY-MM-DD-<name>
 - If archive target exists, fail that change but continue with others`,
       license: 'MIT',
-      compatibility: 'Requires openspec-hw CLI.',
-      metadata: { author: 'openspec', version: '1.0' },
+      compatibility: 'Requires synergyspec-hw CLI.',
+      metadata: { author: 'synergyspec', version: '1.0' },
    };
 }
 
@@ -267,7 +267,7 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
 
 1. **Get active changes**
 
-   Run \`openspec-hw list --json\` to get all active changes.
+   Run \`synergyspec-hw list --json\` to get all active changes.
 
    If no active changes exist, inform user and stop.
 
@@ -284,15 +284,15 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
 
    For each selected change, collect:
 
-   a. **Artifact status** - Run \`openspec-hw status --change "<name>" --json\`
+   a. **Artifact status** - Run \`synergyspec-hw status --change "<name>" --json\`
       - Parse \`schemaName\` and \`artifacts\` list
       - Note which artifacts are \`done\` vs other states
 
-   b. **Task completion** - Read \`openspec/changes/<name>/tasks.md\`
+   b. **Task completion** - Read \`synergyspec/changes/<name>/tasks.md\`
       - Count \`- [ ]\` (incomplete) vs \`- [x]\` (complete)
       - If no tasks file exists, note as "No tasks"
 
-   c. **Delta specs** - Check \`openspec/changes/<name>/specs/\` directory
+   c. **Delta specs** - Check \`synergyspec/changes/<name>/specs/\` directory
       - List which capability specs exist
       - For each, extract requirement names (lines matching \`### Requirement: <name>\`)
 
@@ -369,14 +369,14 @@ This skill allows you to batch-archive changes, handling spec conflicts intellig
    Process changes in the determined order (respecting conflict resolution):
 
    a. **Sync specs** if delta specs exist:
-      - Use the openspec-sync-specs approach (agent-driven intelligent merge)
+      - Use the synergyspec-sync-specs approach (agent-driven intelligent merge)
       - For conflicts, apply in resolved order
       - Track if sync was done
 
    b. **Perform the archive**:
       \`\`\`bash
-      mkdir -p openspec/changes/archive
-      mv openspec/changes/<name> openspec/changes/archive/YYYY-MM-DD-<name>
+      mkdir -p synergyspec/changes/archive
+      mv synergyspec/changes/<name> synergyspec/changes/archive/YYYY-MM-DD-<name>
       \`\`\`
 
    c. **Track outcome** for each change:
@@ -489,7 +489,7 @@ No active changes found. Create a new change to get started.
 - Show clear per-change status before confirming
 - Use single confirmation for entire batch
 - Track and report all outcomes (success/skip/fail)
-- Preserve .openspec.yaml when moving to archive
+- Preserve .synergyspec.yaml when moving to archive
 - Archive directory target uses current date: YYYY-MM-DD-<name>
 - If archive target exists, fail that change but continue with others`
    };

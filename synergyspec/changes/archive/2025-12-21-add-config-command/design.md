@@ -1,6 +1,6 @@
 ## Context
 
-The `global-config` spec defines how OpenSpec reads/writes `config.json`, but users currently must edit it by hand. This command provides a CLI interface to that config.
+The `global-config` spec defines how SynergySpec reads/writes `config.json`, but users currently must edit it by hand. This command provides a CLI interface to that config.
 
 ## Goals / Non-Goals
 

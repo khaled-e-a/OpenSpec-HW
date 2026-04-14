@@ -2,11 +2,11 @@
 
 ## Summary
 
-Add `openspec/config.yaml` support for project-level configuration. This enables teams to customize OpenSpec behavior without forking schemas, by providing context and rules that are injected into artifact generation.
+Add `synergyspec/config.yaml` support for project-level configuration. This enables teams to customize SynergySpec behavior without forking schemas, by providing context and rules that are injected into artifact generation.
 
 ## Motivation
 
-Currently, customizing OpenSpec requires forking entire schemas:
+Currently, customizing SynergySpec requires forking entire schemas:
 - Must copy all files even to add one rule
 - Lose updates when openspec upgrades
 - High friction for simple customizations
@@ -19,7 +19,7 @@ Most users don't need different workflow structure. They need to:
 
 ### Two-Path Model
 
-OpenSpec customization follows two distinct paths:
+SynergySpec customization follows two distinct paths:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -31,7 +31,7 @@ OpenSpec customization follows two distinct paths:
 │   + add context                   from scratch                  │
 │   + add rules                                                   │
 │                                                                 │
-│   openspec/config.yaml            openspec/schemas/my-flow/     │
+│   synergyspec/config.yaml            synergyspec/schemas/my-flow/     │
 │                                                                 │
 │   ✓ Simple                        ✓ Full control                │
 │   ✓ Get updates                   ✗ You maintain everything     │
@@ -42,7 +42,7 @@ OpenSpec customization follows two distinct paths:
 ### Config Schema
 
 ```yaml
-# openspec/config.yaml
+# synergyspec/config.yaml
 
 # Required: which workflow schema to use
 schema: spec-driven
@@ -88,7 +88,7 @@ Which workflow schema to use. Can be:
 
 This becomes the default schema for:
 - New changes created without `--schema` flag
-- Commands run on changes without `.openspec.yaml` metadata
+- Commands run on changes without `.synergyspec.yaml` metadata
 
 #### `context` (optional)
 
@@ -156,13 +156,13 @@ Today (Experimental):
   openspec artifact-experimental-setup
     → prompts for config creation
     → creates .claude/skills/
-    → creates openspec/config.yaml
+    → creates synergyspec/config.yaml
 
 Future (When graduating):
   openspec init
     → prompts for config creation
-    → creates openspec/ directory
-    → creates openspec/config.yaml
+    → creates synergyspec/ directory
+    → creates synergyspec/config.yaml
 
   + standalone commands:
     openspec config init
@@ -173,7 +173,7 @@ Future (When graduating):
 **Why optional?**
 
 Config is **additive**, not required:
-- OpenSpec works without config (uses defaults)
+- SynergySpec works without config (uses defaults)
 - Users can skip during setup and add manually later
 - Teams can start simple and add config when they feel friction
 - No config file in git = no problem, everyone gets defaults
@@ -222,13 +222,13 @@ $ openspec artifact-experimental-setup
 
 Setting up experimental artifact workflow...
 
-✓ Created .claude/skills/openspec-explore/SKILL.md
-✓ Created .claude/skills/openspec-new-change/SKILL.md
-✓ Created .claude/skills/openspec-continue-change/SKILL.md
-✓ Created .claude/skills/openspec-apply-change/SKILL.md
-✓ Created .claude/skills/openspec-ff-change/SKILL.md
-✓ Created .claude/skills/openspec-sync-specs/SKILL.md
-✓ Created .claude/skills/openspec-archive-change/SKILL.md
+✓ Created .claude/skills/synergyspec-explore/SKILL.md
+✓ Created .claude/skills/synergyspec-new-change/SKILL.md
+✓ Created .claude/skills/synergyspec-continue-change/SKILL.md
+✓ Created .claude/skills/synergyspec-apply-change/SKILL.md
+✓ Created .claude/skills/synergyspec-ff-change/SKILL.md
+✓ Created .claude/skills/synergyspec-sync-specs/SKILL.md
+✓ Created .claude/skills/synergyspec-archive-change/SKILL.md
 
 ✓ Created .claude/commands/opsx/explore.md
 ✓ Created .claude/commands/opsx/new.md
@@ -242,9 +242,9 @@ Setting up experimental artifact workflow...
 
 📋 Project Configuration (Optional)
 
-Configure project defaults for OpenSpec workflows.
+Configure project defaults for SynergySpec workflows.
 
-? Create openspec/config.yaml? (Y/n) Y
+? Create synergyspec/config.yaml? (Y/n) Y
 
 ? Default schema for new changes?
   ❯ spec-driven (proposal → specs → design → tasks)
@@ -278,13 +278,13 @@ Configure project defaults for OpenSpec workflows.
   │
   [Empty line to finish]
 
-✓ Created openspec/config.yaml
+✓ Created synergyspec/config.yaml
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🎉 Setup Complete!
 
-📖 Config created at: openspec/config.yaml
+📖 Config created at: synergyspec/config.yaml
    • Default schema: spec-driven
    • Project context: Added (4 lines)
    • Rules: 1 artifact configured
@@ -295,8 +295,8 @@ Usage:
   • Rules applied to matching artifacts
 
 To share with team:
-  git add openspec/config.yaml .claude/
-  git commit -m "Setup OpenSpec experimental workflow with project config"
+  git add synergyspec/config.yaml .claude/
+  git commit -m "Setup SynergySpec experimental workflow with project config"
 
 [Rest of experimental setup output...]
 ```
@@ -315,7 +315,7 @@ Users can also create config manually (or skip during setup and add later):
 
 ```bash
 # Create config file manually
-cat > openspec/config.yaml << 'EOF'
+cat > synergyspec/config.yaml << 'EOF'
 schema: spec-driven
 
 context: |
@@ -340,14 +340,14 @@ Once config is created, it affects the experimental workflow in three ways:
 
 ```bash
 # Before config: must specify schema
-/opsx-hw:new my-feature --schema spec-driven
+/synspec:new my-feature --schema spec-driven
 
 # After config (with schema: spec-driven): schema is automatic
-/opsx-hw:new my-feature
+/synspec:new my-feature
 # Automatically uses spec-driven from config
 
 # Override still works
-/opsx-hw:new my-feature --schema tdd
+/synspec:new my-feature --schema tdd
 # Uses tdd, ignoring config
 ```
 
@@ -406,7 +406,7 @@ openspec instructions design --change my-feature
 
 ```bash
 # Commit config
-git add openspec/config.yaml
+git add synergyspec/config.yaml
 git commit -m "Add project config with context and rules"
 
 # Everyone gets the same context and rules automatically
@@ -427,7 +427,7 @@ git commit -m "Add project config with context and rules"
 
 ### Config Location
 
-Always at `./openspec/config.yaml` relative to project root. No XDG/global config for simplicity.
+Always at `./synergyspec/config.yaml` relative to project root. No XDG/global config for simplicity.
 
 ### Resolution Order Update
 
@@ -435,8 +435,8 @@ Schema selection order becomes:
 
 ```
 1. --schema CLI flag                    # Explicit override
-2. .openspec.yaml in change directory   # Change-specific binding
-3. openspec/config.yaml schema field    # Project default (NEW)
+2. .synergyspec.yaml in change directory   # Change-specific binding
+3. synergyspec/config.yaml schema field    # Project default (NEW)
 4. "spec-driven"                        # Hardcoded fallback
 ```
 
@@ -457,7 +457,7 @@ After creating skills and commands, the setup command will:
    ```
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    📋 Project Configuration (Optional)
-   Configure project defaults for OpenSpec workflows.
+   Configure project defaults for SynergySpec workflows.
    ```
 
 2. **Prompt: Create config?**
@@ -485,7 +485,7 @@ After creating skills and commands, the setup command will:
 6. **Create and validate config:**
    - Build `ProjectConfig` object from inputs
    - Validate with Zod schema
-   - Write to `openspec/config.yaml` using YAML serializer
+   - Write to `synergyspec/config.yaml` using YAML serializer
    - If validation fails, show error and ask to retry or skip
 
 7. **Display success summary:**
@@ -504,7 +504,7 @@ After creating skills and commands, the setup command will:
 
 **If config already exists:**
 
-When `openspec/config.yaml` already exists:
+When `synergyspec/config.yaml` already exists:
 
 ```bash
 $ openspec artifact-experimental-setup
@@ -515,10 +515,10 @@ $ openspec artifact-experimental-setup
 
 📋 Project Configuration
 
-ℹ️  openspec/config.yaml already exists. Skipping config creation.
+ℹ️  synergyspec/config.yaml already exists. Skipping config creation.
 
-   To update config, edit openspec/config.yaml manually or:
-   1. Delete openspec/config.yaml
+   To update config, edit synergyspec/config.yaml manually or:
+   1. Delete synergyspec/config.yaml
    2. Run openspec artifact-experimental-setup again
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -554,7 +554,7 @@ try {
   const configResult = await promptForConfig();
   if (configResult.createConfig) {
     writeConfigFile(configResult);
-    console.log('✓ Created openspec/config.yaml');
+    console.log('✓ Created synergyspec/config.yaml');
   }
 } catch (error) {
   if (error.name === 'ExitPromptError') {
@@ -579,7 +579,7 @@ The experimental setup command will need an interactive prompting library for th
 1. **@inquirer/prompts** (recommended)
    - Modern, tree-shakeable, TypeScript-first
    - Individual imports: `@inquirer/input`, `@inquirer/confirm`, `@inquirer/checkbox`, `@inquirer/editor`
-   - Already used in OpenSpec (if not, lightweight addition)
+   - Already used in SynergySpec (if not, lightweight addition)
 
 2. **inquirer** (classic)
    - More established, larger ecosystem
@@ -638,7 +638,7 @@ const yamlContent = stringify(config, {
 - Verify rules appear only for matching artifact (not all artifacts)
 - Verify schema from config is used for new changes
 - Verify CLI `--schema` flag overrides config
-- Verify change's `.openspec.yaml` overrides config
+- Verify change's `.synergyspec.yaml` overrides config
 - Verify graceful handling of missing config (fallback to defaults)
 - Verify graceful handling of invalid YAML syntax (warning, fallback)
 - Verify graceful handling of invalid schema (warning, show valid schemas)
@@ -647,8 +647,8 @@ const yamlContent = stringify(config, {
 **Schema Resolution Precedence:**
 - Test all four levels of schema resolution:
   1. CLI flag `--schema` (highest priority)
-  2. Change metadata `.openspec.yaml`
-  3. Project config `openspec/config.yaml`
+  2. Change metadata `.synergyspec.yaml`
+  3. Project config `synergyspec/config.yaml`
   4. Hardcoded default "spec-driven" (lowest priority)
 - Verify each level correctly overrides lower levels
 
@@ -684,7 +684,7 @@ const yamlContent = stringify(config, {
 
 **Backward Compatibility:**
 - Existing projects without config continue to work
-- Existing changes with `.openspec.yaml` metadata aren't affected by config
+- Existing changes with `.synergyspec.yaml` metadata aren't affected by config
 - Adding config to existing project doesn't break in-progress changes
 
 **Integration Tests:**
@@ -733,7 +733,7 @@ export type ProjectConfig = z.infer<typeof ProjectConfigSchema>;
 │                                                                 │
 │   User provides:                                                │
 │   ┌─────────────────────────────────────────────────────────┐   │
-│   │ openspec/config.yaml                                    │   │
+│   │ synergyspec/config.yaml                                    │   │
 │   │                                                         │   │
 │   │ schema: spec-driven                                     │   │
 │   │ context: "We use React, TypeScript..."                  │   │
@@ -743,7 +743,7 @@ export type ProjectConfig = z.infer<typeof ProjectConfigSchema>;
 │                              │                                  │
 │                              ▼                                  │
 │   ┌─────────────────────────────────────────────────────────┐   │
-│   │ OpenSpec merges:                                        │   │
+│   │ SynergySpec merges:                                        │   │
 │   │                                                         │   │
 │   │   Schema (spec-driven)                                  │   │
 │   │   + User's context                                      │   │

@@ -44,6 +44,6 @@
 
 ## 7. Archive Change
 
-- [x] 7.1 After merge and verification, create new spec file at openspec/specs/ci-nix-validation/spec.md
-- [x] 7.2 Move change directory to openspec/changes/archive/[date]-add-nix-ci-validation/
+- [x] 7.1 After merge and verification, create new spec file at synergyspec/specs/ci-nix-validation/spec.md
+- [x] 7.2 Move change directory to synergyspec/changes/archive/[date]-add-nix-ci-validation/
 - [x] 7.3 Run `openspec validate --strict` to confirm archived change passes

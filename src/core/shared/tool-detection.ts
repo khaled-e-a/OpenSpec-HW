@@ -9,31 +9,31 @@ import * as fs from 'fs';
 import { AI_TOOLS } from '../config.js';
 
 /**
- * Names of skill directories created by openspec init.
+ * Names of skill directories created by synergyspec-hw init.
  */
 export const SKILL_NAMES = [
-  'openspec-explore',
-  'openspec-new-change',
-  'openspec-continue-change',
-  'openspec-apply-change',
-  'openspec-tdd',
-  'openspec-ff-change',
-  'openspec-sync-specs',
-  'openspec-archive-change',
-  'openspec-bulk-archive-change',
-  'openspec-verify-change',
-  'openspec-verify-spec',
-  'openspec-onboard',
-  'openspec-propose',
-  'openspec-gen-tests',
-  'openspec-run-tests',
-  'openspec-ci',
+  'synergyspec-explore',
+  'synergyspec-new-change',
+  'synergyspec-continue-change',
+  'synergyspec-apply-change',
+  'synergyspec-tdd',
+  'synergyspec-ff-change',
+  'synergyspec-sync-specs',
+  'synergyspec-archive-change',
+  'synergyspec-bulk-archive-change',
+  'synergyspec-verify-change',
+  'synergyspec-verify-spec',
+  'synergyspec-onboard',
+  'synergyspec-propose',
+  'synergyspec-gen-tests',
+  'synergyspec-run-tests',
+  'synergyspec-ci',
 ] as const;
 
 export type SkillName = (typeof SKILL_NAMES)[number];
 
 /**
- * IDs of command templates created by openspec init.
+ * IDs of command templates created by synergyspec-hw init.
  */
 export const COMMAND_IDS = [
   'explore',
@@ -148,7 +148,7 @@ export function extractGeneratedByVersion(skillFilePath: string): string | null 
     // ---
     // ...
     // metadata:
-    //   author: openspec
+    //   author: synergyspec
     //   version: "1.0"
     //   generatedBy: "0.23.0"
     // ---

@@ -8,7 +8,7 @@ An 80/20 solution is to add a lightweight smoke harness for deterministic non-in
 
 ## What Changes
 
-- Add a lightweight QA smoke harness for OpenSpec CLI behavior with isolated per-run sandbox state
+- Add a lightweight QA smoke harness for SynergySpec CLI behavior with isolated per-run sandbox state
 - Use `Makefile` targets as the primary entrypoint:
   - `make qa` (default local QA entrypoint)
   - `make qa-smoke` (deterministic non-interactive suite)

@@ -1,0 +1,71 @@
+:root {
+  font-family: system-ui, -apple-system, sans-serif;
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pomodoro {
+  text-align: center;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.pomodoro--work {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.pomodoro--rest {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.pomodoro h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.display__phase {
+  font-size: 1rem;
+  text-transform: uppercase;
+  opacity: 0.7;
+  letter-spacing: 0.1em;
+}
+
+.display__time {
+  font-size: 5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin: 0.5rem 0 1rem;
+}
+
+.controls {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.controls button {
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.1);
+  color: inherit;
+  font-weight: 600;
+}
+
+.controls button:hover {
+  background: rgba(0, 0, 0, 0.2);
+}

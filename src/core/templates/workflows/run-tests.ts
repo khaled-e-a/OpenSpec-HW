@@ -12,13 +12,13 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
+   Run \`synergyspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
 
    **NEVER auto-select**.
 
 2. **Load spec-tests.md (if available)**
 
-   Look for \`openspec/changes/<name>/spec-tests.md\`.
+   Look for \`synergyspec/changes/<name>/spec-tests.md\`.
    If found, read it — it provides the Requirement Traceability Matrix and step-level IDs (e.g., UC1-S1) mapping spec steps/flows to test files.
    If not found, proceed with best-effort mapping (keyword/file-path matching).
 
@@ -44,7 +44,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
    For each counterexample found:
    1. Extract the minimal failing input values from the output.
    2. Write a **deterministic regression unit test** that hardcodes those exact inputs, named \`pbt-regression-<uc-id>-<N>.<ext>\`, placed in the same test directory as the failing property test. This test must pass once the bug is fixed and must never be deleted.
-   3. Append an entry to \`openspec/changes/<name>/pbt-regressions.md\` (create the file if it does not exist):
+   3. Append an entry to \`synergyspec/changes/<name>/pbt-regressions.md\` (create the file if it does not exist):
 
    \`\`\`markdown
    ## PBT Regressions: <change-name>
@@ -58,11 +58,11 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
    **If no PBT failures are found**: note "No PBT counterexamples found" and skip the rest of this step.
 
-   **If no PBT tests exist** (no \`.property.test.*\` files found anywhere): note "No PBT tests found — run \`/opsx-hw:gen-tests\` to generate them."
+   **If no PBT tests exist** (no \`.property.test.*\` files found anywhere): note "No PBT tests found — run \`/synspec:gen-tests\` to generate them."
 
 4. **Generate Test Coverage Report**
 
-   Save this file to \`openspec/changes/<name>/test-report.md\`.
+   Save this file to \`synergyspec/changes/<name>/test-report.md\`.
 
    \`\`\`markdown
    ## Test Report: <change-name>
@@ -80,7 +80,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
    ### Uncovered Requirements
    - ❌ **UC1-E2a**: <description>: No test found
-     → Run /opsx-hw:gen-tests to generate missing tests
+     → Run /synspec:gen-tests to generate missing tests
    ...
 
    ### PBT Results
@@ -99,7 +99,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
    **Trigger**: Run this step whenever \`test-report.md\` contains any ⚠️ partial or ❌ uncovered requirements.
 
-   **Goal**: Save \`openspec/changes/<name>/test-plan.md\`.
+   **Goal**: Save \`synergyspec/changes/<name>/test-plan.md\`.
 
    **Classification — for each ⚠️/❌ requirement, determine the blocking reason:**
 
@@ -180,8 +180,8 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 **Graceful Degradation**
 
 - If tests fail: still show the coverage report; highlight failures separately
-- If no spec-tests.md: note "Run /opsx-hw:gen-tests first for accurate coverage mapping"
-- If no PBT tests found: note "No PBT tests found — run /opsx-hw:gen-tests to generate them" and skip step 3b
+- If no spec-tests.md: note "Run /synspec:gen-tests first for accurate coverage mapping"
+- If no PBT tests found: note "No PBT tests found — run /synspec:gen-tests to generate them" and skip step 3b
 - If pbt-regressions.md already exists: update it in place (append new entries, update status of previously open regressions that now pass)
 
 **Output Format**
@@ -190,21 +190,21 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 - ✅ covered, ⚠️ partial/uncertain, ❌ not covered
 - File:line references for existing tests
 - Specific, actionable recommendations for missing coverage
-- If test plan was generated: "Test plan saved to \`openspec/changes/<name>/test-plan.md\` — follow it to manually verify N uncovered steps."
-- If coverage is complete: suggest \`/opsx-hw:archive\` to archive and close the change
-- For full CI pipeline (all tests + e2e + coverage + screenshot comparison in one step): run \`/opsx-hw:ci\``;
+- If test plan was generated: "Test plan saved to \`synergyspec/changes/<name>/test-plan.md\` — follow it to manually verify N uncovered steps."
+- If coverage is complete: suggest \`/synspec:archive\` to archive and close the change
+- For full CI pipeline (all tests + e2e + coverage + screenshot comparison in one step): run \`/synspec:ci\``;
 
 export function getRunTestsSkillTemplate(): SkillTemplate {
   return {
-    name: 'openspec-run-tests',
+    name: 'synergyspec-run-tests',
     description:
       'Run the test suite and generate a spec-coverage report. Reads spec-tests.md (produced by gen-tests) when available.',
     instructions: `Run the test suite and generate a spec-coverage report, reading spec-tests.md when available.
 
 ${INSTRUCTIONS_BODY}`,
     license: 'MIT',
-    compatibility: 'Requires openspec-hw CLI.',
-    metadata: { author: 'openspec', version: '1.0' },
+    compatibility: 'Requires synergyspec-hw CLI.',
+    metadata: { author: 'synergyspec', version: '1.0' },
   };
 }
 
@@ -216,7 +216,7 @@ export function getOpsxRunTestsCommandTemplate(): CommandTemplate {
     tags: ['workflow', 'test', 'run-tests', 'coverage'],
     content: `Run the test suite and generate a spec-coverage report, reading spec-tests.md when available.
 
-**Input**: Optionally specify a change name after \`/opsx-hw:run-tests\` (e.g., \`/opsx-hw:run-tests add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
+**Input**: Optionally specify a change name after \`/synspec:run-tests\` (e.g., \`/synspec:run-tests add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 ${INSTRUCTIONS_BODY}`,
   };

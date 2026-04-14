@@ -79,13 +79,13 @@ export class ListCommand {
     const { sort = 'recent', json = false } = options;
 
     if (mode === 'changes') {
-      const changesDir = path.join(targetPath, 'openspec', 'changes');
+      const changesDir = path.join(targetPath, 'synergyspec', 'changes');
 
       // Check if changes directory exists
       try {
         await fs.access(changesDir);
       } catch {
-        throw new Error("No OpenSpec changes directory found. Run 'openspec init' first.");
+        throw new Error("No SynergySpec changes directory found. Run 'synergyspec-hw init' first.");
       }
 
       // Get all directories in changes (excluding archive)
@@ -152,7 +152,7 @@ export class ListCommand {
     }
 
     // specs mode
-    const specsDir = path.join(targetPath, 'openspec', 'specs');
+    const specsDir = path.join(targetPath, 'synergyspec', 'specs');
     try {
       await fs.access(specsDir);
     } catch {

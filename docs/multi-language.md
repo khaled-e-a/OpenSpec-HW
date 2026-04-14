@@ -1,10 +1,10 @@
 # Multi-Language Guide
 
-Configure OpenSpec to generate artifacts in languages other than English.
+Configure SynergySpec to generate artifacts in languages other than English.
 
 ## Quick Setup
 
-Add a language instruction to your `openspec/config.yaml`:
+Add a language instruction to your `synergyspec/config.yaml`:
 
 ```yaml
 schema: spec-driven

@@ -1,15 +1,15 @@
 <p align="center">
-  <a href="https://github.com/Fission-AI/OpenSpec">
+  <a href="https://github.com/Fission-AI/SynergySpec">
     <picture>
-      <source srcset="assets/openspec_bg.png">
-      <img src="assets/openspec_bg.png" alt="OpenSpec logo">
+      <source srcset="assets/synergyspec_bg.png">
+      <img src="assets/synergyspec_bg.png" alt="SynergySpec logo">
     </picture>
   </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Fission-AI/OpenSpec/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Fission-AI/OpenSpec/actions/workflows/ci.yml/badge.svg" /></a>
-  <a href="https://www.npmjs.com/package/@khaledea/openspec-hw"><img alt="npm version" src="https://img.shields.io/npm/v/@khaledea/openspec-hw?style=flat-square" /></a>
+  <a href="https://github.com/Fission-AI/SynergySpec/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Fission-AI/SynergySpec/actions/workflows/ci.yml/badge.svg" /></a>
+  <a href="https://www.npmjs.com/package/@khaledea/synergyspec-hw"><img alt="npm version" src="https://img.shields.io/npm/v/@khaledea/synergyspec-hw?style=flat-square" /></a>
   <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" /></a>
   <a href="https://discord.gg/YctCnvvshC"><img alt="Discord" src="https://img.shields.io/discord/1411657095639601154?style=flat-square&logo=discord&logoColor=white&label=Discord&suffix=%20online" /></a>
 </p>
@@ -17,9 +17,9 @@
 <details>
 <summary><strong>The most loved spec framework.</strong></summary>
 
-[![Stars](https://img.shields.io/github/stars/Fission-AI/OpenSpec?style=flat-square&label=Stars)](https://github.com/Fission-AI/OpenSpec/stargazers)
-[![Downloads](https://img.shields.io/npm/dm/@khaledea/openspec-hw?style=flat-square&label=Downloads/mo)](https://www.npmjs.com/package/@khaledea/openspec-hw)
-[![Contributors](https://img.shields.io/github/contributors/Fission-AI/OpenSpec?style=flat-square&label=Contributors)](https://github.com/Fission-AI/OpenSpec/graphs/contributors)
+[![Stars](https://img.shields.io/github/stars/Fission-AI/SynergySpec?style=flat-square&label=Stars)](https://github.com/Fission-AI/SynergySpec/stargazers)
+[![Downloads](https://img.shields.io/npm/dm/@khaledea/synergyspec-hw?style=flat-square&label=Downloads/mo)](https://www.npmjs.com/package/@khaledea/synergyspec-hw)
+[![Contributors](https://img.shields.io/github/contributors/Fission-AI/SynergySpec?style=flat-square&label=Contributors)](https://github.com/Fission-AI/SynergySpec/graphs/contributors)
 
 </details>
 <p></p>
@@ -34,35 +34,35 @@ Our philosophy:
 ```
 
 > [!TIP]
-> **New workflow now available!** We've rebuilt OpenSpec with a new artifact-guided workflow.
+> **New workflow now available!** We've rebuilt SynergySpec with a new artifact-guided workflow.
 >
-> Run `/opsx-hw:onboard` to get started. → [Learn more here](docs/opsx.md)
+> Run `/synspec:onboard` to get started. → [Learn more here](docs/opsx.md)
 
 <p align="center">
-  Follow <a href="https://x.com/0xTab">@0xTab on X</a> for updates · Join the <a href="https://discord.gg/YctCnvvshC">OpenSpec Discord</a> for help and questions.
+  Follow <a href="https://x.com/0xTab">@0xTab on X</a> for updates · Join the <a href="https://discord.gg/YctCnvvshC">SynergySpec Discord</a> for help and questions.
 </p>
 
 ### Teams
 
-Using OpenSpec in a team? [Email here](mailto:teams@openspec.dev) for access to our Slack channel.
+Using SynergySpec in a team? [Email here](mailto:teams@openspec.dev) for access to our Slack channel.
 
-<!-- TODO: Add GIF demo of /opsx-hw:new → /opsx-hw:archive workflow -->
+<!-- TODO: Add GIF demo of /synspec:new → /synspec:archive workflow -->
 
 ## See it in action
 
 ```text
-You: /opsx-hw:new add-dark-mode
-AI:  Created openspec/changes/add-dark-mode/
+You: /synspec:new add-dark-mode
+AI:  Created synergyspec/changes/add-dark-mode/
      Ready to create: proposal
 
-You: /opsx-hw:ff   # "fast-forward" - generate all planning docs
+You: /synspec:ff   # "fast-forward" - generate all planning docs
 AI:  ✓ proposal.md — why we're doing this, what's changing
      ✓ specs/       — requirements and scenarios
      ✓ design.md    — technical approach
      ✓ tasks.md     — implementation checklist
      Ready for implementation!
 
-You: /opsx-hw:apply
+You: /synspec:apply
 AI:  Implementing tasks...
      ✓ 1.1 Add theme context provider
      ✓ 1.2 Create toggle component
@@ -70,16 +70,16 @@ AI:  Implementing tasks...
      ✓ 2.2 Wire up localStorage
      All tasks complete!
 
-You: /opsx-hw:archive
-AI:  Archived to openspec/changes/archive/2025-01-23-add-dark-mode/
+You: /synspec:archive
+AI:  Archived to synergyspec/changes/archive/2025-01-23-add-dark-mode/
      Specs updated. Ready for the next feature.
 ```
 
 <details>
-<summary><strong>OpenSpec Dashboard</strong></summary>
+<summary><strong>SynergySpec Dashboard</strong></summary>
 
 <p align="center">
-  <img src="assets/openspec_dashboard.png" alt="OpenSpec dashboard preview" width="90%">
+  <img src="assets/synergyspec_dashboard.png" alt="SynergySpec dashboard preview" width="90%">
 </p>
 
 </details>
@@ -88,20 +88,20 @@ AI:  Archived to openspec/changes/archive/2025-01-23-add-dark-mode/
 
 **Requires Node.js 20.19.0 or higher.**
 
-Install OpenSpec globally:
+Install SynergySpec globally:
 
 ```bash
-npm install -g @khaledea/openspec-hw@latest
+npm install -g @khaledea/synergyspec-hw@latest
 ```
 
 Then navigate to your project directory and initialize:
 
 ```bash
 cd your-project
-openspec-hw init
+synergyspec-hw init
 ```
 
-Now tell your AI: `/opsx-hw:new <what-you-want-to-build>`
+Now tell your AI: `/synspec:new <what-you-want-to-build>`
 
 > [!NOTE]
 > Not sure if your tool is supported? [View the full list](docs/supported-tools.md) – we support 20+ tools and growing.
@@ -120,9 +120,9 @@ Now tell your AI: `/opsx-hw:new <what-you-want-to-build>`
 → **[Customization](docs/customization.md)**: make it yours
 
 
-## Why OpenSpec?
+## Why SynergySpec?
 
-AI coding assistants are powerful but unpredictable when requirements live only in chat history. OpenSpec adds a lightweight spec layer so you agree on what to build before any code is written.
+AI coding assistants are powerful but unpredictable when requirements live only in chat history. SynergySpec adds a lightweight spec layer so you agree on what to build before any code is written.
 
 - **Agree before you build** — human and AI align on specs before code gets written
 - **Stay organized** — each change gets its own folder with proposal, specs, design, and tasks
@@ -131,18 +131,18 @@ AI coding assistants are powerful but unpredictable when requirements live only 
 
 ### How we compare
 
-**vs. [Spec Kit](https://github.com/github/spec-kit)** (GitHub) — Thorough but heavyweight. Rigid phase gates, lots of Markdown, Python setup. OpenSpec is lighter and lets you iterate freely.
+**vs. [Spec Kit](https://github.com/github/spec-kit)** (GitHub) — Thorough but heavyweight. Rigid phase gates, lots of Markdown, Python setup. SynergySpec is lighter and lets you iterate freely.
 
-**vs. [Kiro](https://kiro.dev)** (AWS) — Powerful but you're locked into their IDE and limited to Claude models. OpenSpec works with the tools you already use.
+**vs. [Kiro](https://kiro.dev)** (AWS) — Powerful but you're locked into their IDE and limited to Claude models. SynergySpec works with the tools you already use.
 
-**vs. nothing** — AI coding without specs means vague prompts and unpredictable results. OpenSpec brings predictability without the ceremony.
+**vs. nothing** — AI coding without specs means vague prompts and unpredictable results. SynergySpec brings predictability without the ceremony.
 
-## Updating OpenSpec
+## Updating SynergySpec
 
 **Upgrade the package**
 
 ```bash
-npm install -g @khaledea/openspec-hw@latest
+npm install -g @khaledea/synergyspec-hw@latest
 ```
 
 **Refresh agent instructions**
@@ -150,7 +150,7 @@ npm install -g @khaledea/openspec-hw@latest
 Run this inside each project to regenerate AI guidance and ensure the latest slash commands are active:
 
 ```bash
-openspec-hw update
+synergyspec-hw update
 ```
 
 ## Building from Source
@@ -158,8 +158,8 @@ openspec-hw update
 Clone the repo and install dependencies:
 
 ```bash
-git clone https://github.com/khaledea/OpenSpec-HW.git
-cd OpenSpec-HW
+git clone https://github.com/khaledea/SynergySpec-HW.git
+cd SynergySpec-HW
 pnpm install
 ```
 
@@ -169,7 +169,7 @@ Build the package:
 pnpm run build
 ```
 
-Install the built package globally so the `openspec-hw` command is available:
+Install the built package globally so the `synergyspec-hw` command is available:
 
 ```bash
 npm install -g .
@@ -178,22 +178,22 @@ npm install -g .
 Verify it works:
 
 ```bash
-openspec-hw --version
+synergyspec-hw --version
 ```
 
 ## Usage Notes
 
-**Model selection**: OpenSpec works best with high-reasoning models. We recommend Opus 4.5 and GPT 5.2 for both planning and implementation.
+**Model selection**: SynergySpec works best with high-reasoning models. We recommend Opus 4.5 and GPT 5.2 for both planning and implementation.
 
-**Context hygiene**: OpenSpec benefits from a clean context window. Clear your context before starting implementation and maintain good context hygiene throughout your session.
+**Context hygiene**: SynergySpec benefits from a clean context window. Clear your context before starting implementation and maintain good context hygiene throughout your session.
 
 ## Contributing
 
 **Small fixes** — Bug fixes, typo corrections, and minor improvements can be submitted directly as PRs.
 
-**Larger changes** — For new features, significant refactors, or architectural changes, please submit an OpenSpec change proposal first so we can align on intent and goals before implementation begins.
+**Larger changes** — For new features, significant refactors, or architectural changes, please submit an SynergySpec change proposal first so we can align on intent and goals before implementation begins.
 
-When writing proposals, keep the OpenSpec philosophy in mind: we serve a wide variety of users across different coding agents, models, and use cases. Changes should work well for everyone.
+When writing proposals, keep the SynergySpec philosophy in mind: we serve a wide variety of users across different coding agents, models, and use cases. Changes should work well for everyone.
 
 **AI-generated code is welcome** — as long as it's been tested and verified. PRs containing AI-generated code should mention the coding agent and model used (e.g., "Generated with Claude Code using claude-opus-4-5-20251101").
 
@@ -210,11 +210,11 @@ When writing proposals, keep the OpenSpec philosophy in mind: we serve a wide va
 <details>
 <summary><strong>Telemetry</strong></summary>
 
-OpenSpec collects anonymous usage stats.
+SynergySpec collects anonymous usage stats.
 
 We collect only command names and version to understand usage patterns. No arguments, paths, content, or PII. Automatically disabled in CI.
 
-**Opt-out:** `export OPENSPEC_TELEMETRY=0` or `export DO_NOT_TRACK=1`
+**Opt-out:** `export SYNERGYSPEC_TELEMETRY=0` or `export DO_NOT_TRACK=1`
 
 </details>
 

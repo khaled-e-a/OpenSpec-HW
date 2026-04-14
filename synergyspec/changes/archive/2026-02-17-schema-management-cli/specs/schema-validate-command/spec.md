@@ -11,7 +11,7 @@ The CLI SHALL provide an `openspec schema validate [name]` command that validate
 
 #### Scenario: Validate all project schemas
 - **WHEN** user runs `openspec schema validate` without a name
-- **THEN** system validates all schemas in `openspec/schemas/`
+- **THEN** system validates all schemas in `synergyspec/schemas/`
 - **AND** displays results for each schema
 - **AND** exits with non-zero code if any schema is invalid
 

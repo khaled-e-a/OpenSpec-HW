@@ -72,9 +72,9 @@ interface AIToolOption {
 // Tool-agnostic command data
 interface CommandContent {
   id: string;           // e.g., 'explore', 'new', 'apply'
-  name: string;         // e.g., 'OpenSpec Explore'
+  name: string;         // e.g., 'SynergySpec Explore'
   description: string;  // e.g., 'Enter explore mode...'
-  category: string;     // e.g., 'OpenSpec'
+  category: string;     // e.g., 'SynergySpec'
   tags: string[];       // e.g., ['openspec', 'explore']
   body: string;         // The command instructions
 }

@@ -1,16 +1,16 @@
 <p align="center">
-  <a href="https://github.com/Fission-AI/OpenSpec">
+  <a href="https://github.com/Fission-AI/SynergySpec">
     <picture>
       <source srcset="assets/openspec_pixel_dark.svg" media="(prefers-color-scheme: dark)">
       <source srcset="assets/openspec_pixel_light.svg" media="(prefers-color-scheme: light)">
-      <img src="assets/openspec_pixel_light.svg" alt="OpenSpec logo" height="64">
+      <img src="assets/openspec_pixel_light.svg" alt="SynergySpec logo" height="64">
     </picture>
   </a>
   
 </p>
 <p align="center">Spec-driven development for AI coding assistants.</p>
 <p align="center">
-  <a href="https://github.com/Fission-AI/OpenSpec/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Fission-AI/OpenSpec/actions/workflows/ci.yml/badge.svg" /></a>
+  <a href="https://github.com/Fission-AI/SynergySpec/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Fission-AI/SynergySpec/actions/workflows/ci.yml/badge.svg" /></a>
   <a href="https://www.npmjs.com/package/@fission-ai/openspec"><img alt="npm version" src="https://img.shields.io/npm/v/@fission-ai/openspec?style=flat-square" /></a>
   <a href="https://nodejs.org/"><img alt="node version" src="https://img.shields.io/node/v/@fission-ai/openspec?style=flat-square" /></a>
   <a href="./LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" /></a>
@@ -19,24 +19,24 @@
 </p>
 
 <p align="center">
-  <img src="assets/openspec_dashboard.png" alt="OpenSpec dashboard preview" width="90%">
+  <img src="assets/openspec_dashboard.png" alt="SynergySpec dashboard preview" width="90%">
 </p>
 
 <p align="center">
-  Follow <a href="https://x.com/0xTab">@0xTab on X</a> for updates · Join the <a href="https://discord.gg/YctCnvvshC">OpenSpec Discord</a> for help and questions.
+  Follow <a href="https://x.com/0xTab">@0xTab on X</a> for updates · Join the <a href="https://discord.gg/YctCnvvshC">SynergySpec Discord</a> for help and questions.
 </p>
 
 <p align="center">
   <sub>🧪 <strong>New:</strong> <a href="docs/opsx.md">OPSX Workflow</a> — schema-driven, hackable, fluid. Iterate on workflows without code changes.</sub>
 </p>
 
-# OpenSpec
+# SynergySpec
 
-OpenSpec aligns humans and AI coding assistants with spec-driven development so you agree on what to build before any code is written. **No API keys required.**
+SynergySpec aligns humans and AI coding assistants with spec-driven development so you agree on what to build before any code is written. **No API keys required.**
 
-## Why OpenSpec?
+## Why SynergySpec?
 
-AI coding assistants are powerful but unpredictable when requirements live in chat history. OpenSpec adds a lightweight specification workflow that locks intent before implementation, giving you deterministic, reviewable outputs.
+AI coding assistants are powerful but unpredictable when requirements live in chat history. SynergySpec adds a lightweight specification workflow that locks intent before implementation, giving you deterministic, reviewable outputs.
 
 Key outcomes:
 - Human and AI stakeholders agree on specs before work begins.
@@ -44,14 +44,14 @@ Key outcomes:
 - Shared visibility into what's proposed, active, or archived.
 - Works with the AI tools you already use: custom slash commands where supported, context rules everywhere else.
 
-## How OpenSpec compares (at a glance)
+## How SynergySpec compares (at a glance)
 
 - **Lightweight**: simple workflow, no API keys, minimal setup.
-- **Brownfield-first**: works great beyond 0→1. OpenSpec separates the source of truth from proposals: `openspec/specs/` (current truth) and `openspec/changes/` (proposed updates). This keeps diffs explicit and manageable across features.
+- **Brownfield-first**: works great beyond 0→1. SynergySpec separates the source of truth from proposals: `openspec/specs/` (current truth) and `openspec/changes/` (proposed updates). This keeps diffs explicit and manageable across features.
 - **Change tracking**: proposals, tasks, and spec deltas live together; archiving merges the approved updates back into specs.
-- **Compared to spec-kit & Kiro**: those shine for brand-new features (0→1). OpenSpec also excels when modifying existing behavior (1→n), especially when updates span multiple specs.
+- **Compared to spec-kit & Kiro**: those shine for brand-new features (0→1). SynergySpec also excels when modifying existing behavior (1→n), especially when updates span multiple specs.
 
-See the full comparison in [How OpenSpec Compares](#how-openspec-compares).
+See the full comparison in [How SynergySpec Compares](#how-openspec-compares).
 
 ## How It Works
 
@@ -92,7 +92,7 @@ See the full comparison in [How OpenSpec Compares](#how-openspec-compares).
 <details>
 <summary><strong>Native Slash Commands</strong> (click to expand)</summary>
 
-These tools have built-in OpenSpec commands. Select the OpenSpec integration when prompted.
+These tools have built-in SynergySpec commands. Select the SynergySpec integration when prompted.
 
 | Tool | Commands |
 |------|----------|
@@ -125,7 +125,7 @@ Kilo Code discovers team workflows automatically. Save the generated files under
 <details>
 <summary><strong>AGENTS.md Compatible</strong> (click to expand)</summary>
 
-These tools automatically read workflow instructions from `openspec/AGENTS.md`. Ask them to follow the OpenSpec workflow if they need a reminder. Learn more about the [AGENTS.md convention](https://agents.md/).
+These tools automatically read workflow instructions from `openspec/AGENTS.md`. Ask them to follow the SynergySpec workflow if they need a reminder. Learn more about the [AGENTS.md convention](https://agents.md/).
 
 | Tools |
 |-------|
@@ -153,14 +153,14 @@ openspec --version
 
 **Option B: Using Nix (NixOS and Nix package manager)**
 
-Run OpenSpec directly without installation:
+Run SynergySpec directly without installation:
 ```bash
-nix run github:Fission-AI/OpenSpec -- init
+nix run github:Fission-AI/SynergySpec -- init
 ```
 
 Or install to your profile:
 ```bash
-nix profile install github:Fission-AI/OpenSpec
+nix profile install github:Fission-AI/SynergySpec
 ```
 
 Or add to your development environment in `flake.nix`:
@@ -168,7 +168,7 @@ Or add to your development environment in `flake.nix`:
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    openspec.url = "github:Fission-AI/OpenSpec";
+    openspec.url = "github:Fission-AI/SynergySpec";
   };
 
   outputs = { nixpkgs, openspec, ... }: {
@@ -184,7 +184,7 @@ Verify installation:
 openspec --version
 ```
 
-#### Step 2: Initialize OpenSpec in your project
+#### Step 2: Initialize SynergySpec in your project
 
 Navigate to your project directory:
 ```bash
@@ -198,7 +198,7 @@ openspec init
 
 **What happens during initialization:**
 - You'll be prompted to pick any natively supported AI tools (Claude Code, CodeBuddy, Cursor, OpenCode, Qoder,etc.); other assistants always rely on the shared `AGENTS.md` stub
-- OpenSpec automatically configures slash commands for the tools you choose and always writes a managed `AGENTS.md` hand-off at the project root
+- SynergySpec automatically configures slash commands for the tools you choose and always writes a managed `AGENTS.md` hand-off at the project root
 - A new `openspec/` directory structure is created in your project
 
 **After setup:**
@@ -220,16 +220,16 @@ Use `openspec/project.md` to define project-level conventions, standards, archit
 
 ### Create Your First Change
 
-Here's a real example showing the complete OpenSpec workflow. This works with any AI tool. Those with native slash commands will recognize the shortcuts automatically.
+Here's a real example showing the complete SynergySpec workflow. This works with any AI tool. Those with native slash commands will recognize the shortcuts automatically.
 
 #### 1. Draft the Proposal
 Start by asking your AI to create a change proposal:
 
 ```text
-You: Create an OpenSpec change proposal for adding profile search filters by role and team
+You: Create an SynergySpec change proposal for adding profile search filters by role and team
      (Shortcut for tools with slash commands: /openspec:proposal Add profile search filters)
 
-AI:  I'll create an OpenSpec change proposal for profile filters.
+AI:  I'll create an SynergySpec change proposal for profile filters.
      *Scaffolds openspec/changes/add-profile-filters/ with proposal.md, tasks.md, spec deltas.*
 ```
 
@@ -283,7 +283,7 @@ Or run the command yourself in terminal:
 $ openspec archive add-profile-filters --yes  # Archive the completed change without prompts
 ```
 
-**Note:** Tools with native slash commands (Claude Code, CodeBuddy, Cursor, Codex, Qoder, RooCode) can use the shortcuts shown. All other tools work with natural language requests to "create an OpenSpec proposal", "apply the OpenSpec change", or "archive the change".
+**Note:** Tools with native slash commands (Claude Code, CodeBuddy, Cursor, Codex, Qoder, RooCode) can use the shortcuts shown. All other tools work with natural language requests to "create an SynergySpec proposal", "apply the SynergySpec change", or "archive the change".
 
 ## Command Reference
 
@@ -295,7 +295,7 @@ openspec validate <change>  # Check spec formatting and structure
 openspec archive <change> [--yes|-y]   # Move a completed change into archive/ (non-interactive with --yes)
 ```
 
-## Example: How AI Creates OpenSpec Files
+## Example: How AI Creates SynergySpec Files
 
 When you ask your AI assistant to "add two-factor authentication", it creates:
 
@@ -364,7 +364,7 @@ The system MUST require a second factor during login.
 
 **Important:** You don't create these files manually. Your AI assistant generates them based on your requirements and the existing codebase.
 
-## Understanding OpenSpec Files
+## Understanding SynergySpec Files
 
 ### Delta Format
 
@@ -379,27 +379,27 @@ Deltas are "patches" that show how specs change:
 - Every requirement needs at least one `#### Scenario:` block
 - Use SHALL/MUST in requirement text
 
-## How OpenSpec Compares
+## How SynergySpec Compares
 
 ### vs. spec-kit
-OpenSpec’s two-folder model (`openspec/specs/` for the current truth, `openspec/changes/` for proposed updates) keeps state and diffs separate. This scales when you modify existing features or touch multiple specs. spec-kit is strong for greenfield/0→1 but provides less structure for cross-spec updates and evolving features.
+SynergySpec’s two-folder model (`openspec/specs/` for the current truth, `openspec/changes/` for proposed updates) keeps state and diffs separate. This scales when you modify existing features or touch multiple specs. spec-kit is strong for greenfield/0→1 but provides less structure for cross-spec updates and evolving features.
 
 ### vs. Kiro.dev
-OpenSpec groups every change for a feature in one folder (`openspec/changes/feature-name/`), making it easy to track related specs, tasks, and designs together. Kiro spreads updates across multiple spec folders, which can make feature tracking harder.
+SynergySpec groups every change for a feature in one folder (`openspec/changes/feature-name/`), making it easy to track related specs, tasks, and designs together. Kiro spreads updates across multiple spec folders, which can make feature tracking harder.
 
 ### vs. No Specs
-Without specs, AI coding assistants generate code from vague prompts, often missing requirements or adding unwanted features. OpenSpec brings predictability by agreeing on the desired behavior before any code is written.
+Without specs, AI coding assistants generate code from vague prompts, often missing requirements or adding unwanted features. SynergySpec brings predictability by agreeing on the desired behavior before any code is written.
 
 ## Team Adoption
 
-1. **Initialize OpenSpec** – Run `openspec init` in your repo.
+1. **Initialize SynergySpec** – Run `openspec init` in your repo.
 2. **Start with new features** – Ask your AI to capture upcoming work as change proposals.
 3. **Grow incrementally** – Each change archives into living specs that document your system.
 4. **Stay flexible** – Different teammates can use Claude Code, CodeBuddy, Cursor, or any AGENTS.md-compatible tool while sharing the same specs.
 
 Run `openspec update` whenever someone switches tools so your agents pick up the latest instructions and slash-command bindings.
 
-## Updating OpenSpec
+## Updating SynergySpec
 
 1. **Upgrade the package**
    ```bash
@@ -434,11 +434,11 @@ You can always go back:
 
 | Command | What it does |
 |---------|--------------|
-| `/opsx-hw:new` | Start a new change |
-| `/opsx-hw:continue` | Create the next artifact (based on what's ready) |
-| `/opsx-hw:ff` | Fast-forward (all planning artifacts at once) |
-| `/opsx-hw:apply` | Implement tasks, updating artifacts as needed |
-| `/opsx-hw:archive` | Archive when done |
+| `/synspec:new` | Start a new change |
+| `/synspec:continue` | Create the next artifact (based on what's ready) |
+| `/synspec:ff` | Fast-forward (all planning artifacts at once) |
+| `/synspec:apply` | Implement tasks, updating artifacts as needed |
+| `/synspec:archive` | Archive when done |
 
 **Setup:** `openspec experimental`
 
@@ -447,7 +447,7 @@ You can always go back:
 </details>
 
 <details>
-<summary><strong>Telemetry</strong> – OpenSpec collects anonymous usage stats (opt-out: <code>OPENSPEC_TELEMETRY=0</code>)</summary>
+<summary><strong>Telemetry</strong> – SynergySpec collects anonymous usage stats (opt-out: <code>OPENSPEC_TELEMETRY=0</code>)</summary>
 
 We collect only command names and version to understand usage patterns. No arguments, paths, content, or PII. Automatically disabled in CI.
 

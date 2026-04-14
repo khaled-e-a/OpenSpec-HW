@@ -2,7 +2,7 @@
 
 ## Problem
 
-The `openspec diff` command adds unnecessary complexity to the OpenSpec CLI for several reasons:
+The `openspec diff` command adds unnecessary complexity to the SynergySpec CLI for several reasons:
 
 1. **Redundant functionality**: The `openspec show` command already provides comprehensive visualization of changes through structured JSON output and markdown rendering
 2. **Maintenance burden**: The diff command requires a separate dependency (jest-diff) and additional code complexity (~227 lines)
@@ -32,19 +32,19 @@ Remove the `openspec diff` command entirely and guide users to more appropriate 
 - **Reduced complexity**: Removes ~227 lines of code and the jest-diff dependency
 - **Clearer user journey**: Directs users to the canonical `show` command for viewing changes
 - **Lower maintenance**: Fewer commands to maintain and test
-- **Better alignment**: Focuses on the core OpenSpec workflow without redundant features
+- **Better alignment**: Focuses on the core SynergySpec workflow without redundant features
 
 ## Implementation
 
 ### Files to Remove
 - `/src/core/diff.ts` - The entire diff command implementation
-- `/openspec/specs/cli-diff/spec.md` - The diff command specification
+- `/synergyspec/specs/cli-diff/spec.md` - The diff command specification
 
 ### Files to Update
 - `/src/cli/index.ts` - Remove diff command registration (lines 8, 84-96)
 - `/package.json` - Remove jest-diff dependency
 - `/README.md` - Remove diff command documentation
-- `/openspec/README.md` - Remove diff command references
+- `/synergyspec/README.md` - Remove diff command references
 - Various documentation files mentioning `openspec diff`
 
 ### Migration Guide for Users
@@ -62,7 +62,7 @@ openspec show add-feature
 openspec show add-feature --json --deltas-only
 
 # After - use git for file comparisons
-git diff openspec/specs openspec/changes/add-feature/specs
+git diff synergyspec/specs synergyspec/changes/add-feature/specs
 ```
 
 ## Risks

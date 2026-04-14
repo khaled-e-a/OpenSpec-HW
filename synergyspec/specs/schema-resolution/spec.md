@@ -6,29 +6,29 @@ Define project-local schema resolution behavior, including precedence order (pro
 ## Requirements
 ### Requirement: Project-local schema resolution
 
-The system SHALL resolve schemas from the project-local directory (`./openspec/schemas/<name>/`) with highest priority when a `projectRoot` is provided.
+The system SHALL resolve schemas from the project-local directory (`./synergyspec/schemas/<name>/`) with highest priority when a `projectRoot` is provided.
 
 #### Scenario: Project-local schema takes precedence over user override
-- **WHEN** a schema named "my-workflow" exists at `./openspec/schemas/my-workflow/schema.yaml`
-- **AND** a schema named "my-workflow" exists at `~/.local/share/openspec/schemas/my-workflow/schema.yaml`
+- **WHEN** a schema named "my-workflow" exists at `./synergyspec/schemas/my-workflow/schema.yaml`
+- **AND** a schema named "my-workflow" exists at `~/.local/share/synergyspec/schemas/my-workflow/schema.yaml`
 - **AND** `getSchemaDir("my-workflow", projectRoot)` is called
 - **THEN** the system SHALL return the project-local path
 
 #### Scenario: Project-local schema takes precedence over package built-in
-- **WHEN** a schema named "spec-driven" exists at `./openspec/schemas/spec-driven/schema.yaml`
+- **WHEN** a schema named "spec-driven" exists at `./synergyspec/schemas/spec-driven/schema.yaml`
 - **AND** "spec-driven" is a package built-in schema
 - **AND** `getSchemaDir("spec-driven", projectRoot)` is called
 - **THEN** the system SHALL return the project-local path
 
 #### Scenario: Falls back to user override when no project-local schema
-- **WHEN** no schema named "my-workflow" exists at `./openspec/schemas/my-workflow/`
-- **AND** a schema named "my-workflow" exists at `~/.local/share/openspec/schemas/my-workflow/schema.yaml`
+- **WHEN** no schema named "my-workflow" exists at `./synergyspec/schemas/my-workflow/`
+- **AND** a schema named "my-workflow" exists at `~/.local/share/synergyspec/schemas/my-workflow/schema.yaml`
 - **AND** `getSchemaDir("my-workflow", projectRoot)` is called
 - **THEN** the system SHALL return the user override path
 
 #### Scenario: Falls back to package built-in when no project-local or user schema
-- **WHEN** no schema named "spec-driven" exists at `./openspec/schemas/spec-driven/`
-- **AND** no schema named "spec-driven" exists at `~/.local/share/openspec/schemas/spec-driven/`
+- **WHEN** no schema named "spec-driven" exists at `./synergyspec/schemas/spec-driven/`
+- **AND** no schema named "spec-driven" exists at `~/.local/share/synergyspec/schemas/spec-driven/`
 - **AND** "spec-driven" is a package built-in schema
 - **AND** `getSchemaDir("spec-driven", projectRoot)` is called
 - **THEN** the system SHALL return the package built-in path
@@ -44,14 +44,14 @@ The system SHALL provide a `getProjectSchemasDir(projectRoot)` function that ret
 
 #### Scenario: Returns correct path
 - **WHEN** `getProjectSchemasDir("/path/to/project")` is called
-- **THEN** the system SHALL return `/path/to/project/openspec/schemas`
+- **THEN** the system SHALL return `/path/to/project/synergyspec/schemas`
 
 ### Requirement: List schemas includes project-local
 
 The system SHALL include project-local schemas when listing available schemas if `projectRoot` is provided.
 
 #### Scenario: Project-local schemas appear in list
-- **WHEN** a schema named "team-flow" exists at `./openspec/schemas/team-flow/schema.yaml`
+- **WHEN** a schema named "team-flow" exists at `./synergyspec/schemas/team-flow/schema.yaml`
 - **AND** `listSchemas(projectRoot)` is called
 - **THEN** the returned list SHALL include "team-flow"
 
@@ -69,12 +69,12 @@ The system SHALL include project-local schemas when listing available schemas if
 The system SHALL indicate `source: 'project'` for project-local schemas in `listSchemasWithInfo()` results.
 
 #### Scenario: Project-local schema shows project source
-- **WHEN** a schema named "team-flow" exists at `./openspec/schemas/team-flow/schema.yaml`
+- **WHEN** a schema named "team-flow" exists at `./synergyspec/schemas/team-flow/schema.yaml`
 - **AND** `listSchemasWithInfo(projectRoot)` is called
 - **THEN** the schema info for "team-flow" SHALL have `source: 'project'`
 
 #### Scenario: User override schema shows user source
-- **WHEN** a schema named "my-custom" exists only at `~/.local/share/openspec/schemas/my-custom/`
+- **WHEN** a schema named "my-custom" exists only at `~/.local/share/synergyspec/schemas/my-custom/`
 - **AND** `listSchemasWithInfo(projectRoot)` is called
 - **THEN** the schema info for "my-custom" SHALL have `source: 'user'`
 
@@ -93,7 +93,7 @@ The `openspec schemas` command SHALL display the source of each schema.
 
 ### Requirement: Use config schema as default for new changes
 
-The system SHALL use the schema field from `openspec/config.yaml` as the default when creating new changes without explicit `--schema` flag.
+The system SHALL use the schema field from `synergyspec/config.yaml` as the default when creating new changes without explicit `--schema` flag.
 
 #### Scenario: Create change without --schema flag and config exists
 - **WHEN** user runs `openspec new change foo` and config contains `schema: "tdd"`
@@ -116,7 +116,7 @@ The system SHALL resolve the schema for a change using the following precedence 
 - **THEN** system uses "custom" regardless of change metadata or config
 
 #### Scenario: Change metadata specifies schema
-- **WHEN** change has `.openspec.yaml` with `schema: bound` and config has `schema: tdd`
+- **WHEN** change has `.synergyspec.yaml` with `schema: bound` and config has `schema: tdd`
 - **THEN** system uses "bound" from change metadata
 
 #### Scenario: Only project config specifies schema
@@ -129,10 +129,10 @@ The system SHALL resolve the schema for a change using the following precedence 
 
 ### Requirement: Support project-local schema names in config
 
-The system SHALL allow the config schema field to reference project-local schemas defined in `openspec/schemas/`.
+The system SHALL allow the config schema field to reference project-local schemas defined in `synergyspec/schemas/`.
 
 #### Scenario: Config references project-local schema
-- **WHEN** config contains `schema: "my-workflow"` and `openspec/schemas/my-workflow/` exists
+- **WHEN** config contains `schema: "my-workflow"` and `synergyspec/schemas/my-workflow/` exists
 - **THEN** system resolves to the project-local schema
 
 #### Scenario: Config references non-existent schema
@@ -153,7 +153,7 @@ The system SHALL display schema error with fuzzy match suggestions, list of avai
 
 #### Scenario: Error message includes fix instructions
 - **WHEN** config references invalid schema
-- **THEN** error message includes "Fix: Edit openspec/config.yaml and change 'schema: X' to a valid schema name"
+- **THEN** error message includes "Fix: Edit synergyspec/config.yaml and change 'schema: X' to a valid schema name"
 
 #### Scenario: Error distinguishes built-in vs project-local schemas
 - **WHEN** error lists available schemas
@@ -169,4 +169,4 @@ The system SHALL continue to work with existing changes that do not have project
 
 #### Scenario: Existing change with config added later
 - **WHEN** config file is added to project with existing changes
-- **THEN** existing changes continue to use their bound schema from `.openspec.yaml`
+- **THEN** existing changes continue to use their bound schema from `.synergyspec.yaml`

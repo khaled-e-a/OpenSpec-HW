@@ -4,24 +4,24 @@ import { transformToHyphenCommands } from '../../src/utils/command-references.js
 describe('transformToHyphenCommands', () => {
   describe('basic transformations', () => {
     it('should transform single command reference', () => {
-      expect(transformToHyphenCommands('/opsx-hw:new')).toBe('/opsx-hw-new');
+      expect(transformToHyphenCommands('/synspec:new')).toBe('/synspec-new');
     });
 
     it('should transform multiple command references', () => {
-      const input = '/opsx-hw:new and /opsx-hw:apply';
-      const expected = '/opsx-hw-new and /opsx-hw-apply';
+      const input = '/synspec:new and /synspec:apply';
+      const expected = '/synspec-new and /synspec-apply';
       expect(transformToHyphenCommands(input)).toBe(expected);
     });
 
     it('should transform command reference in context', () => {
-      const input = 'Use /opsx-hw:apply to implement tasks';
-      const expected = 'Use /opsx-hw-apply to implement tasks';
+      const input = 'Use /synspec:apply to implement tasks';
+      const expected = 'Use /synspec-apply to implement tasks';
       expect(transformToHyphenCommands(input)).toBe(expected);
     });
 
     it('should handle backtick-quoted commands', () => {
-      const input = 'Run `/opsx-hw:continue` to proceed';
-      const expected = 'Run `/opsx-hw-continue` to proceed';
+      const input = 'Run `/synspec:continue` to proceed';
+      const expected = 'Run `/synspec-continue` to proceed';
       expect(transformToHyphenCommands(input)).toBe(expected);
     });
   });
@@ -42,20 +42,20 @@ describe('transformToHyphenCommands', () => {
     });
 
     it('should handle multiple occurrences on same line', () => {
-      const input = '/opsx-hw:new /opsx-hw:continue /opsx-hw:apply';
-      const expected = '/opsx-hw-new /opsx-hw-continue /opsx-hw-apply';
+      const input = '/synspec:new /synspec:continue /synspec:apply';
+      const expected = '/synspec-new /synspec-continue /synspec-apply';
       expect(transformToHyphenCommands(input)).toBe(expected);
     });
   });
 
   describe('multiline content', () => {
     it('should transform references across multiple lines', () => {
-      const input = `Use /opsx-hw:new to start
-Then /opsx-hw:continue to proceed
-Finally /opsx-hw:apply to implement`;
-      const expected = `Use /opsx-hw-new to start
-Then /opsx-hw-continue to proceed
-Finally /opsx-hw-apply to implement`;
+      const input = `Use /synspec:new to start
+Then /synspec:continue to proceed
+Finally /synspec:apply to implement`;
+      const expected = `Use /synspec-new to start
+Then /synspec-continue to proceed
+Finally /synspec-apply to implement`;
       expect(transformToHyphenCommands(input)).toBe(expected);
     });
   });
@@ -75,8 +75,8 @@ Finally /opsx-hw-apply to implement`;
     ];
 
     for (const cmd of commands) {
-      it(`should transform /opsx-hw:${cmd}`, () => {
-        expect(transformToHyphenCommands(`/opsx-hw:${cmd}`)).toBe(`/opsx-hw-${cmd}`);
+      it(`should transform /synspec:${cmd}`, () => {
+        expect(transformToHyphenCommands(`/synspec:${cmd}`)).toBe(`/synspec-${cmd}`);
       });
     }
   });

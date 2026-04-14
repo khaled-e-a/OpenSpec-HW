@@ -9,14 +9,14 @@ import type { CommandContent, ToolCommandAdapter } from '../types.js';
 
 /**
  * Antigravity adapter for command generation.
- * File path: .agent/workflows/opsx-hw-<id>.md
+ * File path: .agent/workflows/synspec-<id>.md
  * Frontmatter: description
  */
 export const antigravityAdapter: ToolCommandAdapter = {
   toolId: 'antigravity',
 
   getFilePath(commandId: string): string {
-    return path.join('.agent', 'workflows', `opsx-hw-${commandId}.md`);
+    return path.join('.agent', 'workflows', `synspec-${commandId}.md`);
   },
 
   formatFile(content: CommandContent): string {

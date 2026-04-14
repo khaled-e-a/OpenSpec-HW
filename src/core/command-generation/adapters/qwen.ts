@@ -9,14 +9,14 @@ import type { CommandContent, ToolCommandAdapter } from '../types.js';
 
 /**
  * Qwen adapter for command generation.
- * File path: .qwen/commands/opsx-hw-<id>.toml
+ * File path: .qwen/commands/synspec-<id>.toml
  * Format: TOML with description and prompt fields
  */
 export const qwenAdapter: ToolCommandAdapter = {
   toolId: 'qwen',
 
   getFilePath(commandId: string): string {
-    return path.join('.qwen', 'commands', `opsx-hw-${commandId}.toml`);
+    return path.join('.qwen', 'commands', `synspec-${commandId}.toml`);
   },
 
   formatFile(content: CommandContent): string {

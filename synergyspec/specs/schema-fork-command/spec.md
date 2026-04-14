@@ -5,18 +5,18 @@ Define `openspec schema fork` behavior for cloning existing schemas into project
 
 ## Requirements
 ### Requirement: Schema fork copies existing schema
-The CLI SHALL provide an `openspec schema fork <source> [name]` command that copies an existing schema to the project's `openspec/schemas/` directory.
+The CLI SHALL provide an `openspec schema fork <source> [name]` command that copies an existing schema to the project's `synergyspec/schemas/` directory.
 
 #### Scenario: Fork with explicit name
 - **WHEN** user runs `openspec schema fork spec-driven my-custom`
 - **THEN** system locates `spec-driven` schema using resolution order (project → user → package)
-- **AND** copies all files to `openspec/schemas/my-custom/`
+- **AND** copies all files to `synergyspec/schemas/my-custom/`
 - **AND** updates `name` field in `schema.yaml` to `my-custom`
 - **AND** displays success message with source and destination paths
 
 #### Scenario: Fork with default name
 - **WHEN** user runs `openspec schema fork spec-driven` without specifying a name
-- **THEN** system copies to `openspec/schemas/spec-driven-custom/`
+- **THEN** system copies to `synergyspec/schemas/spec-driven-custom/`
 - **AND** updates `name` field in `schema.yaml` to `spec-driven-custom`
 
 #### Scenario: Source schema not found
@@ -29,7 +29,7 @@ The CLI SHALL provide an `openspec schema fork <source> [name]` command that cop
 The CLI SHALL require confirmation or `--force` flag when the destination schema already exists.
 
 #### Scenario: Destination exists without force
-- **WHEN** user runs `openspec schema fork spec-driven my-custom` and `openspec/schemas/my-custom/` exists
+- **WHEN** user runs `openspec schema fork spec-driven my-custom` and `synergyspec/schemas/my-custom/` exists
 - **THEN** system displays error that destination already exists
 - **AND** suggests using `--force` to overwrite
 - **AND** exits with non-zero code

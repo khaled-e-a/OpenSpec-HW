@@ -1,10 +1,10 @@
 # Concepts
 
-This guide explains the core ideas behind OpenSpec and how they fit together. For practical usage, see [Getting Started](getting-started.md) and [Workflows](workflows.md).
+This guide explains the core ideas behind SynergySpec and how they fit together. For practical usage, see [Getting Started](getting-started.md) and [Workflows](workflows.md).
 
 ## Philosophy
 
-OpenSpec is built around four principles:
+SynergySpec is built around four principles:
 
 ```
 fluid not rigid       — no phase gates, work on what makes sense
@@ -15,21 +15,21 @@ brownfield-first      — works with existing codebases, not just greenfield
 
 ### Why These Principles Matter
 
-**Fluid not rigid.** Traditional spec systems lock you into phases: first you plan, then you implement, then you're done. OpenSpec is more flexible — you can create artifacts in any order that makes sense for your work.
+**Fluid not rigid.** Traditional spec systems lock you into phases: first you plan, then you implement, then you're done. SynergySpec is more flexible — you can create artifacts in any order that makes sense for your work.
 
-**Iterative not waterfall.** Requirements change. Understanding deepens. What seemed like a good approach at the start might not hold up after you see the codebase. OpenSpec embraces this reality.
+**Iterative not waterfall.** Requirements change. Understanding deepens. What seemed like a good approach at the start might not hold up after you see the codebase. SynergySpec embraces this reality.
 
-**Easy not complex.** Some spec frameworks require extensive setup, rigid formats, or heavyweight processes. OpenSpec stays out of your way. Initialize in seconds, start working immediately, customize only if you need to.
+**Easy not complex.** Some spec frameworks require extensive setup, rigid formats, or heavyweight processes. SynergySpec stays out of your way. Initialize in seconds, start working immediately, customize only if you need to.
 
-**Brownfield-first.** Most software work isn't building from scratch — it's modifying existing systems. OpenSpec's delta-based approach makes it easy to specify changes to existing behavior, not just describe new systems.
+**Brownfield-first.** Most software work isn't building from scratch — it's modifying existing systems. SynergySpec's delta-based approach makes it easy to specify changes to existing behavior, not just describe new systems.
 
 ## The Big Picture
 
-OpenSpec organizes your work into two main areas:
+SynergySpec organizes your work into two main areas:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        openspec/                                 │
+│                        synergyspec/                                 │
 │                                                                  │
 │   ┌─────────────────────┐      ┌──────────────────────────────┐ │
 │   │       specs/        │      │         changes/              │ │
@@ -56,7 +56,7 @@ Specs describe your system's behavior using structured requirements and scenario
 ### Structure
 
 ```
-openspec/specs/
+synergyspec/specs/
 ├── auth/
 │   └── spec.md           # Authentication behavior
 ├── payments/
@@ -154,7 +154,7 @@ Quick test:
 
 ### Keep It Lightweight: Progressive Rigor
 
-OpenSpec aims to avoid bureaucracy. Use the lightest level that still makes the change verifiable.
+SynergySpec aims to avoid bureaucracy. Use the lightest level that still makes the change verifiable.
 
 **Lite spec (default):**
 - Short behavior-first requirements
@@ -186,11 +186,11 @@ A change is a proposed modification to your system, packaged as a folder with ev
 ### Change Structure
 
 ```
-openspec/changes/add-dark-mode/
+synergyspec/changes/add-dark-mode/
 ├── proposal.md           # Why and what
 ├── design.md             # How (technical approach)
 ├── tasks.md              # Implementation checklist
-├── .openspec.yaml        # Change metadata (optional)
+├── .synergyspec.yaml        # Change metadata (optional)
 └── specs/                # Delta specs
     └── ui/
         └── spec.md       # What's changing in ui/spec.md
@@ -345,7 +345,7 @@ Tasks are the **implementation checklist** — concrete steps with checkboxes.
 
 ## Delta Specs
 
-Delta specs are the key concept that makes OpenSpec work for brownfield development. They describe **what's changing** rather than restating the entire spec.
+Delta specs are the key concept that makes SynergySpec work for brownfield development. They describe **what's changing** rather than restating the entire spec.
 
 ### The Format
 
@@ -411,7 +411,7 @@ Schemas define the artifact types and their dependencies for a workflow.
 ### How Schemas Work
 
 ```yaml
-# openspec/schemas/spec-driven/schema.yaml
+# synergyspec/schemas/spec-driven/schema.yaml
 name: spec-driven
 artifacts:
   - id: proposal
@@ -472,16 +472,16 @@ Create custom schemas for your team's workflow:
 
 ```bash
 # Create from scratch
-openspec-hw schema init research-first
+synergyspec-hw schema init research-first
 
 # Or fork an existing one
-openspec-hw schema fork spec-driven research-first
+synergyspec-hw schema fork spec-driven research-first
 ```
 
 **Example custom schema:**
 
 ```yaml
-# openspec/schemas/research-first/schema.yaml
+# synergyspec/schemas/research-first/schema.yaml
 name: research-first
 artifacts:
   - id: research
@@ -508,7 +508,7 @@ Archiving completes a change by merging its delta specs into the main specs and 
 ```
 Before archive:
 
-openspec/
+synergyspec/
 ├── specs/
 │   └── auth/
 │       └── spec.md ◄────────────────┐
@@ -524,7 +524,7 @@ openspec/
 
 After archive:
 
-openspec/
+synergyspec/
 ├── specs/
 │   └── auth/
 │       └── spec.md        # Now includes 2FA requirements
@@ -562,27 +562,27 @@ openspec/
 │                              OPENSPEC FLOW                                   │
 │                                                                              │
 │   ┌────────────────┐                                                         │
-│   │  1. START      │  /opsx-hw:new creates a change folder                      │
+│   │  1. START      │  /synspec:new creates a change folder                      │
 │   │     CHANGE     │                                                         │
 │   └───────┬────────┘                                                         │
 │           │                                                                  │
 │           ▼                                                                  │
 │   ┌────────────────┐                                                         │
-│   │  2. CREATE     │  /opsx-hw:ff or /opsx-hw:continue                             │
+│   │  2. CREATE     │  /synspec:ff or /synspec:continue                             │
 │   │     ARTIFACTS  │  Creates proposal → specs → design → tasks              │
 │   │                │  (based on schema dependencies)                         │
 │   └───────┬────────┘                                                         │
 │           │                                                                  │
 │           ▼                                                                  │
 │   ┌────────────────┐                                                         │
-│   │  3. IMPLEMENT  │  /opsx-hw:apply                                            │
+│   │  3. IMPLEMENT  │  /synspec:apply                                            │
 │   │     TASKS      │  Work through tasks, checking them off                  │
 │   │                │◄──── Update artifacts as you learn                      │
 │   └───────┬────────┘                                                         │
 │           │                                                                  │
 │           ▼                                                                  │
 │   ┌────────────────┐                                                         │
-│   │  4. VERIFY     │  /opsx-hw:verify (optional)                                │
+│   │  4. VERIFY     │  /synspec:verify (optional)                                │
 │   │     WORK       │  Check implementation matches specs                     │
 │   └───────┬────────┘                                                         │
 │           │                                                                  │
@@ -618,7 +618,7 @@ openspec/
 | **Scenario** | A concrete example of a requirement, typically in Given/When/Then format |
 | **Schema** | A definition of artifact types and their dependencies |
 | **Spec** | A specification describing system behavior, containing requirements and scenarios |
-| **Source of truth** | The `openspec/specs/` directory, containing the current agreed-upon behavior |
+| **Source of truth** | The `synergyspec/specs/` directory, containing the current agreed-upon behavior |
 
 ## Next Steps
 

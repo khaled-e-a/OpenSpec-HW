@@ -1,4 +1,4 @@
-# OpenSpec Parallel Delta Remediation Plan
+# SynergySpec Parallel Delta Remediation Plan
 
 ## Problem Summary
 - Active changes apply requirement-level replacements when archiving. When two changes touch the same requirement, the second archive overwrites the first and silently drops scenarios (e.g., Windsurf vs. Kilo Code slash command updates).
@@ -76,7 +76,7 @@ _Outcome:_ Most concurrent updates become commutative, drastically reducing the 
 3. **Integrate with Git directly.**
    - Offer optional `openspec branch` scaffolding that aligns spec changes with Git branches, letting teams leverage Git’s conflict editor for the markdown IR.
 
-_Outcome:_ OpenSpec graduates from replace-based updates to a resilient, intent-preserving spec management platform.
+_Outcome:_ SynergySpec graduates from replace-based updates to a resilient, intent-preserving spec management platform.
 
 ## Migration & Product Impacts
 - **Backfill metadata:** add hashes for all active changes and the current main specs during the initial rollout.

@@ -14,7 +14,7 @@ The system SHALL provide a `change` command with subcommands for displaying, lis
 #### Scenario: List all changes
 
 - **WHEN** executing `openspec change list`
-- **THEN** scan the openspec/changes directory
+- **THEN** scan the synergyspec/changes directory
 - **AND** return list of all pending changes
 - **AND** support JSON output with `--json` flag
 

@@ -11,7 +11,7 @@ Today’s process requires maintainers to merge the Changesets PR, cut a tag, an
 1) Phase 1 — Dry run (no publish)
    - Update the existing `release-prepare.yml` to wire up `changesets/action` with `createGithubReleases: true` and a no-op `publish` command (e.g., `echo 'dry run'`).
    - Keep `.github/workflows/release-publish.yml` intact. This avoids any publish path changes while we verify that the version PR behavior and permissions are correct.
-   - Add a repository guard (`if: github.repository == 'Fission-AI/OpenSpec'`) and a concurrency group for safety.
+   - Add a repository guard (`if: github.repository == 'Fission-AI/SynergySpec'`) and a concurrency group for safety.
 
 2) Phase 2 — Enable publish and consolidate
    - Add `"release": "pnpm run build && pnpm exec changeset publish"` to `package.json`.
@@ -20,7 +20,7 @@ Today’s process requires maintainers to merge the Changesets PR, cut a tag, an
 
 ## Guardrails
 - Concurrency: `concurrency: { group: release-\\${{ github.ref }}, cancel-in-progress: false }` on the workflow to serialize releases.
-- Repository/branch guard: run publish logic only on upstream `main` (`if: github.repository == 'Fission-AI/OpenSpec' && github.ref == 'refs/heads/main'`).
+- Repository/branch guard: run publish logic only on upstream `main` (`if: github.repository == 'Fission-AI/SynergySpec' && github.ref == 'refs/heads/main'`).
 - Permissions: ensure `contents: write` and `pull-requests: write` for opening/updating the version PR; `packages: read` optional.
 
 ## Rollback and Hotfixes

@@ -2,15 +2,15 @@
 
 ## Summary
 
-The implementation to add a separate use cases artifact to OpenSpec-HW has been **SUCCESSFULLY COMPLETED** in the development version. However, demo projects created before this update will show the old workflow sequence.
+The implementation to add a separate use cases artifact to SynergySpec-HW has been **SUCCESSFULLY COMPLETED** in the development version. However, demo projects created before this update will show the old workflow sequence.
 
 ## What Was Implemented
 
-1. **Updated Schema Configuration** (`/Users/khaledea/data/claude-research/OpenSpec-HW/schemas/spec-driven/schema.yaml`)
+1. **Updated Schema Configuration** (`/Users/khaledea/data/claude-research/SynergySpec-HW/schemas/spec-driven/schema.yaml`)
    - Added `usecases` artifact between `proposal` and `specs`
    - Updated workflow sequence: proposal → usecases → specs → design → tasks
 
-2. **Created Use Cases Template** (`/Users/khaledea/data/claude-research/OpenSpec-HW/schemas/spec-driven/templates/usecases.md`)
+2. **Created Use Cases Template** (`/Users/khaledea/data/claude-research/SynergySpec-HW/schemas/spec-driven/templates/usecases.md`)
    - Following Cockburn's methodology
    - Includes actor-goal list, use case structure, and notes
 
@@ -23,7 +23,7 @@ The implementation to add a separate use cases artifact to OpenSpec-HW has been 
 
 Using the development version shows the correct workflow:
 ```bash
-/Users/khaledea/data/claude-research/OpenSpec-HW/bin/openspec.js status --change <name>
+/Users/khaledea/data/claude-research/SynergySpec-HW/bin/openspec.js status --change <name>
 # Shows: 1/5 artifacts complete
 # [ ] proposal
 # [ ] design
@@ -36,7 +36,7 @@ Using the development version shows the correct workflow:
 
 Demo projects show the old workflow because they use the **globally installed** version:
 ```bash
-openspec-hw status --change <name>
+synergyspec-hw status --change <name>
 # Shows: 1/4 artifacts complete
 # [ ] proposal
 # [ ] design
@@ -46,7 +46,7 @@ openspec-hw status --change <name>
 
 ## Root Cause
 
-The demo project at `/Users/khaledea/data/claude-research/OpenSpec-HW/demos/demo-widget-2026-03-02` was created using the globally installed `openspec-hw` (version 1.1.1) which doesn't include our schema updates.
+The demo project at `/Users/khaledea/data/claude-research/SynergySpec-HW/demos/demo-widget-2026-03-02` was created using the globally installed `synergyspec-hw` (version 1.1.1) which doesn't include our schema updates.
 
 ## Solution
 
@@ -54,12 +54,12 @@ To use the updated workflow with use cases:
 
 1. **Use the development binary**:
    ```bash
-   /Users/khaledea/data/claude-research/OpenSpec-HW/bin/openspec.js <command>
+   /Users/khaledea/data/claude-research/SynergySpec-HW/bin/openspec.js <command>
    ```
 
 2. **Or rebuild and reinstall globally**:
    ```bash
-   cd /Users/khaledea/data/claude-research/OpenSpec-HW
+   cd /Users/khaledea/data/claude-research/SynergySpec-HW
    npm run build
    npm install -g .
    ```
@@ -68,7 +68,7 @@ To use the updated workflow with use cases:
 
 ## Conclusion
 
-The implementation is complete and working correctly. The schema-driven workflow now creates use cases as a separate artifact, providing better separation of concerns and following industry best practices, just like OpenSpec-HW2.
+The implementation is complete and working correctly. The schema-driven workflow now creates use cases as a separate artifact, providing better separation of concerns and following industry best practices, just like SynergySpec-HW2.
 
 ---
 

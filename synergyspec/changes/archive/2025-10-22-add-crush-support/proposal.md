@@ -1,5 +1,5 @@
 ## Why
-Add support for Crush AI assistant in OpenSpec to enable developers to use Crush's enhanced capabilities for spec-driven development workflows.
+Add support for Crush AI assistant in SynergySpec to enable developers to use Crush's enhanced capabilities for spec-driven development workflows.
 
 ## What Changes
 - Add Crush slash command configurator for proposal, apply, and archive operations
@@ -10,4 +10,4 @@ Add support for Crush AI assistant in OpenSpec to enable developers to use Crush
 ## Impact
 - Affected specs: cli-init (new tool option)
 - Affected code: src/core/configurators/slash/crush.ts, registry.ts
-- New files: .crush/commands/openspec/ (proposal.md, apply.md, archive.md)
+- New files: .crush/commands/synergyspec/ (proposal.md, apply.md, archive.md)

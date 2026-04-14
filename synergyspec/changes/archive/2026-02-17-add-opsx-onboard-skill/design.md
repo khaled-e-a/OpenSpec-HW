@@ -1,6 +1,6 @@
 ## Context
 
-OpenSpec has a complete skill and slash command generation system. Skills are defined in `src/core/templates/skill-templates.ts` as functions that return `SkillTemplate` objects (for Agent Skills) and `CommandTemplate` objects (for slash commands). These are registered in `src/core/shared/skill-generation.ts` and generated during `openspec init` and `openspec update`.
+SynergySpec has a complete skill and slash command generation system. Skills are defined in `src/core/templates/skill-templates.ts` as functions that return `SkillTemplate` objects (for Agent Skills) and `CommandTemplate` objects (for slash commands). These are registered in `src/core/shared/skill-generation.ts` and generated during `openspec init` and `openspec update`.
 
 Existing skills follow a consistent pattern:
 - `getXxxSkillTemplate()` returns the skill with name, description, instructions
@@ -10,7 +10,7 @@ Existing skills follow a consistent pattern:
 ## Goals / Non-Goals
 
 **Goals:**
-- Add `/opsx-hw:onboard` skill that teaches the OpenSpec workflow through guided practice
+- Add `/synspec:onboard` skill that teaches the SynergySpec workflow through guided practice
 - Follow existing patterns for skill/command template generation
 - Provide comprehensive narration that explains each step
 - Include codebase analysis to suggest real, appropriately-scoped tasks

@@ -9,8 +9,8 @@ import type { SkillTemplate } from '../types.js';
 export function getFeedbackSkillTemplate(): SkillTemplate {
    return {
       name: 'feedback',
-      description: 'Collect and submit user feedback about OpenSpec with context enrichment and anonymization.',
-      instructions: `Help the user submit feedback about OpenSpec.
+      description: 'Collect and submit user feedback about SynergySpec with context enrichment and anonymization.',
+      instructions: `Help the user submit feedback about SynergySpec.
 
 **Goal**: Guide the user through collecting, enriching, and submitting feedback while ensuring privacy through anonymization.
 
@@ -45,8 +45,8 @@ export function getFeedbackSkillTemplate(): SkillTemplate {
    - Allow the user to request modifications
 
 5. **Submit on confirmation**
-   - Use the \`openspec-hw feedback\` command to submit
-   - Format: \`openspec-hw feedback "title" --body "body content"\`
+   - Use the \`synergyspec-hw feedback\` command to submit
+   - Format: \`synergyspec-hw feedback "title" --body "body content"\`
    - The command will automatically add metadata (version, platform, timestamp)
 
 **Example Draft**
@@ -109,7 +109,7 @@ Does this look good? I can modify it if you'd like, or submit it as-is.
 
 Only proceed with submission after user confirms.`,
       license: 'MIT',
-      compatibility: 'Requires openspec-hw CLI.',
-      metadata: { author: 'openspec', version: '1.0' },
+      compatibility: 'Requires synergyspec-hw CLI.',
+      metadata: { author: 'synergyspec', version: '1.0' },
    };
 }

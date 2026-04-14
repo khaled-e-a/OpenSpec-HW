@@ -26,7 +26,7 @@
         in
         {
           default = pkgs.stdenv.mkDerivation (finalAttrs: {
-            pname = "openspec";
+            pname = "synergyspec";
             version = (builtins.fromJSON (builtins.readFile ./package.json)).version;
 
             src = lib.fileset.toSource {
@@ -76,7 +76,7 @@
               homepage = "https://github.com/Fission-AI/OpenSpec";
               license = licenses.mit;
               maintainers = [ ];
-              mainProgram = "openspec";
+              mainProgram = "synergyspec-hw";
             };
           });
         }
@@ -85,7 +85,7 @@
       apps = forAllSystems (system: {
         default = {
           type = "app";
-          program = "${self.packages.${system}.default}/bin/openspec";
+          program = "${self.packages.${system}.default}/bin/synergyspec-hw";
         };
       });
 

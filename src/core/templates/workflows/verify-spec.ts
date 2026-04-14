@@ -14,7 +14,7 @@ const INSTRUCTIONS = `Verify and fix use case traceability across all artifacts 
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
+   Run \`synergyspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
 
    Show only changes that have a \`usecases.md\` artifact (traceability mapping requires it).
 
@@ -23,7 +23,7 @@ const INSTRUCTIONS = `Verify and fix use case traceability across all artifacts 
 2. **Load artifacts**
 
    \`\`\`bash
-   openspec-hw instructions apply --change "<name>" --json
+   synergyspec-hw instructions apply --change "<name>" --json
    \`\`\`
 
    From the returned \`contextFiles\`, read:
@@ -126,12 +126,12 @@ const INSTRUCTIONS = `Verify and fix use case traceability across all artifacts 
 
 export function getVerifySpecSkillTemplate(): SkillTemplate {
   return {
-    name: 'openspec-verify-spec',
+    name: 'synergyspec-verify-spec',
     description: 'Verify and fix use case traceability across all artifacts. Use when the user wants to audit or repair traceability annotations in usecases.md, specs, design.md, or tasks.md.',
     instructions: INSTRUCTIONS,
     license: 'MIT',
-    compatibility: 'Requires openspec-hw CLI.',
-    metadata: { author: 'openspec', version: '1.0' },
+    compatibility: 'Requires synergyspec-hw CLI.',
+    metadata: { author: 'synergyspec', version: '1.0' },
   };
 }
 
@@ -143,13 +143,13 @@ export function getOpsxVerifySpecCommandTemplate(): CommandTemplate {
     tags: ['workflow', 'verify', 'traceability', 'experimental'],
     content: `Verify and fix use case traceability across all artifacts for a change.
 
-**Input**: Optionally specify a change name after \`/opsx-hw:verify-spec\` (e.g., \`/opsx-hw:verify-spec add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
+**Input**: Optionally specify a change name after \`/synspec:verify-spec\` (e.g., \`/synspec:verify-spec add-auth\`). If omitted, check if it can be inferred from conversation context. If vague or ambiguous you MUST prompt for available changes.
 
 **Steps**
 
 1. **If no change name provided, prompt for selection**
 
-   Run \`openspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
+   Run \`synergyspec-hw list --json\` to get available changes. Use the **AskUserQuestion tool** to let the user select.
 
    Show only changes that have a \`usecases.md\` artifact (traceability mapping requires it).
 
@@ -158,7 +158,7 @@ export function getOpsxVerifySpecCommandTemplate(): CommandTemplate {
 2. **Load artifacts**
 
    \`\`\`bash
-   openspec-hw instructions apply --change "<name>" --json
+   synergyspec-hw instructions apply --change "<name>" --json
    \`\`\`
 
    From the returned \`contextFiles\`, read:
