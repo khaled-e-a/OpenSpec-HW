@@ -1,0 +1,376 @@
+# SynergySpec Knowledge Graph Ontology Schema
+# This schema defines the abstract types and relationships for the KG
+# Version: 1.0.0
+
+schema:
+  name: synergyspec-kg-ontology
+  version: "1.0.0"
+  description: Knowledge graph ontology for SynergySpec artifacts and traceability
+
+abstractTypes:
+  Artifact:
+    description: Base type for all file-based artifacts in SynergySpec
+    properties:
+      id: { type: string, required: true, unique: true }
+      name: { type: string, required: true }
+      createdAt: { type: datetime, required: true }
+      updatedAt: { type: datetime, required: false }
+      status: { type: string, enum: [active, archived, deprecated], required: true }
+      filePath: { type: string, required: true }
+      changeId: { type: string, required: true }  # Reference to parent change
+    relationships:
+      partOf:
+        target: Change
+        cardinality: many-to-one
+        description: Artifact belongs to a change
+      derivedFrom:
+        target: Artifact
+        cardinality: many-to-one
+        description: Artifact is derived from another artifact
+      versionOf:
+        target: Artifact
+        cardinality: many-to-one
+        description: Artifact is a version of another artifact
+
+  Entity:
+    description: Base type for all conceptual entities (requirements, use cases, etc.)
+    properties:
+      id: { type: string, required: true, unique: true }
+      type: { type: string, required: true }
+      name: { type: string, required: true }
+      description: { type: string, required: false }
+      metadata: { type: json, required: false }
+    relationships:
+      relatedTo:
+        target: Entity
+        cardinality: many-to-many
+        description: Generic relationship between entities
+      traceableTo:
+        target: Entity
+        cardinality: many-to-many
+        description: Traceability link to upstream entities
+
+  Event:
+    description: Base type for all events and executions
+    properties:
+      id: { type: string, required: true, unique: true }
+      timestamp: { type: datetime, required: true }
+      type: { type: string, required: true }
+      outcome: { type: string, enum: [success, failure, warning, pending], required: true }
+      duration: { type: integer, required: false }  # milliseconds
+      metadata: { type: json, required: false }
+    relationships:
+      triggeredBy:
+        target: Entity
+        cardinality: many-to-one
+        description: Event was triggered by an entity
+      resultsIn:
+        target: Artifact
+        cardinality: one-to-many
+        description: Event produced artifacts
+
+concreteTypes:
+  # Artifacts extending Artifact base
+  Spec:
+    extends: Artifact
+    description: Specification document defining requirements
+    properties:
+      capability: { type: string, required: true }
+      specType: { type: string, enum: [new, modified, delta], required: true }
+      requirementsCount: { type: integer, required: false }
+    relationships:
+      hasRequirement:
+        target: Requirement
+        cardinality: one-to-many
+        description: Spec contains requirements
+      modifies:
+        target: Spec
+        cardinality: many-to-one
+        description: Delta spec modifies an existing spec
+
+  TestCase:
+    extends: Artifact
+    description: Test file or test case
+    properties:
+      framework: { type: string, required: true }
+      testType: { type: string, enum: [unit, component, integration, e2e], required: true }
+      assertionsCount: { type: integer, required: false }
+      isFailing: { type: boolean, required: true }
+      implementsTDD: { type: boolean, required: false }
+    relationships:
+      tests:
+        target: Requirement
+        cardinality: many-to-many
+        description: Test validates requirements
+      covers:
+        target: UseCaseStep
+        cardinality: many-to-many
+        description: Test covers use case steps
+      usesMock:
+        target: MockObject
+        cardinality: many-to-many
+        description: Test uses mock objects
+
+  CodeFile:
+    extends: Artifact
+    description: Source code file
+    properties:
+      language: { type: string, required: true }
+      complexity: { type: integer, required: false }
+      linesOfCode: { type: integer, required: false }
+      testCoverage: { type: float, required: false }
+    relationships:
+      implements:
+        target: Requirement
+        cardinality: many-to-many
+        description: Code implements requirements
+      testedBy:
+        target: TestCase
+        cardinality: one-to-many
+        description: Code is tested by test cases
+      hasFunction:
+        target: Function
+        cardinality: one-to-many
+        description: Code file contains functions
+
+  DesignDoc:
+    extends: Artifact
+    description: Design document with technical decisions
+    properties:
+      decisionsCount: { type: integer, required: false }
+      hasMigrationPlan: { type: boolean, required: false }
+    relationships:
+      documents:
+        target: DesignDecision
+        cardinality: one-to-many
+        description: Design doc contains decisions
+
+  # Entities extending Entity base
+  Requirement:
+    extends: Entity
+    description: Individual requirement from specs
+    properties:
+      requirementType: { type: string, enum: [added, modified, removed, renamed], required: true }
+      shallStatement: { type: string, required: true }
+      priority: { type: string, enum: [high, medium, low], required: false, default: medium }
+      isTestable: { type: boolean, required: false, default: true }
+    relationships:
+      implements:
+        target: UseCaseStep
+        cardinality: many-to-many
+        description: Requirement implements use case steps
+      hasScenario:
+        target: Scenario
+        cardinality: one-to-many
+        description: Requirement has test scenarios
+
+  UseCase:
+    extends: Entity
+    description: Use case with actor goals
+    properties:
+      primaryActor: { type: string, required: true }
+      goal: { type: string, required: true }
+      level: { type: string, enum: [summary, user, subfunction], required: true }
+    relationships:
+      hasStep:
+        target: UseCaseStep
+        cardinality: one-to-many
+        description: Use case has steps
+      hasPrecondition:
+        target: Precondition
+        cardinality: one-to-many
+        description: Use case has preconditions
+
+  UseCaseStep:
+    extends: Entity
+    description: Individual step in a use case
+    properties:
+      stepNumber: { type: string, required: true }  # e.g., "S1", "E2a"
+      stepType: { type: string, enum: [main, extension], required: true }
+      actor: { type: string, required: false }
+      action: { type: string, required: true }
+    relationships:
+      partOf:
+        target: UseCase
+        cardinality: many-to-one
+        description: Step belongs to use case
+      implementedBy:
+        target: Requirement
+        cardinality: many-to-many
+        description: Step is implemented by requirements
+
+  DesignDecision:
+    extends: Entity
+    description: Technical design decision
+    properties:
+      rationale: { type: string, required: true }
+      riskLevel: { type: string, enum: [high, medium, low], required: false }
+      isArchitecture: { type: boolean, required: false }
+    relationships:
+      addresses:
+        target: UseCaseStep
+        cardinality: many-to-many
+        description: Decision addresses use case steps
+      influences:
+        target: CodeFile
+        cardinality: many-to-many
+        description: Decision influences code
+
+  Task:
+    extends: Entity
+    description: Implementation task
+    properties:
+      taskNumber: { type: string, required: true }  # e.g., "1.2"
+      status: { type: string, enum: [pending, in_progress, completed, blocked], required: true }
+      priority: { type: string, enum: [high, medium, low], required: false }
+      estimatedEffort: { type: integer, required: false }  # hours
+      isTestDriven: { type: boolean, required: false }
+    relationships:
+      implements:
+        target: UseCaseStep
+        cardinality: many-to-many
+        description: Task implements use case steps
+      dependsOn:
+        target: Task
+        cardinality: many-to-many
+        description: Task depends on other tasks
+      creates:
+        target: CodeFile
+        cardinality: one-to-many
+        description: Task creates code files
+
+  # Events extending Event base
+  TestRun:
+    extends: Event
+    description: Execution of test suite
+    properties:
+      testFramework: { type: string, required: true }
+      totalTests: { type: integer, required: true }
+      passed: { type: integer, required: true }
+      failed: { type: integer, required: true }
+      skipped: { type: integer, required: true }
+      coveragePercentage: { type: float, required: false }
+    relationships:
+      executes:
+        target: TestCase
+        cardinality: one-to-many
+        description: Test run executes test cases
+      produces:
+        target: CoverageReport
+        cardinality: one-to-one
+        description: Test run produces coverage report
+
+  ScreenshotCapture:
+    extends: Event
+    description: Screenshot capture during E2E test
+    properties:
+      viewport: { type: string, required: false }
+      isBaseline: { type: boolean, required: true }
+      diffPercentage: { type: float, required: false }
+    relationships:
+      capturedBy:
+        target: E2ETest
+        cardinality: many-to-one
+        description: Screenshot captured by E2E test
+      comparesTo:
+        target: ScreenshotCapture
+        cardinality: one-to-one
+        description: Screenshot compares to baseline
+
+  # Supporting entities
+  MockObject:
+    extends: Entity
+    description: Mock or stub object used in tests
+    properties:
+      mockType: { type: string, enum: [stub, spy, fake, mock], required: true }
+      targetType: { type: string, required: true }
+      validationRules: { type: json, required: false }
+    relationships:
+      usedBy:
+        target: TestCase
+        cardinality: many-to-many
+        description: Mock is used by test cases
+      mocks:
+        target: Dependency
+        cardinality: one-to-one
+        description: Mock replaces dependency
+
+  CoverageGap:
+    extends: Entity
+    description: Uncovered code identified in coverage
+    properties:
+      gapType: { type: string, enum: [line, branch, function], required: true }
+      severity: { type: string, enum: [high, medium, low], required: true }
+      filePath: { type: string, required: true }
+      lineRange: { type: string, required: false }
+    relationships:
+      inFile:
+        target: CodeFile
+        cardinality: many-to-one
+        description: Gap is in code file
+      suggestsTest:
+        target: TestCase
+        cardinality: one-to-one
+        description: Gap suggests needed test
+
+# Validation rules
+validationRules:
+  - name: requirement_test_coverage
+    description: Every requirement should have at least one test
+    query: |
+      MATCH (r:Requirement)
+      WHERE NOT (r)-[:tests]-(:TestCase)
+      RETURN r.id as uncovered_requirement
+    severity: warning
+
+  - name: usecase_step_implementation
+    description: Every use case step should be implemented by a requirement
+    query: |
+      MATCH (step:UseCaseStep)
+      WHERE NOT (step)-[:implementedBy]-(:Requirement)
+      RETURN step.id as unimplemented_step
+    severity: error
+
+  - name: tdd_test_first
+    description: TDD tasks should have failing tests before code
+    query: |
+      MATCH (t:Task)
+      WHERE t.isTestDriven = true
+      AND NOT (t)-[:creates]->(:CodeFile)<-[:testedBy]-(:TestCase {isFailing: true})
+      RETURN t.id as tdd_violation
+    severity: error
+
+  - name: code_coverage_threshold
+    description: Code files should meet minimum coverage threshold
+    query: |
+      MATCH (cf:CodeFile)
+      WHERE cf.testCoverage < 80
+      RETURN cf.id as low_coverage_file, cf.testCoverage as coverage
+    severity: warning
+
+# Indexes for performance
+indexes:
+  - type: Artifact
+    properties: [id, changeId, status]
+  - type: Entity
+    properties: [id, type]
+  - type: Event
+    properties: [id, timestamp, type]
+  - type: Requirement
+    properties: [capability, requirementType]
+  - type: TestCase
+    properties: [framework, testType, isFailing]
+  - type: UseCaseStep
+    properties: [stepNumber, stepType]
+
+# Schema metadata
+metadata:
+  author: SynergySpec Team
+  license: MIT
+  compatibility: ">=1.0.0"
+  changelog: |
+    1.0.0: Initial ontology schema with abstract types
+    - Introduced Artifact, Entity, Event abstract base types
+    - Defined concrete types for all SynergySpec artifacts
+    - Added validation rules for traceability
+    - Included performance indexes
