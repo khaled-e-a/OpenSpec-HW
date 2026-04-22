@@ -198,6 +198,17 @@ export class InMemoryKGClient extends KGClient {
     properties?: Record<string, any>;
   }>> = new Map();
   private transactions: Map<string, any> = new Map();
+  private persistencePath?: string;
+
+  constructor(config: KGClientConfig) {
+    super(config);
+
+    // Set up persistence if configured
+    if (config.type === 'file' && config.connectionString) {
+      this.persistencePath = config.connectionString;
+      this.loadFromDisk();
+    }
+  }
 
   async create(entity: types.KGEntity, options?: CreateOptions): Promise<types.KGEntity> {
     // Validate if requested
@@ -470,5 +481,61 @@ export class InMemoryKGClient extends KGClient {
       this.relationships = snapshot.relationships;
       this.transactions.delete(txId);
     }
+  }
+
+  // Persistence methods
+  private loadFromDisk(): void {
+    if (!this.persistencePath) return;
+
+    try {
+      const fs = require('fs');
+      if (fs.existsSync(this.persistencePath)) {
+        const data = JSON.parse(fs.readFileSync(this.persistencePath, 'utf-8'));
+
+        // Load entities
+        if (data.entities) {
+          for (const entity of data.entities) {
+            this.entities.set(entity.id, entity);
+          }
+        }
+
+        // Load relationships
+        if (data.relationships) {
+          for (const rel of data.relationships) {
+            const relKey = `${rel.sourceId}-${rel.type}`;
+            const relationships = this.relationships.get(relKey) || [];
+            relationships.push(rel);
+            this.relationships.set(relKey, relationships);
+          }
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to load KG from disk:', error.message);
+    }
+  }
+
+  private saveToDisk(): void {
+    if (!this.persistencePath) return;
+
+    try {
+      const fs = require('fs');
+      const data = {
+        version: '1.0.0',
+        exportedAt: new Date().toISOString(),
+        entities: Array.from(this.entities.values()),
+        relationships: Array.from(this.relationships.values()).flat()
+      };
+
+      fs.writeFileSync(this.persistencePath, JSON.stringify(data, null, 2));
+    } catch (error) {
+      console.warn('Failed to save KG to disk:', error.message);
+    }
+  }
+
+  /**
+   * Save current state to disk (for file-based persistence)
+   */
+  async persist(): Promise<void> {
+    this.saveToDisk();
   }
 }

@@ -1,5 +1,5 @@
 /**
- * Agent Skill Templates
+ * Agent Skill Templates - Updated with KG Support
  *
  * Compatibility facade that re-exports split workflow template modules.
  */
@@ -9,9 +9,11 @@ export type { SkillTemplate, CommandTemplate } from './types.js';
 export { getExploreSkillTemplate, getOpsxExploreCommandTemplate } from './workflows/explore.js';
 export { getNewChangeSkillTemplate, getOpsxNewCommandTemplate } from './workflows/new-change.js';
 export { getContinueChangeSkillTemplate, getOpsxContinueCommandTemplate } from './workflows/continue-change.js';
+export { getContinueChangeKGSkillTemplate, getOpsxContinueKGCommandTemplate } from './workflows/continue-change-kg.js';
 export { getApplyChangeSkillTemplate, getOpsxApplyCommandTemplate } from './workflows/apply-change.js';
 export { getTddSkillTemplate, getOpsxTddCommandTemplate } from './workflows/tdd.js';
 export { getFfChangeSkillTemplate, getOpsxFfCommandTemplate } from './workflows/ff-change.js';
+export { getFfChangeKGSkillTemplate, getOpsxFfKGCommandTemplate } from './workflows/ff-change-kg.js';
 export { getSyncSpecsSkillTemplate, getOpsxSyncCommandTemplate } from './workflows/sync-specs.js';
 export { getArchiveChangeSkillTemplate, getOpsxArchiveCommandTemplate } from './workflows/archive-change.js';
 export { getBulkArchiveChangeSkillTemplate, getOpsxBulkArchiveCommandTemplate } from './workflows/bulk-archive-change.js';
@@ -24,9 +26,3 @@ export { getCiSkillTemplate, getOpsxCiCommandTemplate } from './workflows/ci.js'
 export { getOpsxProposeSkillTemplate, getOpsxProposeCommandTemplate } from './workflows/propose.js';
 export { getFeedbackSkillTemplate } from './workflows/feedback.js';
 export { getCompareImagesSkillTemplate } from './workflows/compare-images.js';
-export { getVerifySpecKGSkillTemplate, getOpsxVerifySpecKGCommandTemplate } from './workflows/verify-spec-kg.js';
-export { getTddKGSkillTemplate, getOpsxTddKGCommandTemplate } from './workflows/tdd-kg.js';
-export { getApplyChangeKGSkillTemplate, getOpsxApplyKGCommandTemplate } from './workflows/apply-change-kg.js';
-export { getVerifyChangeKGSkillTemplate, getOpsxVerifyChangeKGCommandTemplate } from './workflows/verify-change-kg.js';
-export { getGenTestsKGSkillTemplate, getOpsxGenTestsKGCommandTemplate } from './workflows/gen-tests-kg.js';
-export { getRunTestsKGSkillTemplate, getOpsxRunTestsKGCommandTemplate } from './workflows/run-tests-kg.js';
