@@ -14,6 +14,7 @@ export interface KGInitOptions {
   changeId?: string;
   schema?: string;
   forceRecreate?: boolean;
+  type?: 'memory' | 'file';
 }
 
 export interface KGInitResult {
@@ -145,8 +146,8 @@ export async function initializeChangeKG(
 async function createSchemaArtifacts(
   changeId: string,
   schema: string
-): Promise<types.Artifact[]> {
-  const artifacts: types.Artifact[] = [];
+): Promise<any[]> {
+  const artifacts: any[] = [];
   const timestamp = new Date();
 
   // Base artifacts for all schemas

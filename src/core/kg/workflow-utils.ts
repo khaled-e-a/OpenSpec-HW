@@ -73,7 +73,7 @@ export async function createArtifactEntity(
   const kgInterface = createKGToolInterface(projectRoot);
 
   // Determine artifact type and create appropriate entity
-  let entity: types.Artifact;
+  let entity: any;
   const entityId = `${changeId}-${artifactType}`;
   const timestamp = new Date();
 
@@ -206,6 +206,7 @@ export async function extractEntitiesFromArtifact(
   success: boolean;
   entities: types.KGEntity[];
   relationships: any[];
+  error?: string;
 }> {
   const kgInterface = createKGToolInterface(projectRoot);
   const entities: types.KGEntity[] = [];
@@ -265,7 +266,7 @@ export async function extractEntitiesFromArtifact(
       entities,
       relationships
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       entities: [],
@@ -500,42 +501,3 @@ async function extractTaskEntities(
   return { entities, relationships };
 }
 
-/**
- * Extract requirement entities from spec.md content
- */
-async function extractSpecEntities(
-  changeId: string,
-  artifactId: string,
-  content: string
-): Promise<{ entities: types.KGEntity[]; relationships: any[] }> {
-  const entities: types.KGEntity[] = [];
-  const relationships: any[] = [];
-  const timestamp = new Date();
-
-  // Parse requirements from content
-  const requirementMatches = content.match(/### Requirement: (.+)/g);
-  if (requirementMatches) {
-    for (let i = 0; i < requirementMatches.length; i++) {
-      const reqTitle = requirementMatches[i].replace('### Requirement: ', '').trim();
-      const reqId = `${artifactId}-req${i + 1}`;
-
-      // Extract implements references
-      const implementsMatch = content.match(new RegExp(`\\*\\*Implements\\*\\*: (.+)`));
-      const implementsSteps = implementsMatch?.[1].split(';').map(s => s.trim()) || [];
-
-      const requirement: types.Requirement = {
-        id: reqId,
-        type: 'Requirement',
-        name: reqTitle,
-        requirementType: 'added',
-        shallStatement: `The system SHALL ${reqTitle.toLowerCase()}`,
-        priority: 'medium',
-        isTestable: true,
-        changeId
-      };
-
-      entities.push(requirement);
-
-      // Link to use case steps
-      for (const stepRef of implementsSteps) {
-        const stepId = stepRef.split(' ')[0]; // Extract UC1-S1 from

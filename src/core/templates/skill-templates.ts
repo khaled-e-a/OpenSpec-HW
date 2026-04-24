@@ -24,9 +24,3 @@ export { getCiSkillTemplate, getOpsxCiCommandTemplate } from './workflows/ci.js'
 export { getOpsxProposeSkillTemplate, getOpsxProposeCommandTemplate } from './workflows/propose.js';
 export { getFeedbackSkillTemplate } from './workflows/feedback.js';
 export { getCompareImagesSkillTemplate } from './workflows/compare-images.js';
-export { getVerifySpecKGSkillTemplate, getOpsxVerifySpecKGCommandTemplate } from './workflows/verify-spec-kg.js';
-export { getTddKGSkillTemplate, getOpsxTddKGCommandTemplate } from './workflows/tdd-kg.js';
-export { getApplyChangeKGSkillTemplate, getOpsxApplyKGCommandTemplate } from './workflows/apply-change-kg.js';
-export { getVerifyChangeKGSkillTemplate, getOpsxVerifyChangeKGCommandTemplate } from './workflows/verify-change-kg.js';
-export { getGenTestsKGSkillTemplate, getOpsxGenTestsKGCommandTemplate } from './workflows/gen-tests-kg.js';
-export { getRunTestsKGSkillTemplate, getOpsxRunTestsKGCommandTemplate } from './workflows/run-tests-kg.js';

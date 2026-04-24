@@ -96,7 +96,7 @@ export async function analyzeBlastRadiusViaKG(
       issues
     };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       impactedSpecs: [],
@@ -169,7 +169,7 @@ async function findCodeEntitiesForFiles(
           }
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.warn(`Failed to find KG entity for file ${file}:`, error.message);
     }
   }
@@ -333,7 +333,7 @@ export function generateKGBlastRadiusReport(
       for (const spec of direct) {
         report += `- **${spec.specName}** (${spec.specPath})\n`;
         report += `  - Confidence: ${(spec.confidence * 100).toFixed(0)}%\n`;
-        report += `  - Impact path: ${spec.impactPath.map(p => p.relationship).join(' → ')}\n`;
+        report += `  - Impact path: ${spec.impactPath.map((p: any) => p.relationship).join(' → ')}\n`;
       }
       report += '\n';
     }
@@ -343,7 +343,7 @@ export function generateKGBlastRadiusReport(
       for (const spec of indirect) {
         report += `- **${spec.specName}** (${spec.specPath})\n`;
         report += `  - Confidence: ${(spec.confidence * 100).toFixed(0)}%\n`;
-        report += `  - Impact path: ${spec.impactPath.map(p => p.relationship).join(' → ')}\n`;
+        report += `  - Impact path: ${spec.impactPath.map((p: any) => p.relationship).join(' → ')}\n`;
       }
       report += '\n';
     }

@@ -59,11 +59,7 @@ export async function verifyKGConnectivity(
       options
     );
     issues.push(...useCaseIssues.issues);
-    if (options?.autoFix && useCaseIssues.fixable) {
-      const fixed = await fixUseCaseConnectivity(kgInterface, changeId, useCaseIssues.issues);
-      fixed += fixed;
-    }
-    report.useCases.issues = useCaseIssues.issues.length;
+    report.issues.useCases = useCaseIssues.issues.length;
 
     // 2. Verify requirement traceability
     const reqIssues = await verifyRequirementTraceability(
@@ -73,11 +69,7 @@ export async function verifyKGConnectivity(
       options
     );
     issues.push(...reqIssues.issues);
-    if (options?.autoFix && reqIssues.fixable) {
-      const fixed = await fixRequirementTraceability(kgInterface, changeId, reqIssues.issues);
-      fixed += fixed;
-    }
-    report.requirements.issues = reqIssues.issues.length;
+    report.issues.requirements = reqIssues.issues.length;
 
     // 3. Verify task implementation
     const taskIssues = await verifyTaskImplementation(
@@ -87,11 +79,7 @@ export async function verifyKGConnectivity(
       options
     );
     issues.push(...taskIssues.issues);
-    if (options?.autoFix && taskIssues.fixable) {
-      const fixed = await fixTaskImplementation(kgInterface, changeId, taskIssues.issues);
-      fixed += fixed;
-    }
-    report.tasks.issues = taskIssues.issues.length;
+    report.issues.tasks = taskIssues.issues.length;
 
     // 4. Verify artifact connectivity
     const artifactIssues = await verifyArtifactConnectivity(
@@ -100,11 +88,7 @@ export async function verifyKGConnectivity(
       options
     );
     issues.push(...artifactIssues.issues);
-    if (options?.autoFix && artifactIssues.fixable) {
-      const fixed = await fixArtifactConnectivity(kgInterface, changeId, artifactIssues.issues);
-      fixed += fixed;
-    }
-    report.artifacts.issues = artifactIssues.issues.length;
+    report.issues.artifacts = artifactIssues.issues.length;
 
     // Update report with final state
     await updateReportWithFinalState(kgInterface, report);
@@ -116,7 +100,7 @@ export async function verifyKGConnectivity(
       issues
     };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       report: createEmptyReport(changeId),
@@ -252,7 +236,7 @@ async function verifyRequirementTraceability(
       relationshipTypes: ['implements']
     });
 
-    const implementedSteps = implementsRel.map(r => r.target.id);
+    const implementedSteps = implementsRel.map((r: any) => r.target.id);
     const expectedSteps = req.implements || [];
 
     for (const expectedStep of expectedSteps) {
@@ -327,7 +311,7 @@ async function verifyTaskImplementation(
       relationshipTypes: ['implements']
     });
 
-    const implementedReqs = implementsRel.map(r => r.target.id);
+    const implementedReqs = implementsRel.map((r: any) => r.target.id);
     const expectedReqs = task.addresses || [];
 
     for (const expectedReq of expectedReqs) {
@@ -398,7 +382,7 @@ async function verifyArtifactConnectivity(
       relationshipTypes: ['hasArtifact']
     });
 
-    const hasArtifact = changeRelationships.some(r => r.target.id === artifactId);
+    const hasArtifact = changeRelationships.some((r: any) => r.target.id === artifactId);
     if (!hasArtifact) {
       issues.push({
         type: 'missing-relationship',
@@ -456,7 +440,7 @@ async function fixKGConnectivity(
           if (relResult.success) fixed++;
           break;
       }
-    } catch (error) {
+    } catch (error: any) {
       console.warn(`Failed to fix issue ${issue.type}: ${error.message}`);
     }
   }
@@ -477,7 +461,7 @@ async function updateReportWithFinalState(
     if (summaryResult.success && summaryResult.summary) {
       report.finalState = summaryResult.summary;
     }
-  } catch (error) {
+  } catch (error: any) {
     console.warn('Failed to get final KG state:', error.message);
   }
 }

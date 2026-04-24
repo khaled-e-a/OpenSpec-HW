@@ -99,7 +99,17 @@ After completing all artifacts, summarize:
 - Always read dependency artifacts before creating a new one
 - If context is critically unclear, ask the user - but prefer making reasonable decisions to keep momentum
 - If a change with that name already exists, suggest continuing that change instead
-- Verify each artifact file exists after writing before proceeding to next`,
+- Verify each artifact file exists after writing before proceeding to next
+
+**Knowledge Graph Integration (Optional)**
+
+If KG is enabled (\`.synergyspec/kg/\` exists), populate the graph as each artifact is written:
+
+1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
+2. After every artifact file is created, \`kg:create-entity\` for the artifact (Spec/DesignDoc/Artifact) and \`kg:create-relationship\` linking it to the Change via \`hasArtifact\`.
+3. Parse each artifact (usecases, specs, tasks) and bulk-create sub-entities via \`kg:create-entities\` plus their parent relationships.
+4. Call \`kg:persist\` after all artifacts are created.
+5. On KG error at any step, warn and continue — artifact files are already on disk.`,
       license: 'MIT',
       compatibility: 'Requires synergyspec-hw CLI.',
       metadata: { author: 'synergyspec', version: '1.0' },

@@ -154,7 +154,20 @@ What would you like to do?
 This skill supports the "actions on a change" model:
 
 - **Can be invoked anytime**: Before all artifacts are done (if tasks exist), after partial implementation, interleaved with other actions
-- **Allows artifact updates**: If implementation reveals design issues, suggest updating artifacts - not phase-locked, work fluidly`,
+- **Allows artifact updates**: If implementation reveals design issues, suggest updating artifacts - not phase-locked, work fluidly
+
+**Knowledge Graph Integration (Optional)**
+
+If KG is enabled (\`.synergyspec/kg/\` exists), track implementation in the graph:
+
+1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
+2. Before starting each task: query \`kg:get-entity\` for the Task, note its implementing Requirements via \`kg:get-relationships\` (direction: out, types: ['implements']).
+3. When code is written/modified:
+   - \`kg:create-entity\` a \`CodeFile\` with \`{ filePath, language, linesOfCode, changeId }\`
+   - \`kg:create-relationship\` link Task → CodeFile via \`implementedBy\`
+4. Emit an \`ImplementationEvent\` (Event entity) with outcome 'success' or 'failure' and task/change IDs in metadata.
+5. When a task completes: \`kg:update\` the Task to \`status: 'completed'\`.
+6. Call \`kg:persist\` at the end. On KG error, warn and continue.`,
       license: 'MIT',
       compatibility: 'Requires synergyspec-hw CLI.',
       metadata: { author: 'synergyspec', version: '1.0' },

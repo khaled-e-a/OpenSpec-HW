@@ -163,7 +163,7 @@ export function parseRequirements(content: string): Array<{
 
     // Extract implements references
     const implementsMatch = sectionContent.match(/\*\*Implements\*\*: (.+)/);
-    const implements = implementsMatch
+    const implementsRefs = implementsMatch
       ? implementsMatch[1].split(';').map(s => s.trim().split(' ')[0])
       : [];
 
@@ -185,7 +185,7 @@ export function parseRequirements(content: string): Array<{
       shallStatement,
       requirementType,
       priority,
-      implements: implements.length > 0 ? implements : undefined
+      implements: implementsRefs.length > 0 ? implementsRefs : undefined
     });
 
     reqIndex++;

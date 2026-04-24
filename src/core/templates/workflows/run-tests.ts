@@ -192,7 +192,18 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 - Specific, actionable recommendations for missing coverage
 - If test plan was generated: "Test plan saved to \`synergyspec/changes/<name>/test-plan.md\` — follow it to manually verify N uncovered steps."
 - If coverage is complete: suggest \`/synspec:archive\` to archive and close the change
-- For full CI pipeline (all tests + e2e + coverage + screenshot comparison in one step): run \`/synspec:ci\``;
+- For full CI pipeline (all tests + e2e + coverage + screenshot comparison in one step): run \`/synspec:ci\`
+
+**Knowledge Graph Integration (Optional)**
+
+If KG is enabled (\`.synergyspec/kg/\` exists), record test execution in the graph:
+
+1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
+2. Before running, query \`kg:query\` for existing TestCase entities in the change to map test files to entities.
+3. After each test file runs, emit a \`TestRun\` Event with \`{ outcome: pass|fail|warning, duration, metadata: { file, passed, failed, skipped, coverage } }\`.
+4. \`kg:update\` the TestCase with \`{ isFailing: !passed }\` so verify-change can query failing tests.
+5. For PBT counterexamples promoted to regression tests, \`kg:create-entity\` a new TestCase and link it to the original via \`regresses\`.
+6. Call \`kg:persist\`. On KG error, warn and continue — test report is already generated.`;
 
 export function getRunTestsSkillTemplate(): SkillTemplate {
   return {

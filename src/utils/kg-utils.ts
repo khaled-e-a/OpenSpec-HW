@@ -211,7 +211,7 @@ export function withKGInfo(
   commandFn: Function,
   commandName: string
 ): Function {
-  return async function(...args: any[]) {
+  return async function(this: any, ...args: any[]) {
     const projectRoot = process.cwd();
     const useKG = isKGEnabled(projectRoot);
 
@@ -221,7 +221,7 @@ export function withKGInfo(
 
     try {
       return await commandFn.apply(this, args);
-    } catch (error) {
+    } catch (error: any) {
       if (useKG && error.message?.includes('KG')) {
         handleKGError(error);
         // Retry without KG?

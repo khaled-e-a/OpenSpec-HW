@@ -26,12 +26,12 @@ export interface NewChangeOptions {
 async function createChangeArtifacts(
   changeId: string,
   schema: string
-): Promise<types.Artifact[]> {
+): Promise<any[]> {
   const timestamp = new Date();
-  const artifacts: types.Artifact[] = [];
+  const artifacts: any[] = [];
 
   // Base artifacts for all schemas
-  const baseArtifacts: types.Artifact[] = [
+  const baseArtifacts: any[] = [
     {
       id: `${changeId}-proposal`,
       type: 'DesignDoc',

@@ -233,7 +233,7 @@ export class InMemoryKGClient extends KGClient {
       try {
         await this.create(entity, options);
         result.created++;
-      } catch (error) {
+      } catch (error: any) {
         result.success = false;
         result.errors.push({
           entity,
@@ -266,7 +266,7 @@ export class InMemoryKGClient extends KGClient {
       throw new Error(`Entity not found: ${id}`);
     }
 
-    const updated = { ...entity, ...updates };
+    const updated = { ...entity, ...updates } as types.KGEntity;
     this.entities.set(id, updated);
     return updated;
   }
@@ -402,7 +402,7 @@ export class InMemoryKGClient extends KGClient {
     // Calculate coverage
     const totalRequirements = requirements.length;
     const testedRequirements = requirements.filter(r =>
-      testCases.some(tc => tc.tests?.includes(r))
+      testCases.some((tc: any) => tc.tests?.includes(r))
     ).length;
     const coverage = totalRequirements > 0 ? (testedRequirements / totalRequirements) * 100 : 0;
 
@@ -509,7 +509,7 @@ export class InMemoryKGClient extends KGClient {
           }
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.warn('Failed to load KG from disk:', error.message);
     }
   }
@@ -527,7 +527,7 @@ export class InMemoryKGClient extends KGClient {
       };
 
       fs.writeFileSync(this.persistencePath, JSON.stringify(data, null, 2));
-    } catch (error) {
+    } catch (error: any) {
       console.warn('Failed to save KG to disk:', error.message);
     }
   }
@@ -537,5 +537,98 @@ export class InMemoryKGClient extends KGClient {
    */
   async persist(): Promise<void> {
     this.saveToDisk();
+  }
+
+  // Stub implementations for abstract methods not yet needed by the KG workflows.
+  // These satisfy the KGClient contract and return sensible defaults.
+
+  async updateMany(updates: Array<{ id: string; data: Partial<types.KGEntity> }>): Promise<BulkOperationResult> {
+    const results: BulkOperationResult = { success: true, created: 0, updated: 0, deleted: 0, errors: [] };
+    for (const u of updates) {
+      try { await this.update(u.id, u.data); results.updated++; }
+      catch (e: any) { results.errors.push({ entity: u.id, error: e.message }); }
+    }
+    results.success = results.errors.length === 0;
+    return results;
+  }
+
+  async delete(id: string): Promise<boolean> {
+    return this.entities.delete(id);
+  }
+
+  async deleteMany(ids: string[]): Promise<BulkOperationResult> {
+    const results: BulkOperationResult = { success: true, created: 0, updated: 0, deleted: 0, errors: [] };
+    for (const id of ids) {
+      if (this.entities.delete(id)) results.deleted++;
+      else { results.errors.push({ entity: id, error: 'not found' }); }
+    }
+    results.success = results.errors.length === 0;
+    return results;
+  }
+
+  async deleteByQuery(_query: any): Promise<number> { return 0; }
+
+  async findOne(query: types.KGQuery): Promise<types.KGEntity | null> {
+    const results = await this.find(query, { limit: 1 });
+    return results[0] ?? null;
+  }
+
+  async findByType(type: string, options?: QueryOptions): Promise<types.KGEntity[]> {
+    return this.find({ type } as any, options);
+  }
+
+  async count(query: types.KGQuery): Promise<number> {
+    const results = await this.find(query);
+    return results.length;
+  }
+
+  async deleteRelationship(_sourceId: string, _relationshipType: string, _targetId: string): Promise<void> {}
+
+  async findPath(_startId: string, _endId: string, _options?: PathQueryOptions): Promise<types.KGEntity[] | null> {
+    return null;
+  }
+
+  async findAllPaths(_startId: string, _endId: string, _options?: PathQueryOptions): Promise<types.KGEntity[][]> {
+    return [];
+  }
+
+  async getNeighbors(_entityId: string, _relationshipTypes?: string[], _depth?: number): Promise<types.KGEntity[]> {
+    return [];
+  }
+
+  async getTraceabilityMatrix(_sourceType: string, _targetType: string, _viaRelationship: string): Promise<Array<{ source: types.KGEntity; target: types.KGEntity; path: types.KGEntity[]; }>> {
+    return [];
+  }
+
+  async getCoverageReport(_useCaseId: string): Promise<{ covered: types.KGEntity[]; uncovered: types.KGEntity[]; percentage: number; }> {
+    return { covered: [], uncovered: [], percentage: 0 };
+  }
+
+  async getImpactAnalysis(_entityId: string, _depth?: number): Promise<{ upstream: types.KGEntity[]; downstream: types.KGEntity[]; impacted: types.KGEntity[]; }> {
+    return { upstream: [], downstream: [], impacted: [] };
+  }
+
+  async getTestCoverage(_entityId: string): Promise<{ covered: boolean; testCases: types.TestCase[]; coveragePercentage: number; gaps: types.CoverageGap[]; }> {
+    return { covered: false, testCases: [], coveragePercentage: 0, gaps: [] };
+  }
+
+  async getFailingTests(): Promise<types.TestCase[]> { return []; }
+
+  async getTestResults(_since?: Date): Promise<types.TestRun[]> { return []; }
+
+  async getSchema(): Promise<any> { return {}; }
+
+  async getTypes(): Promise<string[]> {
+    const typeSet = new Set<string>();
+    for (const e of this.entities.values()) typeSet.add((e as any).type);
+    return Array.from(typeSet);
+  }
+
+  async exists(id: string): Promise<boolean> {
+    return this.entities.has(id);
+  }
+
+  async import(_data: string, _format: 'json' | 'yaml' | 'csv'): Promise<BulkOperationResult> {
+    return { success: true, created: 0, updated: 0, deleted: 0, errors: [] };
   }
 }

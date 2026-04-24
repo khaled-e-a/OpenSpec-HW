@@ -273,7 +273,20 @@ Use clear markdown with:
 - Grouped lists for issues (CRITICAL/WARNING/SUGGESTION)
 - Code references in format: \`file.ts:123\`
 - Specific, actionable recommendations
-- No vague suggestions like "consider reviewing"`,
+- No vague suggestions like "consider reviewing"
+
+**Knowledge Graph Integration (Optional)**
+
+If KG is enabled (\`.synergyspec/kg/\` exists), use it as a structured ground truth for connectivity checks:
+
+1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
+2. Call \`kg:get-change-traceability\` with the changeId to get all entities and their relationships.
+3. Cross-check the graph against the implementation:
+   - Every Task should have at least one implementing CodeFile (\`implementedBy\`)
+   - Every Requirement should have at least one testing TestCase (\`tests\`, inbound)
+   - Flag orphans: entities without required relationships
+4. Use \`analyzeBlastRadiusViaKG\` (from \`src/core/kg/blast-radius-utils.js\`) on changed files to find impacted specs via KG traversal.
+5. Report KG coverage alongside file-based checks. On KG error, warn and fall back to file-based verification only.`,
       license: 'MIT',
       compatibility: 'Requires synergyspec-hw CLI.',
       metadata: { author: 'synergyspec', version: '1.0' },

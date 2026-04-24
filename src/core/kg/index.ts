@@ -6,6 +6,7 @@
  */
 
 export * from './types.js';
+export * as types from './types.js';
 export * from './client.js';
 export * from './validator.js';
 export * from './init.js';
@@ -36,6 +37,7 @@ import {
 export const KG = {
   Client: InMemoryKGClient,
   Validator: KGSchemaValidator,
+  createKGClient: (config: any) => new InMemoryKGClient(config),
   initializeKG,
   initializeChangeKG,
   saveKGState,

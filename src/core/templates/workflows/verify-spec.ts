@@ -122,7 +122,18 @@ const INSTRUCTIONS = `Verify and fix use case traceability across all artifacts 
 - Descriptions in annotations **must match canonical text exactly** (copy from table, do not paraphrase).
 - Step IDs must be exact: \`UC1-S1\`, not \`UC 1-S1\`, not \`uc1-s1\`.
 - Only annotate steps that genuinely belong to the artifact; do not force every step into every file.
-- Do NOT create new artifact files; only patch files that already exist.`;
+- Do NOT create new artifact files; only patch files that already exist.
+
+**Knowledge Graph Integration (Optional)**
+
+If KG is enabled (\`.synergyspec/kg/\` exists), audit connectivity against the graph as well:
+
+1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
+2. For each parsed UseCase/UseCaseStep/Requirement/Task, verify \`kg:get-entity\` returns it with the expected id (e.g., \`<changeId>-<stepId>\`).
+3. For each requirement, confirm an \`implements\` relationship exists to its target step via \`kg:get-relationships\`.
+4. For each task, confirm an \`implements\` relationship to its addressed requirement.
+5. Report any missing entities or relationships in the same scorecard. If \`autoFix\` is enabled, call \`kg:create-entity\` / \`kg:create-relationship\` to fill in obvious gaps.
+6. Call \`kg:persist\` at the end. On KG error, warn and fall back to file-only verification.`;
 
 export function getVerifySpecSkillTemplate(): SkillTemplate {
   return {

@@ -309,13 +309,13 @@ export async function executeKGTool(
   toolName: string,
   parameters: Record<string, any>
 ): Promise<any> {
-  const tool = KG_TOOL_REGISTRY[toolName];
+  const tool = (KG_TOOL_REGISTRY as Record<string, any>)[toolName];
   if (!tool) {
     throw new Error(`Unknown KG tool: ${toolName}`);
   }
 
   // Validate required parameters
-  for (const [paramName, paramDef] of Object.entries(tool.parameters)) {
+  for (const [paramName, paramDef] of Object.entries(tool.parameters) as [string, any][]) {
     if (paramDef.required && !(paramName in parameters)) {
       throw new Error(`Missing required parameter: ${paramName}`);
     }
@@ -329,10 +329,10 @@ export async function executeKGTool(
  * Get tool description for AI assistants
  */
 export function getKGToolDescription(toolName: string): string | null {
-  const tool = KG_TOOL_REGISTRY[toolName];
+  const tool = (KG_TOOL_REGISTRY as Record<string, any>)[toolName];
   if (!tool) return null;
 
-  return `${tool.description}\n\nParameters:\n${Object.entries(tool.parameters)
+  return `${tool.description}\n\nParameters:\n${(Object.entries(tool.parameters) as [string, any][])
     .map(([name, def]) => `  ${name}: ${def.type}${def.required ? ' (required)' : ' (optional)'} - ${def.description}`)
     .join('\n')}\n\nReturns:\n${JSON.stringify(tool.returns, null, 2)}`;
 }
@@ -371,6 +371,7 @@ export function createKGToolInterface(projectRoot: string) {
       success: boolean;
       entities: types.KGEntity[];
       relationships: any[];
+      error?: string;
     }> {
       const results: types.KGEntity[] = [];
       const relationships: any[] = [];
@@ -440,7 +441,7 @@ export function createKGToolInterface(projectRoot: string) {
           entities: results,
           relationships
         };
-      } catch (error) {
+      } catch (error: any) {
         return {
           success: false,
           entities: results,
@@ -456,9 +457,9 @@ export function createKGToolInterface(projectRoot: string) {
     async createChangeArtifacts(changeData: {
       id: string;
       schema: string;
-    }): Promise<types.Artifact[]> {
+    }): Promise<any[]> {
       const timestamp = new Date();
-      const artifacts: types.Artifact[] = [];
+      const artifacts: any[] = [];
 
       // Base artifacts
       artifacts.push(

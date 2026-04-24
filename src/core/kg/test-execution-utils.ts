@@ -74,7 +74,7 @@ export async function runTestsWithKGTracking(
 
         results.push(result);
 
-      } catch (error) {
+      } catch (error: any) {
         results.push({
           file: testFile,
           passed: false,
@@ -88,7 +88,7 @@ export async function runTestsWithKGTracking(
 
     return results;
 
-  } catch (error) {
+  } catch (error: any) {
     return [{
       file: 'all',
       passed: false,
@@ -140,9 +140,8 @@ export async function updateTestResultsInKG(
     const eventId = `test-run-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     const testRunEvent: types.Event = {
       id: eventId,
-      type: 'TestRun',
-      timestamp: new Date(),
       type: 'test_run',
+      timestamp: new Date(),
       outcome: result.passed ? 'success' : 'failure',
       duration: result.duration,
       metadata: {
@@ -163,7 +162,7 @@ export async function updateTestResultsInKG(
       console.warn('Failed to create test run event:', eventResult.error);
     }
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to update test results in KG:', error.message);
   }
 }
@@ -190,9 +189,8 @@ export async function updateTestMetricsInKG(
 
     const metricsEvent: types.Event = {
       id: `test-metrics-${Date.now()}`,
-      type: 'TestMetricsEvent',
-      timestamp: new Date(),
       type: 'test_metrics',
+      timestamp: new Date(),
       outcome: 'success',
       metadata: {
         ...metrics,
@@ -208,7 +206,7 @@ export async function updateTestMetricsInKG(
       console.warn('Failed to create test metrics event:', result.error);
     }
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Failed to update test metrics in KG:', error.message);
   }
 }
@@ -261,7 +259,7 @@ async function detectTestRunner(testFiles: string[]): Promise<string> {
         return pkg.scripts.test;
       }
     }
-  } catch (error) {
+  } catch (error: any) {
     // Continue with other detection methods
   }
 
@@ -310,7 +308,7 @@ async function runSingleTest(testFile: string, runner: string): Promise<{
       coverage
     };
 
-  } catch (error) {
+  } catch (error: any) {
     // exec throws on non-zero exit code
     const duration = Date.now() - (error as any).startTime || 0;
 

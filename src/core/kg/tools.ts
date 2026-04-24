@@ -42,7 +42,7 @@ export async function initKGTool(projectRoot: string, options?: {
       kgPath: result.kgPath,
       message: result.message
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       clientId: '',
@@ -88,7 +88,7 @@ export async function createKGEntityTool(
       entityId: created.id,
       entity: created
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       entityId: '',
@@ -136,7 +136,7 @@ export async function createKGEntitiesTool(
       errors: result.errors,
       entityIds: result.success ? entities.map(e => e.id) : []
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       created: 0,
@@ -175,7 +175,7 @@ export async function createKGRelationshipTool(
     await kg.createRelationship(sourceId, relationshipType, targetId, properties);
 
     return { success: true };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       error: error.message
@@ -242,7 +242,7 @@ export async function queryKGTool(
       entities,
       count: entities.length
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       entities: [],
@@ -290,7 +290,7 @@ export async function getKGEntityTool(
       success: true,
       entity
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       error: error.message
@@ -334,7 +334,7 @@ export async function getChangeTraceabilityTool(
       success: true,
       traceability
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       error: error.message
@@ -360,7 +360,7 @@ export async function persistKGTool(projectRoot: string): Promise<{
       success: true,
       kgPath: join(projectRoot, '.synergyspec', 'kg')
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       error: error.message
@@ -394,7 +394,7 @@ export async function validateKGEntityTool(
       errors: result.errors,
       warnings: result.warnings
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       isValid: false,
@@ -439,7 +439,7 @@ export async function getKGSummaryTool(projectRoot: string): Promise<{
       success: true,
       summary
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       error: error.message

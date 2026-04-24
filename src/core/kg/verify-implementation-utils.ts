@@ -92,7 +92,7 @@ export async function verifyTaskKGConnectivity(
       issues
     };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       tasksWithCode: 0,
@@ -173,7 +173,7 @@ export async function verifyRequirementKGConnectivity(
       uncoveredRequirements: uncovered
     };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       requirementsWithCode: 0,
@@ -248,7 +248,7 @@ export async function verifyTestKGConnectivity(
       untestedRequirements: untested
     };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       requirementsWithTests: 0,
@@ -350,7 +350,7 @@ export async function crossVerifyKGWithCode(
           }
         }
 
-      } catch (readError) {
+      } catch (readError: any) {
         discrepancies.push({
           entityId: entity.id,
           entityType: entity.type,
@@ -367,7 +367,7 @@ export async function crossVerifyKGWithCode(
       discrepancies
     };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       discrepancies: [{

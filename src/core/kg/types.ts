@@ -8,6 +8,7 @@
 // Base abstract types
 export interface Artifact {
   id: string;
+  type?: string;
   name: string;
   createdAt: Date;
   updatedAt?: Date;
@@ -22,6 +23,7 @@ export interface Entity {
   name: string;
   description?: string;
   metadata?: Record<string, any>;
+  changeId?: string;
 }
 
 export interface Event {

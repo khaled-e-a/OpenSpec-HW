@@ -468,7 +468,18 @@ Task 4 / 7: <task description >
 
 - ** Can be invoked anytime **: interleaved with other actions, or resumed after a pause
   - ** Interoperates with apply **: tasks completed by apply or tdd are both tracked via the
-same \`- [x]\` checkboxes in tasks.md; either command can pick up where the other left off`;
+same \`- [x]\` checkboxes in tasks.md; either command can pick up where the other left off
+
+**Knowledge Graph Integration (Optional)**
+
+If KG is enabled (\`.synergyspec/kg/\` exists), track each red-green-refactor cycle:
+
+1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
+2. On **Red** (failing test written): \`kg:create-entity\` a TestCase with \`isFailing: true\`; link it to the Requirement via \`tests\`.
+3. On **Green** (test passes): \`kg:update\` the TestCase to \`isFailing: false\`; \`kg:create-entity\` a CodeFile for the new implementation; link Task → CodeFile via \`implementedBy\`.
+4. On **Refactor**: emit a \`TDDEvent\` Event with \`{ outcome: 'success', metadata: { cycle: 'refactor', testCount, codeLines } }\`.
+5. When a task completes its full red-green-refactor cycle, \`kg:update\` the Task to \`status: 'completed'\` with \`implementsTDD: true\`.
+6. Call \`kg:persist\` at the end. On KG error, warn and continue.`;
 
 export function getTddSkillTemplate(): SkillTemplate {
   return {

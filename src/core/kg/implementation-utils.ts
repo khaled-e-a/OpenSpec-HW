@@ -46,10 +46,9 @@ export async function trackImplementationStart(
     const implementationId = `impl-${changeId}-${taskId}-${Date.now()}`;
     const implementationEvent: types.Event = {
       id: implementationId,
-      type: 'ImplementationEvent',
-      timestamp: new Date(),
       type: 'implementation',
-      outcome: 'in_progress',
+      timestamp: new Date(),
+      outcome: 'pending',
       metadata: {
         taskId: taskId,
         changeId: changeId,
@@ -72,7 +71,7 @@ export async function trackImplementationStart(
       implementationId
     };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       error: error.message
@@ -145,7 +144,7 @@ export async function trackImplementationComplete(
       eventUpdate
     };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       error: error.message
@@ -188,7 +187,7 @@ export async function createOrUpdateCodeEntity(
       id: entityId,
       type: 'CodeFile',
       name: `Implementation for task ${taskId}`,
-      status: options?.status || 'active',
+      status: (options?.status === 'in_progress' ? 'active' : options?.status) || 'active',
       filePath: filePath,
       changeId: changeId,
       createdAt: existing.success ? existing.entity.createdAt : timestamp,
@@ -197,8 +196,7 @@ export async function createOrUpdateCodeEntity(
       complexity: calculateComplexity(content),
       linesOfCode: content.split('\n').length,
       testCoverage: options?.testCoverage,
-      implementationMethod: options?.implementationMethod
-    };
+    } as types.CodeFile;
 
     if (existing.success) {
       // Update existing entity
@@ -210,6 +208,7 @@ export async function createOrUpdateCodeEntity(
       if (!result.success) {
         return {
           success: false,
+          entityId: '',
           error: `Failed to update code entity: ${result.error}`
         };
       }
@@ -228,6 +227,7 @@ export async function createOrUpdateCodeEntity(
       if (!result.success) {
         return {
           success: false,
+          entityId: '',
           error: `Failed to create code entity: ${result.error}`
         };
       }
@@ -239,9 +239,10 @@ export async function createOrUpdateCodeEntity(
       };
     }
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
+      entityId: '',
       error: error.message
     };
   }
@@ -296,6 +297,7 @@ export async function createTestEntity(
     if (!result.success) {
       return {
         success: false,
+        entityId: '',
         error: `Failed to create test entity: ${result.error}`
       };
     }
@@ -326,9 +328,10 @@ export async function createTestEntity(
       entity: testEntity
     };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
+      entityId: '',
       error: error.message
     };
   }
@@ -361,9 +364,8 @@ export async function trackTDDCycle(
 
     const tddEvent: types.Event = {
       id: eventId,
-      type: 'TDDEvent',
-      timestamp: timestamp,
       type: 'tdd_cycle',
+      timestamp: timestamp,
       outcome: 'success',
       duration: metrics.duration,
       metadata: {
@@ -384,6 +386,7 @@ export async function trackTDDCycle(
     if (!result.success) {
       return {
         success: false,
+        eventId: '',
         error: `Failed to create TDD event: ${result.error}`
       };
     }
@@ -393,9 +396,10 @@ export async function trackTDDCycle(
       eventId: result.entityId
     };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
+      eventId: '',
       error: error.message
     };
   }
@@ -472,7 +476,7 @@ export async function updateChangeProgress(
       update: result
     };
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
       error: error.message
@@ -556,5 +560,5 @@ function detectLanguage(filePath: string): string {
     'php': 'php'
   };
 
-  return languageMap[ext] || 'unknown';
+  return (ext && languageMap[ext]) || 'unknown';
 }

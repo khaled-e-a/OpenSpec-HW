@@ -66,7 +66,7 @@ interface ValidationError {
 }
 
 export class KGSchemaValidator {
-  private schema: SchemaDefinition;
+  private schema!: SchemaDefinition;
   private typeHierarchy: Map<string, string[]> = new Map();
 
   constructor() {
@@ -151,7 +151,7 @@ export class KGSchemaValidator {
       }
 
       // Enum validation
-      if (propDef.enum && !propDef.enum.includes(value)) {
+      if (propDef.enum && !propDef.enum.includes(value as string)) {
         errors.push({
           field: propName,
           message: `Value must be one of: ${propDef.enum.join(', ')}`,
@@ -316,17 +316,17 @@ export class KGSchemaValidator {
         if (violations.length > 0) {
           results.push({
             isValid: rule.severity !== 'error',
-            errors: rule.severity === 'error' ? violations.map(v => ({
+            errors: rule.severity === 'error' ? violations.map((v: any) => ({
               rule: rule.name,
               message: `${rule.description}: ${JSON.stringify(v)}`
             })) : [],
-            warnings: rule.severity === 'warning' ? violations.map(v => ({
+            warnings: rule.severity === 'warning' ? violations.map((v: any) => ({
               rule: rule.name,
               message: `${rule.description}: ${JSON.stringify(v)}`
             })) : []
           });
         }
-      } catch (error) {
+      } catch (error: any) {
         results.push({
           isValid: false,
           errors: [{
@@ -348,7 +348,7 @@ export class KGSchemaValidator {
     return {
       abstractTypes: Object.keys(this.schema.abstractTypes),
       concreteTypes: Object.keys(this.schema.concreteTypes),
-      validationRules: this.schema.validationRules.map(r => ({
+      validationRules: this.schema.validationRules.map((r: any) => ({
         name: r.name,
         description: r.description,
         severity: r.severity

@@ -211,9 +211,9 @@ export async function newChangeCommandWithTools(
 async function createArtifactsForSchema(
   changeId: string,
   schema: string
-): Promise<types.Artifact[]> {
+): Promise<any[]> {
   const timestamp = new Date();
-  const artifacts: types.Artifact[] = [];
+  const artifacts: any[] = [];
 
   // Base artifacts for all schemas
   artifacts.push(

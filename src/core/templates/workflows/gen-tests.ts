@@ -196,7 +196,17 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 - Summary of gaps found and stubs written
 - Confirmation that spec-tests.md was written to \`synergyspec/changes/<name>/spec-tests.md\`
-- Prompt: "Run \`/synspec:run-tests\` to execute the suite and generate a spec-coverage report."`;
+- Prompt: "Run \`/synspec:run-tests\` to execute the suite and generate a spec-coverage report."
+
+**Knowledge Graph Integration (Optional)**
+
+If KG is enabled (\`.synergyspec/kg/\` exists), track generated tests in the graph:
+
+1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
+2. For each newly written test file, \`kg:create-entity\` a TestCase: \`{ id, type: 'TestCase', framework, testType, isFailing: true, filePath, changeId }\`.
+3. \`kg:create-relationship\` link TestCase → Requirement via \`tests\` for every requirement the test covers.
+4. Emit a \`TestGenerationEvent\` (Event) with outcome 'success' capturing which requirements got tests.
+5. Call \`kg:persist\`. On KG error, warn and continue — test files are already written.`;
 
 export function getGenTestsSkillTemplate(): SkillTemplate {
    return {
