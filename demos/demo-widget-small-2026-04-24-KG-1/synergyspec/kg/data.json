@@ -1,0 +1,148 @@
+{
+  "version": "1.0.0",
+  "exportedAt": "2026-04-24T17:54:47.845Z",
+  "entities": [
+    {
+      "id": "react-drag-drop-dashboard",
+      "type": "Change",
+      "name": "react-drag-drop-dashboard",
+      "schema": "spec-driven",
+      "status": "proposed",
+      "createdDate": "2026-04-24T17:54:47.842Z"
+    },
+    {
+      "id": "react-drag-drop-dashboard-proposal",
+      "type": "DesignDoc",
+      "name": "Proposal",
+      "status": "active",
+      "filePath": "synergyspec/changes/react-drag-drop-dashboard/proposal.md",
+      "changeId": "react-drag-drop-dashboard",
+      "createdAt": "2026-04-24T17:54:47.843Z",
+      "decisionsCount": 0,
+      "hasMigrationPlan": false
+    },
+    {
+      "id": "react-drag-drop-dashboard-tasks",
+      "type": "Artifact",
+      "name": "Tasks",
+      "status": "active",
+      "filePath": "synergyspec/changes/react-drag-drop-dashboard/tasks.md",
+      "changeId": "react-drag-drop-dashboard",
+      "createdAt": "2026-04-24T17:54:47.843Z"
+    },
+    {
+      "id": "react-drag-drop-dashboard-usecases",
+      "type": "Artifact",
+      "name": "Use Cases",
+      "status": "active",
+      "filePath": "synergyspec/changes/react-drag-drop-dashboard/usecases.md",
+      "changeId": "react-drag-drop-dashboard",
+      "createdAt": "2026-04-24T17:54:47.843Z"
+    },
+    {
+      "id": "react-drag-drop-dashboard-specs",
+      "type": "Spec",
+      "name": "Specifications",
+      "status": "active",
+      "filePath": "synergyspec/changes/react-drag-drop-dashboard/specs/",
+      "changeId": "react-drag-drop-dashboard",
+      "createdAt": "2026-04-24T17:54:47.843Z",
+      "capability": "change-specs",
+      "specType": "new",
+      "requirementsCount": 0
+    },
+    {
+      "id": "react-drag-drop-dashboard-design",
+      "type": "DesignDoc",
+      "name": "Design",
+      "status": "active",
+      "filePath": "synergyspec/changes/react-drag-drop-dashboard/design.md",
+      "changeId": "react-drag-drop-dashboard",
+      "createdAt": "2026-04-24T17:54:47.843Z",
+      "decisionsCount": 0,
+      "hasMigrationPlan": false
+    }
+  ],
+  "relationships": [
+    {
+      "sourceId": "react-drag-drop-dashboard",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard-proposal",
+      "properties": {
+        "role": "designdoc"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard-tasks",
+      "properties": {
+        "role": "artifact"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard-usecases",
+      "properties": {
+        "role": "artifact"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard-specs",
+      "properties": {
+        "role": "spec"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard-design",
+      "properties": {
+        "role": "designdoc"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-proposal",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard",
+      "properties": {
+        "role": "designdoc"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard",
+      "properties": {
+        "role": "artifact"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-usecases",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard",
+      "properties": {
+        "role": "artifact"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-specs",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard",
+      "properties": {
+        "role": "spec"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-design",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard",
+      "properties": {
+        "role": "designdoc"
+      }
+    }
+  ]
+}

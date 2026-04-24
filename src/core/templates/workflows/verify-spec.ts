@@ -126,7 +126,7 @@ const INSTRUCTIONS = `Verify and fix use case traceability across all artifacts 
 
 **Knowledge Graph Integration (Optional)**
 
-If KG is enabled (\`.synergyspec/kg/\` exists), audit connectivity against the graph as well:
+If KG is enabled (\`synergyspec/kg/\` exists), audit connectivity against the graph as well:
 
 1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
 2. For each parsed UseCase/UseCaseStep/Requirement/Task, verify \`kg:get-entity\` returns it with the expected id (e.g., \`<changeId>-<stepId>\`).

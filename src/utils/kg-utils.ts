@@ -5,7 +5,7 @@
  */
 
 import { KG, KGClient } from '../core/kg/index.js';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { existsSync } from 'fs';
 
 export interface KGConfig {
@@ -15,12 +15,29 @@ export interface KGConfig {
   connectionString?: string;
 }
 
+// One client per project root — reused across tool calls in the same process so
+// entities/relationships created by different tool invocations share state and
+// get flushed to disk together on persist().
+const clientCache = new Map<string, KGClient>();
+
+function cacheKey(projectRoot: string): string {
+  return resolve(projectRoot);
+}
+
+function getCached(projectRoot: string): KGClient | undefined {
+  return clientCache.get(cacheKey(projectRoot));
+}
+
+function setCached(projectRoot: string, client: KGClient): void {
+  clientCache.set(cacheKey(projectRoot), client);
+}
+
 /**
  * Check if KG is enabled for the project
  */
 export function isKGEnabled(projectRoot: string): boolean {
   // Check for KG config file
-  const kgConfigPath = join(projectRoot, '.synergyspec', 'kg', 'config.json');
+  const kgConfigPath = join(projectRoot, 'synergyspec', 'kg', 'config.json');
   if (existsSync(kgConfigPath)) {
     return true;
   }
@@ -37,39 +54,49 @@ export function isKGEnabled(projectRoot: string): boolean {
 }
 
 /**
- * Get or create KG client for a project
+ * Get or create KG client for a project.
+ *
+ * Returns a cached client when one exists for this project root; otherwise
+ * constructs a file-backed client so mutations can be flushed via persist().
  */
 export async function getKGClient(projectRoot: string): Promise<KGClient | null> {
   if (!isKGEnabled(projectRoot)) {
     return null;
   }
 
-  const kgConfigPath = join(projectRoot, '.synergyspec', 'kg', 'config.json');
-  const kgDataPath = join(projectRoot, '.synergyspec', 'kg', 'data.json');
+  const cached = getCached(projectRoot);
+  if (cached) return cached;
 
-  // Check if KG data exists
-  if (existsSync(kgDataPath)) {
-    // Load existing KG
-    const client = KG.createKGClient({
-      type: 'file',
-      connectionString: kgDataPath
-    });
+  const kgDataPath = join(projectRoot, 'synergyspec', 'kg', 'data.json');
 
-    // Load state
-    await KG.loadKGState(client, join(projectRoot, '.synergyspec', 'kg'));
-
-    return client;
-  }
-
-  // KG is enabled but not initialized yet
-  // This shouldn't happen if new-change command is used, but handle gracefully
-  const { initializeKG } = await import('../core/kg/init.js');
-  const result = await initializeKG({
-    projectRoot,
-    forceRecreate: false
+  // Build a file-backed client. loadFromDisk runs in the constructor when
+  // data.json exists, so in-memory state matches what's on disk.
+  const client = KG.createKGClient({
+    type: 'file',
+    connectionString: kgDataPath
   });
 
-  return result.client;
+  setCached(projectRoot, client);
+  return client;
+}
+
+/**
+ * Register an already-constructed client (e.g. from initializeKG) in the cache.
+ * Used by kg:init so subsequent tool calls reuse the same instance.
+ */
+export function registerKGClient(projectRoot: string, client: KGClient): void {
+  setCached(projectRoot, client);
+}
+
+/**
+ * Drop the cached client for this project. Test-only.
+ */
+export function resetKGClientCache(projectRoot?: string): void {
+  if (projectRoot === undefined) {
+    clientCache.clear();
+  } else {
+    clientCache.delete(cacheKey(projectRoot));
+  }
 }
 
 /**
@@ -118,15 +145,20 @@ export async function ensureKGInitialized(
 }
 
 /**
- * Save KG state after modifications
+ * Save KG state after modifications.
+ *
+ * If a client is provided, use it. Otherwise fall back to the cached client
+ * (this is the normal path when called from the kg:persist tool).
  */
-export async function persistKGState(projectRoot: string, client: KGClient): Promise<void> {
+export async function persistKGState(projectRoot: string, client?: KGClient | null): Promise<void> {
   if (!isKGEnabled(projectRoot)) return;
 
-  const { saveKGState } = await import('../core/kg/init.js');
-  const kgPath = join(projectRoot, '.synergyspec', 'kg');
+  const target = client ?? getCached(projectRoot);
+  if (!target) return;
 
-  await saveKGState(client, kgPath);
+  const { saveKGState } = await import('../core/kg/init.js');
+  const kgPath = join(projectRoot, 'synergyspec', 'kg');
+  await saveKGState(target, kgPath);
 }
 
 /**

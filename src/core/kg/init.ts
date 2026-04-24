@@ -32,7 +32,7 @@ export async function initializeKG(options: KGInitOptions): Promise<KGInitResult
   const { projectRoot, changeId, schema = 'spec-driven', forceRecreate = false } = options;
 
   // Determine KG storage path
-  const kgPath = join(projectRoot, '.synergyspec', 'kg');
+  const kgPath = join(projectRoot, 'synergyspec', 'kg');
   const kgConfigPath = join(kgPath, 'config.json');
   const kgDataPath = join(kgPath, 'data.json');
 
@@ -44,12 +44,16 @@ export async function initializeKG(options: KGInitOptions): Promise<KGInitResult
   // Check if KG already exists
   const kgExists = existsSync(kgConfigPath) && existsSync(kgDataPath);
 
+  const { registerKGClient } = await import('../../utils/kg-utils.js');
+
   if (kgExists && !forceRecreate) {
     // Load existing KG
     const client = KG.createKGClient({
       type: 'file',
       connectionString: kgDataPath
     });
+
+    registerKGClient(projectRoot, client);
 
     return {
       success: true,
@@ -60,8 +64,11 @@ export async function initializeKG(options: KGInitOptions): Promise<KGInitResult
     };
   }
 
-  // Create new KG
-  const client = KG.createKGClient({ type: 'memory' });
+  // Create new file-backed KG so mutations can be flushed via persist().
+  const client = KG.createKGClient({
+    type: 'file',
+    connectionString: kgDataPath
+  });
 
   // Save initial config
   const config = {
@@ -77,6 +84,8 @@ export async function initializeKG(options: KGInitOptions): Promise<KGInitResult
   if (!changeId) {
     await initializeProjectKG(client, projectRoot);
   }
+
+  registerKGClient(projectRoot, client);
 
   return {
     success: true,

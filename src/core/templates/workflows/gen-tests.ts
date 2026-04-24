@@ -200,7 +200,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 **Knowledge Graph Integration (Optional)**
 
-If KG is enabled (\`.synergyspec/kg/\` exists), track generated tests in the graph:
+If KG is enabled (\`synergyspec/kg/\` exists), track generated tests in the graph:
 
 1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
 2. For each newly written test file, \`kg:create-entity\` a TestCase: \`{ id, type: 'TestCase', framework, testType, isFailing: true, filePath, changeId }\`.

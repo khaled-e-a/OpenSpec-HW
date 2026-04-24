@@ -6,6 +6,7 @@
  */
 
 import * as types from './types.js';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 
 export interface KGClientConfig {
   type: 'memory' | 'neo4j' | 'file';
@@ -488,9 +489,8 @@ export class InMemoryKGClient extends KGClient {
     if (!this.persistencePath) return;
 
     try {
-      const fs = require('fs');
-      if (fs.existsSync(this.persistencePath)) {
-        const data = JSON.parse(fs.readFileSync(this.persistencePath, 'utf-8'));
+      if (existsSync(this.persistencePath)) {
+        const data = JSON.parse(readFileSync(this.persistencePath, 'utf-8'));
 
         // Load entities
         if (data.entities) {
@@ -518,7 +518,6 @@ export class InMemoryKGClient extends KGClient {
     if (!this.persistencePath) return;
 
     try {
-      const fs = require('fs');
       const data = {
         version: '1.0.0',
         exportedAt: new Date().toISOString(),
@@ -526,7 +525,7 @@ export class InMemoryKGClient extends KGClient {
         relationships: Array.from(this.relationships.values()).flat()
       };
 
-      fs.writeFileSync(this.persistencePath, JSON.stringify(data, null, 2));
+      writeFileSync(this.persistencePath, JSON.stringify(data, null, 2));
     } catch (error: any) {
       console.warn('Failed to save KG to disk:', error.message);
     }

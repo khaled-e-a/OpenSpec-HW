@@ -196,7 +196,7 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 
 **Knowledge Graph Integration (Optional)**
 
-If KG is enabled (\`.synergyspec/kg/\` exists), record test execution in the graph:
+If KG is enabled (\`synergyspec/kg/\` exists), record test execution in the graph:
 
 1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
 2. Before running, query \`kg:query\` for existing TestCase entities in the change to map test files to entities.

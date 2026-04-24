@@ -158,7 +158,7 @@ This skill supports the "actions on a change" model:
 
 **Knowledge Graph Integration (Optional)**
 
-If KG is enabled (\`.synergyspec/kg/\` exists), track implementation in the graph:
+If KG is enabled (\`synergyspec/kg/\` exists), track implementation in the graph:
 
 1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
 2. Before starting each task: query \`kg:get-entity\` for the Task, note its implementing Requirements via \`kg:get-relationships\` (direction: out, types: ['implements']).

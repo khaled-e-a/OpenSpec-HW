@@ -103,7 +103,7 @@ After completing all artifacts, summarize:
 
 **Knowledge Graph Integration (Optional)**
 
-If KG is enabled (\`.synergyspec/kg/\` exists), populate the graph as each artifact is written:
+If KG is enabled (\`synergyspec/kg/\` exists), populate the graph as each artifact is written:
 
 1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
 2. After every artifact file is created, \`kg:create-entity\` for the artifact (Spec/DesignDoc/Artifact) and \`kg:create-relationship\` linking it to the Change via \`hasArtifact\`.

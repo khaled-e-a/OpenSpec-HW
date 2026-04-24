@@ -178,7 +178,7 @@ For other schemas, follow the \`instruction\` field from the CLI output.
 
 **Knowledge Graph Integration (Optional)**
 
-If the project has KG enabled (\`.synergyspec/kg/\` exists), also update the graph when you create an artifact:
+If the project has KG enabled (\`synergyspec/kg/\` exists), also update the graph when you create an artifact:
 
 1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
 2. After writing the artifact file, create the entity:

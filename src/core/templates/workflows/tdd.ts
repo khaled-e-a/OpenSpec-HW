@@ -472,7 +472,7 @@ same \`- [x]\` checkboxes in tasks.md; either command can pick up where the othe
 
 **Knowledge Graph Integration (Optional)**
 
-If KG is enabled (\`.synergyspec/kg/\` exists), track each red-green-refactor cycle:
+If KG is enabled (\`synergyspec/kg/\` exists), track each red-green-refactor cycle:
 
 1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
 2. On **Red** (failing test written): \`kg:create-entity\` a TestCase with \`isFailing: true\`; link it to the Requirement via \`tests\`.

@@ -14,6 +14,7 @@ import { ValidateCommand } from '../commands/validate.js';
 import { ShowCommand } from '../commands/show.js';
 import { CompletionCommand } from '../commands/completion.js';
 import { FeedbackCommand } from '../commands/feedback.js';
+import { kgViewCommand } from '../commands/kg-view.js';
 import { registerConfigCommand } from '../commands/config.js';
 import { registerSchemaCommand } from '../commands/schema.js';
 import {
@@ -500,6 +501,23 @@ newCmd
   .action(async (name: string, options: NewChangeOptions) => {
     try {
       await newChangeCommand(name, options);
+    } catch (error) {
+      console.log();
+      ora().fail(`Error: ${(error as Error).message}`);
+      process.exit(1);
+    }
+  });
+
+const kgCmd = program.command('kg').description('Knowledge Graph utilities');
+
+kgCmd
+  .command('view')
+  .description('Open an interactive visualization of the local KG in the browser')
+  .option('--port <number>', 'Port to bind the local viewer server (default: random free port)')
+  .option('--no-open', 'Do not auto-open the browser; just print the URL')
+  .action(async (options: { port?: string; open?: boolean }) => {
+    try {
+      await kgViewCommand({ port: options.port, noOpen: options.open === false });
     } catch (error) {
       console.log();
       ora().fail(`Error: ${(error as Error).message}`);

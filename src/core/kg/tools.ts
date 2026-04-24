@@ -1,19 +1,19 @@
 /**
  * Knowledge Graph Tool Operations
  *
- * Tool wrappers for KG operations to ensure deterministic behavior
- * when AI assistants interact with the knowledge graph
+ * Tool wrappers for KG operations. Each tool accepts a single params object
+ * so it can be dispatched uniformly by executeKGTool.
  */
 
+import { join } from 'path';
 import { KG, KGClient, types } from './index.js';
 import { KGClientConfig } from './client.js';
 
 /**
  * Tool: Initialize Knowledge Graph
- *
- * Creates and configures a KG client for a project
  */
-export async function initKGTool(projectRoot: string, options?: {
+export async function initKGTool(params: {
+  projectRoot: string;
   type?: 'memory' | 'file';
   forceRecreate?: boolean;
   schema?: string;
@@ -27,18 +27,15 @@ export async function initKGTool(projectRoot: string, options?: {
     const { initializeKG } = await import('./init.js');
 
     const result = await initializeKG({
-      projectRoot,
-      type: options?.type || 'file',
-      schema: options?.schema,
-      forceRecreate: options?.forceRecreate || false
+      projectRoot: params.projectRoot,
+      type: params.type || 'file',
+      schema: params.schema,
+      forceRecreate: params.forceRecreate || false
     });
-
-    // Generate a client ID for reference
-    const clientId = `kg-${Date.now()}`;
 
     return {
       success: result.success,
-      clientId,
+      clientId: `kg-${Date.now()}`,
       kgPath: result.kgPath,
       message: result.message
     };
@@ -53,17 +50,13 @@ export async function initKGTool(projectRoot: string, options?: {
 
 /**
  * Tool: Create KG Entity
- *
- * Creates a single entity in the knowledge graph
  */
-export async function createKGEntityTool(
-  projectRoot: string,
-  entity: types.KGEntity,
-  options?: {
-    validate?: boolean;
-    cascade?: boolean;
-  }
-): Promise<{
+export async function createKGEntityTool(params: {
+  projectRoot: string;
+  entity: types.KGEntity;
+  validate?: boolean;
+  cascade?: boolean;
+}): Promise<{
   success: boolean;
   entityId: string;
   entity?: types.KGEntity;
@@ -71,45 +64,29 @@ export async function createKGEntityTool(
 }> {
   try {
     const { getKGClient } = await import('../../utils/kg-utils.js');
-    const kg = await getKGClient(projectRoot);
+    const kg = await getKGClient(params.projectRoot);
 
     if (!kg) {
-      return {
-        success: false,
-        entityId: '',
-        error: 'KG not available for this project'
-      };
+      return { success: false, entityId: '', error: 'KG not available for this project' };
     }
 
-    const created = await kg.create(entity, options);
+    const created = await kg.create(params.entity, { validate: params.validate, cascade: params.cascade });
 
-    return {
-      success: true,
-      entityId: created.id,
-      entity: created
-    };
+    return { success: true, entityId: created.id, entity: created };
   } catch (error: any) {
-    return {
-      success: false,
-      entityId: '',
-      error: error.message
-    };
+    return { success: false, entityId: '', error: error.message };
   }
 }
 
 /**
  * Tool: Create Multiple KG Entities
- *
- * Creates multiple entities in a single operation
  */
-export async function createKGEntitiesTool(
-  projectRoot: string,
-  entities: types.KGEntity[],
-  options?: {
-    validate?: boolean;
-    cascade?: boolean;
-  }
-): Promise<{
+export async function createKGEntitiesTool(params: {
+  projectRoot: string;
+  entities: types.KGEntity[];
+  validate?: boolean;
+  cascade?: boolean;
+}): Promise<{
   success: boolean;
   created: number;
   errors: Array<{ entity: any; error: string }>;
@@ -117,30 +94,30 @@ export async function createKGEntitiesTool(
 }> {
   try {
     const { getKGClient } = await import('../../utils/kg-utils.js');
-    const kg = await getKGClient(projectRoot);
+    const kg = await getKGClient(params.projectRoot);
 
     if (!kg) {
       return {
         success: false,
         created: 0,
-        errors: entities.map(e => ({ entity: e, error: 'KG not available' })),
+        errors: params.entities.map(e => ({ entity: e, error: 'KG not available' })),
         entityIds: []
       };
     }
 
-    const result = await kg.createMany(entities, options);
+    const result = await kg.createMany(params.entities, { validate: params.validate, cascade: params.cascade });
 
     return {
       success: result.success,
       created: result.created,
       errors: result.errors,
-      entityIds: result.success ? entities.map(e => e.id) : []
+      entityIds: result.success ? params.entities.map(e => e.id) : []
     };
   } catch (error: any) {
     return {
       success: false,
       created: 0,
-      errors: entities.map(e => ({ entity: e, error: error.message })),
+      errors: params.entities.map(e => ({ entity: e, error: error.message })),
       entityIds: []
     };
   }
@@ -148,59 +125,47 @@ export async function createKGEntitiesTool(
 
 /**
  * Tool: Create KG Relationship
- *
- * Creates a relationship between two entities
  */
-export async function createKGRelationshipTool(
-  projectRoot: string,
-  sourceId: string,
-  relationshipType: string,
-  targetId: string,
-  properties?: Record<string, any>
-): Promise<{
+export async function createKGRelationshipTool(params: {
+  projectRoot: string;
+  sourceId: string;
+  relationshipType: string;
+  targetId: string;
+  properties?: Record<string, any>;
+}): Promise<{
   success: boolean;
   error?: string;
 }> {
   try {
     const { getKGClient } = await import('../../utils/kg-utils.js');
-    const kg = await getKGClient(projectRoot);
+    const kg = await getKGClient(params.projectRoot);
 
     if (!kg) {
-      return {
-        success: false,
-        error: 'KG not available for this project'
-      };
+      return { success: false, error: 'KG not available for this project' };
     }
 
-    await kg.createRelationship(sourceId, relationshipType, targetId, properties);
+    await kg.createRelationship(params.sourceId, params.relationshipType, params.targetId, params.properties);
 
     return { success: true };
   } catch (error: any) {
-    return {
-      success: false,
-      error: error.message
-    };
+    return { success: false, error: error.message };
   }
 }
 
 /**
  * Tool: Query KG Entities
- *
- * Finds entities matching query criteria
  */
-export async function queryKGTool(
-  projectRoot: string,
+export async function queryKGTool(params: {
+  projectRoot: string;
   query: {
     entityType?: string;
     properties?: Record<string, any>;
     ids?: string[];
-  },
-  options?: {
-    limit?: number;
-    offset?: number;
-    orderBy?: string;
-  }
-): Promise<{
+  };
+  limit?: number;
+  offset?: number;
+  orderBy?: string;
+}): Promise<{
   success: boolean;
   entities: types.KGEntity[];
   count: number;
@@ -208,105 +173,71 @@ export async function queryKGTool(
 }> {
   try {
     const { getKGClient } = await import('../../utils/kg-utils.js');
-    const kg = await getKGClient(projectRoot);
+    const kg = await getKGClient(params.projectRoot);
 
     if (!kg) {
-      return {
-        success: false,
-        entities: [],
-        count: 0,
-        error: 'KG not available for this project'
-      };
+      return { success: false, entities: [], count: 0, error: 'KG not available for this project' };
     }
 
-    // Handle ID-based queries
+    const { query } = params;
+
     if (query.ids && query.ids.length > 0) {
       const entities = await kg.readMany(query.ids);
-      return {
-        success: true,
-        entities,
-        count: entities.length
-      };
+      return { success: true, entities, count: entities.length };
     }
 
-    // Handle property-based queries
     const kgQuery: any = {
       entityType: query.entityType,
       properties: query.properties
     };
 
-    const entities = await kg.find(kgQuery, options);
+    const entities = await kg.find(kgQuery, { limit: params.limit, offset: params.offset, orderBy: params.orderBy });
 
-    return {
-      success: true,
-      entities,
-      count: entities.length
-    };
+    return { success: true, entities, count: entities.length };
   } catch (error: any) {
-    return {
-      success: false,
-      entities: [],
-      count: 0,
-      error: error.message
-    };
+    return { success: false, entities: [], count: 0, error: error.message };
   }
 }
 
 /**
  * Tool: Get KG Entity by ID
- *
- * Retrieves a single entity by its ID
  */
-export async function getKGEntityTool(
-  projectRoot: string,
-  entityId: string,
-  entityType?: string
-): Promise<{
+export async function getKGEntityTool(params: {
+  projectRoot: string;
+  entityId: string;
+  entityType?: string;
+}): Promise<{
   success: boolean;
   entity?: types.KGEntity;
   error?: string;
 }> {
   try {
     const { getKGClient } = await import('../../utils/kg-utils.js');
-    const kg = await getKGClient(projectRoot);
+    const kg = await getKGClient(params.projectRoot);
 
     if (!kg) {
-      return {
-        success: false,
-        error: 'KG not available for this project'
-      };
+      return { success: false, error: 'KG not available for this project' };
     }
 
-    const entity = await kg.read(entityId, entityType);
+    const entity = await kg.read(params.entityId, params.entityType);
 
     if (!entity) {
-      return {
-        success: false,
-        error: `Entity '${entityId}' not found`
-      };
+      return { success: false, error: `Entity '${params.entityId}' not found` };
     }
 
-    return {
-      success: true,
-      entity
-    };
+    return { success: true, entity };
   } catch (error: any) {
-    return {
-      success: false,
-      error: error.message
-    };
+    return { success: false, error: error.message };
   }
 }
 
 /**
  * Tool: Get Change Traceability
- *
- * Gets complete traceability information for a change
  */
-export async function getChangeTraceabilityTool(
-  projectRoot: string,
-  changeId: string
-): Promise<{
+export async function getChangeTraceabilityTool(params: {
+  projectRoot: string;
+  changeId: string;
+}): Promise<{
   success: boolean;
   traceability?: {
     useCaseSteps: types.UseCaseStep[];
@@ -319,64 +250,49 @@ export async function getChangeTraceabilityTool(
 }> {
   try {
     const { getChangeKGClient } = await import('../../utils/kg-utils.js');
-    const kg = await getChangeKGClient(projectRoot, changeId);
+    const kg = await getChangeKGClient(params.projectRoot, params.changeId);
 
     if (!kg) {
-      return {
-        success: false,
-        error: 'KG not available or change not found'
-      };
+      return { success: false, error: 'KG not available or change not found' };
     }
 
-    const traceability = await kg.getChangeTraceability(changeId);
+    const traceability = await kg.getChangeTraceability(params.changeId);
 
-    return {
-      success: true,
-      traceability
-    };
+    return { success: true, traceability };
   } catch (error: any) {
-    return {
-      success: false,
-      error: error.message
-    };
+    return { success: false, error: error.message };
   }
 }
 
 /**
  * Tool: Persist KG State
- *
- * Saves the current KG state to persistent storage
  */
-export async function persistKGTool(projectRoot: string): Promise<{
+export async function persistKGTool(params: { projectRoot: string }): Promise<{
   success: boolean;
   kgPath?: string;
   error?: string;
 }> {
   try {
     const { persistKGState } = await import('../../utils/kg-utils.js');
-    await persistKGState(projectRoot, null as any); // Will get client internally
+    // persistKGState falls back to the cached client for this project root.
+    await persistKGState(params.projectRoot);
 
     return {
       success: true,
-      kgPath: join(projectRoot, '.synergyspec', 'kg')
+      kgPath: join(params.projectRoot, 'synergyspec', 'kg')
     };
   } catch (error: any) {
-    return {
-      success: false,
-      error: error.message
-    };
+    return { success: false, error: error.message };
   }
 }
 
 /**
  * Tool: Validate Entity Against Schema
- *
- * Validates an entity against the KG ontology schema
  */
-export async function validateKGEntityTool(
-  entity: any,
-  entityType: string
-): Promise<{
+export async function validateKGEntityTool(params: {
+  entity: any;
+  entityType: string;
+}): Promise<{
   success: boolean;
   isValid: boolean;
   errors: Array<{ field?: string; message: string }>;
@@ -386,7 +302,7 @@ export async function validateKGEntityTool(
     const { KGSchemaValidator } = await import('./validator.js');
     const validator = new KGSchemaValidator();
 
-    const result = validator.validateEntity(entity, entityType);
+    const result = validator.validateEntity(params.entity, params.entityType);
 
     return {
       success: true,
@@ -406,10 +322,8 @@ export async function validateKGEntityTool(
 
 /**
  * Tool: Get KG Summary
- *
- * Gets a summary of KG contents for a project
  */
-export async function getKGSummaryTool(projectRoot: string): Promise<{
+export async function getKGSummaryTool(params: { projectRoot: string }): Promise<{
   success: boolean;
   summary?: {
     enabled: boolean;
@@ -421,31 +335,17 @@ export async function getKGSummaryTool(projectRoot: string): Promise<{
 }> {
   try {
     const { getKGSummary } = await import('../../utils/kg-utils.js');
-    const summary = await getKGSummary(projectRoot, '');
+    const summary = await getKGSummary(params.projectRoot, '');
 
     if (!summary) {
       return {
         success: true,
-        summary: {
-          enabled: false,
-          entities: 0,
-          relationships: 0,
-          coverage: 0
-        }
+        summary: { enabled: false, entities: 0, relationships: 0, coverage: 0 }
       };
     }
 
-    return {
-      success: true,
-      summary
-    };
+    return { success: true, summary };
   } catch (error: any) {
-    return {
-      success: false,
-      error: error.message
-    };
+    return { success: false, error: error.message };
   }
 }
-
-// Import utilities
-import { join } from 'path';

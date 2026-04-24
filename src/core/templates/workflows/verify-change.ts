@@ -277,7 +277,7 @@ Use clear markdown with:
 
 **Knowledge Graph Integration (Optional)**
 
-If KG is enabled (\`.synergyspec/kg/\` exists), use it as a structured ground truth for connectivity checks:
+If KG is enabled (\`synergyspec/kg/\` exists), use it as a structured ground truth for connectivity checks:
 
 1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
 2. Call \`kg:get-change-traceability\` with the changeId to get all entities and their relationships.
