@@ -9,10 +9,12 @@ import { existsSync, readFileSync } from 'fs';
 import path from 'path';
 import { exec } from 'child_process';
 import { KG_VIEWER_HTML } from '../core/kg/viewer-html.js';
+import { kgRefreshCommand } from './kg-refresh.js';
 
 export interface KGViewOptions {
   port?: string;
   noOpen?: boolean;
+  noRefresh?: boolean;
 }
 
 async function findFreePort(): Promise<number> {

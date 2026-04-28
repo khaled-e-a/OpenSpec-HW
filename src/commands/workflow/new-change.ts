@@ -167,13 +167,24 @@ export async function newChangeCommand(name: string | undefined, options: NewCha
       await fs.writeFile(readmePath, `# ${name}\n\n${options.description}${kgInfo}`, 'utf-8');
     }
 
+    // Step 6: Refresh sub-entities from any seed content (templates are mostly
+    // placeholders, so this is usually a no-op — but it makes the workflow
+    // consistent: every command that touches change files leaves a synced KG.
+    try {
+      const { kgRefreshCommand } = await import('../kg-refresh.js');
+      await kgRefreshCommand({ change: name, silent: true, projectRoot });
+    } catch (err: any) {
+      // Non-fatal: change was created successfully, just couldn't refresh KG.
+      console.warn(`(warning: KG refresh failed: ${err.message})`);
+    }
+
     spinner.succeed(`Created change '${name}' at synergyspec/changes/${name}/ (schema: ${result.schema})`);
 
     // Log KG info
     console.log(`\n📊 Knowledge Graph initialized with:`);
     console.log(`   - ${kgResult.entities.length} entities`);
     console.log(`   - ${kgResult.relationships.length} relationships`);
-    console.log(`   - KG stored at: ${kgInit.kgPath || '.synergyspec/kg'}`);
+    console.log(`   - KG stored at: ${kgInit.kgPath || 'synergyspec/kg'}`);
 
   } catch (error) {
     spinner.fail(`Failed to create change '${name}'`);

@@ -154,6 +154,19 @@ export class InitCommand {
     // Create config.yaml if needed
     const configStatus = await this.createConfig(openspecPath, extendMode);
 
+    // Install Claude Code KG hooks if Claude is among the selected tools.
+    // This makes `kg refresh` run automatically after every Write/Edit and at
+    // end-of-turn, so the graph stays in sync without relying on the AI
+    // remembering to invoke refresh from inside its skill instructions.
+    if (validatedTools.some(t => t.value === 'claude')) {
+      try {
+        const { kgInstallHooksCommand } = await import('../commands/kg-install-hooks.js');
+        await kgInstallHooksCommand({ projectRoot: projectPath, silent: true });
+      } catch {
+        // Non-fatal: hook install is a nice-to-have, not blocking init.
+      }
+    }
+
     // Display success message
     this.displaySuccessMessage(projectPath, validatedTools, results, configStatus);
   }

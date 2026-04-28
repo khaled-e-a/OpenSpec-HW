@@ -25,14 +25,16 @@ export function parseUseCases(content: string): Array<{
     level?: string;
   }> = [];
 
-  // Find use case sections
-  const useCaseRegex = /### Use Case: (.+)/g;
+  // Match either the template's `### Use Case: Name` form or AI-generated
+  // variants like `### UC1: Name`, `### UC1 - Name`, `### UC1. Name`.
+  const useCaseRegex = /^### (?:Use Case:|UC(\d+)[:.\-\s]+)\s*(.+)$/gim;
   let match;
   let useCaseIndex = 1;
 
   while ((match = useCaseRegex.exec(content)) !== null) {
-    const title = match[1].trim();
-    const useCaseId = `uc${useCaseIndex}`;
+    const explicitNumber = match[1] ? parseInt(match[1], 10) : null;
+    const title = match[2].trim();
+    const useCaseId = explicitNumber !== null ? `uc${explicitNumber}` : `uc${useCaseIndex}`;
 
     // Extract actor and goal from the section
     const sectionStart = match.index;
@@ -145,14 +147,15 @@ export function parseRequirements(content: string): Array<{
     const name = match[1].trim();
     const reqId = `req${reqIndex}`;
 
-    // Find the section content
+    // Find the section content. Search for boundaries on the *next line*
+    // (anchored by '\n') so we don't match the current header itself.
     const sectionStart = match.index;
-    const nextReq = content.indexOf('### Requirement:', sectionStart + 1);
-    const nextSection = content.indexOf('##', sectionStart + 1);
-    const sectionEnd = Math.min(
-      nextReq > 0 ? nextReq : content.length,
-      nextSection > 0 ? nextSection : content.length
-    );
+    const headerEnd = content.indexOf('\n', sectionStart);
+    const searchFrom = headerEnd >= 0 ? headerEnd : sectionStart;
+    const nextReq = content.indexOf('\n### Requirement:', searchFrom);
+    const nextSection = content.indexOf('\n## ', searchFrom);
+    const candidates = [nextReq, nextSection].filter(i => i > 0);
+    const sectionEnd = candidates.length > 0 ? Math.min(...candidates) : content.length;
     const sectionContent = content.substring(sectionStart, sectionEnd);
 
     // Extract shall statement

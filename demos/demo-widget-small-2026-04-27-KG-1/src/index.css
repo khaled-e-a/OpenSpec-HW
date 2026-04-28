@@ -1,0 +1,77 @@
+/* react-grid-layout styles */
+@import 'react-grid-layout/css/styles.css';
+
+/* CSS reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #f0f2f5;
+  --color-surface: #ffffff;
+  --color-border: #e2e8f0;
+  --color-text: #1a202c;
+  --color-text-muted: #718096;
+  --color-primary: #6366f1;
+  --color-primary-hover: #4f46e5;
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
+  --color-placeholder-bg: rgba(99, 102, 241, 0.12);
+  --color-placeholder-border: #6366f1;
+  --color-placeholder-invalid-bg: rgba(239, 68, 68, 0.12);
+  --color-placeholder-invalid-border: #ef4444;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  --radius: 10px;
+  --radius-sm: 6px;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* RGL placeholder — valid drop target */
+.react-grid-layout .react-grid-placeholder {
+  background: var(--color-placeholder-bg) !important;
+  border: 2px dashed var(--color-placeholder-border) !important;
+  border-radius: var(--radius);
+  opacity: 1 !important;
+}
+
+/* RGL placeholder — invalid drop target (grid full) */
+.rgl-grid-full .react-grid-placeholder {
+  background: var(--color-placeholder-invalid-bg) !important;
+  border: 2px dashed var(--color-placeholder-invalid-border) !important;
+}
+
+/* Drag item lifted state */
+.react-draggable-dragging .widget-card {
+  opacity: 0.75;
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.02);
+}
+
+/* Shake animation for rejected drop */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.widget-shake {
+  animation: shake 0.35s ease-in-out;
+}

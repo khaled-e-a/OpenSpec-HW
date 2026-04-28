@@ -1,0 +1,3036 @@
+{
+  "version": "1.0.0",
+  "exportedAt": "2026-04-28T19:28:53.983Z",
+  "entities": [
+    {
+      "id": "react-drag-drop-dashboard",
+      "type": "Change",
+      "name": "react-drag-drop-dashboard",
+      "schema": "spec-driven",
+      "status": "proposed",
+      "createdDate": "2026-04-28T13:57:49.724Z"
+    },
+    {
+      "id": "react-drag-drop-dashboard-proposal",
+      "type": "DesignDoc",
+      "name": "Proposal",
+      "status": "active",
+      "filePath": "synergyspec/changes/react-drag-drop-dashboard/proposal.md",
+      "changeId": "react-drag-drop-dashboard",
+      "createdAt": "2026-04-28T19:25:53.516Z",
+      "decisionsCount": 0,
+      "hasMigrationPlan": false
+    },
+    {
+      "id": "react-drag-drop-dashboard-usecases",
+      "type": "Artifact",
+      "name": "Use Cases",
+      "status": "active",
+      "filePath": "synergyspec/changes/react-drag-drop-dashboard/usecases.md",
+      "changeId": "react-drag-drop-dashboard",
+      "createdAt": "2026-04-28T19:25:53.516Z"
+    },
+    {
+      "id": "react-drag-drop-dashboard-design",
+      "type": "DesignDoc",
+      "name": "Design",
+      "status": "active",
+      "filePath": "synergyspec/changes/react-drag-drop-dashboard/design.md",
+      "changeId": "react-drag-drop-dashboard",
+      "createdAt": "2026-04-28T19:25:53.516Z",
+      "decisionsCount": 0,
+      "hasMigrationPlan": false
+    },
+    {
+      "id": "react-drag-drop-dashboard-specs",
+      "type": "Spec",
+      "name": "Specifications",
+      "status": "active",
+      "filePath": "synergyspec/changes/react-drag-drop-dashboard/specs",
+      "changeId": "react-drag-drop-dashboard",
+      "createdAt": "2026-04-28T19:25:53.516Z",
+      "capability": "change-specs",
+      "specType": "new"
+    },
+    {
+      "id": "react-drag-drop-dashboard-tasks",
+      "type": "Artifact",
+      "name": "Tasks",
+      "status": "active",
+      "filePath": "synergyspec/changes/react-drag-drop-dashboard/tasks.md",
+      "changeId": "react-drag-drop-dashboard",
+      "createdAt": "2026-04-28T19:25:53.516Z"
+    },
+    {
+      "id": "react-drag-drop-dashboard-uc1",
+      "type": "UseCase",
+      "name": "— Drag and Reposition a Widget",
+      "primaryActor": "User",
+      "goal": "Move a widget to a different position on the dashboard grid",
+      "level": "user",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-uc2",
+      "type": "UseCase",
+      "name": "— Add a Widget from the Registry",
+      "primaryActor": "User",
+      "goal": "Place a new widget type onto the dashboard",
+      "level": "user",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-uc3",
+      "type": "UseCase",
+      "name": "— Remove a Widget from the Dashboard",
+      "primaryActor": "User",
+      "goal": "Dismiss a widget from the dashboard to declutter the layout",
+      "level": "user",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-uc4",
+      "type": "UseCase",
+      "name": "— Restore Layout After Page Reload",
+      "primaryActor": "User",
+      "goal": "Return to the dashboard and see it exactly as it was last arranged",
+      "level": "user",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-uc5",
+      "type": "UseCase",
+      "name": "— View Live Drag Preview While Moving a Widget",
+      "primaryActor": "User",
+      "goal": "See a real-time visual cue of where a widget will land before releasing it",
+      "level": "user",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC1-S1",
+      "type": "UseCaseStep",
+      "name": "UC1-S1",
+      "stepNumber": "S1",
+      "stepType": "main",
+      "action": "User grabs a widget's drag handle",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC1-S2",
+      "type": "UseCaseStep",
+      "name": "UC1-S2",
+      "stepNumber": "S2",
+      "stepType": "main",
+      "action": "System lifts the widget visually and displays a drag preview",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC1-S3",
+      "type": "UseCaseStep",
+      "name": "UC1-S3",
+      "stepNumber": "S3",
+      "stepType": "main",
+      "action": "User moves the pointer across the dashboard",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC1-S4",
+      "type": "UseCaseStep",
+      "name": "UC1-S4",
+      "stepNumber": "S4",
+      "stepType": "main",
+      "action": "System highlights the valid drop zone under the pointer in real time",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC1-S5",
+      "type": "UseCaseStep",
+      "name": "UC1-S5",
+      "stepNumber": "S5",
+      "stepType": "main",
+      "action": "User releases the pointer over a target grid cell",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC1-S6",
+      "type": "UseCaseStep",
+      "name": "UC1-S6",
+      "stepNumber": "S6",
+      "stepType": "main",
+      "action": "System places the widget at the new position, shifting others to avoid overlap",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC1-S7",
+      "type": "UseCaseStep",
+      "name": "UC1-S7",
+      "stepNumber": "S7",
+      "stepType": "main",
+      "action": "System persists the updated layout to localStorage",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC1-E4a",
+      "type": "UseCaseStep",
+      "name": "UC1-E4a",
+      "stepNumber": "E4a",
+      "stepType": "extension",
+      "action": "User moves pointer outside any valid drop zone; system shows no highlight",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC1-E5a",
+      "type": "UseCaseStep",
+      "name": "UC1-E5a",
+      "stepNumber": "E5a",
+      "stepType": "extension",
+      "action": "User releases pointer outside valid drop zone; widget returns to original position",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC1-E6a",
+      "type": "UseCaseStep",
+      "name": "UC1-E6a",
+      "stepNumber": "E6a",
+      "stepType": "extension",
+      "action": "Target cell occupied and grid full; widget returned, error indicator shown",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC2-S1",
+      "type": "UseCaseStep",
+      "name": "UC2-S1",
+      "stepNumber": "S1",
+      "stepType": "main",
+      "action": "User opens the Add Widget panel",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC2-S2",
+      "type": "UseCaseStep",
+      "name": "UC2-S2",
+      "stepNumber": "S2",
+      "stepType": "main",
+      "action": "System displays available widget types with names and previews",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC2-S3",
+      "type": "UseCaseStep",
+      "name": "UC2-S3",
+      "stepNumber": "S3",
+      "stepType": "main",
+      "action": "User selects a widget type",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC2-S4",
+      "type": "UseCaseStep",
+      "name": "UC2-S4",
+      "stepNumber": "S4",
+      "stepType": "main",
+      "action": "System places widget instance in first available grid cell",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC2-S5",
+      "type": "UseCaseStep",
+      "name": "UC2-S5",
+      "stepNumber": "S5",
+      "stepType": "main",
+      "action": "System persists updated layout to localStorage",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC2-S6",
+      "type": "UseCaseStep",
+      "name": "UC2-S6",
+      "stepNumber": "S6",
+      "stepType": "main",
+      "action": "New widget appears on dashboard ready for use",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC2-E3a",
+      "type": "UseCaseStep",
+      "name": "UC2-E3a",
+      "stepNumber": "E3a",
+      "stepType": "extension",
+      "action": "User cancels panel; no change made",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC2-E4a",
+      "type": "UseCaseStep",
+      "name": "UC2-E4a",
+      "stepNumber": "E4a",
+      "stepType": "extension",
+      "action": "No free grid cell; system notifies user, widget not added",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC3-S1",
+      "type": "UseCaseStep",
+      "name": "UC3-S1",
+      "stepNumber": "S1",
+      "stepType": "main",
+      "action": "User clicks the remove control on a widget",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC3-S2",
+      "type": "UseCaseStep",
+      "name": "UC3-S2",
+      "stepNumber": "S2",
+      "stepType": "main",
+      "action": "System presents a confirmation prompt",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC3-S3",
+      "type": "UseCaseStep",
+      "name": "UC3-S3",
+      "stepNumber": "S3",
+      "stepType": "main",
+      "action": "User confirms the removal",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC3-S4",
+      "type": "UseCaseStep",
+      "name": "UC3-S4",
+      "stepNumber": "S4",
+      "stepType": "main",
+      "action": "System removes the widget from the dashboard",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC3-S5",
+      "type": "UseCaseStep",
+      "name": "UC3-S5",
+      "stepNumber": "S5",
+      "stepType": "main",
+      "action": "System frees the grid cells occupied by the widget",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC3-S6",
+      "type": "UseCaseStep",
+      "name": "UC3-S6",
+      "stepNumber": "S6",
+      "stepType": "main",
+      "action": "System persists updated layout to localStorage",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC3-E3a",
+      "type": "UseCaseStep",
+      "name": "UC3-E3a",
+      "stepNumber": "E3a",
+      "stepType": "extension",
+      "action": "User cancels confirmation; widget remains unchanged",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC4-S1",
+      "type": "UseCaseStep",
+      "name": "UC4-S1",
+      "stepNumber": "S1",
+      "stepType": "main",
+      "action": "Browser loads the React dashboard application",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC4-S2",
+      "type": "UseCaseStep",
+      "name": "UC4-S2",
+      "stepNumber": "S2",
+      "stepType": "main",
+      "action": "System reads stored layout from localStorage",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC4-S3",
+      "type": "UseCaseStep",
+      "name": "UC4-S3",
+      "stepNumber": "S3",
+      "stepType": "main",
+      "action": "System parses layout and reconstructs widget positions and types",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC4-S4",
+      "type": "UseCaseStep",
+      "name": "UC4-S4",
+      "stepNumber": "S4",
+      "stepType": "main",
+      "action": "System renders dashboard with each widget in its persisted position",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC4-S5",
+      "type": "UseCaseStep",
+      "name": "UC4-S5",
+      "stepNumber": "S5",
+      "stepType": "main",
+      "action": "User sees dashboard exactly as last left",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC4-E2a",
+      "type": "UseCaseStep",
+      "name": "UC4-E2a",
+      "stepNumber": "E2a",
+      "stepType": "extension",
+      "action": "No layout in localStorage; system renders default layout",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC4-E2b",
+      "type": "UseCaseStep",
+      "name": "UC4-E2b",
+      "stepNumber": "E2b",
+      "stepType": "extension",
+      "action": "Layout data corrupt/incompatible; system falls back to default, notifies user",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC5-S1",
+      "type": "UseCaseStep",
+      "name": "UC5-S1",
+      "stepNumber": "S1",
+      "stepType": "main",
+      "action": "User moves pointer while dragging a widget",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC5-S2",
+      "type": "UseCaseStep",
+      "name": "UC5-S2",
+      "stepNumber": "S2",
+      "stepType": "main",
+      "action": "System renders a ghost/placeholder at the hovered target cell",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC5-S3",
+      "type": "UseCaseStep",
+      "name": "UC5-S3",
+      "stepNumber": "S3",
+      "stepType": "main",
+      "action": "System updates placeholder position in real time as pointer moves",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC5-S4",
+      "type": "UseCaseStep",
+      "name": "UC5-S4",
+      "stepNumber": "S4",
+      "stepType": "main",
+      "action": "User sees intended drop position clearly distinguished",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC5-S5",
+      "type": "UseCaseStep",
+      "name": "UC5-S5",
+      "stepNumber": "S5",
+      "stepType": "main",
+      "action": "User releases pointer; preview is removed and drop completes",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-UC5-E3a",
+      "type": "UseCaseStep",
+      "name": "UC5-E3a",
+      "stepNumber": "E3a",
+      "stepType": "extension",
+      "action": "Pointer moves to invalid position; placeholder rendered in invalid state",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-req1",
+      "type": "Requirement",
+      "name": "Maintain a static widget type registry",
+      "requirementType": "added",
+      "shallStatement": "The system SHALL maintain a registry of available widget types, each entry containing at minimum: a unique identifier, a display name, a short description, a default grid size (w × h), and a reference to the React component that renders it.",
+      "priority": "medium",
+      "isTestable": true,
+      "changeId": "react-drag-drop-dashboard",
+      "metadata": {
+        "specFile": "synergyspec/changes/react-drag-drop-dashboard/specs/widget-registry/spec.md"
+      }
+    },
+    {
+      "id": "react-drag-drop-dashboard-req2",
+      "type": "Requirement",
+      "name": "Expose registry entries for display in the Add Widget panel",
+      "requirementType": "added",
+      "shallStatement": "The system SHALL provide the full list of registered widget types to the Add Widget panel UI so they can be presented to the user.",
+      "priority": "medium",
+      "isTestable": true,
+      "changeId": "react-drag-drop-dashboard",
+      "metadata": {
+        "specFile": "synergyspec/changes/react-drag-drop-dashboard/specs/widget-registry/spec.md"
+      }
+    },
+    {
+      "id": "react-drag-drop-dashboard-req3",
+      "type": "Requirement",
+      "name": "Support instantiation of a registered widget type",
+      "requirementType": "added",
+      "shallStatement": "The system SHALL be able to create a new widget instance from a registry entry, assigning it a unique instance ID and its default grid size.",
+      "priority": "medium",
+      "isTestable": true,
+      "changeId": "react-drag-drop-dashboard",
+      "metadata": {
+        "specFile": "synergyspec/changes/react-drag-drop-dashboard/specs/widget-registry/spec.md"
+      }
+    },
+    {
+      "id": "react-drag-drop-dashboard-req4",
+      "type": "Requirement",
+      "name": "Support extension with new widget types without grid changes",
+      "requirementType": "added",
+      "shallStatement": "The system SHALL allow new widget types to be registered by adding an entry to the registry array without requiring changes to any grid or layout logic.",
+      "priority": "medium",
+      "isTestable": true,
+      "changeId": "react-drag-drop-dashboard",
+      "metadata": {
+        "specFile": "synergyspec/changes/react-drag-drop-dashboard/specs/widget-registry/spec.md"
+      }
+    },
+    {
+      "id": "react-drag-drop-dashboard-req5",
+      "type": "Requirement",
+      "name": "Notify user when grid is full and block addition",
+      "requirementType": "added",
+      "shallStatement": "The system SHALL check for available grid space before adding a widget. If no free cell block exists for the widget's default size, the system SHALL display a notification and SHALL NOT add the widget.",
+      "priority": "medium",
+      "isTestable": true,
+      "changeId": "react-drag-drop-dashboard",
+      "metadata": {
+        "specFile": "synergyspec/changes/react-drag-drop-dashboard/specs/widget-management/spec.md"
+      }
+    },
+    {
+      "id": "react-drag-drop-dashboard-req6",
+      "type": "Requirement",
+      "name": "Provide a remove control on each widget",
+      "requirementType": "added",
+      "shallStatement": "The system SHALL provide a remove control on each widget",
+      "priority": "medium",
+      "isTestable": true,
+      "changeId": "react-drag-drop-dashboard",
+      "metadata": {
+        "specFile": "synergyspec/changes/react-drag-drop-dashboard/specs/widget-management/spec.md"
+      }
+    },
+    {
+      "id": "react-drag-drop-dashboard-req7",
+      "type": "Requirement",
+      "name": "Request confirmation before removing a widget",
+      "requirementType": "added",
+      "shallStatement": "The system SHALL present a confirmation prompt when the user activates the remove control on a widget. The widget SHALL only be removed if the user confirms.",
+      "priority": "medium",
+      "isTestable": true,
+      "changeId": "react-drag-drop-dashboard",
+      "metadata": {
+        "specFile": "synergyspec/changes/react-drag-drop-dashboard/specs/widget-management/spec.md"
+      }
+    },
+    {
+      "id": "react-drag-drop-dashboard-req8",
+      "type": "Requirement",
+      "name": "Cancel removal without change",
+      "requirementType": "added",
+      "shallStatement": "The system SHALL dismiss the confirmation prompt and leave the widget on the dashboard when the user cancels the removal.",
+      "priority": "medium",
+      "isTestable": true,
+      "changeId": "react-drag-drop-dashboard",
+      "metadata": {
+        "specFile": "synergyspec/changes/react-drag-drop-dashboard/specs/widget-management/spec.md"
+      }
+    },
+    {
+      "id": "react-drag-drop-dashboard-task1_1",
+      "type": "Task",
+      "name": "Scaffold the React + TypeScript project with Vite (`npm create vite@latest . -- --template react-ts`)",
+      "taskNumber": "1.1",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task1_2",
+      "type": "Task",
+      "name": "Install core dependencies: `react-grid-layout`, `@types/react-grid-layout`",
+      "taskNumber": "1.2",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task1_3",
+      "type": "Task",
+      "name": "Install UI utility dependencies: a toast/notification library (e.g., `react-hot-toast`) for error and reset notifications",
+      "taskNumber": "1.3",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task1_4",
+      "type": "Task",
+      "name": "Configure TypeScript `tsconfig.json` and Vite `vite.config.ts` for path aliases and strict mode",
+      "taskNumber": "1.4",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task1_5",
+      "type": "Task",
+      "name": "Set up basic CSS reset and global styles; import `react-grid-layout/css/styles.css` and `react-grid-layout/css/resizable.css`",
+      "taskNumber": "1.5",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task2_1",
+      "type": "Task",
+      "name": "Define the `WidgetRegistryEntry` TypeScript interface (`id`, `displayName`, `description`, `defaultSize: {w, h}`, `component`)",
+      "taskNumber": "2.1",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task2_2",
+      "type": "Task",
+      "name": "Create the static `WIDGET_REGISTRY` array in `src/registry/widgetRegistry.ts` with at least three starter widget types (e.g., StatsCard, ChartWidget, TableWidget)",
+      "taskNumber": "2.2",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task2_3",
+      "type": "Task",
+      "name": "Implement each starter widget component as a simple placeholder React component under `src/widgets/`",
+      "taskNumber": "2.3",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task2_4",
+      "type": "Task",
+      "name": "Export a `getWidgetComponent(id)` helper that resolves a registry entry to its React component",
+      "taskNumber": "2.4",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task3_1",
+      "type": "Task",
+      "name": "Define the `WidgetInstance` type (`instanceId`, `typeId`, `x`, `y`, `w`, `h`) and `DashboardLayout` type (`layoutVersion`, `widgets: WidgetInstance[]`) in `src/types/layout.ts`",
+      "taskNumber": "3.1",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task3_2",
+      "type": "Task",
+      "name": "Define the `DEFAULT_LAYOUT` constant in `src/registry/defaultLayout.ts` with one instance of each starter widget type at sensible positions",
+      "taskNumber": "3.2",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task3_3",
+      "type": "Task",
+      "name": "Implement `loadLayout(): DashboardLayout` in `src/persistence/layoutStorage.ts` — reads `rdd_layout` from localStorage, wraps parse in try/catch, falls back to `DEFAULT_LAYOUT` on missing or corrupt data, checks `layoutVersion` for compatibility",
+      "taskNumber": "3.3",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task3_4",
+      "type": "Task",
+      "name": "Implement `saveLayout(layout: DashboardLayout): void` — serialises layout to JSON and writes to `localStorage` under `rdd_layout`",
+      "taskNumber": "3.4",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task3_5",
+      "type": "Task",
+      "name": "Implement the `useDashboardLayout` custom hook in `src/hooks/useDashboardLayout.ts` — initialises state via lazy `useState(() => loadLayout())`, exposes `layout`, `moveWidget`, `addWidget`, `removeWidget`, and calls `saveLayout` on every mutation",
+      "taskNumber": "3.5",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task3_6",
+      "type": "Task",
+      "name": "Add version-mismatch detection in `loadLayout`: if `layoutVersion` doesn't match `CURRENT_LAYOUT_VERSION`, clear storage and return `DEFAULT_LAYOUT`",
+      "taskNumber": "3.6",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task3_7",
+      "type": "Task",
+      "name": "Show toast notification when fallback to default layout is triggered due to corruption or version mismatch",
+      "taskNumber": "3.7",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task4_1",
+      "type": "Task",
+      "name": "Create `src/components/DashboardGrid.tsx` — renders `<ReactGridLayout>` with 12 columns, `draggableHandle=\".widget-drag-handle\"`, and maps `layout.widgets` to grid items",
+      "taskNumber": "4.1",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task4_2",
+      "type": "Task",
+      "name": "Wire `onLayoutChange` callback in `DashboardGrid` to call `moveWidget` from `useDashboardLayout`, updating positions after each drag",
+      "taskNumber": "4.2",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task4_3",
+      "type": "Task",
+      "name": "Style the `react-grid-layout__placeholder` CSS class with a dashed border and shaded background to clearly distinguish the drop target",
+      "taskNumber": "4.3",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task4_4",
+      "type": "Task",
+      "name": "Add a CSS modifier class (e.g., `.rgl-placeholder--invalid`) applied when the grid is full during a drag, giving the placeholder a red tint",
+      "taskNumber": "4.4",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task4_5",
+      "type": "Task",
+      "name": "Ensure grid items snap back automatically via `react-grid-layout` when released outside the grid canvas",
+      "taskNumber": "4.5",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task5_1",
+      "type": "Task",
+      "name": "Create `src/components/WidgetCard.tsx` — a card wrapper that renders a header with the widget title, a drag handle grip icon (`.widget-drag-handle`), a remove \"×\" button, and a body area for the widget component",
+      "taskNumber": "5.1",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task5_2",
+      "type": "Task",
+      "name": "Style the `.widget-drag-handle` with a grab cursor and grip icon; ensure it is clearly visible in the card header",
+      "taskNumber": "5.2",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task5_3",
+      "type": "Task",
+      "name": "Apply \"lifted\" CSS styling (reduced opacity + elevated box-shadow) to the card being dragged, using the `isDragging` state from `react-grid-layout`",
+      "taskNumber": "5.3",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task5_4",
+      "type": "Task",
+      "name": "Ensure pointer events on the widget body do NOT initiate a drag (only the `.widget-drag-handle` region starts a drag)",
+      "taskNumber": "5.4",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task6_1",
+      "type": "Task",
+      "name": "Verify the built-in `react-grid-layout` placeholder updates in real time as the pointer moves between cells during a drag",
+      "taskNumber": "6.1",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task6_2",
+      "type": "Task",
+      "name": "Implement a `isGridFull(layout, newWidget)` utility in `src/utils/gridUtils.ts` that checks if any free (x, y) slot exists for the given widget size",
+      "taskNumber": "6.2",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task6_3",
+      "type": "Task",
+      "name": "Conditionally apply the `.rgl-placeholder--invalid` class to the placeholder when `isGridFull` returns true during an active drag",
+      "taskNumber": "6.3",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task6_4",
+      "type": "Task",
+      "name": "Show a brief shake animation or toast when a drop is rejected (grid full) to communicate the failure",
+      "taskNumber": "6.4",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task6_5",
+      "type": "Task",
+      "name": "Confirm placeholder is removed and grid returns to normal display state immediately after any drop (valid or cancelled)",
+      "taskNumber": "6.5",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task7_1",
+      "type": "Task",
+      "name": "Create `src/components/AddWidgetDrawer.tsx` — a slide-in drawer component that lists all entries from `WIDGET_REGISTRY` with their `displayName` and `description`",
+      "taskNumber": "7.1",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task7_2",
+      "type": "Task",
+      "name": "Add an \"Add Widget +\" button to the dashboard toolbar that toggles the `AddWidgetDrawer` open/closed",
+      "taskNumber": "7.2",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task7_3",
+      "type": "Task",
+      "name": "Implement widget selection in the drawer: clicking a registry item calls `addWidget(typeId)` from `useDashboardLayout` and closes the drawer",
+      "taskNumber": "7.3",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task7_4",
+      "type": "Task",
+      "name": "Implement `addWidget` in `useDashboardLayout`: uses `isGridFull` to check space; if space exists, finds first free cell, creates a new `WidgetInstance` with a `uuid`, appends to layout, and calls `saveLayout`",
+      "taskNumber": "7.4",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task7_5",
+      "type": "Task",
+      "name": "Close the drawer without changes when the user presses Escape or clicks outside the drawer",
+      "taskNumber": "7.5",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task7_6",
+      "type": "Task",
+      "name": "Show a toast notification (\"Dashboard is full — remove a widget to add a new one\") and block the add when `isGridFull` returns true",
+      "taskNumber": "7.6",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task8_1",
+      "type": "Task",
+      "name": "Wire the \"×\" button in `WidgetCard` to open an inline confirmation popover",
+      "taskNumber": "8.1",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task8_2",
+      "type": "Task",
+      "name": "Implement the inline confirmation popover with \"Remove\" and \"Cancel\" buttons; render it anchored to the \"×\" button",
+      "taskNumber": "8.2",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task8_3",
+      "type": "Task",
+      "name": "On confirmation, call `removeWidget(instanceId)` from `useDashboardLayout` — filters the widget from layout, calls `saveLayout`",
+      "taskNumber": "8.3",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task8_4",
+      "type": "Task",
+      "name": "On cancel, dismiss the popover and leave the widget unchanged on the dashboard",
+      "taskNumber": "8.4",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task9_1",
+      "type": "Task",
+      "name": "Create `src/App.tsx` — instantiates `useDashboardLayout`, renders the toolbar (with \"Add Widget\" button) and `<DashboardGrid>`, passes layout and handlers as props",
+      "taskNumber": "9.1",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task9_2",
+      "type": "Task",
+      "name": "Render `<WidgetCard>` for each `WidgetInstance` inside `DashboardGrid`, passing the resolved component from `getWidgetComponent(typeId)`",
+      "taskNumber": "9.2",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task9_3",
+      "type": "Task",
+      "name": "Mount `<Toaster>` (or equivalent) in `App.tsx` for toast notifications",
+      "taskNumber": "9.3",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task9_4",
+      "type": "Task",
+      "name": "Verify end-to-end: load app → layout restores → drag widget → layout persists → reload → layout matches",
+      "taskNumber": "9.4",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task10_1",
+      "type": "Task",
+      "name": "Style the dashboard toolbar with an \"Add Widget +\" button aligned to the top-right",
+      "taskNumber": "10.1",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task10_2",
+      "type": "Task",
+      "name": "Style widget cards with consistent padding, border radius, and a visually distinct header strip containing the drag handle and remove button",
+      "taskNumber": "10.2",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task10_3",
+      "type": "Task",
+      "name": "Style the `AddWidgetDrawer` as a right-side slide-in panel with smooth open/close animation",
+      "taskNumber": "10.3",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task10_4",
+      "type": "Task",
+      "name": "Add responsive grid breakpoints (e.g., lg/md/sm) using `react-grid-layout`'s `Responsive` wrapper if needed",
+      "taskNumber": "10.4",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    },
+    {
+      "id": "react-drag-drop-dashboard-task10_5",
+      "type": "Task",
+      "name": "Ensure the drag handle grip icon uses an appropriate cursor (`grab` / `grabbing`) to clearly communicate draggability",
+      "taskNumber": "10.5",
+      "status": "completed",
+      "priority": "medium",
+      "changeId": "react-drag-drop-dashboard"
+    }
+  ],
+  "relationships": [
+    {
+      "sourceId": "react-drag-drop-dashboard",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard-proposal",
+      "properties": {
+        "role": "proposal"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard-usecases",
+      "properties": {
+        "role": "usecases"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard-design",
+      "properties": {
+        "role": "design"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard-specs",
+      "properties": {
+        "role": "specs"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard",
+      "type": "hasArtifact",
+      "targetId": "react-drag-drop-dashboard-tasks",
+      "properties": {
+        "role": "tasks"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-usecases",
+      "type": "definesUseCase",
+      "targetId": "react-drag-drop-dashboard-uc1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-usecases",
+      "type": "definesUseCase",
+      "targetId": "react-drag-drop-dashboard-uc2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-usecases",
+      "type": "definesUseCase",
+      "targetId": "react-drag-drop-dashboard-uc3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-usecases",
+      "type": "definesUseCase",
+      "targetId": "react-drag-drop-dashboard-uc4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-usecases",
+      "type": "definesUseCase",
+      "targetId": "react-drag-drop-dashboard-uc5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-specs",
+      "type": "hasRequirement",
+      "targetId": "react-drag-drop-dashboard-req1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-specs",
+      "type": "hasRequirement",
+      "targetId": "react-drag-drop-dashboard-req2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-specs",
+      "type": "hasRequirement",
+      "targetId": "react-drag-drop-dashboard-req3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-specs",
+      "type": "hasRequirement",
+      "targetId": "react-drag-drop-dashboard-req4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-specs",
+      "type": "hasRequirement",
+      "targetId": "react-drag-drop-dashboard-req5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-specs",
+      "type": "hasRequirement",
+      "targetId": "react-drag-drop-dashboard-req6",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-specs",
+      "type": "hasRequirement",
+      "targetId": "react-drag-drop-dashboard-req7",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-specs",
+      "type": "hasRequirement",
+      "targetId": "react-drag-drop-dashboard-req8",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task1_1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task1_2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task1_3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task1_4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task1_5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task2_1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task2_2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task2_3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task2_4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task3_1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task3_2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task3_3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task3_4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task3_5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task3_6",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task3_7",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task4_1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task4_2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task4_3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task4_4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task4_5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task5_1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task5_2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task5_3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task5_4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task6_1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task6_2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task6_3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task6_4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task6_5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task7_1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task7_2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task7_3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task7_4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task7_5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task7_6",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task8_1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task8_2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task8_3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task8_4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task9_1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task9_2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task9_3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task9_4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task10_1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task10_2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task10_3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task10_4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-tasks",
+      "type": "hasTask",
+      "targetId": "react-drag-drop-dashboard-task10_5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc1",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC1-S1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc1",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC1-S2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc1",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC1-S3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc1",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC1-S4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc1",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC1-S5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc1",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC1-S6",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc1",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC1-S7",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc1",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC1-E4a",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc1",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC1-E5a",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc1",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC1-E6a",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc2",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC2-S1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc2",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC2-S2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc2",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC2-S3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc2",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC2-S4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc2",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC2-S5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc2",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC2-S6",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc2",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC2-E3a",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc2",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC2-E4a",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc3",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC3-S1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc3",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC3-S2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc3",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC3-S3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc3",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC3-S4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc3",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC3-S5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc3",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC3-S6",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc3",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC3-E3a",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc4",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC4-S1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc4",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC4-S2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc4",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC4-S3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc4",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC4-S4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc4",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC4-S5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc4",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC4-E2a",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc4",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC4-E2b",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc5",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC5-S1",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc5",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC5-S2",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc5",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC5-S3",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc5",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC5-S4",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc5",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC5-S5",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-uc5",
+      "type": "hasStep",
+      "targetId": "react-drag-drop-dashboard-UC5-E3a",
+      "properties": {
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req1",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC4-S4",
+      "properties": {
+        "reference": "UC4-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req1",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC1-S1",
+      "properties": {
+        "reference": "UC1-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req1",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC1-S7",
+      "properties": {
+        "reference": "UC1-S7",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req1",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC2-S5",
+      "properties": {
+        "reference": "UC2-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req1",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC3-S6",
+      "properties": {
+        "reference": "UC3-S6",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req1",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC2-S1",
+      "properties": {
+        "reference": "UC2-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req1",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC2-S2",
+      "properties": {
+        "reference": "UC2-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req2",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC1-S5",
+      "properties": {
+        "reference": "UC1-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req2",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC1-S6",
+      "properties": {
+        "reference": "UC1-S6",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req2",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC1-S2",
+      "properties": {
+        "reference": "UC1-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req2",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC4-S1",
+      "properties": {
+        "reference": "UC4-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req2",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC4-S2",
+      "properties": {
+        "reference": "UC4-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req2",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC4-S3",
+      "properties": {
+        "reference": "UC4-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req2",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC4-S4",
+      "properties": {
+        "reference": "UC4-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req2",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC4-S5",
+      "properties": {
+        "reference": "UC4-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req2",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC2-S2",
+      "properties": {
+        "reference": "UC2-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req3",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC3-S4",
+      "properties": {
+        "reference": "UC3-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req3",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC3-S5",
+      "properties": {
+        "reference": "UC3-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req3",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC5-S1",
+      "properties": {
+        "reference": "UC5-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req3",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC5-S2",
+      "properties": {
+        "reference": "UC5-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req3",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC5-S3",
+      "properties": {
+        "reference": "UC5-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req3",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC5-S4",
+      "properties": {
+        "reference": "UC5-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req3",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC4-E2a",
+      "properties": {
+        "reference": "UC4-E2a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req3",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC2-S3",
+      "properties": {
+        "reference": "UC2-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req4",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC2-S4",
+      "properties": {
+        "reference": "UC2-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req4",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC2-S6",
+      "properties": {
+        "reference": "UC2-S6",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req4",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC1-E4a",
+      "properties": {
+        "reference": "UC1-E4a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req4",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC5-E3a",
+      "properties": {
+        "reference": "UC5-E3a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req4",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC4-E2b",
+      "properties": {
+        "reference": "UC4-E2b",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req4",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC2-E3a",
+      "properties": {
+        "reference": "UC2-E3a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req4",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC2-S2",
+      "properties": {
+        "reference": "UC2-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req5",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC1-S3",
+      "properties": {
+        "reference": "UC1-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req5",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC1-S4",
+      "properties": {
+        "reference": "UC1-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req5",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC1-E5a",
+      "properties": {
+        "reference": "UC1-E5a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req5",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC2-E4a",
+      "properties": {
+        "reference": "UC2-E4a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req6",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC1-E6a",
+      "properties": {
+        "reference": "UC1-E6a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req6",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC3-S1",
+      "properties": {
+        "reference": "UC3-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req7",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC5-S5",
+      "properties": {
+        "reference": "UC5-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req7",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC3-S2",
+      "properties": {
+        "reference": "UC3-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req7",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC3-S3",
+      "properties": {
+        "reference": "UC3-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-req8",
+      "type": "implements",
+      "targetId": "react-drag-drop-dashboard-UC3-E3a",
+      "properties": {
+        "reference": "UC3-E3a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task1_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S1",
+      "properties": {
+        "reference": "UC4-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task1_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S3",
+      "properties": {
+        "reference": "UC1-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task1_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S5",
+      "properties": {
+        "reference": "UC1-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task1_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S6",
+      "properties": {
+        "reference": "UC1-S6",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task1_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-E6a",
+      "properties": {
+        "reference": "UC1-E6a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task1_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-E4a",
+      "properties": {
+        "reference": "UC2-E4a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task1_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-E2b",
+      "properties": {
+        "reference": "UC4-E2b",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task1_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S1",
+      "properties": {
+        "reference": "UC4-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task1_5",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S1",
+      "properties": {
+        "reference": "UC4-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task2_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S2",
+      "properties": {
+        "reference": "UC2-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task2_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S2",
+      "properties": {
+        "reference": "UC2-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task2_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S3",
+      "properties": {
+        "reference": "UC2-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task2_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S6",
+      "properties": {
+        "reference": "UC2-S6",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task2_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S3",
+      "properties": {
+        "reference": "UC4-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S3",
+      "properties": {
+        "reference": "UC4-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-E2a",
+      "properties": {
+        "reference": "UC4-E2a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S2",
+      "properties": {
+        "reference": "UC4-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S3",
+      "properties": {
+        "reference": "UC4-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-E2a",
+      "properties": {
+        "reference": "UC4-E2a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-E2b",
+      "properties": {
+        "reference": "UC4-E2b",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S7",
+      "properties": {
+        "reference": "UC1-S7",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S5",
+      "properties": {
+        "reference": "UC2-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-S6",
+      "properties": {
+        "reference": "UC3-S6",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_5",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S4",
+      "properties": {
+        "reference": "UC4-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_5",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S5",
+      "properties": {
+        "reference": "UC4-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_6",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-E2b",
+      "properties": {
+        "reference": "UC4-E2b",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task3_7",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-E2b",
+      "properties": {
+        "reference": "UC4-E2b",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task4_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S3",
+      "properties": {
+        "reference": "UC1-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task4_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S4",
+      "properties": {
+        "reference": "UC1-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task4_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S5",
+      "properties": {
+        "reference": "UC1-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task4_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S4",
+      "properties": {
+        "reference": "UC4-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task4_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S6",
+      "properties": {
+        "reference": "UC1-S6",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task4_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S7",
+      "properties": {
+        "reference": "UC1-S7",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task4_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC5-S2",
+      "properties": {
+        "reference": "UC5-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task4_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC5-S4",
+      "properties": {
+        "reference": "UC5-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task4_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC5-E3a",
+      "properties": {
+        "reference": "UC5-E3a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task4_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-E4a",
+      "properties": {
+        "reference": "UC1-E4a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task4_5",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-E5a",
+      "properties": {
+        "reference": "UC1-E5a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task5_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S1",
+      "properties": {
+        "reference": "UC1-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task5_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-S1",
+      "properties": {
+        "reference": "UC3-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task5_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S1",
+      "properties": {
+        "reference": "UC1-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task5_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S2",
+      "properties": {
+        "reference": "UC1-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task5_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S1",
+      "properties": {
+        "reference": "UC1-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task6_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC5-S1",
+      "properties": {
+        "reference": "UC5-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task6_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC5-S2",
+      "properties": {
+        "reference": "UC5-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task6_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC5-S3",
+      "properties": {
+        "reference": "UC5-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task6_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-E4a",
+      "properties": {
+        "reference": "UC2-E4a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task6_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-E6a",
+      "properties": {
+        "reference": "UC1-E6a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task6_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC5-E3a",
+      "properties": {
+        "reference": "UC5-E3a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task6_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-E6a",
+      "properties": {
+        "reference": "UC1-E6a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task6_5",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC5-S5",
+      "properties": {
+        "reference": "UC5-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task7_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S1",
+      "properties": {
+        "reference": "UC2-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task7_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S2",
+      "properties": {
+        "reference": "UC2-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task7_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S1",
+      "properties": {
+        "reference": "UC2-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task7_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S3",
+      "properties": {
+        "reference": "UC2-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task7_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S4",
+      "properties": {
+        "reference": "UC2-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task7_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S6",
+      "properties": {
+        "reference": "UC2-S6",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task7_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S4",
+      "properties": {
+        "reference": "UC2-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task7_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S5",
+      "properties": {
+        "reference": "UC2-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task7_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S6",
+      "properties": {
+        "reference": "UC2-S6",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task7_5",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-E3a",
+      "properties": {
+        "reference": "UC2-E3a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task7_6",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-E4a",
+      "properties": {
+        "reference": "UC2-E4a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task8_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-S1",
+      "properties": {
+        "reference": "UC3-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task8_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-S2",
+      "properties": {
+        "reference": "UC3-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task8_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-S2",
+      "properties": {
+        "reference": "UC3-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task8_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-S3",
+      "properties": {
+        "reference": "UC3-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task8_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-E3a",
+      "properties": {
+        "reference": "UC3-E3a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task8_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-S3",
+      "properties": {
+        "reference": "UC3-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task8_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-S4",
+      "properties": {
+        "reference": "UC3-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task8_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-S5",
+      "properties": {
+        "reference": "UC3-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task8_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-S6",
+      "properties": {
+        "reference": "UC3-S6",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task8_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-E3a",
+      "properties": {
+        "reference": "UC3-E3a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S1",
+      "properties": {
+        "reference": "UC4-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S4",
+      "properties": {
+        "reference": "UC4-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S3",
+      "properties": {
+        "reference": "UC4-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S5",
+      "properties": {
+        "reference": "UC4-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-E6a",
+      "properties": {
+        "reference": "UC1-E6a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-E4a",
+      "properties": {
+        "reference": "UC2-E4a",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-E2b",
+      "properties": {
+        "reference": "UC4-E2b",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S1",
+      "properties": {
+        "reference": "UC4-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S2",
+      "properties": {
+        "reference": "UC4-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S3",
+      "properties": {
+        "reference": "UC4-S3",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S4",
+      "properties": {
+        "reference": "UC4-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task9_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S5",
+      "properties": {
+        "reference": "UC4-S5",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task10_1",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S1",
+      "properties": {
+        "reference": "UC2-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task10_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S1",
+      "properties": {
+        "reference": "UC1-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task10_2",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC3-S1",
+      "properties": {
+        "reference": "UC3-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task10_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S1",
+      "properties": {
+        "reference": "UC2-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task10_3",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC2-S2",
+      "properties": {
+        "reference": "UC2-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task10_4",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC4-S4",
+      "properties": {
+        "reference": "UC4-S4",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task10_5",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S1",
+      "properties": {
+        "reference": "UC1-S1",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    },
+    {
+      "sourceId": "react-drag-drop-dashboard-task10_5",
+      "type": "addresses",
+      "targetId": "react-drag-drop-dashboard-UC1-S2",
+      "properties": {
+        "reference": "UC1-S2",
+        "createdAt": "2026-04-28T19:25:53.516Z"
+      }
+    }
+  ]
+}

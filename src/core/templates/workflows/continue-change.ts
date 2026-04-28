@@ -176,17 +176,23 @@ For other schemas, follow the \`instruction\` field from the CLI output.
   - Do NOT copy \`<context>\`, \`<rules>\`, \`<project_context>\` blocks into the artifact
   - These guide what you write, but should never appear in the output
 
-**Knowledge Graph Integration (Optional)**
+**Sync Knowledge Graph (REQUIRED)**
 
-If the project has KG enabled (\`synergyspec/kg/\` exists), also update the graph when you create an artifact:
+After completing this workflow, you MUST run this command to sync the Knowledge Graph with the current artifact content:
 
-1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
-2. After writing the artifact file, create the entity:
-   - \`kg:create-entity\` with \`{ id: "<changeId>-<artifactType>", type: "Spec" | "DesignDoc" | "Artifact", status: "active", filePath, changeId }\`
-   - \`kg:create-relationship\` linking the change to the artifact via \`hasArtifact\`
-3. For spec/usecases/tasks, extract sub-entities (requirements, use case steps, tasks) and create them with their parent relationships.
-4. Call \`kg:persist\` to save.
-5. On any KG error, log a warning but continue — do not block the workflow.`,
+\`\`\`bash
+synergyspec-hw kg refresh --change "<name>"
+\`\`\`
+
+This re-parses every change artifact (\`usecases.md\`, \`specs/**/*.md\`, \`tasks.md\`) and rebuilds fine-grained KG entities (use cases, steps, requirements, tasks) plus their cross-document relationships (\`implements\`, \`addresses\`). It is idempotent — safe to run repeatedly. Skipping it leaves the graph stale and breaks downstream workflows that rely on traceability.
+
+**Manual Edit Notice (tell the user)**
+
+When you finish this workflow and report results to the user — alongside any next-step suggestions you make — ALWAYS include this reminder verbatim:
+
+> 💡 If you edit any change artifact (\`usecases.md\`, \`specs/*.md\`, \`tasks.md\`) by hand outside of slash commands, run \`synergyspec-hw kg refresh\` to keep the Knowledge Graph in sync — or run \`synergyspec-hw kg watch\` in a side terminal to auto-refresh on every save.
+
+This reminder belongs in your final user-facing output for every invocation of this workflow, regardless of whether the user actually edited anything manually this time. It's a standing reminder.`,
     license: 'MIT',
     compatibility: 'Requires synergyspec-hw CLI.',
     metadata: { author: 'synergyspec', version: '1.0' },

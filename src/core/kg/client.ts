@@ -309,6 +309,11 @@ export class InMemoryKGClient extends KGClient {
     const relKey = `${sourceId}-${relationshipType}`;
     const relationships = this.relationships.get(relKey) || [];
 
+    // Idempotent: skip if the same edge already exists.
+    if (relationships.some(r => r.targetId === targetId)) {
+      return;
+    }
+
     relationships.push({
       sourceId,
       type: relationshipType,
@@ -326,43 +331,37 @@ export class InMemoryKGClient extends KGClient {
   ): Promise<Array<any>> {
     const results: Array<any> = [];
 
-    // Outgoing relationships
-    if (direction === 'out' || direction === 'both') {
-      for (const [key, rels] of this.relationships.entries()) {
-        if (key.startsWith(entityId)) {
-          for (const rel of rels) {
-            if (!relationshipTypes || relationshipTypes.includes(rel.type)) {
-              const target = this.entities.get(rel.targetId);
-              if (target) {
-                results.push({
-                  id: `${rel.sourceId}-${rel.type}-${rel.targetId}`,
-                  type: rel.type,
-                  target,
-                  properties: rel.properties
-                });
-              }
-            }
+    // Filter on the relationship objects themselves (sourceId / targetId)
+    // rather than on the storage key, which uses string prefix matching and
+    // would incorrectly match descendant entity ids that share a prefix.
+    for (const rels of this.relationships.values()) {
+      for (const rel of rels) {
+        if (relationshipTypes && !relationshipTypes.includes(rel.type)) continue;
+
+        const isOutbound = rel.sourceId === entityId;
+        const isInbound = rel.targetId === entityId;
+
+        if ((direction === 'out' || direction === 'both') && isOutbound) {
+          const target = this.entities.get(rel.targetId);
+          if (target) {
+            results.push({
+              id: `${rel.sourceId}-${rel.type}-${rel.targetId}`,
+              type: rel.type,
+              target,
+              properties: rel.properties
+            });
           }
         }
-      }
-    }
 
-    // Incoming relationships
-    if (direction === 'in' || direction === 'both') {
-      for (const [key, rels] of this.relationships.entries()) {
-        for (const rel of rels) {
-          if (rel.targetId === entityId) {
-            if (!relationshipTypes || relationshipTypes.includes(rel.type)) {
-              const source = this.entities.get(rel.sourceId);
-              if (source) {
-                results.push({
-                  id: `${rel.sourceId}-${rel.type}-${rel.targetId}`,
-                  type: rel.type,
-                  target: source, // In this case, target is the source entity
-                  properties: rel.properties
-                });
-              }
-            }
+        if ((direction === 'in' || direction === 'both') && isInbound) {
+          const source = this.entities.get(rel.sourceId);
+          if (source) {
+            results.push({
+              id: `${rel.sourceId}-${rel.type}-${rel.targetId}`,
+              type: rel.type,
+              target: source, // for inbound, the "target" of the result is the source entity
+              properties: rel.properties
+            });
           }
         }
       }
@@ -552,7 +551,20 @@ export class InMemoryKGClient extends KGClient {
   }
 
   async delete(id: string): Promise<boolean> {
-    return this.entities.delete(id);
+    const existed = this.entities.delete(id);
+    if (!existed) return false;
+
+    // Drop any relationships originating from the deleted entity.
+    for (const key of Array.from(this.relationships.keys())) {
+      if (key.startsWith(`${id}-`)) this.relationships.delete(key);
+    }
+    // Drop any relationships pointing to the deleted entity.
+    for (const [key, rels] of this.relationships) {
+      const filtered = rels.filter(r => r.targetId !== id);
+      if (filtered.length === 0) this.relationships.delete(key);
+      else if (filtered.length !== rels.length) this.relationships.set(key, filtered);
+    }
+    return true;
   }
 
   async deleteMany(ids: string[]): Promise<BulkOperationResult> {

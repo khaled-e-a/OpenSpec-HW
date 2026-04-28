@@ -303,10 +303,11 @@ export async function saveKGState(
   // Export all entities
   const entities = await client.find({});
 
-  // Export all relationships
+  // Export outbound edges only — each edge is owned by its source, so this
+  // visits every edge exactly once.
   const relationships: any[] = [];
   for (const entity of entities) {
-    const entityRels = await client.getRelationships(entity.id);
+    const entityRels = await client.getRelationships(entity.id, 'out');
     relationships.push(...entityRels.map(rel => ({
       sourceId: entity.id,
       type: rel.type,

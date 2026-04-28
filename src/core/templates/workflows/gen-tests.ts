@@ -198,15 +198,23 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 - Confirmation that spec-tests.md was written to \`synergyspec/changes/<name>/spec-tests.md\`
 - Prompt: "Run \`/synspec:run-tests\` to execute the suite and generate a spec-coverage report."
 
-**Knowledge Graph Integration (Optional)**
+**Sync Knowledge Graph (REQUIRED)**
 
-If KG is enabled (\`synergyspec/kg/\` exists), track generated tests in the graph:
+After completing this workflow, you MUST run this command to sync the Knowledge Graph with the current artifact content:
 
-1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
-2. For each newly written test file, \`kg:create-entity\` a TestCase: \`{ id, type: 'TestCase', framework, testType, isFailing: true, filePath, changeId }\`.
-3. \`kg:create-relationship\` link TestCase → Requirement via \`tests\` for every requirement the test covers.
-4. Emit a \`TestGenerationEvent\` (Event) with outcome 'success' capturing which requirements got tests.
-5. Call \`kg:persist\`. On KG error, warn and continue — test files are already written.`;
+\`\`\`bash
+synergyspec-hw kg refresh --change "<name>"
+\`\`\`
+
+This re-parses every change artifact (\`usecases.md\`, \`specs/**/*.md\`, \`tasks.md\`) and rebuilds fine-grained KG entities (use cases, steps, requirements, tasks) plus their cross-document relationships (\`implements\`, \`addresses\`). It is idempotent — safe to run repeatedly. Skipping it leaves the graph stale and breaks downstream workflows that rely on traceability.
+
+**Manual Edit Notice (tell the user)**
+
+When you finish this workflow and report results to the user — alongside any next-step suggestions you make — ALWAYS include this reminder verbatim:
+
+> 💡 If you edit any change artifact (\`usecases.md\`, \`specs/*.md\`, \`tasks.md\`) by hand outside of slash commands, run \`synergyspec-hw kg refresh\` to keep the Knowledge Graph in sync — or run \`synergyspec-hw kg watch\` in a side terminal to auto-refresh on every save.
+
+This reminder belongs in your final user-facing output for every invocation of this workflow, regardless of whether the user actually edited anything manually this time. It's a standing reminder.`;
 
 export function getGenTestsSkillTemplate(): SkillTemplate {
    return {

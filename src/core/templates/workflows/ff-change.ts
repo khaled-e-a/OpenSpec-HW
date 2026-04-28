@@ -101,15 +101,23 @@ After completing all artifacts, summarize:
 - If a change with that name already exists, suggest continuing that change instead
 - Verify each artifact file exists after writing before proceeding to next
 
-**Knowledge Graph Integration (Optional)**
+**Sync Knowledge Graph (REQUIRED)**
 
-If KG is enabled (\`synergyspec/kg/\` exists), populate the graph as each artifact is written:
+After completing this workflow, you MUST run this command to sync the Knowledge Graph with the current artifact content:
 
-1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
-2. After every artifact file is created, \`kg:create-entity\` for the artifact (Spec/DesignDoc/Artifact) and \`kg:create-relationship\` linking it to the Change via \`hasArtifact\`.
-3. Parse each artifact (usecases, specs, tasks) and bulk-create sub-entities via \`kg:create-entities\` plus their parent relationships.
-4. Call \`kg:persist\` after all artifacts are created.
-5. On KG error at any step, warn and continue — artifact files are already on disk.`,
+\`\`\`bash
+synergyspec-hw kg refresh --change "<name>"
+\`\`\`
+
+This re-parses every change artifact (\`usecases.md\`, \`specs/**/*.md\`, \`tasks.md\`) and rebuilds fine-grained KG entities (use cases, steps, requirements, tasks) plus their cross-document relationships (\`implements\`, \`addresses\`). It is idempotent — safe to run repeatedly. Skipping it leaves the graph stale and breaks downstream workflows that rely on traceability.
+
+**Manual Edit Notice (tell the user)**
+
+When you finish this workflow and report results to the user — alongside any next-step suggestions you make — ALWAYS include this reminder verbatim:
+
+> 💡 If you edit any change artifact (\`usecases.md\`, \`specs/*.md\`, \`tasks.md\`) by hand outside of slash commands, run \`synergyspec-hw kg refresh\` to keep the Knowledge Graph in sync — or run \`synergyspec-hw kg watch\` in a side terminal to auto-refresh on every save.
+
+This reminder belongs in your final user-facing output for every invocation of this workflow, regardless of whether the user actually edited anything manually this time. It's a standing reminder.`,
       license: 'MIT',
       compatibility: 'Requires synergyspec-hw CLI.',
       metadata: { author: 'synergyspec', version: '1.0' },

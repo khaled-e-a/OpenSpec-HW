@@ -194,16 +194,23 @@ const INSTRUCTIONS_BODY = `**Input**: Optionally specify a change name. If omitt
 - If coverage is complete: suggest \`/synspec:archive\` to archive and close the change
 - For full CI pipeline (all tests + e2e + coverage + screenshot comparison in one step): run \`/synspec:ci\`
 
-**Knowledge Graph Integration (Optional)**
+**Sync Knowledge Graph (REQUIRED)**
 
-If KG is enabled (\`synergyspec/kg/\` exists), record test execution in the graph:
+After completing this workflow, you MUST run this command to sync the Knowledge Graph with the current artifact content:
 
-1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
-2. Before running, query \`kg:query\` for existing TestCase entities in the change to map test files to entities.
-3. After each test file runs, emit a \`TestRun\` Event with \`{ outcome: pass|fail|warning, duration, metadata: { file, passed, failed, skipped, coverage } }\`.
-4. \`kg:update\` the TestCase with \`{ isFailing: !passed }\` so verify-change can query failing tests.
-5. For PBT counterexamples promoted to regression tests, \`kg:create-entity\` a new TestCase and link it to the original via \`regresses\`.
-6. Call \`kg:persist\`. On KG error, warn and continue — test report is already generated.`;
+\`\`\`bash
+synergyspec-hw kg refresh --change "<name>"
+\`\`\`
+
+This re-parses every change artifact (\`usecases.md\`, \`specs/**/*.md\`, \`tasks.md\`) and rebuilds fine-grained KG entities (use cases, steps, requirements, tasks) plus their cross-document relationships (\`implements\`, \`addresses\`). It is idempotent — safe to run repeatedly. Skipping it leaves the graph stale and breaks downstream workflows that rely on traceability.
+
+**Manual Edit Notice (tell the user)**
+
+When you finish this workflow and report results to the user — alongside any next-step suggestions you make — ALWAYS include this reminder verbatim:
+
+> 💡 If you edit any change artifact (\`usecases.md\`, \`specs/*.md\`, \`tasks.md\`) by hand outside of slash commands, run \`synergyspec-hw kg refresh\` to keep the Knowledge Graph in sync — or run \`synergyspec-hw kg watch\` in a side terminal to auto-refresh on every save.
+
+This reminder belongs in your final user-facing output for every invocation of this workflow, regardless of whether the user actually edited anything manually this time. It's a standing reminder.`;
 
 export function getRunTestsSkillTemplate(): SkillTemplate {
   return {

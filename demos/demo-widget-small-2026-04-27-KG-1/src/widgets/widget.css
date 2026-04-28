@@ -1,0 +1,119 @@
+/* Shared widget content styles */
+.widget-content {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* StatsCard */
+.stats-card {
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+}
+.stats-card__value {
+  font-size: 2.4em;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1;
+}
+.stats-card__label {
+  font-size: 0.85em;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+.stats-card__change {
+  font-size: 0.8em;
+  margin-top: 6px;
+  font-weight: 500;
+}
+.stats-card__change.positive { color: #22c55e; }
+.stats-card__change.negative { color: var(--color-danger); }
+
+/* ChartWidget */
+.chart-widget {
+  gap: 8px;
+}
+.chart-widget__bars {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 0 4px;
+}
+.chart-widget__bar {
+  flex: 1;
+  background: var(--color-primary);
+  border-radius: 3px 3px 0 0;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+.chart-widget__bar:hover { opacity: 1; }
+.chart-widget__label {
+  font-size: 0.78em;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* TableWidget */
+.table-widget {
+  padding: 8px;
+  overflow: auto;
+}
+.table-widget__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82em;
+}
+.table-widget__table th,
+.table-widget__table td {
+  padding: 5px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+.table-widget__table th {
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: 0.9em;
+}
+.status-badge {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 99px;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+.status-badge--active   { background: #dcfce7; color: #166534; }
+.status-badge--inactive { background: #f1f5f9; color: #475569; }
+.status-badge--pending  { background: #fef9c3; color: #713f12; }
+
+/* TaskListWidget */
+.task-list-widget__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.task-list-widget__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88em;
+  color: var(--color-text);
+}
+.task-list-widget__item.done {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+.task-list-widget__check {
+  color: var(--color-primary);
+  font-size: 0.9em;
+  width: 16px;
+  flex-shrink: 0;
+}

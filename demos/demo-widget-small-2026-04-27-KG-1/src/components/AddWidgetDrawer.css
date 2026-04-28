@@ -1,0 +1,115 @@
+/* Backdrop */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 200;
+}
+
+/* Drawer */
+.add-widget-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 320px;
+  background: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.add-widget-drawer--open {
+  transform: translateX(0);
+}
+
+/* Drawer header */
+.add-widget-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+.add-widget-drawer__title {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.add-widget-drawer__close {
+  background: transparent;
+  border: none;
+  font-size: 1.4em;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+.add-widget-drawer__close:hover { background: #f1f5f9; color: var(--color-text); }
+
+/* Widget list */
+.add-widget-drawer__list {
+  list-style: none;
+  margin: 0;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Widget item button */
+.add-widget-drawer__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s, border-color 0.12s;
+}
+.add-widget-drawer__item:hover {
+  background: rgba(99, 102, 241, 0.05);
+  border-color: var(--color-primary);
+}
+
+.add-widget-drawer__item-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1em;
+  flex-shrink: 0;
+}
+
+.add-widget-drawer__item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.add-widget-drawer__item-name {
+  font-weight: 600;
+  font-size: 0.88em;
+  color: var(--color-text);
+}
+.add-widget-drawer__item-desc {
+  font-size: 0.78em;
+  color: var(--color-text-muted);
+  line-height: 1.35;
+}

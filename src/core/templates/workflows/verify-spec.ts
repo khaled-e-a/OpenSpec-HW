@@ -124,16 +124,23 @@ const INSTRUCTIONS = `Verify and fix use case traceability across all artifacts 
 - Only annotate steps that genuinely belong to the artifact; do not force every step into every file.
 - Do NOT create new artifact files; only patch files that already exist.
 
-**Knowledge Graph Integration (Optional)**
+**Sync Knowledge Graph (REQUIRED)**
 
-If KG is enabled (\`synergyspec/kg/\` exists), audit connectivity against the graph as well:
+After completing this workflow, you MUST run this command to sync the Knowledge Graph with the current artifact content:
 
-1. Initialize: \`const kg = createKGToolInterface(projectRoot);\`
-2. For each parsed UseCase/UseCaseStep/Requirement/Task, verify \`kg:get-entity\` returns it with the expected id (e.g., \`<changeId>-<stepId>\`).
-3. For each requirement, confirm an \`implements\` relationship exists to its target step via \`kg:get-relationships\`.
-4. For each task, confirm an \`implements\` relationship to its addressed requirement.
-5. Report any missing entities or relationships in the same scorecard. If \`autoFix\` is enabled, call \`kg:create-entity\` / \`kg:create-relationship\` to fill in obvious gaps.
-6. Call \`kg:persist\` at the end. On KG error, warn and fall back to file-only verification.`;
+\`\`\`bash
+synergyspec-hw kg refresh --change "<name>"
+\`\`\`
+
+This re-parses every change artifact (\`usecases.md\`, \`specs/**/*.md\`, \`tasks.md\`) and rebuilds fine-grained KG entities (use cases, steps, requirements, tasks) plus their cross-document relationships (\`implements\`, \`addresses\`). It is idempotent — safe to run repeatedly. Skipping it leaves the graph stale and breaks downstream workflows that rely on traceability.
+
+**Manual Edit Notice (tell the user)**
+
+When you finish this workflow and report results to the user — alongside any next-step suggestions you make — ALWAYS include this reminder verbatim:
+
+> 💡 If you edit any change artifact (\`usecases.md\`, \`specs/*.md\`, \`tasks.md\`) by hand outside of slash commands, run \`synergyspec-hw kg refresh\` to keep the Knowledge Graph in sync — or run \`synergyspec-hw kg watch\` in a side terminal to auto-refresh on every save.
+
+This reminder belongs in your final user-facing output for every invocation of this workflow, regardless of whether the user actually edited anything manually this time. It's a standing reminder.`;
 
 export function getVerifySpecSkillTemplate(): SkillTemplate {
   return {

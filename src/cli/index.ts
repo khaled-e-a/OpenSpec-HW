@@ -15,6 +15,9 @@ import { ShowCommand } from '../commands/show.js';
 import { CompletionCommand } from '../commands/completion.js';
 import { FeedbackCommand } from '../commands/feedback.js';
 import { kgViewCommand } from '../commands/kg-view.js';
+import { kgRefreshCommand } from '../commands/kg-refresh.js';
+import { kgWatchCommand } from '../commands/kg-watch.js';
+import { kgInstallHooksCommand } from '../commands/kg-install-hooks.js';
 import { registerConfigCommand } from '../commands/config.js';
 import { registerSchemaCommand } from '../commands/schema.js';
 import {
@@ -518,6 +521,51 @@ kgCmd
   .action(async (options: { port?: string; open?: boolean }) => {
     try {
       await kgViewCommand({ port: options.port, noOpen: options.open === false });
+    } catch (error) {
+      console.log();
+      ora().fail(`Error: ${(error as Error).message}`);
+      process.exit(1);
+    }
+  });
+
+kgCmd
+  .command('refresh')
+  .description('Re-parse change artifacts and rebuild fine-grained KG entities (use cases, steps, requirements, tasks, edges)')
+  .option('--change <name>', 'Only refresh this specific change (default: all changes)')
+  .option('-v, --verbose', 'Print warnings for empty/placeholder artifacts')
+  .option('--silent', 'Suppress all output and exit 0 on non-KG projects (intended for hooks)')
+  .action(async (options: { change?: string; verbose?: boolean; silent?: boolean }) => {
+    try {
+      await kgRefreshCommand({ change: options.change, verbose: options.verbose, silent: options.silent });
+    } catch (error) {
+      if (options.silent) { process.exit(0); return; }
+      console.log();
+      ora().fail(`Error: ${(error as Error).message}`);
+      process.exit(1);
+    }
+  });
+
+kgCmd
+  .command('install-hooks')
+  .description('Install Claude Code hooks (.claude/settings.local.json) so the KG auto-refreshes after every AI Write/Edit and at end-of-turn')
+  .action(async () => {
+    try {
+      await kgInstallHooksCommand();
+    } catch (error) {
+      console.log();
+      ora().fail(`Error: ${(error as Error).message}`);
+      process.exit(1);
+    }
+  });
+
+kgCmd
+  .command('watch')
+  .description('Watch synergyspec/changes/ and auto-refresh the KG on every markdown edit')
+  .option('--debounce <ms>', 'Debounce window in milliseconds (default: 500)')
+  .action(async (options: { debounce?: string }) => {
+    try {
+      const debounceMs = options.debounce ? parseInt(options.debounce, 10) : undefined;
+      await kgWatchCommand({ debounceMs });
     } catch (error) {
       console.log();
       ora().fail(`Error: ${(error as Error).message}`);
